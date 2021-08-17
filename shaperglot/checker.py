@@ -19,10 +19,10 @@ class Checker:
     def check(self, lang):
         self.results = Reporter()
         self.lang = lang
-        self.check_orthographies()
-        self.check_features()
-        for shaping_check in self.lang.get("shaping", []):
-            self.check_shaping(shaping_check)
+        # Run all methods that start with check_
+        checks = [x for x in dir(self) if x.startswith("check_")]
+        for check in checks:
+            getattr(self, check)()
         return self.results
 
     def _get_cluster(self, buffers, index):
@@ -50,7 +50,11 @@ class Checker:
             else:
                 self.results.okay(f"All mark glyphs were present in the font")
 
-    def check_shaping(self, check):
+    def check_shaping(self):
+        for shaping_check in self.lang.get("shaping", []):
+            self._check_shaping(shaping_check)
+
+    def _check_shaping(self, check):
         buffers = []
         for input in check["inputs"]:
             if isinstance(input, str):
@@ -83,7 +87,7 @@ class Checker:
                 if feat == "mark" and test["involves"] == "hyperglot":
                     self.check_mark_attachment()
                 elif "involves" in test:
-                    self.check_feature_involves(feat, test["involves"])
+                    self._feature_involves(feat, test["involves"])
 
     def check_mark_attachment(self):
         rules = flatten([x.routine.rules for x in self.ff.features["mark"]])
@@ -110,7 +114,7 @@ class Checker:
                         f"Mark glyph ◌{m}  ({glyph}) did not take part in any mark positioning rule"
                     )
 
-    def check_feature_involves(self, feat, involves):
+    def _feature_involves(self, feat, involves):
         rules = flatten([x.routine.rules for x in self.ff.features[feat]])
         involved = flatten([x.involved_glyphs for x in rules])
         glyph = self.cmap.get(involves)
