@@ -7,6 +7,7 @@ features:
     - involves: 0x0639
   fina:
     - involves: 0x0639
+languagesystems: ["arab", "URD "]
 shaping:
   - inputs:
       - "ببببب"

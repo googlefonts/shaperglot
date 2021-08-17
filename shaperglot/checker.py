@@ -1,5 +1,5 @@
 from vharfbuzz import Vharfbuzz
-from fontFeatures.ttLib import unparse
+from fontFeatures.ttLib import unparse, unparseLanguageSystems
 from hyperglot.parse import parse_chars, parse_marks
 from shaperglot.reporter import Reporter
 import fontFeatures
@@ -129,5 +129,17 @@ class Checker:
                 f"Glyph {chr(involves)} ({glyph}) did not take part in any {feat} rule"
             )
 
-    def check_language_systems(self):
-        pass
+    def check_languagesystems(self):
+        if "languagesystems" not in self.lang:
+            return
+        gsub_gpos = [
+            self.ttfont[tableTag]
+            for tableTag in ("GSUB", "GPOS")
+            if tableTag in self.ttfont
+        ]
+        language_systems = unparseLanguageSystems(gsub_gpos)
+        script, lang = self.lang["languagesystems"]
+        if script in language_systems and lang in language_systems[script]:
+            self.results.okay(f"Language system '{script}/{lang}' found in font")
+        else:
+            self.results.fail(f"Language system '{script}/{lang}' not found in font")
