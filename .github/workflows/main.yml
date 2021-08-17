@@ -1,0 +1,35 @@
+name: main
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - uses: Gr1N/setup-poetry@v4
+
+    - uses: actions/cache@v2
+      with:
+        path: .venv
+        key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+
+    - name: Install dependencies
+      run: poetry install
+
+    - name: Check code
+      run: poetry run pylint shaperglot
+
+    - name: Test code
+      run: poetry run pytest

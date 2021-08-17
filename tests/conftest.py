@@ -1,0 +1,2 @@
+"""Integration tests configuration file."""
+
