@@ -33,14 +33,14 @@ class Checker:
 
     def check_orthographies(self):
         for ortho in self.lang["orthographies"]:
-            bases = parse_chars(ortho.get("base", ""))
+            marks = set(parse_marks(ortho.get("marks", "")))
+            bases = set(parse_chars(ortho.get("base", ""))) - marks
             missing = [x for x in bases if ord(x) not in self.cmap]
             if missing:
                 missing = ", ".join(missing)
                 self.results.fail(f"Some base glyphs were missing: {missing}")
             else:
                 self.results.okay(f"All base glyphs were present in the font")
-            marks = parse_marks(ortho.get("marks", ""))
             if not marks:
                 continue
             missing = [x for x in marks if ord(x) not in self.cmap]
