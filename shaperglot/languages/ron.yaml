@@ -1,0 +1,19 @@
+shaping:
+  - inputs:
+    - text: "ş"
+    - text: "ş"
+      language: "ro"
+      features:
+        smcp: true
+    differs: [ [0,0], [1,0] ]
+    rationale: "Romanian s-cedilla should become s-comma-accent"
+  - inputs:
+    - text: "Ş"
+    - text: "Ş"
+      language: "ro"
+      features:
+        smcp: true
+    differs: [ [0,0], [1,0] ]
+    rationale: "Romanian S-cedilla should become S-comma-accent"
+
+

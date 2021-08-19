@@ -1,0 +1,19 @@
+shaping:
+  - inputs:
+    - text: "ş"
+    - text: "ş"
+      language: "mol"
+      features:
+        smcp: true
+    differs: [ [0,0], [1,0] ]
+    rationale: "Moldavian s-cedilla should become s-comma-accent"
+  - inputs:
+    - text: "Ş"
+    - text: "Ş"
+      language: "mol"
+      features:
+        smcp: true
+    differs: [ [0,0], [1,0] ]
+    rationale: "Moldavian S-cedilla should become S-comma-accent"
+
+
