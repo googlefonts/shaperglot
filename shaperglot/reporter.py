@@ -7,6 +7,7 @@ class Result(Enum):
     PASS = colored("PASS", "green")
     WARN = colored("WARN", "yellow")
     FAIL = colored("FAIL", "red")
+    SKIP = colored("SKIP", "blue")
 
 
 class Reporter(Sequence):
@@ -27,6 +28,9 @@ class Reporter(Sequence):
 
     def fail(self, message):
         self.results.append((Result.FAIL, message))
+
+    def skip(self, message):
+        self.results.append((Result.SKIP, message))
 
     @property
     def is_success(self):

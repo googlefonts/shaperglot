@@ -56,6 +56,12 @@ class Checker:
 
     def _check_shaping(self, check):
         buffers = []
+        if "if" in check:
+            condition = check["if"]
+            if "feature" in condition and condition["feature"] not in self.ff.features:
+                self.results.skip(f'{check["rationale"]}: ({condition["feature"]} not present)')
+                return
+
         for input in check["inputs"]:
             if isinstance(input, str):
                 buffers.append(self.vharfbuzz.shape(input))
@@ -84,11 +90,11 @@ class Checker:
                 self.results.fail(f"Required feature '{feat}' not present")
             else:
                 self.results.okay(f"Required feature '{feat}' was present")
-            for test in features[feat]:
-                if feat == "mark" and test["involves"] == "hyperglot":
-                    self._check_mark_attachment()
-                elif "involves" in test:
-                    self._feature_involves(feat, test["involves"])
+                for test in features[feat]:
+                    if feat == "mark" and test["involves"] == "hyperglot":
+                        self._check_mark_attachment()
+                    elif "involves" in test:
+                        self._feature_involves(feat, test["involves"])
 
     def _check_mark_attachment(self):
         rules = flatten([x.routine.rules for x in self.ff.features["mark"]])
