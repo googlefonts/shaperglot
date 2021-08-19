@@ -60,7 +60,8 @@ class Checker:
             if isinstance(input, str):
                 buffers.append(self.vharfbuzz.shape(input))
             else:
-                raise NotImplementedError
+                text = input.get("text")
+                buffers.append(self.vharfbuzz.shape(text, input))
 
         if "differs" in check:
             params = check["differs"]
