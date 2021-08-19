@@ -86,11 +86,11 @@ class Checker:
                 self.results.okay(f"Required feature '{feat}' was present")
             for test in features[feat]:
                 if feat == "mark" and test["involves"] == "hyperglot":
-                    self.check_mark_attachment()
+                    self._check_mark_attachment()
                 elif "involves" in test:
                     self._feature_involves(feat, test["involves"])
 
-    def check_mark_attachment(self):
+    def _check_mark_attachment(self):
         rules = flatten([x.routine.rules for x in self.ff.features["mark"]])
         used_marks = flatten(
             [
