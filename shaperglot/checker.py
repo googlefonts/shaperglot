@@ -26,10 +26,15 @@ class Checker:
         return self.results
 
     def _get_cluster(self, buffers, index):
-        cluster = index[1]
-        return [
-            x.codepoint for x in buffers[index[0]].glyph_infos if x.cluster == cluster
+        input_id = index[0]
+        cluster_id = index[1]
+        glyphs = buffers[input_id].glyph_infos
+        cluster = [
+            x.codepoint for x in glyphs if x.cluster == cluster_id
         ]
+        if len(index) == 3:
+            return [ cluster[index[2]] ]
+        return cluster
 
     def check_orthographies(self):
         for ortho in self.lang["orthographies"]:
@@ -71,7 +76,7 @@ class Checker:
 
         if "differs" in check:
             params = check["differs"]
-            params = [[0, x] if isinstance(x, int) else x for x in params]
+            params = [[0, x, 0] if isinstance(x, int) else x for x in params]
             clusters = [self._get_cluster(buffers, param) for param in params]
             if len(clusters) != 2:
                 self.results.fail(f"Cluster check did not identify two clusters!")
