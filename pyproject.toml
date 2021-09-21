@@ -31,6 +31,8 @@ classifiers = [
 python = "^3.9"
 hyperglot = "0.3.3"
 termcolor = "1.1.0"
+fontFeatures = "^1.0"
+vharfbuzz = "^0"
 
 [tool.poetry.dev-dependencies]
 
