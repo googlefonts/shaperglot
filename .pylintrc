@@ -1,0 +1,10 @@
+[MASTER]
+ignore=CVS
+jobs=1
+persistent=yes
+unsafe-load-any-extension=no
+
+disable=
+    C0116,
+    C0115,
+    C0114,
