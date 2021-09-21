@@ -24,6 +24,7 @@ class Checker:
     def __init__(self, fontfile):
         self.vharfbuzz = Vharfbuzz(fontfile)
         self.ttfont = self.vharfbuzz.ttfont
+        # pylint: disable=C0103
         self.ff = unparse(self.ttfont, do_gdef=True)
         self.cmap = self.ttfont["cmap"].getBestCmap()
         self.results = None
