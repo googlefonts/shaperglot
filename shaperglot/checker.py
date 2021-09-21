@@ -1,12 +1,23 @@
 from vharfbuzz import Vharfbuzz
 from fontFeatures.ttLib import unparse, unparseLanguageSystems
 from hyperglot.parse import parse_chars, parse_marks
-from shaperglot.reporter import Reporter
 import fontFeatures
 
+from shaperglot.reporter import Reporter
 
-def flatten(t):
-    return [item for sublist in t for item in sublist]
+
+def flatten(lst):
+    return [item for sublist in lst for item in sublist]
+
+
+def _get_cluster(buffers, index):
+    input_id = index[0]
+    cluster_id = index[1]
+    glyphs = buffers[input_id].glyph_infos
+    cluster = [x.codepoint for x in glyphs if x.cluster == cluster_id]
+    if len(index) == 3:
+        return [cluster[index[2]]]
+    return cluster
 
 
 class Checker:
@@ -15,6 +26,8 @@ class Checker:
         self.ttfont = self.vharfbuzz.ttfont
         self.ff = unparse(self.ttfont, do_gdef=True)
         self.cmap = self.ttfont["cmap"].getBestCmap()
+        self.results = None
+        self.lang = None
 
     def check(self, lang):
         self.results = Reporter()
@@ -25,17 +38,6 @@ class Checker:
             getattr(self, check)()
         return self.results
 
-    def _get_cluster(self, buffers, index):
-        input_id = index[0]
-        cluster_id = index[1]
-        glyphs = buffers[input_id].glyph_infos
-        cluster = [
-            x.codepoint for x in glyphs if x.cluster == cluster_id
-        ]
-        if len(index) == 3:
-            return [ cluster[index[2]] ]
-        return cluster
-
     def check_orthographies(self):
         for ortho in self.lang["orthographies"]:
             marks = set(parse_marks(ortho.get("marks", "")))
@@ -45,7 +47,7 @@ class Checker:
                 missing = ", ".join(missing)
                 self.results.fail(f"Some base glyphs were missing: {missing}")
             else:
-                self.results.okay(f"All base glyphs were present in the font")
+                self.results.okay("All base glyphs were present in the font")
             if not marks:
                 continue
             missing = [x for x in marks if ord(x) not in self.cmap]
@@ -53,7 +55,7 @@ class Checker:
                 missing = ", ".join(missing)
                 self.results.fail(f"Some mark glyphs were missing: {missing}")
             else:
-                self.results.okay(f"All mark glyphs were present in the font")
+                self.results.okay("All mark glyphs were present in the font")
 
     def check_shaping(self):
         for shaping_check in self.lang.get("shaping", []):
@@ -64,22 +66,24 @@ class Checker:
         if "if" in check:
             condition = check["if"]
             if "feature" in condition and condition["feature"] not in self.ff.features:
-                self.results.skip(f'{check["rationale"]}: ({condition["feature"]} not present)')
+                self.results.skip(
+                    f'{check["rationale"]}: ({condition["feature"]} not present)'
+                )
                 return
 
-        for input in check["inputs"]:
-            if isinstance(input, str):
-                buffers.append(self.vharfbuzz.shape(input))
+        for shaping_input in check["inputs"]:
+            if isinstance(shaping_input, str):
+                buffers.append(self.vharfbuzz.shape(shaping_input))
             else:
-                text = input.get("text")
-                buffers.append(self.vharfbuzz.shape(text, input))
+                text = shaping_input.get("text")
+                buffers.append(self.vharfbuzz.shape(text, shaping_input))
 
         if "differs" in check:
             params = check["differs"]
             params = [[0, x, 0] if isinstance(x, int) else x for x in params]
-            clusters = [self._get_cluster(buffers, param) for param in params]
+            clusters = [_get_cluster(buffers, param) for param in params]
             if len(clusters) != 2:
-                self.results.fail(f"Cluster check did not identify two clusters!")
+                self.results.fail("Cluster check did not identify two clusters!")
                 return
             if clusters[0] == clusters[1]:
                 self.results.fail(check["rationale"])
@@ -113,17 +117,18 @@ class Checker:
 
         for ortho in self.lang["orthographies"]:
             marks = parse_marks(ortho.get("marks", ""))
-            for m in marks:
-                glyph = self.cmap.get(ord(m))
+            for mark in marks:
+                glyph = self.cmap.get(ord(mark))
                 if not glyph:
                     continue  # Should be picked up by the orthographies tester
                 if glyph in used_marks:
                     self.results.okay(
-                        f"Mark glyph ◌{m}  ({glyph}) took part in a mark positioning rule"
+                        f"Mark glyph ◌{mark}  ({glyph}) took part in a mark positioning rule"
                     )
                 else:
                     self.results.fail(
-                        f"Mark glyph ◌{m}  ({glyph}) did not take part in any mark positioning rule"
+                        f"Mark glyph ◌{mark}  ({glyph}) did not "
+                        "take part in any mark positioning rule"
                     )
 
     def _feature_involves(self, feat, involves):
