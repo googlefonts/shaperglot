@@ -2,7 +2,6 @@ from vharfbuzz import Vharfbuzz
 from fontFeatures.ttLib import unparse, unparseLanguageSystems
 from hyperglot.parse import parse_chars, parse_marks
 import fontFeatures
-
 from shaperglot.reporter import Reporter
 
 
@@ -78,6 +77,33 @@ class Checker:
             else:
                 text = shaping_input.get("text")
                 buffers.append(self.vharfbuzz.shape(text, shaping_input))
+
+        #Created a test to validate if a mark is being attached to a specific base.
+        #Compares the GPOS history of a standalone mark against the mark following a specific base.
+        if "mark2base" in check:
+            params = check["mark2base"]
+            params = [[0, x, 0] if isinstance(x, int) else x for x in params]
+            clusters = [_get_cluster(buffers, param) for param in params]
+            cluster_pos = []
+            mark_pos1 = ""
+            mark_pos2 = ""
+            if len(clusters) != 2:
+                self.results.fail("Cluster check did not identify two clusters!")
+                return
+            else:
+                cluster_pos = self.vharfbuzz.serialize_buf(buffers[1]).split('|')
+            if len(cluster_pos) != 2:   
+                self.results.okay(check["rationale"] + " **Is Precomposed**")
+                return
+            else:
+                mark_pos1 = self.vharfbuzz.serialize_buf(buffers[0])
+                mark_pos2 = cluster_pos[1]
+            if mark_pos2 == mark_pos1:
+                self.results.fail(check["rationale"])
+            else:
+                self.results.okay(check["rationale"])
+            #print(mark_pos1, cluster_pos, mark_pos2)
+
 
         if "differs" in check:
             params = check["differs"]
