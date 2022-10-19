@@ -1,0 +1,8 @@
+- check: no_orphaned_marks
+  input:
+    text: "Ɔ́Ɛ́ɔ́ɛ́Ɔ̀Ɛ̀ɔ̀ɛ̀"
+- check: no_orphaned_marks
+  input:
+    text: "Ɔ́Ɛ́ɔ́ɛ́Ɔ̀Ɛ̀ɔ̀ɛ̀"
+    features:
+      smcp: true

@@ -1,0 +1,17 @@
+- check: shaping_differs
+  inputs:
+    - text: "ş"
+    - text: "ş"
+      language: "ro"
+  differs:
+    - cluster: 0
+      glyph: 0
+    - cluster: 0
+      glyph: 0
+  rationale: "in Romanian, s-cedilla should become s-comma-accent"
+- check: shaping_differs
+  inputs:
+    - text: "Ş"
+    - text: "Ş"
+      language: "ro"
+  rationale: "in Romanian, S-cedilla should become S-comma-accent"
