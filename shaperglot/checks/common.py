@@ -1,4 +1,4 @@
-from strictyaml import FixedSeq, Str, Map, Int, Optional, MapPattern, Bool
+from strictyaml import Str, Map, Optional, MapPattern, Bool
 
 shaping_input_schema = Map(
     {
@@ -14,8 +14,7 @@ def and_join(lst):
         return "(nothing here)"
     if len(lst) > 1:
         return ', '.join(lst[:-1]) + ' and ' + lst[-1]
-    elif len(lst) == 1:
-        return lst[0]
+    return lst[0]
 
 class ShapeInput:
     def __init__(self, check_yaml):
@@ -27,19 +26,19 @@ class ShapeInput:
             self.features = {}
 
     def describe(self):
-        r = f"shaping the text '{self.text}' "
+        result = f"shaping the text '{self.text}' "
         if self.language or self.features:
-            r += "while "
+            result += "while "
         if self.language:
-            r += f"setting the language to '{self.language}' "
+            result += f"setting the language to '{self.language}' "
             if self.features:
-                r += "and "
+                result += "and "
         if self.features:
-            r += "turning " + and_join([
+            result += "turning " + and_join([
                 f"the '{feat}' feature " + (state and "on" or "off")
                 for feat, state in self.features.items()
             ])
-        return r.strip()
+        return result.strip()
 
     def shape(self, checker):
         parameters = {}
@@ -49,7 +48,7 @@ class ShapeInput:
             parameters["features"] = self.features
         return checker.vharfbuzz.shape(self.text, parameters)
 
-
+# pylint: disable=R0903
 class ShaperglotCheck:
     def __init__(self, check_yaml):
         self.definition = check_yaml

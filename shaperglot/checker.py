@@ -1,7 +1,4 @@
 from vharfbuzz import Vharfbuzz
-from fontFeatures.ttLib import unparse, unparseLanguageSystems
-import fontFeatures
-
 from shaperglot.reporter import Reporter
 
 
@@ -24,8 +21,6 @@ class Checker:
         self.vharfbuzz = Vharfbuzz(fontfile)
         self.ttfont = self.vharfbuzz.ttfont
         self.glyphorder = self.ttfont.getGlyphOrder()
-        # pylint: disable=C0103
-        self.ff = unparse(self.ttfont, do_gdef=True)
         self.cmap = self.ttfont["cmap"].getBestCmap()
         self.results = None
         self.lang = None
@@ -36,4 +31,3 @@ class Checker:
         for check_object in self.lang.get("shaperglot_checks", []):
             check_object.execute(self)
         return self.results
-

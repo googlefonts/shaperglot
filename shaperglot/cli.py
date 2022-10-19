@@ -12,8 +12,8 @@ def describe(options):
     if options.lang not in langs:
         maybe = langs.disambiguate(options.lang)
         if len(maybe) == 1:
-            l = langs[maybe[0]]
-            print(f"Assuming you meant {maybe[0]} ({l['full_name']}).")
+            lang = langs[maybe[0]]
+            print(f"Assuming you meant {maybe[0]} ({lang['full_name']}).")
         elif len(maybe) > 1:
             print(f"Language '{options.lang}' not known", end="")
             print("; try one of: " + ", ".join(maybe))
@@ -23,9 +23,9 @@ def describe(options):
             print("")
             return
     else:
-        l = langs[options.lang]
-    print(f"To test for {l['name']} support, shaperglot will:")
-    for shaperglot_check in l.get("shaperglot_checks", []):
+        lang = langs[options.lang]
+    print(f"To test for {lang['name']} support, shaperglot will:")
+    for shaperglot_check in lang.get("shaperglot_checks", []):
         print(
             fill(
                 "ensure " + shaperglot_check.describe(),

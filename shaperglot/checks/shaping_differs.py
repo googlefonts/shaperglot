@@ -21,31 +21,37 @@ class ShapingDiffersCheck(ShaperglotCheck):
         cluster_desc = []
         if "differs" in self.definition:
             for differs in self.definition["differs"]:
-                d = f"the {num2words(1+int(differs['glyph']), to='ordinal')} glyph"
+                desc = f"the {num2words(1+int(differs['glyph']), to='ordinal')} glyph"
                 if "cluster" in differs:
-                    d += f" of the {num2words(1+int(differs['cluster']), to='ordinal')} cluster"
-                cluster_desc.append(d)
-            result = f"{cluster_desc[0]} of the first output is different to " \
-                     f"{cluster_desc[1]} of the second output."
+                    desc += f" of the {num2words(1+int(differs['cluster']), to='ordinal')} cluster"
+                cluster_desc.append(desc)
+            result = (
+                f"{cluster_desc[0]} of the first output is different to "
+                f"{cluster_desc[1]} of the second output."
+            )
         else:
             result = "the outputs differ."
-        r = (
+        full_result = (
             f"that, when {self.inputs[0].describe()}, and then {self.inputs[1].describe()}, "
         ) + result
         if str(self.definition["rationale"]):
-            r += f" This is because {self.definition['rationale']}."
-        return r
+            full_result += f" This is because {self.definition['rationale']}."
+        return full_result
 
     def execute(self, checker):
         buffers = [i.shape(checker) for i in self.inputs]
         if "differs" not in self.definition:
             # Any difference is OK
-            s1 = checker.vharfbuzz.serialize_buf(buffers[0])
-            s2 = checker.vharfbuzz.serialize_buf(buffers[1])
-            if s1 != s2:
+            serialized_buf1 = checker.vharfbuzz.serialize_buf(buffers[0])
+            serialized_buf2 = checker.vharfbuzz.serialize_buf(buffers[1])
+            if serialized_buf1 != serialized_buf2:
                 checker.results.okay(self.definition["rationale"])
             else:
-                checker.results.fail(self.definition["rationale"]+"; both buffers returned "+s1)
+                checker.results.fail(
+                    self.definition["rationale"]
+                    + "; both buffers returned "
+                    + serialized_buf1
+                )
             return
         # We are looking for a specific difference
         glyphs = []
@@ -54,11 +60,17 @@ class ShapingDiffersCheck(ShaperglotCheck):
             if "cluster" in differs:
                 buffer = [x for x in buffer if x[0].cluster == int(differs["cluster"])]
             glyph_ix = int(differs["glyph"])
-            if len(buffer)-1 < glyph_ix:
-                checker.results.fail(f"Test asked for glyph {glyph_ix} but shaper only returned {len(buffer)} glyphs")
+            if len(buffer) - 1 < glyph_ix:
+                checker.results.fail(
+                    f"Test asked for glyph {glyph_ix} but shaper only returned {len(buffer)} glyphs"
+                )
                 return
-            glyphs.append((buffer[glyph_ix][0].codepoint,buffer[glyph_ix][1]))
+            glyphs.append((buffer[glyph_ix][0].codepoint, buffer[glyph_ix][1]))
         if glyphs[0] != glyphs[1]:
             checker.results.okay(self.definition["rationale"])
         else:
-            checker.results.fail(self.definition["rationale"]+"; both buffers returned "+checker.vharfbuzz.serialize_buf(buffers[0]))
+            checker.results.fail(
+                self.definition["rationale"]
+                + "; both buffers returned "
+                + checker.vharfbuzz.serialize_buf(buffers[0])
+            )

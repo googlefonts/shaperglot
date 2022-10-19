@@ -1,12 +1,13 @@
-from strictyaml import FixedSeq, Str, Map, Int, Optional
-from num2words import num2words
+from strictyaml import Str, Map, Optional
 from ufo2ft.util import classifyGlyphs
 from youseedee import ucd_data
 
 from .common import shaping_input_schema, ShaperglotCheck
 
-def _simple_mark_check(cp):
-    return ucd_data(cp).get("General_Category")=="Mn"
+
+def _simple_mark_check(codepoint):
+    return ucd_data(codepoint).get("General_Category") == "Mn"
+
 
 class NoOrphanedMarksCheck(ShaperglotCheck):
     name = "no_orphaned_marks"
@@ -27,13 +28,18 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
 
         # GDEF may be wrong, don't trust it.
         is_mark = {}
-        for yes_no, glyphs in classifyGlyphs(_simple_mark_check, checker.cmap, checker.ttfont.get("GSUB")).items():
-            for g in glyphs:
-                is_mark[g] = yes_no
+        for yes_no, glyphs in classifyGlyphs(
+            _simple_mark_check, checker.cmap, checker.ttfont.get("GSUB")
+        ).items():
+            for glyphname in glyphs:
+                is_mark[glyphname] = yes_no
 
         passed = True
         previous = None
-        for ix, (info, pos) in enumerate(zip(buffer.glyph_infos, buffer.glyph_positions)):
+        # pylint: disable=C0103
+        for ix, (info, pos) in enumerate(
+            zip(buffer.glyph_infos, buffer.glyph_positions)
+        ):
             glyphname = checker.glyphorder[buffer.glyph_infos[ix].codepoint]
             # Is this a mark glyph?
             if info.codepoint == 0:
@@ -47,7 +53,11 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
                     checker.results.fail("Shaper produced a dotted circle")
                 elif pos.x_offset == 0 and pos.y_offset == 0:  # Suspicious
                     passed = False
-                    checker.results.fail(f"Shaper didn't attached {glyphname} to {previous}")
+                    checker.results.fail(
+                        f"Shaper didn't attached {glyphname} to {previous}"
+                    )
             previous = glyphname
         if passed:
-            checker.results.okay("No unattached mark glyphs were produced "+self.input.describe())
+            checker.results.okay(
+                "No unattached mark glyphs were produced " + self.input.describe()
+            )

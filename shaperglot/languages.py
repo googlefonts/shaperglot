@@ -1,12 +1,12 @@
-import os
-from strictyaml import load, Seq
 from pathlib import Path
+import sys
+
 from gflanguages import LoadLanguages, LoadScripts
-from strictyaml import YAMLValidationError
+from strictyaml import YAMLValidationError, load
+from google.protobuf.json_format import MessageToDict
+
 from .checks import schemas, checks_map
 from .checks.orthographies import OrthographiesCheck
-from google.protobuf.json_format import MessageToDict
-import sys
 
 gflangs = LoadLanguages()
 gfscripts = LoadScripts()
@@ -18,7 +18,8 @@ def load_shaperglot_definition(language, validate=False):
     definition_file = definitions_directory / (language + ".yaml")
     if not definition_file.is_file():
         return []
-    data = load(open(definition_file).read())
+    with open(definition_file) as fh:
+        data = load(fh.read())
     check_objects = []
     for ix, check in enumerate(data):
         if validate:
@@ -31,13 +32,13 @@ def load_shaperglot_definition(language, validate=False):
             except YAMLValidationError as e:
                 raise ValueError(
                     f"Language definition file for {language} invalid; parser error in check {ix}: {e}"
-                )
+                ) from e
         # This turns a { "check": "foobar" } into a FoobarCheck({"check": "foobar"})
         check_objects.append(checks_map[check["check"]](check))
     return check_objects
 
 
-class Languages():
+class Languages:
     loaded = {}
 
     def __contains__(self, item):
@@ -47,13 +48,11 @@ class Languages():
         return gflangs.keys()
 
     def disambiguate(self, lang):
-        maybe_keys = [
-            k for k in gflangs.keys() if k.lower().startswith(lang.lower()+"_")
-        ]
+        maybe_keys = [k for k in gflangs if k.lower().startswith(lang.lower() + "_")]
         if maybe_keys:
             return maybe_keys
         maybe_keys = [
-            k for k,v in gflangs.items() if v.name.lower().startswith(lang.lower())
+            k for k, v in gflangs.items() if v.name.lower().startswith(lang.lower())
         ]
         return maybe_keys
 
@@ -63,12 +62,16 @@ class Languages():
         if item not in gflangs:
             return
         orig = MessageToDict(gflangs[item])
-        orig["full_name"] = orig["name"]+ " in the "+ gfscripts[orig["script"]].name+" script"
+        orig["full_name"] = (
+            orig["name"] + " in the " + gfscripts[orig["script"]].name + " script"
+        )
         orig["shaperglot_checks"] = [OrthographiesCheck(orig)]
         try:
             checks = load_shaperglot_definition(item, validate=True)
         except Exception as e:
-            print(f"The shaperglot definition for {item} is not valid. Please report a bug.")
+            print(
+                f"The shaperglot definition for {item} is not valid. Please report a bug."
+            )
             print(e)
             sys.exit(1)
         orig["shaperglot_checks"].extend(checks)
