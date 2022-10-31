@@ -8,6 +8,11 @@ def parse_bases(bases):
     return [x[0] or x[1] for x in re.findall(r"\{([^}]+)\}|(\S+)", bases)]
 
 
+def can_shape(text, checker):
+    buf = checker.vharfbuzz.shape(text)
+    return all(gi.codepoint != 0 for gi in buf.glyph_infos)
+
+
 class OrthographiesCheck(ShaperglotCheck):
     name = "orthographies"
     schema = Map({})
@@ -26,24 +31,20 @@ class OrthographiesCheck(ShaperglotCheck):
             f"'{g}'" for g in self.all_glyphs
         )
 
-    def can_shape(self, text, checker):
-        buf = checker.vharfbuzz.shape(text)
-        return all(gi.codepoint != 0 for gi in buf.glyph_infos)
-
     def execute(self, checker):
         if not self.all_glyphs:
             checker.results.warn(
                 f"No glyphs were defined for language {checker.lang['name']}"
             )
             return
-        missing = [x for x in self.bases if not self.can_shape(x, checker)]
+        missing = [x for x in self.bases if not can_shape(x, checker)]
         if missing:
             missing = ", ".join(missing)
             checker.results.fail(f"Some base glyphs were missing: {missing}")
         else:
             checker.results.okay("All base glyphs were present in the font")
         if self.marks:
-            missing = [x for x in self.marks if not self.can_shape(x, checker)]
+            missing = [x for x in self.marks if not can_shape(x, checker)]
             if missing:
                 missing = ", ".join([chr(0x25cc)+x for x in missing])
                 checker.results.fail(f"Some mark glyphs were missing: {missing}")
