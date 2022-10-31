@@ -16,7 +16,7 @@ def _get_cluster(buffers, index):
     return cluster
 
 
-class Checker:
+class Checker:  # pylint: disable=too-few-public-methods
     def __init__(self, fontfile):
         self.vharfbuzz = Vharfbuzz(fontfile)
         self.ttfont = self.vharfbuzz.ttfont
