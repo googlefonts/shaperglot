@@ -36,12 +36,11 @@ strictyaml = "*"
 num2words = "^0.5"
 ufo2ft = "*"
 youseedee = "*"
-protobuf = "3.19.0"
+protobuf = "3.19.4"
 
 [tool.poetry.dev-dependencies]
 
 # Formatters
-black = "=20.8b1"
 pylint = "~2.6.0"
 pytest = "^5.3.2"
 
