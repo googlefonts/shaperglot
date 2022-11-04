@@ -35,6 +35,9 @@ class Checker:  # pylint: disable=too-few-public-methods
         self.full_reversed_cmap = {k: list(v)[0] for k,v in self.reversed_cmap.items()}
         if not gsub:
             return
+        if len(self.full_reversed_cmap) > 5_000:
+            # Some kind of CJK monstrosity, give up
+            return
         for cp, glyph in self.cmap.items():
             glyphs = set([glyph])
             if gsub:
