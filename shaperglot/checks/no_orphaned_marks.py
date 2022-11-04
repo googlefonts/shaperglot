@@ -1,10 +1,11 @@
 from strictyaml import Str, Map, Optional
-from ufo2ft.util import classifyGlyphs
 from youseedee import ucd_data
+from functools import cache
 
 from .common import shaping_input_schema, ShaperglotCheck
 
 
+@cache
 def _simple_mark_check(codepoint):
     return ucd_data(codepoint).get("General_Category") == "Mn"
 
@@ -27,13 +28,6 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
         dotted_circle_glyph = checker.cmap.get(0x25CC)
 
         # GDEF may be wrong, don't trust it.
-        is_mark = {}
-        for yes_no, glyphs in classifyGlyphs(
-            _simple_mark_check, checker.cmap, checker.ttfont.get("GSUB")
-        ).items():
-            for glyphname in glyphs:
-                is_mark[glyphname] = yes_no
-
         passed = True
         previous = None
         # pylint: disable=C0103
@@ -46,7 +40,7 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
                 passed = False
                 checker.results.fail("Shaper produced a .notdef")
                 break
-            if is_mark[glyphname]:
+            if _simple_mark_check(checker.codepoint_for(glyphname)):
                 # Was the previous glyph dotted circle?
                 if previous and previous == dotted_circle_glyph:
                     passed = False
