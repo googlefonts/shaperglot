@@ -2,6 +2,7 @@ import argparse
 import sys
 from textwrap import fill
 import os
+import re
 
 from shaperglot.checker import Checker
 from shaperglot.languages import Languages
@@ -46,7 +47,9 @@ def check(options):
 
         results = checker.check(langs[lang])
 
-        if results.is_success:
+        if results.is_unknown:
+            print(f"Cannot determine whether font supports language '{lang}'")
+        elif results.is_success:
             print(f"Font supports language '{lang}'")
         else:
             print(f"Font does not fully support language '{lang}'")
@@ -58,6 +61,28 @@ def check(options):
             for message in results.fails:
                 print(f" * {message}")
 
+
+def report(options):
+    checker = Checker(options.font)
+    langs = Languages()
+    for lang in langs.keys():
+        if options.filter and not re.search(options.filter, lang):
+            continue
+        results = checker.check(langs[lang])
+
+        if results.is_unknown:
+            continue
+        elif results.is_success:
+            print(f"Font supports language '{lang}'")
+        else:
+            print(f"Font does not fully support language '{lang}'")
+
+        if options.verbose and options.verbose > 1:
+            for status, message in results:
+                print(f" * {status.value}: {message}")
+        elif options.verbose or not results.is_success:
+            for message in results.fails:
+                print(f" * {message}")
 
 def main(args=None):
     if args is None:
@@ -89,6 +114,9 @@ def main(args=None):
         'report', help='report which languages are supported'
     )
     parser_report.add_argument('font', metavar='FONT', help='the font file')
+    parser_report.add_argument('--verbose', '-v', action='count')
+    parser_report.add_argument('--filter',type=str, help="Regular expression to filter languages")
+    parser_report.set_defaults(func=report)
 
     options = parser.parse_args(args)
     if not hasattr(options, "func"):
