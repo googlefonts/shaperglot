@@ -33,8 +33,16 @@ class Reporter(Sequence):
         self.results.append((Result.SKIP, message))
 
     @property
+    def is_unknown(self):
+        return not self.passes and not self.fails
+
+    @property
     def is_success(self):
-        return not self.fails
+        return len(self.passes) > 0 and not self.fails
+
+    @property
+    def passes(self):
+        return [x[1] for x in self.results if x[0] == Result.PASS]
 
     @property
     def fails(self):
