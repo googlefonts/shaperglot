@@ -54,7 +54,7 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
                 elif pos.x_offset == 0 and pos.y_offset == 0:  # Suspicious
                     passed = False
                     checker.results.fail(
-                        f"Shaper didn't attached {glyphname} to {previous}"
+                        f"Shaper didn't attach {glyphname} to {previous}"
                     )
             previous = glyphname
         if passed:
