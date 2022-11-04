@@ -65,14 +65,15 @@ def check(options):
 def report(options):
     checker = Checker(options.font)
     langs = Languages()
-    for lang in langs.keys():
+    for lang in langs.keys():  # pylint: disable=C0206
         if options.filter and not re.search(options.filter, lang):
             continue
         results = checker.check(langs[lang])
 
         if results.is_unknown:
             continue
-        elif results.is_success:
+
+        if results.is_success:
             print(f"Font supports language '{lang}'")
         else:
             print(f"Font does not fully support language '{lang}'")

@@ -1,6 +1,7 @@
+from functools import cache
+
 from strictyaml import Str, Map, Optional
 from youseedee import ucd_data
-from functools import cache
 
 from .common import shaping_input_schema, ShaperglotCheck
 

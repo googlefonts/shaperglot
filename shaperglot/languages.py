@@ -47,10 +47,10 @@ class Languages:
     def __contains__(self, item):
         return item in gflangs
 
-    def keys(self):  # pylint: disable=no-self-use
+    def keys(self):
         return gflangs.keys()
 
-    def disambiguate(self, lang):  # pylint: disable=no-self-use
+    def disambiguate(self, lang):
         maybe_keys = [k for k in gflangs if k.lower().startswith(lang.lower() + "_")]
         if maybe_keys:
             return maybe_keys

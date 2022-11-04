@@ -38,12 +38,12 @@ class Checker:  # pylint: disable=too-few-public-methods
         if len(self.full_reversed_cmap) > 5_000:
             # Some kind of CJK monstrosity, give up
             return
-        for cp, glyph in self.cmap.items():
+        for codepoint, glyph in self.cmap.items():
             glyphs = set([glyph])
             if gsub:
                 closeGlyphsOverGSUB(gsub, glyphs)
             for glyph in glyphs:
-                self.full_reversed_cmap[glyph] = cp
+                self.full_reversed_cmap[glyph] = codepoint
 
     def codepoint_for(self, glyphname):
         if glyphname in self.reversed_cmap:
