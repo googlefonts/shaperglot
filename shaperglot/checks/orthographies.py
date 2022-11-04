@@ -9,8 +9,10 @@ def parse_bases(bases):
 
 
 def can_shape(text, checker):
-    buf = checker.vharfbuzz.shape(text)
-    return all(gi.codepoint != 0 for gi in buf.glyph_infos)
+    if text not in checker.cache["can_shape"]:
+        buf = checker.vharfbuzz.shape(text)
+        checker.cache["can_shape"][text] = all(gi.codepoint != 0 for gi in buf.glyph_infos)
+    return checker.cache["can_shape"][text]
 
 
 class OrthographiesCheck(ShaperglotCheck):

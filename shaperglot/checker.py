@@ -24,6 +24,7 @@ class Checker:  # pylint: disable=too-few-public-methods
         self.cmap = self.ttfont["cmap"].getBestCmap()
         self.results = None
         self.lang = None
+        self.cache = {"can_shape": {}}
 
     def check(self, lang):
         self.results = Reporter()
