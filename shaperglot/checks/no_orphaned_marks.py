@@ -39,20 +39,39 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
             # Is this a mark glyph?
             if info.codepoint == 0:
                 passed = False
-                checker.results.fail("Shaper produced a .notdef")
+                checker.results.fail(
+                    check_name="no-orphaned-marks",
+                    result_code="notdef-produced",
+                    message="Shaper produced a .notdef",
+                    context = { "text": self.input.check_yaml }
+                )
                 break
             if _simple_mark_check(checker.codepoint_for(glyphname)):
                 # Was the previous glyph dotted circle?
                 if previous and previous == dotted_circle_glyph:
                     passed = False
-                    checker.results.fail("Shaper produced a dotted circle")
+                    checker.results.fail(
+                        check_name="no-orphaned-marks",
+                        result_code="dotted-circle-produced",
+                        message="Shaper produced a dotted circle",
+                        context = { "text": self.input.check_yaml }
+                    )
                 elif pos.x_offset == 0 and pos.y_offset == 0:  # Suspicious
                     passed = False
                     checker.results.fail(
-                        f"Shaper didn't attach {glyphname} to {previous}"
+                        check_name="no-orphaned-marks",
+                        result_code="orphaned-mark",
+                        message=f"Shaper didn't attach {glyphname} to {previous}",
+                        context = {
+                            "text": self.input.check_yaml,
+                            "mark": glyphname,
+                            "base": previous,
+                        }
                     )
             previous = glyphname
         if passed:
             checker.results.okay(
-                "No unattached mark glyphs were produced " + self.input.describe()
+                check_name="no-orphaned-marks",
+                message=f"No unattached mark glyphs were produced " + self.input.describe(),
+                context= { "text": self.input.check_yaml }
             )

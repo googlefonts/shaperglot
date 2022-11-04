@@ -55,8 +55,8 @@ def check(options):
             print(f"Font does not fully support language '{lang}'")
 
         if options.verbose and options.verbose > 1:
-            for status, message in results:
-                print(f" * {status.value}: {message}")
+            for message in results:
+                print(f" * {message}")
         elif options.verbose or not results.is_success:
             for message in results.fails:
                 print(f" * {message}")
@@ -65,7 +65,11 @@ def check(options):
 def report(options):
     checker = Checker(options.font)
     langs = Languages()
-    for lang in langs.keys():  # pylint: disable=C0206
+    messages = []
+    supported = []
+    unsupported = []
+
+    for lang in sorted(langs.keys()):  # pylint: disable=C0206
         if options.filter and not re.search(options.filter, lang):
             continue
         results = checker.check(langs[lang])
@@ -74,16 +78,74 @@ def report(options):
             continue
 
         if results.is_success:
-            print(f"Font supports language '{lang}'")
+            supported.append(langs[lang]['name'])
+            print(f"Font supports language '{lang}' ({langs[lang]['name']})")
         else:
-            print(f"Font does not fully support language '{lang}'")
-
+            unsupported.append(langs[lang]['name'])
+            print(
+                f"Font does not fully support language '{lang}' ({langs[lang]['name']})"
+            )
+        messages.extend(results)
         if options.verbose and options.verbose > 1:
             for status, message in results:
                 print(f" * {status.value}: {message}")
         elif options.verbose or not results.is_success:
             for message in results.fails:
                 print(f" * {message}")
+
+    # Collate a useful fixing guide
+    print("\n== Summary ==\n")
+    print(f"* {len(supported)+len(unsupported)} languages checked")
+    if supported:
+        print(f"* {len(supported)} languages supported")
+    if unsupported:
+        print(
+            fill(
+                "* Unsupported languages: " + ", ".join(unsupported),
+                subsequent_indent=" " * 25,
+                width=os.get_terminal_size()[0] - 2,
+            )
+        )
+        print("\nTo add support:")
+    missing_bases = set()
+    missing_marks = set()
+    missing_anchors = set()
+    for msg in messages:
+        if msg.result_code == "bases-missing":
+            missing_bases |= set(msg.context["glyphs"])
+        if msg.result_code == "marks-missing":
+            missing_marks |= set(msg.context["glyphs"])
+        if msg.result_code == "orphaned-mark":
+            missing_anchors.add((msg.context["base"], msg.context["mark"]))
+    if missing_marks:
+        print(
+            fill(
+                " * Add mark glyphs: "
+                + ", ".join(["\u25cc" + x for x in sorted(missing_marks)]),
+                subsequent_indent="    ",
+                width=os.get_terminal_size()[0] - 2,
+            )
+        )
+    if missing_bases:
+        print(
+            fill(
+                " * Support characters: " + ", ".join(sorted(missing_bases)),
+                subsequent_indent="    ",
+                width=os.get_terminal_size()[0] - 2,
+            )
+        )
+    if missing_anchors:
+        print(
+            fill(
+                " * Add anchor attachments: "
+                + ", ".join(
+                    [base + '/' + mark for base, mark in sorted(missing_anchors)]
+                ),
+                subsequent_indent="    ",
+                width=os.get_terminal_size()[0] - 2,
+            )
+        )
+
 
 def main(args=None):
     if args is None:
@@ -116,7 +178,9 @@ def main(args=None):
     )
     parser_report.add_argument('font', metavar='FONT', help='the font file')
     parser_report.add_argument('--verbose', '-v', action='count')
-    parser_report.add_argument('--filter',type=str, help="Regular expression to filter languages")
+    parser_report.add_argument(
+        '--filter', type=str, help="Regular expression to filter languages"
+    )
     parser_report.set_defaults(func=report)
 
     options = parser.parse_args(args)

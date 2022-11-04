@@ -24,6 +24,7 @@ class ShapeInput:
             self.features = check_yaml["features"].data
         else:
             self.features = {}
+        self.check_yaml = check_yaml
 
     def describe(self):
         result = f"shaping the text '{self.text}' "

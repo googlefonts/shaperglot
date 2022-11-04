@@ -36,19 +36,39 @@ class OrthographiesCheck(ShaperglotCheck):
     def execute(self, checker):
         if not self.all_glyphs:
             checker.results.warn(
-                f"No glyphs were defined for language {checker.lang['name']}"
+                check_name="orthographies",
+                result_code="no-exemplars",
+                message=f"No exemplar glyphs were defined for language {checker.lang['name']}",
             )
             return
         missing = [x for x in self.bases if not can_shape(x, checker)]
         if missing:
-            missing = ", ".join(missing)
-            checker.results.fail(f"Some base glyphs were missing: {missing}")
+            checker.results.fail(
+                check_name="orthographies",
+                result_code="bases-missing",
+                message=f"Some base glyphs were missing: {', '.join(missing)}",
+                context={"glyphs": missing}
+            )
         else:
-            checker.results.okay("All base glyphs were present in the font")
-        if self.marks:
-            missing = [x for x in self.marks if not can_shape(x, checker)]
-            if missing:
-                missing = ", ".join([chr(0x25cc)+x for x in missing])
-                checker.results.fail(f"Some mark glyphs were missing: {missing}")
-            else:
-                checker.results.okay("All mark glyphs were present in the font")
+            checker.results.okay(
+                check_name="orthographies",
+                message="All base glyphs were present in the font"
+            )
+
+        if not self.marks:
+            return
+
+        missing = [x for x in self.marks if not can_shape(x, checker)]
+        if missing:
+            missing_str = ", ".join([chr(0x25cc)+x for x in missing])
+            checker.results.fail(
+                check_name="orthographies",
+                result_code="marks-missing",
+                message=f"Some mark glyphs were missing: {missing_str}",
+                context={"glyphs": missing}
+            )
+        else:
+            checker.results.okay(
+                check_name="orthographies",
+                message="All mark glyphs were present in the font"
+            )

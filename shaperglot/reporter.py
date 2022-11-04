@@ -1,13 +1,26 @@
 from enum import Enum
 from collections.abc import Sequence
-from termcolor import colored
+from dataclasses import dataclass, field
 
+from termcolor import colored
 
 class Result(Enum):
     PASS = colored("PASS", "green")
     WARN = colored("WARN", "yellow")
     FAIL = colored("FAIL", "red")
     SKIP = colored("SKIP", "blue")
+
+
+@dataclass(repr=False)
+class Message():
+    result: Result
+    check_name: str
+    message: str
+    result_code: str = "ok"
+    context: dict = field(default_factory=dict)
+
+    def __repr__(self):
+        return self.result.value + ": " + self.message
 
 
 class Reporter(Sequence):
@@ -20,17 +33,17 @@ class Reporter(Sequence):
     def __len__(self):
         return len(self.results)
 
-    def okay(self, message):
-        self.results.append((Result.PASS, message))
+    def okay(self, **kwargs):
+        self.results.append(Message(result=Result.PASS, **kwargs))
 
-    def warn(self, message):
-        self.results.append((Result.WARN, message))
+    def warn(self, **kwargs):
+        self.results.append(Message(result=Result.WARN, **kwargs))
 
-    def fail(self, message):
-        self.results.append((Result.FAIL, message))
+    def fail(self, **kwargs):
+        self.results.append(Message(result=Result.FAIL, **kwargs))
 
-    def skip(self, message):
-        self.results.append((Result.SKIP, message))
+    def skip(self, **kwargs):
+        self.results.append(Message(result=Result.SKIP, **kwargs))
 
     @property
     def is_unknown(self):
@@ -42,12 +55,12 @@ class Reporter(Sequence):
 
     @property
     def passes(self):
-        return [x[1] for x in self.results if x[0] == Result.PASS]
+        return [x for x in self.results if x.result == Result.PASS]
 
     @property
     def fails(self):
-        return [x[1] for x in self.results if x[0] == Result.FAIL]
+        return [x for x in self.results if x.result == Result.FAIL]
 
     @property
     def warns(self):
-        return [x[1] for x in self.results if x[0] == Result.WARN]
+        return [x for x in self.results if x.result == Result.WARN]
