@@ -37,7 +37,8 @@ class UnencodedVariantsCheck(ShaperglotCheck):
             return
         # Try it again with locl on, set the language to the one we're
         # looking for see if something happens.
-        # self.input.language = ???
+        if not self.input.language:
+            self.input.language = checker.lang["language"]
         self.input.features["locl"] = True
         buffer2 = self.input.shape(checker)
         glyphname2 = checker.glyphorder[buffer2.glyph_infos[0].codepoint]
