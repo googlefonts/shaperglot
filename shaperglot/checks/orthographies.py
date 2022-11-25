@@ -28,6 +28,9 @@ class OrthographiesCheck(ShaperglotCheck):
         self.marks = set(marks)
         self.bases = set(bases) - self.marks
 
+    def should_skip(self, checker):
+        return False
+
     def describe(self):
         return "that the following glyphs are in the font: " + and_join(
             f"'{g}'" for g in self.all_glyphs

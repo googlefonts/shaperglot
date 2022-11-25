@@ -56,5 +56,9 @@ class Checker:  # pylint: disable=too-few-public-methods
         self.results = Reporter()
         self.lang = lang
         for check_object in self.lang.get("shaperglot_checks", []):
+            skip_reason = check_object.should_skip(self)
+            if skip_reason:
+                self.results.skip(check_name=check_object.name, message=skip_reason)
+                continue
             check_object.execute(self)
         return self.results

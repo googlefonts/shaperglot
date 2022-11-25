@@ -1,19 +1,17 @@
 from strictyaml import FixedSeq, Str, Map, Int, Optional
 from num2words import num2words
 
-from .common import shaping_input_schema, ShaperglotCheck
+from .common import shaping_input_schema, ShaperglotCheck, check_schema
 
 cluster_schema = Map({Optional("cluster"): Int(), "glyph": Int()})
 
 
 class ShapingDiffersCheck(ShaperglotCheck):
     name = "shaping_differs"
-    schema = Map(
+    schema = check_schema(
         {
-            "check": Str(),
             "inputs": FixedSeq([shaping_input_schema, shaping_input_schema]),
             Optional("differs"): FixedSeq([cluster_schema, cluster_schema]),
-            Optional("rationale"): Str(),
         }
     )
 

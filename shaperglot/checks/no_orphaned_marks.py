@@ -3,7 +3,7 @@ from functools import cache
 from strictyaml import Str, Map, Optional
 from youseedee import ucd_data
 
-from .common import shaping_input_schema, ShaperglotCheck
+from .common import shaping_input_schema, ShaperglotCheck, check_schema
 
 
 @cache
@@ -13,11 +13,9 @@ def _simple_mark_check(codepoint):
 
 class NoOrphanedMarksCheck(ShaperglotCheck):
     name = "no_orphaned_marks"
-    schema = Map(
+    schema = check_schema(
         {
-            "check": Str(),
             "input": shaping_input_schema,
-            Optional("rationale"): Str(),
         }
     )
 
