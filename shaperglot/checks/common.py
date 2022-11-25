@@ -8,17 +8,14 @@ shaping_input_schema = Map(
     }
 )
 
-conditions_schema = Map(
-    {
-        Optional("features"): Seq(Str())
-    }
-)
+conditions_schema = Map({Optional("features"): Seq(Str())})
+
 
 def check_schema(schema):
     base_schema = {
         "check": Str(),
         Optional("rationale"): Str(),
-        Optional("conditions"): conditions_schema
+        Optional("conditions"): conditions_schema,
     }
     schema.update(base_schema)
     return Map(schema)
@@ -31,6 +28,7 @@ def and_join(lst):
     if len(lst) > 1:
         return ', '.join(lst[:-1]) + ' and ' + lst[-1]
     return lst[0]
+
 
 class ShapeInput:
     def __init__(self, check_yaml):
@@ -51,10 +49,12 @@ class ShapeInput:
             if self.features:
                 result += "and "
         if self.features:
-            result += "turning " + and_join([
-                f"the '{feat}' feature " + (state and "on" or "off")
-                for feat, state in self.features.items()
-            ])
+            result += "turning " + and_join(
+                [
+                    f"the '{feat}' feature " + (state and "on" or "off")
+                    for feat, state in self.features.items()
+                ]
+            )
         return result.strip()
 
     def shape(self, checker):
@@ -64,6 +64,7 @@ class ShapeInput:
         if self.features:
             parameters["features"] = self.features
         return checker.vharfbuzz.shape(self.text, parameters)
+
 
 # pylint: disable=R0903
 class ShaperglotCheck:
@@ -81,11 +82,15 @@ class ShaperglotCheck:
         if "features" in conditions:
             font_features = set()
             for table in ["GSUB", "GPOS"]:
-                if checker.ttfont.get(table) and checker.ttfont[table].table.FeatureList:
-                    for fr in checker.ttfont[table].table.FeatureList.FeatureRecord:
-                        font_features.add(fr.FeatureTag)
-            required = set([ str(f) for f in conditions["features"] ])
+                if (
+                    checker.ttfont.get(table)
+                    and checker.ttfont[table].table.FeatureList
+                ):
+                    for feature_record in checker.ttfont[
+                        table
+                    ].table.FeatureList.FeatureRecord:
+                        font_features.add(feature_record.FeatureTag)
+            required = set(str(f) for f in conditions["features"])
             if required - font_features:
                 return f"Missing features: {', '.join(required-font_features)}"
         return False
-

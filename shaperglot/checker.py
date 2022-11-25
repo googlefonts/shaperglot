@@ -42,8 +42,8 @@ class Checker:  # pylint: disable=too-few-public-methods
             glyphs = set([glyph])
             if gsub:
                 closeGlyphsOverGSUB(gsub, glyphs)
-            for glyph in glyphs:
-                self.full_reversed_cmap[glyph] = codepoint
+            for new_glyph in glyphs:
+                self.full_reversed_cmap[new_glyph] = codepoint
 
     def codepoint_for(self, glyphname):
         if glyphname in self.reversed_cmap:

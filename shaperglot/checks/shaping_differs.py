@@ -1,4 +1,4 @@
-from strictyaml import FixedSeq, Str, Map, Int, Optional
+from strictyaml import FixedSeq, Map, Int, Optional
 from num2words import num2words
 
 from .common import shaping_input_schema, ShaperglotCheck, check_schema

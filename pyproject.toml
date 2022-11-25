@@ -64,5 +64,5 @@ good-names = [
     "e",
     "ix",
 ]
-disable=["broad-except", "missing-module-docstring", "no-self-use", "too-many-instance-attributes", "missing-function-docstring", "missing-class-docstring"]
-
+disable=["broad-except", "missing-module-docstring", "no-self-use", "too-many-instance-attributes", "missing-function-docstring", "missing-class-docstring", "duplicate-code","too-many-branches"]
+max-line-length=120

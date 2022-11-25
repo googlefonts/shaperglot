@@ -1,6 +1,5 @@
 from functools import cache
 
-from strictyaml import Str, Map, Optional
 from youseedee import ucd_data
 
 from .common import shaping_input_schema, ShaperglotCheck, check_schema
@@ -70,6 +69,6 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
         if passed:
             checker.results.okay(
                 check_name="no-orphaned-marks",
-                message=f"No unattached mark glyphs were produced " + self.input.describe(),
+                message="No unattached mark glyphs were produced " + self.input.describe(),
                 context= { "text": self.input.check_yaml }
             )
