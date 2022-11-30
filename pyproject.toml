@@ -28,16 +28,19 @@ classifiers = [
 
 [tool.poetry.dependencies]
 
-python = "^3.9"
-hyperglot = "0.3.3"
+python = ">= 3.7"
+gflanguages = { git = "https://github.com/googlefonts/lang" }
 termcolor = "1.1.0"
-fontFeatures = "^1.0"
 vharfbuzz = "^0"
+strictyaml = "*"
+num2words = "^0.5"
+ufo2ft = "*"
+youseedee = "*"
+protobuf = "3.19.4"
 
 [tool.poetry.dev-dependencies]
 
 # Formatters
-black = "=20.8b1"
 pylint = "~2.6.0"
 pytest = "^5.3.2"
 
@@ -54,3 +57,12 @@ skip-string-normalization = true
 
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pylint."messages control"]
+good-names = [
+    "fh",
+    "e",
+    "ix",
+]
+disable=["broad-except", "missing-module-docstring", "no-self-use", "too-many-instance-attributes", "missing-function-docstring", "missing-class-docstring", "duplicate-code","too-many-branches"]
+max-line-length=120
