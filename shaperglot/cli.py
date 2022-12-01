@@ -89,15 +89,14 @@ def report(options):
         if options.verbose and options.verbose > 1:
             for status, message in results:
                 print(f" * {status.value}: {message}")
-        elif options.verbose or not results.is_success:
-            for message in results.fails:
-                print(f" * {message}")
 
     # Collate a useful fixing guide
     print("\n== Summary ==\n")
     print(f"* {len(supported)+len(unsupported)} languages checked")
     if supported:
         print(f"* {len(supported)} languages supported")
+    if not options.verbose:
+        return
     if unsupported:
         print(
             fill(
