@@ -69,7 +69,7 @@ def report(options):
     supported = []
     unsupported = []
 
-    for lang in sorted(langs.keys()):  # pylint: disable=C0206
+    for lang in sorted(langs.keys()):
         if options.filter and not re.search(options.filter, lang):
             continue
         results = checker.check(langs[lang])
