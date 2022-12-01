@@ -36,11 +36,19 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
             # Is this a mark glyph?
             if info.codepoint == 0:
                 passed = False
+                message = "Shaper produced a .notdef"
+                # Generally this message happens because we're missing
+                # base/mark glyphs, so we will heard about this already,
+                # *except* if no exemplars are defined, when it would be
+                # good to hear specifically what glyphs we tried to test here.
+                if not checker.lang.get("exemplarChars"):
+                    message += " when shaping " + self.input.describe()
+
                 checker.results.fail(
                     check_name="no-orphaned-marks",
                     result_code="notdef-produced",
-                    message="Shaper produced a .notdef",
-                    context = { "text": self.input.check_yaml }
+                    message=message,
+                    context={"text": self.input.check_yaml},
                 )
                 break
             if _simple_mark_check(checker.codepoint_for(glyphname)):
@@ -50,8 +58,9 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
                     checker.results.fail(
                         check_name="no-orphaned-marks",
                         result_code="dotted-circle-produced",
-                        message="Shaper produced a dotted circle",
-                        context = { "text": self.input.check_yaml }
+                        message="Shaper produced a dotted circle when shaping "
+                        + self.input.describe(),
+                        context={"text": self.input.check_yaml},
                     )
                 elif pos.x_offset == 0 and pos.y_offset == 0:  # Suspicious
                     passed = False
@@ -59,16 +68,17 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
                         check_name="no-orphaned-marks",
                         result_code="orphaned-mark",
                         message=f"Shaper didn't attach {glyphname} to {previous}",
-                        context = {
+                        context={
                             "text": self.input.check_yaml,
                             "mark": glyphname,
                             "base": previous,
-                        }
+                        },
                     )
             previous = glyphname
         if passed:
             checker.results.okay(
                 check_name="no-orphaned-marks",
-                message="No unattached mark glyphs were produced " + self.input.describe(),
-                context= { "text": self.input.check_yaml }
+                message="No unattached mark glyphs were produced "
+                + self.input.describe(),
+                context={"text": self.input.check_yaml},
             )
