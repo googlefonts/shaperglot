@@ -4,6 +4,7 @@ from strictyaml import Map
 
 from .common import ShaperglotCheck, and_join
 
+
 def parse_bases(bases):
     return [x[0] or x[1] for x in re.findall(r"\{([^}]+)\}|(\S+)", bases)]
 
@@ -11,7 +12,9 @@ def parse_bases(bases):
 def can_shape(text, checker):
     if text not in checker.cache["can_shape"]:
         buf = checker.vharfbuzz.shape(text)
-        checker.cache["can_shape"][text] = all(gi.codepoint != 0 for gi in buf.glyph_infos)
+        checker.cache["can_shape"][text] = all(
+            gi.codepoint != 0 for gi in buf.glyph_infos
+        )
     return checker.cache["can_shape"][text]
 
 
@@ -46,34 +49,34 @@ class OrthographiesCheck(ShaperglotCheck):
                 message=f"No exemplar glyphs were defined for language {checker.lang['name']}",
             )
             return
-        missing = [x for x in self.bases if not can_shape(x, checker)]
+        missing = sorted([x for x in self.bases if not can_shape(x, checker)])
         if missing:
             checker.results.fail(
                 check_name="orthographies",
                 result_code="bases-missing",
                 message=f"Some base glyphs were missing: {', '.join(missing)}",
-                context={"glyphs": missing}
+                context={"glyphs": missing},
             )
         else:
             checker.results.okay(
                 check_name="orthographies",
-                message="All base glyphs were present in the font"
+                message="All base glyphs were present in the font",
             )
 
         if not self.marks:
             return
 
-        missing = [x for x in self.marks if not can_shape(x, checker)]
+        missing = sorted([x for x in self.marks if not can_shape(x, checker)])
         if missing:
-            missing_str = ", ".join([chr(0x25cc)+x for x in missing])
+            missing_str = ", ".join([chr(0x25CC) + x for x in missing])
             checker.results.fail(
                 check_name="orthographies",
                 result_code="marks-missing",
                 message=f"Some mark glyphs were missing: {missing_str}",
-                context={"glyphs": missing}
+                context={"glyphs": missing},
             )
         else:
             checker.results.okay(
                 check_name="orthographies",
-                message="All mark glyphs were present in the font"
+                message="All mark glyphs were present in the font",
             )
