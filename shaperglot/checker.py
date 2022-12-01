@@ -1,6 +1,5 @@
 from ufo2ft.util import closeGlyphsOverGSUB
 from vharfbuzz import Vharfbuzz
-
 from shaperglot.reporter import Reporter
 
 
