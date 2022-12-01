@@ -45,13 +45,13 @@ class ShapingDiffersCheck(ShaperglotCheck):
             if serialized_buf1 != serialized_buf2:
                 checker.results.okay(
                     check_name="shaping-differs",
-                    message=self.definition["rationale"],
+                    message=f"{self.definition['rationale']}",
                 )
             else:
                 checker.results.fail(
                     check_name="shaping-differs",
                     result_code="shaping-did-not-differ",
-                    message=self.definition["rationale"]
+                    message=f"{self.definition['rationale']}"
                     + "; both buffers returned "
                     + serialized_buf1,
                     context={
@@ -83,13 +83,13 @@ class ShapingDiffersCheck(ShaperglotCheck):
             checker.results.okay(
                 check_name="shaping-differs",
                 result_code="shaping-did-not-differ",
-                message=self.definition["rationale"],
+                message=f"{self.definition['rationale']}",
             )
         else:
             checker.results.fail(
                 check_name="shaping-differs",
                 result_code="shaping-did-not-differ",
-                message=self.definition["rationale"]
+                message=f"{self.definition['rationale']}"
                 + "; both buffers returned "
                 + serialized_buf1,
                 context={
