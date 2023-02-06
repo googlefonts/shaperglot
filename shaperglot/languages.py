@@ -18,20 +18,23 @@ def load_shaperglot_definition(language, validate=False):
     definition_file = definitions_directory / (language + ".yaml")
     if not definition_file.is_file():
         return []
-    with open(definition_file) as fh:
+    with open(definition_file, encoding="utf-8") as fh:
         data = load(fh.read())
     check_objects = []
     for ix, check in enumerate(data):
         if validate:
             if check["check"] not in schemas:
                 raise ValueError(
-                    f"Language definition file for {language} invalid; unknown check type {check['check']} in check {ix} - choose from { ', '.join(schemas.keys()) }"
+                    f"Language definition file for {language} invalid; "
+                    f"unknown check type {check['check']} in check {ix} "
+                    f"- choose from { ', '.join(schemas.keys()) }"
                 )
             try:
                 check.revalidate(schemas[check["check"]])
             except YAMLValidationError as e:
                 raise ValueError(
-                    f"Language definition file for {language} invalid; parser error in check {ix}: {e}"
+                    f"Language definition file for {language} invalid; "
+                    f"parser error in check {ix}: {e}"
                 ) from e
         # This turns a { "check": "foobar" } into a FoobarCheck({"check": "foobar"})
         check_objects.append(checks_map[check["check"]](check))
@@ -60,7 +63,7 @@ class Languages:
         if item in self.loaded:
             return self.loaded[item]
         if item not in gflangs:
-            return
+            return None
         orig = MessageToDict(gflangs[item])
         orig["full_name"] = (
             orig["name"] + " in the " + gfscripts[orig["script"]].name + " script"

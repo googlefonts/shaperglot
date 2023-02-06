@@ -1,19 +1,17 @@
-from strictyaml import FixedSeq, Str, Map, Int, Optional
+from strictyaml import FixedSeq, Map, Int, Optional
 from num2words import num2words
 
-from .common import shaping_input_schema, ShaperglotCheck
+from .common import shaping_input_schema, ShaperglotCheck, check_schema
 
 cluster_schema = Map({Optional("cluster"): Int(), "glyph": Int()})
 
 
 class ShapingDiffersCheck(ShaperglotCheck):
     name = "shaping_differs"
-    schema = Map(
+    schema = check_schema(
         {
-            "check": Str(),
             "inputs": FixedSeq([shaping_input_schema, shaping_input_schema]),
             Optional("differs"): FixedSeq([cluster_schema, cluster_schema]),
-            Optional("rationale"): Str(),
         }
     )
 
@@ -45,12 +43,21 @@ class ShapingDiffersCheck(ShaperglotCheck):
             serialized_buf1 = checker.vharfbuzz.serialize_buf(buffers[0])
             serialized_buf2 = checker.vharfbuzz.serialize_buf(buffers[1])
             if serialized_buf1 != serialized_buf2:
-                checker.results.okay(self.definition["rationale"])
+                checker.results.okay(
+                    check_name="shaping-differs",
+                    message=f"{self.definition['rationale']}",
+                )
             else:
                 checker.results.fail(
-                    self.definition["rationale"]
+                    check_name="shaping-differs",
+                    result_code="shaping-did-not-differ",
+                    message=f"{self.definition['rationale']}"
                     + "; both buffers returned "
-                    + serialized_buf1
+                    + serialized_buf1,
+                    context={
+                        "input1": self.inputs[0].check_yaml,
+                        "input2": self.inputs[0].check_yaml,
+                    },
                 )
             return
         # We are looking for a specific difference
@@ -62,15 +69,31 @@ class ShapingDiffersCheck(ShaperglotCheck):
             glyph_ix = int(differs["glyph"])
             if len(buffer) - 1 < glyph_ix:
                 checker.results.fail(
-                    f"Test asked for glyph {glyph_ix} but shaper only returned {len(buffer)} glyphs"
+                    check_name="shaping-differs",
+                    result_code="too-few-glyphs",
+                    message=f"Test asked for glyph {glyph_ix} but shaper only returned {len(buffer)} glyphs",
+                    context={
+                        "input1": self.inputs[0].check_yaml,
+                        "input2": self.inputs[0].check_yaml,
+                    },
                 )
                 return
             glyphs.append((buffer[glyph_ix][0].codepoint, buffer[glyph_ix][1]))
         if glyphs[0] != glyphs[1]:
-            checker.results.okay(self.definition["rationale"])
+            checker.results.okay(
+                check_name="shaping-differs",
+                result_code="shaping-did-not-differ",
+                message=f"{self.definition['rationale']}",
+            )
         else:
             checker.results.fail(
-                self.definition["rationale"]
+                check_name="shaping-differs",
+                result_code="shaping-did-not-differ",
+                message=f"{self.definition['rationale']}"
                 + "; both buffers returned "
-                + checker.vharfbuzz.serialize_buf(buffers[0])
+                + serialized_buf1,
+                context={
+                    "input1": self.inputs[0].check_yaml,
+                    "input2": self.inputs[0].check_yaml,
+                },
             )

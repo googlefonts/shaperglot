@@ -1,21 +1,20 @@
-from strictyaml import Str, Map, Optional
-from ufo2ft.util import classifyGlyphs
+from functools import cache
+
 from youseedee import ucd_data
 
-from .common import shaping_input_schema, ShaperglotCheck
+from .common import shaping_input_schema, ShaperglotCheck, check_schema
 
 
+@cache
 def _simple_mark_check(codepoint):
     return ucd_data(codepoint).get("General_Category") == "Mn"
 
 
 class NoOrphanedMarksCheck(ShaperglotCheck):
     name = "no_orphaned_marks"
-    schema = Map(
+    schema = check_schema(
         {
-            "check": Str(),
             "input": shaping_input_schema,
-            Optional("rationale"): Str(),
         }
     )
 
@@ -27,13 +26,6 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
         dotted_circle_glyph = checker.cmap.get(0x25CC)
 
         # GDEF may be wrong, don't trust it.
-        is_mark = {}
-        for yes_no, glyphs in classifyGlyphs(
-            _simple_mark_check, checker.cmap, checker.ttfont.get("GSUB")
-        ).items():
-            for glyphname in glyphs:
-                is_mark[glyphname] = yes_no
-
         passed = True
         previous = None
         # pylint: disable=C0103
@@ -44,20 +36,49 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
             # Is this a mark glyph?
             if info.codepoint == 0:
                 passed = False
-                checker.results.fail("Shaper produced a .notdef")
+                message = "Shaper produced a .notdef"
+                # Generally this message happens because we're missing
+                # base/mark glyphs, so we will heard about this already,
+                # *except* if no exemplars are defined, when it would be
+                # good to hear specifically what glyphs we tried to test here.
+                if not checker.lang.get("exemplarChars"):
+                    message += " when shaping " + self.input.describe()
+
+                checker.results.fail(
+                    check_name="no-orphaned-marks",
+                    result_code="notdef-produced",
+                    message=message,
+                    context={"text": self.input.check_yaml},
+                )
                 break
-            if is_mark[glyphname]:
+            if _simple_mark_check(checker.codepoint_for(glyphname)):
                 # Was the previous glyph dotted circle?
                 if previous and previous == dotted_circle_glyph:
                     passed = False
-                    checker.results.fail("Shaper produced a dotted circle")
+                    checker.results.fail(
+                        check_name="no-orphaned-marks",
+                        result_code="dotted-circle-produced",
+                        message="Shaper produced a dotted circle when shaping "
+                        + self.input.describe(),
+                        context={"text": self.input.check_yaml},
+                    )
                 elif pos.x_offset == 0 and pos.y_offset == 0:  # Suspicious
                     passed = False
                     checker.results.fail(
-                        f"Shaper didn't attached {glyphname} to {previous}"
+                        check_name="no-orphaned-marks",
+                        result_code="orphaned-mark",
+                        message=f"Shaper didn't attach {glyphname} to {previous}",
+                        context={
+                            "text": self.input.check_yaml,
+                            "mark": glyphname,
+                            "base": previous,
+                        },
                     )
             previous = glyphname
         if passed:
             checker.results.okay(
-                "No unattached mark glyphs were produced " + self.input.describe()
+                check_name="no-orphaned-marks",
+                message="No unattached mark glyphs were produced "
+                + self.input.describe(),
+                context={"text": self.input.check_yaml},
             )

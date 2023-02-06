@@ -1,0 +1,9 @@
+#auto-generated using sg-bulk-builder.py
+- check: no_orphaned_marks
+  input:
+    text: ị́ị̀m̀ọ́ọ̀ụ́ụ̀
+- check: no_orphaned_marks
+  input:
+    text: ị́ị̀m̀ọ́ọ̀ụ́ụ̀
+    features:
+      smcp: true
