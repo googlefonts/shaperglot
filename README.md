@@ -99,6 +99,23 @@ Font does not fully support language 'urd'
  * PASS: Initial and final forms should differ
 ```
 
+Shaperglot can also be run in bulk mode to check language support of entire font libraries. This is done by running `bulk-run-sg-.py` located in the scripts folder.
+
+```
+$ python bulk-run-sg.py ./<path-to-font-library>
+```
+
+This script will automatically drill down the direcory tree and identify all .ttf font files and check them against a subset of language tags. At this time `bulk-run-sg.py` only checks fonts for Pan-African language support. The list of relevant language tags are defined in `language_tag_data/iso639-3-afr-all.txt`. Shaperglot results procesed in bulk can be quite large and may require additional tools to analyze. See [font-lang-support-afr](https://github.com/JamraPatel/font-lang-support-afr) for an example of how bulk results can be reported. Results are saved into two `.json` files.
+
+```
+results.json
+afr_tag_overview.json
+```
+
+`results.json` contains the checker results (`<failure type>: <failure details>`) for each language tag, broken down by font.
+`afr_tag_overview.json` is a summary of which fonts in the library pass and fail for each language tag that was checked.
+
+
 # Setup
 
 ## Requirements
