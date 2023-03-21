@@ -1,0 +1,4 @@
+#auto-generated using sg-bulk-builder.py
+- check: unencoded_variants
+  input:
+    text: Ɓ
