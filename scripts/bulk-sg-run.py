@@ -19,7 +19,7 @@ gflangs = Languages()
 with open("./language_tag_data/iso639-3-afr-all.txt", "r") as f2:
     afr_tags = f2.read().splitlines()
 
-results = open("results.yaml", "w", encoding="utf8")
+results = open("results.json", "w", encoding="utf8")
 overview = open("afr_tag_overview.json", "w", encoding='utf8')
 
 isoconv = {
@@ -103,7 +103,10 @@ def check_one(font, available_tags):
     print(f"analyzing {font}")
     results_for_font = {}
     for tag, item in available_tags.items():
-        results_for_font[tag] = checker.check(gflangs[item])
+        try:
+            results_for_font[tag] = checker.check(gflangs[item])
+        except:
+            print(f"Something went wrong with {font}")
     return results_for_font
 
 
@@ -157,7 +160,7 @@ def main(args=None):
     pf.append({"Missing GFLang Data": missing_tags})
     current_time = datetime.datetime.now()
     pf.append({"Timestamp": f"{current_time}"})
-    yaml.safe_dump(tag_results, results, allow_unicode=True, sort_keys=False)
+    json.dump(tag_results, results, indent = 1)
     json.dump(pf, overview, indent = 1)
 
 
