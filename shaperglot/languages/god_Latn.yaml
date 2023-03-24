@@ -1,0 +1,344 @@
+#auto-generated using sg-bulk-builder.py
+- check: unencoded_variants
+  input:
+    text: Ŋ
+- check: shaping_differs
+  inputs:
+  - text: a
+  - text: a
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: a'
+- check: shaping_differs
+  inputs:
+  - text: ä
+  - text: ä
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: ä'
+- check: shaping_differs
+  inputs:
+  - text: b
+  - text: b
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: b'
+- check: shaping_differs
+  inputs:
+  - text: d
+  - text: d
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: d'
+- check: shaping_differs
+  inputs:
+  - text: e
+  - text: e
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: e'
+- check: shaping_differs
+  inputs:
+  - text: ɛ
+  - text: ɛ
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: ɛ'
+- check: shaping_differs
+  inputs:
+  - text: f
+  - text: f
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: f'
+- check: shaping_differs
+  inputs:
+  - text: g
+  - text: g
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: g'
+- check: shaping_differs
+  inputs:
+  - text: i
+  - text: i
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: i'
+- check: shaping_differs
+  inputs:
+  - text: ï
+  - text: ï
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: ï'
+- check: shaping_differs
+  inputs:
+  - text: ɩ
+  - text: ɩ
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: ɩ'
+- check: shaping_differs
+  inputs:
+  - text: k
+  - text: k
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: k'
+- check: shaping_differs
+  inputs:
+  - text: l
+  - text: l
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: l'
+- check: shaping_differs
+  inputs:
+  - text: m
+  - text: m
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: m'
+- check: shaping_differs
+  inputs:
+  - text: n
+  - text: n
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: n'
+- check: shaping_differs
+  inputs:
+  - text: ŋ
+  - text: ŋ
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: ŋ'
+- check: shaping_differs
+  inputs:
+  - text: o
+  - text: o
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: o'
+- check: shaping_differs
+  inputs:
+  - text: ö
+  - text: ö
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: ö'
+- check: shaping_differs
+  inputs:
+  - text: ɔ
+  - text: ɔ
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: ɔ'
+- check: shaping_differs
+  inputs:
+  - text: p
+  - text: p
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: p'
+- check: shaping_differs
+  inputs:
+  - text: s
+  - text: s
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: s'
+- check: shaping_differs
+  inputs:
+  - text: t
+  - text: t
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: t'
+- check: shaping_differs
+  inputs:
+  - text: u
+  - text: u
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: u'
+- check: shaping_differs
+  inputs:
+  - text: ü
+  - text: ü
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: ü'
+- check: shaping_differs
+  inputs:
+  - text: ʋ
+  - text: ʋ
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: ʋ'
+- check: shaping_differs
+  inputs:
+  - text: v
+  - text: v
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: v'
+- check: shaping_differs
+  inputs:
+  - text: w
+  - text: w
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: w'
+- check: shaping_differs
+  inputs:
+  - text: y
+  - text: y
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: y'
+- check: shaping_differs
+  inputs:
+  - text: z
+  - text: z
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: z'
+- check: shaping_differs
+  inputs:
+  - text: c
+  - text: c
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: c'
+- check: shaping_differs
+  inputs:
+  - text: j
+  - text: j
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: j'
+- check: shaping_differs
+  inputs:
+  - text: q
+  - text: q
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: q'
+- check: shaping_differs
+  inputs:
+  - text: r
+  - text: r
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: r'
+- check: shaping_differs
+  inputs:
+  - text: x
+  - text: x
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Requires Small-cap: x'
