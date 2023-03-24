@@ -3,9 +3,11 @@ import os
 import subprocess
 import glob
 import yaml
+import json
 from multiprocessing import Pool
 from pathlib import Path
 from itertools import repeat
+import datetime
 
 from shaperglot.languages import Languages
 from shaperglot.checker import Checker
@@ -17,9 +19,8 @@ gflangs = Languages()
 with open("./language_tag_data/iso639-3-afr-all.txt", "r") as f2:
     afr_tags = f2.read().splitlines()
 
-output = open("results.txt", "w", encoding="utf8")
 results = open("results.yaml", "w", encoding="utf8")
-summary = open("summary.csv", "w", encoding="utf8")
+overview = open("afr_tag_overview.json", "w", encoding='utf8')
 
 isoconv = {
     "aar": "aa",
@@ -63,21 +64,38 @@ isoconv = {
 }
 
 
-# afr_tags = ["dje", "agq", "ro", "bjp", "bas"]
+def split_dict(input_dict: dict, num_parts: int) -> list:
+    list_len: int = len(input_dict)
+    return [dict(list(input_dict.items())[i * list_len // num_parts:(i + 1) * list_len // num_parts])
+        for i in range(num_parts)]
 
+def summarize(failing_fonts, passing_fonts):
+    pass_fails = []
+    failkeys = set([key for l in failing_fonts for key in l.keys()])
+    failfonts = [[d[x] for d in failing_fonts if x in d ] for x in failkeys]
 
-def summarize(tag, fontname, results):
-    for message in results:
-        if message.result == Result.PASS:
-            continue
-        elif message.result_code == "bases-missing":
-            errcount = str(len(message.context["glyphs"]))
-            summary.write(fontname + "," + tag + ",missing base," + errcount + "\n")
-        elif message.result_code == "marks-missing":
-            errcount = str(len(message.context["glyphs"]))
-            summary.write(fontname + "," + tag + ",missing mark," + errcount + "\n")
-        elif message.check_name == "no-orphaned-marks":
-            summary.write(fontname + "," + tag + ",orphaned marks,1\n")
+    passkeys = set([key for l in passing_fonts for key in l.keys()])
+    passfonts = [[d[x] for d in passing_fonts if x in d ] for x in passkeys]
+
+    for idk, key in enumerate(passkeys):
+        this_passfonts = passfonts[idk]
+        if this_passfonts:
+            pass_fails.append({'tag': key, 'pass': {'count': len(this_passfonts), 'fonts':this_passfonts}})
+
+    for idk, key in enumerate(failkeys):
+        this_failfonts = failfonts[idk]
+        id_in_passfails = next(
+            (index for index, d in enumerate(pass_fails)
+            if key in d['tag']),
+            None
+        )
+        if this_failfonts and id_in_passfails != None:
+            pass_fails[id_in_passfails]['fail'] = {'count': len(this_failfonts), 'fonts':this_failfonts}
+        elif not this_failfonts and id_in_passfails != None:
+            pass_fails[id_in_passfails]['fail'] = {'count': 0, 'fonts': []}
+        elif this_failfonts and id_in_passfails == None:
+            pass_fails.append({'tag': key, 'pass': {'count': 0, 'fonts': []}, 'fail': {'count': len(this_failfonts), 'fonts':this_failfonts}}) 
+    return pass_fails
 
 
 def check_one(font, available_tags):
@@ -88,6 +106,21 @@ def check_one(font, available_tags):
         results_for_font[tag] = checker.check(gflangs[item])
     return results_for_font
 
+
+def run_checker(fonts, tag_results, args, failing_fonts, passing_fonts):
+    with Pool() as p:
+        all_font_results = p.starmap(check_one, args)
+    for font, font_results in zip(fonts, all_font_results):
+        fontname = Path(font).stem
+        for tag, this_tag_results in font_results.items():
+            fails = [
+                message.message for message in this_tag_results if message.result != Result.PASS
+            ]
+            if fails:
+                tag_results.setdefault(tag, {})[fontname] = fails
+                failing_fonts.append({tag: fontname})
+            else:
+                passing_fonts.append({tag: fontname})
 
 def main(args=None):
     parser = argparse.ArgumentParser(description="Check a library for African language support")
@@ -100,6 +133,8 @@ def main(args=None):
     tag_results = {}
     missing_tags = []
     available_tags = {}
+    passing_fonts = []
+    failing_fonts = []
 
     for tag in afr_tags:
         if isoconv.get(tag) is not None:
@@ -109,23 +144,21 @@ def main(args=None):
         if item not in gflangs:
             missing_tags.append(item)
             continue
+
         available_tags[tag] = item
 
-    args = zip(fonts, repeat(available_tags))
-    with Pool() as p:
-        all_font_results = p.starmap(check_one, args)
-    for font, font_results in zip(fonts, all_font_results):
-        fontname = Path(font).stem
-        for tag, this_tag_results in font_results.items():
-            summarize(tag, fontname, this_tag_results)
-            fails = [
-                message.message for message in this_tag_results if message.result != Result.PASS
-            ]
-            if fails:
-                tag_results.setdefault(tag, {})[fontname] = fails
+    split_avail_tags = split_dict(available_tags, 50)
 
-    tag_results["Missing GFLang Data"] = missing_tags
+    for idx, x in enumerate(split_avail_tags):
+        args = zip(fonts, repeat(split_avail_tags[idx]))
+        run_checker(fonts, tag_results, args, failing_fonts, passing_fonts)
+
+    pf = summarize(failing_fonts, passing_fonts)
+    pf.append({"Missing GFLang Data": missing_tags})
+    current_time = datetime.datetime.now()
+    pf.append({"Timestamp": f"{current_time}"})
     yaml.safe_dump(tag_results, results, allow_unicode=True, sort_keys=False)
+    json.dump(pf, overview, indent = 1)
 
 
 if __name__ == "__main__":
