@@ -1,10 +1,7 @@
-from itertools import permutations
 import os
-from xxlimited import new
 import yaml
 import sys
 import unicodedata
-import itertools
 from gflanguages import LoadLanguages, LoadScripts
 from google.protobuf.json_format import MessageToDict
 
@@ -15,10 +12,10 @@ isoconv = {"aar": "aa", "afr": "af", "aka": "ak", "amh": "am", "bam": "bm", "ewe
 
 with open('./language_tag_data/ot-lang-tags.yaml', 'r') as f:
     ot_tags = yaml.safe_load(f)
-    #debug pprint(dataMap)
 
 with open('./language_tag_data/iso639-3-afr-all.txt', 'r') as f2:
     afr_tags = f2.read().splitlines() 
+
 
 def create_file(profile_name):
     path = "./shaperglot/languages/"
@@ -33,24 +30,25 @@ def collect(lang):
     auxiliary = exemplar_chars.get("auxiliary", "").split() or []
     return(bases, auxiliary, marks)
 
-def check_ot_tags (tag): #to be used for unencoded glyph variant check
-    for ot_tag in ot_tags:
-        if tag in ot_tag['codes']:
-            return(True)
-        else:
-            return(False)
+def build_orthographies(bases, auxiliary):
+    ortho_string = ""
+    orth_smcp_test = []
 
-def build_unencoded_gv(record, bases, auxiliary): #to be used for unencoded glyph variant check
-    if record.get("exemplarChars"):
-        if "\u014A" in bases or '\u014A' in auxiliary:
-            return(True)
+    if bases:
+        ortho_string = "".join(bases)
+    if auxiliary:
+        ortho_string = ortho_string.join(auxiliary)
+
+    if ortho_string:
+        orth_smcp_test = {"check": "orthographies", "input": {"text": ortho_string, "features": {"smcp": True}}, "conditions": {"features": ['smcp']}}
+    return(orth_smcp_test)
+
 
 def build_no_orphaned_marks(bases, auxiliary):
     basemarks = []
     nom_test = []
     nom_smcp_test = []
     new_basemarks = []
-
     for base in bases:
         if len(base) > 1 :
             unpack = base.replace("{", "").replace("}", "")
@@ -63,24 +61,50 @@ def build_no_orphaned_marks(bases, auxiliary):
             for char in unpack:
                 if unicodedata.combining(char):
                     basemarks.append(unpack)
-
-    for basemark in basemarks:
-        if len(basemark) > 2:
-            base_only = basemark[0]
-            marks_only = "basemark"[1:len(basemark)]
-            for i in itertools.permutations(marks_only, len(marks_only)): #generate mark permutations
-                new_basemark = base_only.join(i)
-                new_basemarks.append(new_basemark)
-
-    if new_basemarks:
-        basemark_string = "".join(basemarks).join(new_basemarks)
-    else:
-        basemark_string = "".join(basemarks)
-    
+    basemark_string = "".join(basemarks)
     if basemark_string:
         nom_test = {"check": "no_orphaned_marks", "input": {"text": basemark_string}}
-        nom_smcp_test = {"check": "no_orphaned_marks", "input": {"text": basemark_string, "features": {"smcp": True}}}
+        nom_smcp_test = {"check": "no_orphaned_marks", "input": {"text": basemark_string, "features": {"smcp": True}}, "conditions": {"features": ['smcp']}}
     return(nom_test, nom_smcp_test)
+
+def check_ot_tags(tag): #to be used for unencoded glyph variant check may not be needed
+
+    for ot_tag in ot_tags:
+        if tag in ot_tag['codes']:
+            return(True)
+        else:
+            return(False)
+
+def build_unencoded_variants(record, bases, auxiliary): #to be used for unencoded glyph variant check
+    uv_test = []
+    if record.get("exemplarChars"):
+        if "Ŋ" in bases or 'Ŋ' in auxiliary:
+            uv_test = {"check": "unencoded_variants", "input": {"text": 'Ŋ'}}
+    if record.get("language") == "tod":
+        uv_test = {"check": "unencoded_variants", "input": {"text": 'ʋ'}}
+        uv_test = {"check": "unencoded_variants", "input": {"text": 'Ʋ'}}
+    if record.get("language") == "xpe" or record.get("language") == "lom" or record.get("language") == "dnj":
+        uv_test = {"check": "unencoded_variants", "input": {"text": 'Ɓ'}}
+    if record.get("language") == "gaa":
+        uv_test = {"check": "unencoded_variants", "input": {"text": 'Ʃ'}}
+        uv_test = {"check": "unencoded_variants", "input": {"text": 'Ʒ'}}
+
+    return(uv_test)
+
+
+def build_sd_smcp(bases, auxiliary):
+    sd_smcp_collection = []
+    for base in bases:
+        sd_smcp_test = []
+        if len(base) == 1 and unicodedata.category(base) == 'Ll' :
+            sd_smcp_test = {'check': 'shaping_differs', 'inputs': [{'text': base}, {'text': base, 'features': {'smcp': True}}], 'conditions': {'features': ['smcp']}, 'rationale': "Requires Small-cap: " + base}
+            sd_smcp_collection.append(sd_smcp_test)
+    for aux in auxiliary:
+        sd_smcp_test = []
+        if len(aux) == 1 and unicodedata.category(aux) == 'Ll' :
+            sd_smcp_test = {'check': 'shaping_differs', 'inputs': [{'text': aux}, {'text': aux, 'features': {'smcp': True}}], 'conditions': {'features': ['smcp']}, 'rationale': "Requires Small-cap: " + aux}
+            sd_smcp_collection.append(sd_smcp_test)
+    return(sd_smcp_collection)
 
 def build_results(item, new_profile):
     profile = ""
@@ -111,7 +135,6 @@ def main():
     with_exemplars = 0
     needs_variant = 0
 
-
     for tag in afr_tags:
         new_profile = []
 
@@ -128,15 +151,24 @@ def main():
             if bases:
                 with_exemplars = with_exemplars + 1
 
+            sd_smcp_test = build_sd_smcp(bases, auxiliary)
             nom_test, nom_smcp_test = build_no_orphaned_marks(bases, auxiliary)
-            if nom_test:
+            uv_test = build_unencoded_variants(record, bases, auxiliary)
+        
+
+            if nom_smcp_test:
                 new_profile.append(nom_test)
                 new_profile.append(nom_smcp_test)
-            
+            if uv_test:
+                new_profile.append(uv_test)
+            if sd_smcp_test:
+                for test in sd_smcp_test:
+                    new_profile.append(test)
+            if new_profile:
                 build_results(item, new_profile)
 
 
-    #profile.close
+
     f.close
     f2.close
                                                 
