@@ -2,7 +2,9 @@ from functools import cache
 
 from youseedee import ucd_data
 
-from .common import shaping_input_schema, ShaperglotCheck, check_schema
+from shaperglot.checks.orthographies import OrthographiesCheck
+
+from .common import ShapeInput, shaping_input_schema, ShaperglotCheck, check_schema
 
 
 @cache
@@ -82,3 +84,14 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
                 + self.input.describe(),
                 context={"text": self.input.check_yaml},
             )
+
+
+class NoOrphanedMarksInOrthographiesCheck(NoOrphanedMarksCheck):
+    name = "no_orphaned_marks_in_orthographies"
+
+    def __init__(self, lang):
+        super(NoOrphanedMarksCheck, self).__init__({
+            "input": {
+                "text":" ".join(OrthographiesCheck(lang).bases)
+            }
+        })

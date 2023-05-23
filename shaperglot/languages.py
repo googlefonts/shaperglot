@@ -5,6 +5,8 @@ from gflanguages import LoadLanguages, LoadScripts
 from strictyaml import YAMLValidationError, load
 from google.protobuf.json_format import MessageToDict
 
+from shaperglot.checks.no_orphaned_marks import NoOrphanedMarksInOrthographiesCheck
+
 from .checks import schemas, checks_map
 from .checks.orthographies import OrthographiesCheck
 
@@ -68,7 +70,10 @@ class Languages:
         orig["full_name"] = (
             orig["name"] + " in the " + gfscripts[orig["script"]].name + " script"
         )
-        orig["shaperglot_checks"] = [OrthographiesCheck(orig)]
+        orig["shaperglot_checks"] = [
+            OrthographiesCheck(orig),
+            NoOrphanedMarksInOrthographiesCheck(orig)
+        ]
         try:
             checks = load_shaperglot_definition(item, validate=True)
         except Exception as e:
