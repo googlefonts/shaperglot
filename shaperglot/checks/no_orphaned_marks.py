@@ -90,7 +90,7 @@ class NoOrphanedMarksInOrthographiesCheck(NoOrphanedMarksCheck):
     name = "no_orphaned_marks_in_orthographies"
 
     def __init__(self, lang):
-        super(NoOrphanedMarksCheck, self).__init__({
+        super(NoOrphanedMarksInOrthographiesCheck, self).__init__({
             "input": {
                 "text":" ".join(OrthographiesCheck(lang).bases)
             }
