@@ -4,7 +4,7 @@ from youseedee import ucd_data
 
 from shaperglot.checks.orthographies import OrthographiesCheck
 
-from .common import ShapeInput, shaping_input_schema, ShaperglotCheck, check_schema
+from .common import shaping_input_schema, ShaperglotCheck, check_schema
 
 
 @cache
@@ -90,7 +90,7 @@ class NoOrphanedMarksInOrthographiesCheck(NoOrphanedMarksCheck):
     name = "no_orphaned_marks_in_orthographies"
 
     def __init__(self, lang):
-        super(NoOrphanedMarksInOrthographiesCheck, self).__init__({
+        super().__init__({
             "input": {
                 "text":" ".join(OrthographiesCheck(lang).bases)
             }
