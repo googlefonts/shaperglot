@@ -29,7 +29,7 @@ classifiers = [
 [tool.poetry.dependencies]
 
 python = ">= 3.7"
-gflanguages = ">0.4.7"
+gflanguages = ">= 0.4.7"
 termcolor = "1.1.0"
 vharfbuzz = "^0"
 strictyaml = "*"
