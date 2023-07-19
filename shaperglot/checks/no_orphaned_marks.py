@@ -1,4 +1,4 @@
-from functools import cache
+from functools import lru_cache
 
 from youseedee import ucd_data
 
@@ -7,7 +7,7 @@ from shaperglot.checks.orthographies import OrthographiesCheck
 from .common import shaping_input_schema, ShaperglotCheck, check_schema
 
 
-@cache
+@lru_cache(maxsize=None)
 def _simple_mark_check(codepoint):
     return ucd_data(codepoint).get("General_Category") == "Mn"
 
