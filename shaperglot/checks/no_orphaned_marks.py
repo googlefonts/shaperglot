@@ -24,6 +24,8 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
         return f"that, when {self.input.describe()}, no marks are left unattached"
 
     def execute(self, checker):
+        if not self.input.text:
+            return
         buffer = self.input.shape(checker)
         dotted_circle_glyph = checker.cmap.get(0x25CC)
 
