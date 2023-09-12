@@ -51,7 +51,7 @@ class Checker:  # pylint: disable=too-few-public-methods
             self._build_full_reversed_cmap()
         return self.full_reversed_cmap.get(glyphname, 0)
 
-    def check(self, lang):
+    def check(self, lang, fail_fast=False):
         self.results = Reporter()
         self.lang = lang
         for check_object in self.lang.get("shaperglot_checks", []):
@@ -60,4 +60,6 @@ class Checker:  # pylint: disable=too-few-public-methods
                 self.results.skip(check_name=check_object.name, message=skip_reason)
                 continue
             check_object.execute(self)
+            if fail_fast and self.results.fails:
+                return self.results
         return self.results
