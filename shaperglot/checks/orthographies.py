@@ -27,8 +27,8 @@ class OrthographiesCheck(ShaperglotCheck):
         exemplar_chars = lang.get("exemplarChars", {})
         marks = exemplar_chars.get("marks", "").replace("◌", "").split() or []
         bases = parse_bases(exemplar_chars.get("base", ""))
-        aux = parse_bases(exemplar_chars.get("auxiliary", ""))
-        bases = bases + aux
+        #aux = parse_bases(exemplar_chars.get("auxiliary", ""))
+        #bases = bases + aux
         self.all_glyphs = marks + bases
         self.marks = set(marks)
         self.bases = set(bases) - self.marks
