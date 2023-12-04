@@ -1,7 +1,7 @@
 [tool.poetry]
 
 name = "shaperglot"
-version = "0.1.0"
+version = "0.3.0"
 description = "Test font files for OpenType language support"
 
 license = "MIT"
@@ -23,20 +23,22 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
 ]
 
 [tool.poetry.dependencies]
 
 python = ">= 3.7"
-gflanguages = ">0.4.7"
-termcolor = "1.1.0"
+gflanguages = ">= 0.4.7"
+termcolor = ">= 1.1.0"
 vharfbuzz = "^0"
 strictyaml = "*"
 num2words = "^0.5"
 ufo2ft = "*"
 youseedee = "*"
-protobuf = "3.19.4"
+protobuf = ">= 3.19.4"
 
 [tool.poetry.dev-dependencies]
 

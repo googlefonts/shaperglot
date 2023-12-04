@@ -15,8 +15,11 @@ gfscripts = LoadScripts()
 
 definitions_directory = Path(__file__).parent / "languages"
 
+definition_cache = {}
 
 def load_shaperglot_definition(language, validate=False):
+    if language in definition_cache:
+        return definition_cache[language]
     definition_file = definitions_directory / (language + ".yaml")
     if not definition_file.is_file():
         return []
@@ -40,6 +43,7 @@ def load_shaperglot_definition(language, validate=False):
                 ) from e
         # This turns a { "check": "foobar" } into a FoobarCheck({"check": "foobar"})
         check_objects.append(checks_map[check["check"]](check))
+    definition_cache[language] = check_objects
     return check_objects
 
 

@@ -1,13 +1,13 @@
-from functools import cache
+from functools import lru_cache
 
 from youseedee import ucd_data
 
 from shaperglot.checks.orthographies import OrthographiesCheck
 
-from .common import ShapeInput, shaping_input_schema, ShaperglotCheck, check_schema
+from .common import shaping_input_schema, ShaperglotCheck, check_schema
 
 
-@cache
+@lru_cache(maxsize=None)
 def _simple_mark_check(codepoint):
     return ucd_data(codepoint).get("General_Category") == "Mn"
 
@@ -24,6 +24,8 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
         return f"that, when {self.input.describe()}, no marks are left unattached"
 
     def execute(self, checker):
+        if not self.input.text:
+            return
         buffer = self.input.shape(checker)
         dotted_circle_glyph = checker.cmap.get(0x25CC)
 
@@ -90,7 +92,7 @@ class NoOrphanedMarksInOrthographiesCheck(NoOrphanedMarksCheck):
     name = "no_orphaned_marks_in_orthographies"
 
     def __init__(self, lang):
-        super(NoOrphanedMarksCheck, self).__init__({
+        super().__init__({
             "input": {
                 "text":" ".join(OrthographiesCheck(lang).bases)
             }
