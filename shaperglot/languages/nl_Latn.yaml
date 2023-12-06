@@ -1,0 +1,42 @@
+- check: shaping_differs
+  inputs:
+  - text: ij
+    language: NLD
+  - text: íj
+    language: NLD
+  rationale: 'Dutch ij with acute on the i'
+- check: shaping_differs
+  inputs:
+  - text: ij
+    language: NLD
+  - text: íj́
+    language: NLD
+  rationale: 'Dutch ij with acute on both i and j'
+- check: shaping_differs
+  inputs:
+  - text: íj
+    language: NLD
+  - text: íj́
+    language: NLD
+  rationale: 'Dutch íj being different from íj́'
+- check: shaping_differs
+  inputs:
+  - text: IJ
+    language: NLD
+  - text: ÍJ
+    language: NLD
+  rationale: 'Dutch IJ with acute on the I'
+- check: shaping_differs
+  inputs:
+  - text: IJ
+    language: NLD
+  - text: ÍJ́
+    language: NLD
+  rationale: 'Dutch IJ with acute on both I and J'
+- check: shaping_differs
+  inputs:
+  - text: ÍJ
+    language: NLD
+  - text: ÍJ́
+    language: NLD
+  rationale: 'Dutch ÍJ being different from ÍJ́'
