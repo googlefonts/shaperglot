@@ -40,3 +40,45 @@
   - text: ÍJ́
     language: NLD
   rationale: 'Dutch ÍJ being different from ÍJ́'
+- check: shaping_differs
+  inputs:
+  - text: ij
+    language: NLD
+    features:
+      smcp: true
+  - text: íj
+    language: NLD
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Dutch small caps ij with acute on the i'
+- check: shaping_differs
+  inputs:
+  - text: ij
+    language: NLD
+    features:
+      smcp: true
+  - text: íj́
+    language: NLD
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Dutch small caps ij with acute on both i and j'
+- check: shaping_differs
+  inputs:
+  - text: íj
+    language: NLD
+    features:
+      smcp: true
+  - text: íj́
+    language: NLD
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Dutch small caps íj being different from íj́'
