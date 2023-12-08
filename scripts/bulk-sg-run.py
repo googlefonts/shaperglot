@@ -16,7 +16,7 @@ from shaperglot.reporter import Result
 gflangs = Languages()
 
 
-with open("./language_tag_data/iso639-3-afr-all.txt", "r") as f2:
+with open("./data/iso639-3-afr-all.txt", "r") as f2:
     afr_tags = f2.read().splitlines()
 
 results = open("results.json", "w", encoding="utf8")
@@ -66,35 +66,54 @@ isoconv = {
 
 def split_dict(input_dict: dict, num_parts: int) -> list:
     list_len: int = len(input_dict)
-    return [dict(list(input_dict.items())[i * list_len // num_parts:(i + 1) * list_len // num_parts])
-        for i in range(num_parts)]
+    return [
+        dict(
+            list(input_dict.items())[
+                i * list_len // num_parts : (i + 1) * list_len // num_parts
+            ]
+        )
+        for i in range(num_parts)
+    ]
+
 
 def summarize(failing_fonts, passing_fonts):
     pass_fails = []
     failkeys = set([key for l in failing_fonts for key in l.keys()])
-    failfonts = [[d[x] for d in failing_fonts if x in d ] for x in failkeys]
+    failfonts = [[d[x] for d in failing_fonts if x in d] for x in failkeys]
 
     passkeys = set([key for l in passing_fonts for key in l.keys()])
-    passfonts = [[d[x] for d in passing_fonts if x in d ] for x in passkeys]
+    passfonts = [[d[x] for d in passing_fonts if x in d] for x in passkeys]
 
     for idk, key in enumerate(passkeys):
         this_passfonts = passfonts[idk]
         if this_passfonts:
-            pass_fails.append({'tag': key, 'pass': {'count': len(this_passfonts), 'fonts':this_passfonts}})
+            pass_fails.append(
+                {
+                    'tag': key,
+                    'pass': {'count': len(this_passfonts), 'fonts': this_passfonts},
+                }
+            )
 
     for idk, key in enumerate(failkeys):
         this_failfonts = failfonts[idk]
         id_in_passfails = next(
-            (index for index, d in enumerate(pass_fails)
-            if key in d['tag']),
-            None
+            (index for index, d in enumerate(pass_fails) if key in d['tag']), None
         )
         if this_failfonts and id_in_passfails != None:
-            pass_fails[id_in_passfails]['fail'] = {'count': len(this_failfonts), 'fonts':this_failfonts}
+            pass_fails[id_in_passfails]['fail'] = {
+                'count': len(this_failfonts),
+                'fonts': this_failfonts,
+            }
         elif not this_failfonts and id_in_passfails != None:
             pass_fails[id_in_passfails]['fail'] = {'count': 0, 'fonts': []}
         elif this_failfonts and id_in_passfails == None:
-            pass_fails.append({'tag': key, 'pass': {'count': 0, 'fonts': []}, 'fail': {'count': len(this_failfonts), 'fonts':this_failfonts}}) 
+            pass_fails.append(
+                {
+                    'tag': key,
+                    'pass': {'count': 0, 'fonts': []},
+                    'fail': {'count': len(this_failfonts), 'fonts': this_failfonts},
+                }
+            )
     return pass_fails
 
 
@@ -117,7 +136,9 @@ def run_checker(fonts, tag_results, args, failing_fonts, passing_fonts):
         fontname = Path(font).stem
         for tag, this_tag_results in font_results.items():
             fails = [
-                message.message for message in this_tag_results if message.result != Result.PASS
+                message.message
+                for message in this_tag_results
+                if message.result != Result.PASS
             ]
             if fails:
                 tag_results.setdefault(tag, {})[fontname] = fails
@@ -125,10 +146,12 @@ def run_checker(fonts, tag_results, args, failing_fonts, passing_fonts):
             else:
                 passing_fonts.append({tag: fontname})
 
+
 def main(args=None):
-    parser = argparse.ArgumentParser(description="Check a library for African language support")
-    parser.add_argument('directory',
-                        help='directory to check')
+    parser = argparse.ArgumentParser(
+        description="Check a library for African language support"
+    )
+    parser.add_argument('directory', help='directory to check')
 
     args = parser.parse_args()
     fonts = [str(f) for f in Path(args.directory).glob("**/*.ttf")]
@@ -160,8 +183,8 @@ def main(args=None):
     pf.append({"Missing GFLang Data": missing_tags})
     current_time = datetime.datetime.now()
     pf.append({"Timestamp": f"{current_time}"})
-    json.dump(tag_results, results, indent = 1)
-    json.dump(pf, overview, indent = 1)
+    json.dump(tag_results, results, indent=1)
+    json.dump(pf, overview, indent=1)
 
 
 if __name__ == "__main__":
