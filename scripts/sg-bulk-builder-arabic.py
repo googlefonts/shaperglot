@@ -32,7 +32,6 @@ def create_file(profile_name):
 
 
 def build_results(item, new_profile):
-    current_script = item
     profile_name = '%s.yaml' % item
     profile = create_file(profile_name)
     profile.write("#auto-generated using sg-bulk-builder-arabic.py\n")
@@ -90,7 +89,6 @@ def main():
 
             for character in gflangs[language].exemplar_chars.base:
                 if unicodedata.category(character).startswith("L"):
-                    # init/medi/fina
                     joining_type = get_joining_type(character)
                     if joining_type in ("R", "D"):
                         # .fina
