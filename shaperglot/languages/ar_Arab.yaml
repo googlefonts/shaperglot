@@ -53,8 +53,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER HAMZA (.isol)
 - check: no_orphaned_marks
   input:
+    text: ءًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER HAMZA (.isol)
+- check: no_orphaned_marks
+  input:
     text: ءِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER HAMZA (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ءٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER HAMZA (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ءُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER HAMZA (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ءٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER HAMZA (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍أ
@@ -119,8 +135,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍أًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍أِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍أٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍أُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍أٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.fina)
 - check: no_orphaned_marks
   input:
     text: أٰ
@@ -176,8 +208,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.isol)
 - check: no_orphaned_marks
   input:
+    text: أًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
     text: أِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: أٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: أُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: أٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA ABOVE (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ؤ
@@ -242,8 +290,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍ؤًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍ؤِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ؤٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ؤُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ؤٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.fina)
 - check: no_orphaned_marks
   input:
     text: ؤٰ
@@ -299,8 +363,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.isol)
 - check: no_orphaned_marks
   input:
+    text: ؤًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
     text: ؤِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ؤٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ؤُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ؤٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER WAW WITH HAMZA ABOVE (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍إ
@@ -365,8 +445,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍إًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍إِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍إٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍إُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍إٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.fina)
 - check: no_orphaned_marks
   input:
     text: إٰ
@@ -422,8 +518,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.isol)
 - check: no_orphaned_marks
   input:
+    text: إًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.isol)
+- check: no_orphaned_marks
+  input:
     text: إِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.isol)
+- check: no_orphaned_marks
+  input:
+    text: إٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.isol)
+- check: no_orphaned_marks
+  input:
+    text: إُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.isol)
+- check: no_orphaned_marks
+  input:
+    text: إٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF WITH HAMZA BELOW (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ئ
@@ -488,8 +600,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍ئًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍ئِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ئٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ئُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ئٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ئ‍
@@ -554,8 +682,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍ئًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍ئِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ئٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ئُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ئٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.medi)
 - check: shaping_differs
   inputs:
   - text: ئ‍
@@ -620,8 +764,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.init)
 - check: no_orphaned_marks
   input:
+    text: ئًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.init)
+- check: no_orphaned_marks
+  input:
     text: ئِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.init)
+- check: no_orphaned_marks
+  input:
+    text: ئٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.init)
+- check: no_orphaned_marks
+  input:
+    text: ئُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.init)
+- check: no_orphaned_marks
+  input:
+    text: ئٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.init)
 - check: no_orphaned_marks
   input:
     text: ئٰ
@@ -677,8 +837,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.isol)
 - check: no_orphaned_marks
   input:
+    text: ئًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
     text: ئِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ئٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ئُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ئٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER YEH WITH HAMZA ABOVE (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ا
@@ -742,8 +918,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍اًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍اِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍اٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍اُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍اٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF (.fina)
 - check: no_orphaned_marks
   input:
     text: اٰ
@@ -798,8 +990,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF (.isol)
 - check: no_orphaned_marks
   input:
+    text: اًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF (.isol)
+- check: no_orphaned_marks
+  input:
     text: اِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF (.isol)
+- check: no_orphaned_marks
+  input:
+    text: اٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF (.isol)
+- check: no_orphaned_marks
+  input:
+    text: اُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF (.isol)
+- check: no_orphaned_marks
+  input:
+    text: اٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍آ
@@ -864,8 +1072,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍آًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍آِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍آٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍آُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍آٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.fina)
 - check: no_orphaned_marks
   input:
     text: آٰ
@@ -921,8 +1145,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.isol)
 - check: no_orphaned_marks
   input:
+    text: آًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
     text: آِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: آٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: آُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.isol)
+- check: no_orphaned_marks
+  input:
+    text: آٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF WITH MADDA ABOVE (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ب
@@ -986,8 +1226,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER BEH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍بًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER BEH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍بِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER BEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍بٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER BEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍بُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER BEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍بٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER BEH (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ب‍
@@ -1051,8 +1307,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER BEH (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍بًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER BEH (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍بِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER BEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍بٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER BEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍بُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER BEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍بٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER BEH (.medi)
 - check: shaping_differs
   inputs:
   - text: ب‍
@@ -1116,8 +1388,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER BEH (.init)
 - check: no_orphaned_marks
   input:
+    text: بًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER BEH (.init)
+- check: no_orphaned_marks
+  input:
     text: بِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER BEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: بٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER BEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: بُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER BEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: بٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER BEH (.init)
 - check: no_orphaned_marks
   input:
     text: بٰ
@@ -1172,8 +1460,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER BEH (.isol)
 - check: no_orphaned_marks
   input:
+    text: بًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER BEH (.isol)
+- check: no_orphaned_marks
+  input:
     text: بِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER BEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: بٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER BEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: بُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER BEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: بٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER BEH (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ة
@@ -1237,8 +1541,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER TEH MARBUTA (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍ةًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER TEH MARBUTA (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍ةِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER TEH MARBUTA (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ةٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER TEH MARBUTA (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ةُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER TEH MARBUTA (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ةٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER TEH MARBUTA (.fina)
 - check: no_orphaned_marks
   input:
     text: ةٰ
@@ -1293,8 +1613,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER TEH MARBUTA (.isol)
 - check: no_orphaned_marks
   input:
+    text: ةًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER TEH MARBUTA (.isol)
+- check: no_orphaned_marks
+  input:
     text: ةِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER TEH MARBUTA (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ةٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER TEH MARBUTA (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ةُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER TEH MARBUTA (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ةٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER TEH MARBUTA (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ت
@@ -1358,8 +1694,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER TEH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍تًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER TEH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍تِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER TEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍تٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER TEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍تُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER TEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍تٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER TEH (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ت‍
@@ -1423,8 +1775,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER TEH (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍تًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER TEH (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍تِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER TEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍تٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER TEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍تُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER TEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍تٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER TEH (.medi)
 - check: shaping_differs
   inputs:
   - text: ت‍
@@ -1488,8 +1856,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER TEH (.init)
 - check: no_orphaned_marks
   input:
+    text: تًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER TEH (.init)
+- check: no_orphaned_marks
+  input:
     text: تِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER TEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: تٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER TEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: تُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER TEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: تٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER TEH (.init)
 - check: no_orphaned_marks
   input:
     text: تٰ
@@ -1544,8 +1928,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER TEH (.isol)
 - check: no_orphaned_marks
   input:
+    text: تًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER TEH (.isol)
+- check: no_orphaned_marks
+  input:
     text: تِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER TEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: تٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER TEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: تُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER TEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: تٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER TEH (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ث
@@ -1609,8 +2009,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER THEH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍ثًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER THEH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍ثِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER THEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ثٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER THEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ثُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER THEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ثٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER THEH (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ث‍
@@ -1674,8 +2090,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER THEH (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍ثًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER THEH (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍ثِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER THEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ثٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER THEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ثُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER THEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ثٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER THEH (.medi)
 - check: shaping_differs
   inputs:
   - text: ث‍
@@ -1739,8 +2171,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER THEH (.init)
 - check: no_orphaned_marks
   input:
+    text: ثًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER THEH (.init)
+- check: no_orphaned_marks
+  input:
     text: ثِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER THEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: ثٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER THEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: ثُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER THEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: ثٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER THEH (.init)
 - check: no_orphaned_marks
   input:
     text: ثٰ
@@ -1795,8 +2243,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER THEH (.isol)
 - check: no_orphaned_marks
   input:
+    text: ثًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER THEH (.isol)
+- check: no_orphaned_marks
+  input:
     text: ثِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER THEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ثٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER THEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ثُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER THEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ثٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER THEH (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ج
@@ -1860,8 +2324,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER JEEM (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍جًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER JEEM (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍جِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER JEEM (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍جٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER JEEM (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍جُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER JEEM (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍جٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER JEEM (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ج‍
@@ -1925,8 +2405,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER JEEM (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍جًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER JEEM (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍جِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER JEEM (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍جٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER JEEM (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍جُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER JEEM (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍جٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER JEEM (.medi)
 - check: shaping_differs
   inputs:
   - text: ج‍
@@ -1990,8 +2486,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER JEEM (.init)
 - check: no_orphaned_marks
   input:
+    text: جًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER JEEM (.init)
+- check: no_orphaned_marks
+  input:
     text: جِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER JEEM (.init)
+- check: no_orphaned_marks
+  input:
+    text: جٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER JEEM (.init)
+- check: no_orphaned_marks
+  input:
+    text: جُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER JEEM (.init)
+- check: no_orphaned_marks
+  input:
+    text: جٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER JEEM (.init)
 - check: no_orphaned_marks
   input:
     text: جٰ
@@ -2046,8 +2558,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER JEEM (.isol)
 - check: no_orphaned_marks
   input:
+    text: جًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER JEEM (.isol)
+- check: no_orphaned_marks
+  input:
     text: جِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER JEEM (.isol)
+- check: no_orphaned_marks
+  input:
+    text: جٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER JEEM (.isol)
+- check: no_orphaned_marks
+  input:
+    text: جُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER JEEM (.isol)
+- check: no_orphaned_marks
+  input:
+    text: جٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER JEEM (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ح
@@ -2111,8 +2639,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER HAH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍حًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER HAH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍حِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER HAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍حٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER HAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍حُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER HAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍حٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER HAH (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ح‍
@@ -2176,8 +2720,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER HAH (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍حًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER HAH (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍حِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER HAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍حٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER HAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍حُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER HAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍حٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER HAH (.medi)
 - check: shaping_differs
   inputs:
   - text: ح‍
@@ -2241,8 +2801,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER HAH (.init)
 - check: no_orphaned_marks
   input:
+    text: حًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER HAH (.init)
+- check: no_orphaned_marks
+  input:
     text: حِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER HAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: حٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER HAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: حُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER HAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: حٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER HAH (.init)
 - check: no_orphaned_marks
   input:
     text: حٰ
@@ -2297,8 +2873,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER HAH (.isol)
 - check: no_orphaned_marks
   input:
+    text: حًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER HAH (.isol)
+- check: no_orphaned_marks
+  input:
     text: حِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER HAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: حٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER HAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: حُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER HAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: حٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER HAH (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍خ
@@ -2362,8 +2954,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER KHAH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍خًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER KHAH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍خِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER KHAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍خٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER KHAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍خُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER KHAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍خٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER KHAH (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍خ‍
@@ -2427,8 +3035,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER KHAH (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍خًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER KHAH (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍خِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER KHAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍خٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER KHAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍خُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER KHAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍خٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER KHAH (.medi)
 - check: shaping_differs
   inputs:
   - text: خ‍
@@ -2492,8 +3116,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER KHAH (.init)
 - check: no_orphaned_marks
   input:
+    text: خًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER KHAH (.init)
+- check: no_orphaned_marks
+  input:
     text: خِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER KHAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: خٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER KHAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: خُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER KHAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: خٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER KHAH (.init)
 - check: no_orphaned_marks
   input:
     text: خٰ
@@ -2548,8 +3188,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER KHAH (.isol)
 - check: no_orphaned_marks
   input:
+    text: خًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER KHAH (.isol)
+- check: no_orphaned_marks
+  input:
     text: خِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER KHAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: خٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER KHAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: خُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER KHAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: خٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER KHAH (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍د
@@ -2613,8 +3269,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER DAL (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍دًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER DAL (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍دِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER DAL (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍دٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER DAL (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍دُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER DAL (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍دٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER DAL (.fina)
 - check: no_orphaned_marks
   input:
     text: دٰ
@@ -2669,8 +3341,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER DAL (.isol)
 - check: no_orphaned_marks
   input:
+    text: دًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER DAL (.isol)
+- check: no_orphaned_marks
+  input:
     text: دِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER DAL (.isol)
+- check: no_orphaned_marks
+  input:
+    text: دٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER DAL (.isol)
+- check: no_orphaned_marks
+  input:
+    text: دُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER DAL (.isol)
+- check: no_orphaned_marks
+  input:
+    text: دٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER DAL (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ذ
@@ -2734,8 +3422,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER THAL (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍ذًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER THAL (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍ذِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER THAL (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ذٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER THAL (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ذُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER THAL (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ذٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER THAL (.fina)
 - check: no_orphaned_marks
   input:
     text: ذٰ
@@ -2790,8 +3494,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER THAL (.isol)
 - check: no_orphaned_marks
   input:
+    text: ذًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER THAL (.isol)
+- check: no_orphaned_marks
+  input:
     text: ذِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER THAL (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ذٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER THAL (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ذُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER THAL (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ذٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER THAL (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ر
@@ -2855,8 +3575,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER REH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍رًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER REH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍رِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER REH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍رٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER REH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍رُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER REH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍رٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER REH (.fina)
 - check: no_orphaned_marks
   input:
     text: رٰ
@@ -2911,8 +3647,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER REH (.isol)
 - check: no_orphaned_marks
   input:
+    text: رًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER REH (.isol)
+- check: no_orphaned_marks
+  input:
     text: رِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER REH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: رٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER REH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: رُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER REH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: رٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER REH (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ز
@@ -2976,8 +3728,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ZAIN (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍زًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ZAIN (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍زِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ZAIN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍زٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ZAIN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍زُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ZAIN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍زٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ZAIN (.fina)
 - check: no_orphaned_marks
   input:
     text: زٰ
@@ -3032,8 +3800,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ZAIN (.isol)
 - check: no_orphaned_marks
   input:
+    text: زًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ZAIN (.isol)
+- check: no_orphaned_marks
+  input:
     text: زِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ZAIN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: زٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ZAIN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: زُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ZAIN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: زٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ZAIN (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍س
@@ -3097,8 +3881,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SEEN (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍سًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SEEN (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍سِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER SEEN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍سٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SEEN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍سُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SEEN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍سٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SEEN (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍س‍
@@ -3162,8 +3962,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SEEN (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍سًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SEEN (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍سِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER SEEN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍سٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SEEN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍سُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SEEN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍سٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SEEN (.medi)
 - check: shaping_differs
   inputs:
   - text: س‍
@@ -3227,8 +4043,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SEEN (.init)
 - check: no_orphaned_marks
   input:
+    text: سًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SEEN (.init)
+- check: no_orphaned_marks
+  input:
     text: سِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER SEEN (.init)
+- check: no_orphaned_marks
+  input:
+    text: سٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SEEN (.init)
+- check: no_orphaned_marks
+  input:
+    text: سُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SEEN (.init)
+- check: no_orphaned_marks
+  input:
+    text: سٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SEEN (.init)
 - check: no_orphaned_marks
   input:
     text: سٰ
@@ -3283,8 +4115,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SEEN (.isol)
 - check: no_orphaned_marks
   input:
+    text: سًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SEEN (.isol)
+- check: no_orphaned_marks
+  input:
     text: سِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER SEEN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: سٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SEEN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: سُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SEEN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: سٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SEEN (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ش
@@ -3348,8 +4196,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SHEEN (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍شًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SHEEN (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍شِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER SHEEN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍شٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SHEEN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍شُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SHEEN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍شٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SHEEN (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ش‍
@@ -3413,8 +4277,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SHEEN (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍شًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SHEEN (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍شِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER SHEEN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍شٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SHEEN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍شُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SHEEN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍شٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SHEEN (.medi)
 - check: shaping_differs
   inputs:
   - text: ش‍
@@ -3478,8 +4358,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SHEEN (.init)
 - check: no_orphaned_marks
   input:
+    text: شًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SHEEN (.init)
+- check: no_orphaned_marks
+  input:
     text: شِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER SHEEN (.init)
+- check: no_orphaned_marks
+  input:
+    text: شٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SHEEN (.init)
+- check: no_orphaned_marks
+  input:
+    text: شُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SHEEN (.init)
+- check: no_orphaned_marks
+  input:
+    text: شٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SHEEN (.init)
 - check: no_orphaned_marks
   input:
     text: شٰ
@@ -3534,8 +4430,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SHEEN (.isol)
 - check: no_orphaned_marks
   input:
+    text: شًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SHEEN (.isol)
+- check: no_orphaned_marks
+  input:
     text: شِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER SHEEN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: شٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SHEEN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: شُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SHEEN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: شٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SHEEN (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ص
@@ -3599,8 +4511,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SAD (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍صًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SAD (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍صِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER SAD (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍صٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SAD (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍صُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SAD (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍صٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SAD (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ص‍
@@ -3664,8 +4592,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SAD (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍صًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SAD (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍صِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER SAD (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍صٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SAD (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍صُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SAD (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍صٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SAD (.medi)
 - check: shaping_differs
   inputs:
   - text: ص‍
@@ -3729,8 +4673,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SAD (.init)
 - check: no_orphaned_marks
   input:
+    text: صًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SAD (.init)
+- check: no_orphaned_marks
+  input:
     text: صِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER SAD (.init)
+- check: no_orphaned_marks
+  input:
+    text: صٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SAD (.init)
+- check: no_orphaned_marks
+  input:
+    text: صُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SAD (.init)
+- check: no_orphaned_marks
+  input:
+    text: صٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SAD (.init)
 - check: no_orphaned_marks
   input:
     text: صٰ
@@ -3785,8 +4745,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER SAD (.isol)
 - check: no_orphaned_marks
   input:
+    text: صًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER SAD (.isol)
+- check: no_orphaned_marks
+  input:
     text: صِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER SAD (.isol)
+- check: no_orphaned_marks
+  input:
+    text: صٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER SAD (.isol)
+- check: no_orphaned_marks
+  input:
+    text: صُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER SAD (.isol)
+- check: no_orphaned_marks
+  input:
+    text: صٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER SAD (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ض
@@ -3850,8 +4826,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER DAD (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍ضًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER DAD (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍ضِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER DAD (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ضٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER DAD (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ضُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER DAD (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ضٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER DAD (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ض‍
@@ -3915,8 +4907,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER DAD (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍ضًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER DAD (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍ضِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER DAD (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ضٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER DAD (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ضُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER DAD (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ضٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER DAD (.medi)
 - check: shaping_differs
   inputs:
   - text: ض‍
@@ -3980,8 +4988,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER DAD (.init)
 - check: no_orphaned_marks
   input:
+    text: ضًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER DAD (.init)
+- check: no_orphaned_marks
+  input:
     text: ضِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER DAD (.init)
+- check: no_orphaned_marks
+  input:
+    text: ضٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER DAD (.init)
+- check: no_orphaned_marks
+  input:
+    text: ضُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER DAD (.init)
+- check: no_orphaned_marks
+  input:
+    text: ضٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER DAD (.init)
 - check: no_orphaned_marks
   input:
     text: ضٰ
@@ -4036,8 +5060,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER DAD (.isol)
 - check: no_orphaned_marks
   input:
+    text: ضًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER DAD (.isol)
+- check: no_orphaned_marks
+  input:
     text: ضِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER DAD (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ضٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER DAD (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ضُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER DAD (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ضٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER DAD (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ط
@@ -4101,8 +5141,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER TAH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍طًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER TAH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍طِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER TAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍طٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER TAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍طُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER TAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍طٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER TAH (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ط‍
@@ -4166,8 +5222,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER TAH (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍طًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER TAH (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍طِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER TAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍طٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER TAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍طُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER TAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍طٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER TAH (.medi)
 - check: shaping_differs
   inputs:
   - text: ط‍
@@ -4231,8 +5303,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER TAH (.init)
 - check: no_orphaned_marks
   input:
+    text: طًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER TAH (.init)
+- check: no_orphaned_marks
+  input:
     text: طِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER TAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: طٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER TAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: طُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER TAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: طٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER TAH (.init)
 - check: no_orphaned_marks
   input:
     text: طٰ
@@ -4287,8 +5375,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER TAH (.isol)
 - check: no_orphaned_marks
   input:
+    text: طًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER TAH (.isol)
+- check: no_orphaned_marks
+  input:
     text: طِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER TAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: طٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER TAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: طُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER TAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: طٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER TAH (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ظ
@@ -4352,8 +5456,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ZAH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍ظًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ZAH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍ظِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ZAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ظٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ZAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ظُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ZAH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ظٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ZAH (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ظ‍
@@ -4417,8 +5537,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ZAH (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍ظًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ZAH (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍ظِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER ZAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ظٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ZAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ظُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ZAH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ظٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ZAH (.medi)
 - check: shaping_differs
   inputs:
   - text: ظ‍
@@ -4482,8 +5618,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ZAH (.init)
 - check: no_orphaned_marks
   input:
+    text: ظًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ZAH (.init)
+- check: no_orphaned_marks
+  input:
     text: ظِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER ZAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: ظٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ZAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: ظُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ZAH (.init)
+- check: no_orphaned_marks
+  input:
+    text: ظٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ZAH (.init)
 - check: no_orphaned_marks
   input:
     text: ظٰ
@@ -4538,8 +5690,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ZAH (.isol)
 - check: no_orphaned_marks
   input:
+    text: ظًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ZAH (.isol)
+- check: no_orphaned_marks
+  input:
     text: ظِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ZAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ظٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ZAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ظُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ZAH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ظٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ZAH (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ع
@@ -4603,8 +5771,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER AIN (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍عًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER AIN (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍عِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER AIN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍عٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER AIN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍عُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER AIN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍عٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER AIN (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ع‍
@@ -4668,8 +5852,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER AIN (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍عًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER AIN (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍عِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER AIN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍عٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER AIN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍عُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER AIN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍عٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER AIN (.medi)
 - check: shaping_differs
   inputs:
   - text: ع‍
@@ -4733,8 +5933,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER AIN (.init)
 - check: no_orphaned_marks
   input:
+    text: عًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER AIN (.init)
+- check: no_orphaned_marks
+  input:
     text: عِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER AIN (.init)
+- check: no_orphaned_marks
+  input:
+    text: عٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER AIN (.init)
+- check: no_orphaned_marks
+  input:
+    text: عُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER AIN (.init)
+- check: no_orphaned_marks
+  input:
+    text: عٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER AIN (.init)
 - check: no_orphaned_marks
   input:
     text: عٰ
@@ -4789,8 +6005,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER AIN (.isol)
 - check: no_orphaned_marks
   input:
+    text: عًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER AIN (.isol)
+- check: no_orphaned_marks
+  input:
     text: عِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER AIN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: عٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER AIN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: عُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER AIN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: عٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER AIN (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍غ
@@ -4854,8 +6086,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER GHAIN (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍غًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER GHAIN (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍غِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER GHAIN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍غٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER GHAIN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍غُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER GHAIN (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍غٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER GHAIN (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍غ‍
@@ -4919,8 +6167,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER GHAIN (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍غًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER GHAIN (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍غِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER GHAIN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍غٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER GHAIN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍غُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER GHAIN (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍غٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER GHAIN (.medi)
 - check: shaping_differs
   inputs:
   - text: غ‍
@@ -4984,8 +6248,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER GHAIN (.init)
 - check: no_orphaned_marks
   input:
+    text: غًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER GHAIN (.init)
+- check: no_orphaned_marks
+  input:
     text: غِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER GHAIN (.init)
+- check: no_orphaned_marks
+  input:
+    text: غٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER GHAIN (.init)
+- check: no_orphaned_marks
+  input:
+    text: غُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER GHAIN (.init)
+- check: no_orphaned_marks
+  input:
+    text: غٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER GHAIN (.init)
 - check: no_orphaned_marks
   input:
     text: غٰ
@@ -5040,8 +6320,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER GHAIN (.isol)
 - check: no_orphaned_marks
   input:
+    text: غًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER GHAIN (.isol)
+- check: no_orphaned_marks
+  input:
     text: غِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER GHAIN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: غٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER GHAIN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: غُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER GHAIN (.isol)
+- check: no_orphaned_marks
+  input:
+    text: غٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER GHAIN (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ف
@@ -5105,8 +6401,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER FEH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍فًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER FEH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍فِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER FEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍فٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER FEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍فُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER FEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍فٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER FEH (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ف‍
@@ -5170,8 +6482,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER FEH (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍فًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER FEH (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍فِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER FEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍فٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER FEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍فُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER FEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍فٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER FEH (.medi)
 - check: shaping_differs
   inputs:
   - text: ف‍
@@ -5235,8 +6563,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER FEH (.init)
 - check: no_orphaned_marks
   input:
+    text: فًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER FEH (.init)
+- check: no_orphaned_marks
+  input:
     text: فِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER FEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: فٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER FEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: فُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER FEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: فٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER FEH (.init)
 - check: no_orphaned_marks
   input:
     text: فٰ
@@ -5291,8 +6635,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER FEH (.isol)
 - check: no_orphaned_marks
   input:
+    text: فًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER FEH (.isol)
+- check: no_orphaned_marks
+  input:
     text: فِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER FEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: فٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER FEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: فُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER FEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: فٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER FEH (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ق
@@ -5356,8 +6716,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER QAF (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍قًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER QAF (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍قِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER QAF (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍قٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER QAF (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍قُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER QAF (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍قٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER QAF (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ق‍
@@ -5421,8 +6797,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER QAF (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍قًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER QAF (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍قِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER QAF (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍قٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER QAF (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍قُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER QAF (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍قٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER QAF (.medi)
 - check: shaping_differs
   inputs:
   - text: ق‍
@@ -5486,8 +6878,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER QAF (.init)
 - check: no_orphaned_marks
   input:
+    text: قًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER QAF (.init)
+- check: no_orphaned_marks
+  input:
     text: قِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER QAF (.init)
+- check: no_orphaned_marks
+  input:
+    text: قٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER QAF (.init)
+- check: no_orphaned_marks
+  input:
+    text: قُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER QAF (.init)
+- check: no_orphaned_marks
+  input:
+    text: قٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER QAF (.init)
 - check: no_orphaned_marks
   input:
     text: قٰ
@@ -5542,8 +6950,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER QAF (.isol)
 - check: no_orphaned_marks
   input:
+    text: قًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER QAF (.isol)
+- check: no_orphaned_marks
+  input:
     text: قِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER QAF (.isol)
+- check: no_orphaned_marks
+  input:
+    text: قٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER QAF (.isol)
+- check: no_orphaned_marks
+  input:
+    text: قُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER QAF (.isol)
+- check: no_orphaned_marks
+  input:
+    text: قٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER QAF (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ك
@@ -5607,8 +7031,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER KAF (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍كًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER KAF (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍كِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER KAF (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍كٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER KAF (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍كُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER KAF (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍كٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER KAF (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ك‍
@@ -5672,8 +7112,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER KAF (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍كًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER KAF (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍كِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER KAF (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍كٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER KAF (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍كُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER KAF (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍كٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER KAF (.medi)
 - check: shaping_differs
   inputs:
   - text: ك‍
@@ -5737,8 +7193,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER KAF (.init)
 - check: no_orphaned_marks
   input:
+    text: كًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER KAF (.init)
+- check: no_orphaned_marks
+  input:
     text: كِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER KAF (.init)
+- check: no_orphaned_marks
+  input:
+    text: كٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER KAF (.init)
+- check: no_orphaned_marks
+  input:
+    text: كُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER KAF (.init)
+- check: no_orphaned_marks
+  input:
+    text: كٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER KAF (.init)
 - check: no_orphaned_marks
   input:
     text: كٰ
@@ -5793,8 +7265,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER KAF (.isol)
 - check: no_orphaned_marks
   input:
+    text: كًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER KAF (.isol)
+- check: no_orphaned_marks
+  input:
     text: كِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER KAF (.isol)
+- check: no_orphaned_marks
+  input:
+    text: كٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER KAF (.isol)
+- check: no_orphaned_marks
+  input:
+    text: كُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER KAF (.isol)
+- check: no_orphaned_marks
+  input:
+    text: كٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER KAF (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ل
@@ -5858,8 +7346,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER LAM (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍لًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER LAM (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍لِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER LAM (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍لٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER LAM (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍لُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER LAM (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍لٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER LAM (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ل‍
@@ -5923,8 +7427,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER LAM (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍لًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER LAM (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍لِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER LAM (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍لٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER LAM (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍لُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER LAM (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍لٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER LAM (.medi)
 - check: shaping_differs
   inputs:
   - text: ل‍
@@ -5988,8 +7508,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER LAM (.init)
 - check: no_orphaned_marks
   input:
+    text: لًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER LAM (.init)
+- check: no_orphaned_marks
+  input:
     text: لِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER LAM (.init)
+- check: no_orphaned_marks
+  input:
+    text: لٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER LAM (.init)
+- check: no_orphaned_marks
+  input:
+    text: لُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER LAM (.init)
+- check: no_orphaned_marks
+  input:
+    text: لٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER LAM (.init)
 - check: no_orphaned_marks
   input:
     text: لٰ
@@ -6044,8 +7580,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER LAM (.isol)
 - check: no_orphaned_marks
   input:
+    text: لًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER LAM (.isol)
+- check: no_orphaned_marks
+  input:
     text: لِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER LAM (.isol)
+- check: no_orphaned_marks
+  input:
+    text: لٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER LAM (.isol)
+- check: no_orphaned_marks
+  input:
+    text: لُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER LAM (.isol)
+- check: no_orphaned_marks
+  input:
+    text: لٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER LAM (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍م
@@ -6109,8 +7661,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER MEEM (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍مًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER MEEM (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍مِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER MEEM (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍مٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER MEEM (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍مُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER MEEM (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍مٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER MEEM (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍م‍
@@ -6174,8 +7742,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER MEEM (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍مًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER MEEM (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍مِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER MEEM (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍مٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER MEEM (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍مُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER MEEM (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍مٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER MEEM (.medi)
 - check: shaping_differs
   inputs:
   - text: م‍
@@ -6239,8 +7823,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER MEEM (.init)
 - check: no_orphaned_marks
   input:
+    text: مًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER MEEM (.init)
+- check: no_orphaned_marks
+  input:
     text: مِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER MEEM (.init)
+- check: no_orphaned_marks
+  input:
+    text: مٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER MEEM (.init)
+- check: no_orphaned_marks
+  input:
+    text: مُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER MEEM (.init)
+- check: no_orphaned_marks
+  input:
+    text: مٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER MEEM (.init)
 - check: no_orphaned_marks
   input:
     text: مٰ
@@ -6295,8 +7895,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER MEEM (.isol)
 - check: no_orphaned_marks
   input:
+    text: مًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER MEEM (.isol)
+- check: no_orphaned_marks
+  input:
     text: مِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER MEEM (.isol)
+- check: no_orphaned_marks
+  input:
+    text: مٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER MEEM (.isol)
+- check: no_orphaned_marks
+  input:
+    text: مُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER MEEM (.isol)
+- check: no_orphaned_marks
+  input:
+    text: مٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER MEEM (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ن
@@ -6360,8 +7976,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER NOON (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍نًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER NOON (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍نِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER NOON (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍نٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER NOON (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍نُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER NOON (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍نٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER NOON (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ن‍
@@ -6425,8 +8057,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER NOON (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍نًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER NOON (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍نِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER NOON (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍نٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER NOON (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍نُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER NOON (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍نٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER NOON (.medi)
 - check: shaping_differs
   inputs:
   - text: ن‍
@@ -6490,8 +8138,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER NOON (.init)
 - check: no_orphaned_marks
   input:
+    text: نًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER NOON (.init)
+- check: no_orphaned_marks
+  input:
     text: نِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER NOON (.init)
+- check: no_orphaned_marks
+  input:
+    text: نٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER NOON (.init)
+- check: no_orphaned_marks
+  input:
+    text: نُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER NOON (.init)
+- check: no_orphaned_marks
+  input:
+    text: نٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER NOON (.init)
 - check: no_orphaned_marks
   input:
     text: نٰ
@@ -6546,8 +8210,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER NOON (.isol)
 - check: no_orphaned_marks
   input:
+    text: نًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER NOON (.isol)
+- check: no_orphaned_marks
+  input:
     text: نِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER NOON (.isol)
+- check: no_orphaned_marks
+  input:
+    text: نٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER NOON (.isol)
+- check: no_orphaned_marks
+  input:
+    text: نُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER NOON (.isol)
+- check: no_orphaned_marks
+  input:
+    text: نٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER NOON (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ه
@@ -6611,8 +8291,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER HEH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍هًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER HEH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍هِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER HEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍هٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER HEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍هُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER HEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍هٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER HEH (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ه‍
@@ -6676,8 +8372,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER HEH (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍هًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER HEH (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍هِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER HEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍هٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER HEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍هُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER HEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍هٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER HEH (.medi)
 - check: shaping_differs
   inputs:
   - text: ه‍
@@ -6741,8 +8453,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER HEH (.init)
 - check: no_orphaned_marks
   input:
+    text: هًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER HEH (.init)
+- check: no_orphaned_marks
+  input:
     text: هِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER HEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: هٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER HEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: هُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER HEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: هٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER HEH (.init)
 - check: no_orphaned_marks
   input:
     text: هٰ
@@ -6797,8 +8525,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER HEH (.isol)
 - check: no_orphaned_marks
   input:
+    text: هًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER HEH (.isol)
+- check: no_orphaned_marks
+  input:
     text: هِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER HEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: هٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER HEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: هُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER HEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: هٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER HEH (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍و
@@ -6862,8 +8606,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER WAW (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍وًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER WAW (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍وِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER WAW (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍وٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER WAW (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍وُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER WAW (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍وٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER WAW (.fina)
 - check: no_orphaned_marks
   input:
     text: وٰ
@@ -6918,8 +8678,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER WAW (.isol)
 - check: no_orphaned_marks
   input:
+    text: وًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER WAW (.isol)
+- check: no_orphaned_marks
+  input:
     text: وِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER WAW (.isol)
+- check: no_orphaned_marks
+  input:
+    text: وٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER WAW (.isol)
+- check: no_orphaned_marks
+  input:
+    text: وُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER WAW (.isol)
+- check: no_orphaned_marks
+  input:
+    text: وٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER WAW (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ى
@@ -6983,8 +8759,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍ىًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍ىِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ىٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ىُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍ىٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ى‍
@@ -7048,8 +8840,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍ىًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍ىِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ىٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ىُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍ىٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.medi)
 - check: shaping_differs
   inputs:
   - text: ى‍
@@ -7113,8 +8921,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.init)
 - check: no_orphaned_marks
   input:
+    text: ىًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.init)
+- check: no_orphaned_marks
+  input:
     text: ىِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.init)
+- check: no_orphaned_marks
+  input:
+    text: ىٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.init)
+- check: no_orphaned_marks
+  input:
+    text: ىُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.init)
+- check: no_orphaned_marks
+  input:
+    text: ىٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.init)
 - check: no_orphaned_marks
   input:
     text: ىٰ
@@ -7169,8 +8993,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.isol)
 - check: no_orphaned_marks
   input:
+    text: ىًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.isol)
+- check: no_orphaned_marks
+  input:
     text: ىِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ىٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ىُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ىٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER ALEF MAKSURA (.isol)
 - check: shaping_differs
   inputs:
   - text: ‍ي
@@ -7234,8 +9074,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER YEH (.fina)
 - check: no_orphaned_marks
   input:
+    text: ‍يًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER YEH (.fina)
+- check: no_orphaned_marks
+  input:
     text: ‍يِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER YEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍يٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER YEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍يُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER YEH (.fina)
+- check: no_orphaned_marks
+  input:
+    text: ‍يٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER YEH (.fina)
 - check: shaping_differs
   inputs:
   - text: ‍ي‍
@@ -7299,8 +9155,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER YEH (.medi)
 - check: no_orphaned_marks
   input:
+    text: ‍يًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER YEH (.medi)
+- check: no_orphaned_marks
+  input:
     text: ‍يِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER YEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍يٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER YEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍يُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER YEH (.medi)
+- check: no_orphaned_marks
+  input:
+    text: ‍يٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER YEH (.medi)
 - check: shaping_differs
   inputs:
   - text: ي‍
@@ -7364,8 +9236,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER YEH (.init)
 - check: no_orphaned_marks
   input:
+    text: يًّ‍
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER YEH (.init)
+- check: no_orphaned_marks
+  input:
     text: يِّ‍
   rationale: KASRA+SHADDA on top of ARABIC LETTER YEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: يٍّ‍
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER YEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: يُّ‍
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER YEH (.init)
+- check: no_orphaned_marks
+  input:
+    text: يٌّ‍
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER YEH (.init)
 - check: no_orphaned_marks
   input:
     text: يٰ
@@ -7420,8 +9308,24 @@
   rationale: FATHA+SHADDA on top of ARABIC LETTER YEH (.isol)
 - check: no_orphaned_marks
   input:
+    text: يًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC LETTER YEH (.isol)
+- check: no_orphaned_marks
+  input:
     text: يِّ
   rationale: KASRA+SHADDA on top of ARABIC LETTER YEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: يٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC LETTER YEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: يُّ
+  rationale: DAMMA+SHADDA on top of ARABIC LETTER YEH (.isol)
+- check: no_orphaned_marks
+  input:
+    text: يٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC LETTER YEH (.isol)
 - check: no_orphaned_marks
   input:
     text: ـٰ
@@ -7476,5 +9380,21 @@
   rationale: FATHA+SHADDA on top of ARABIC TATWEEL (.isol)
 - check: no_orphaned_marks
   input:
+    text: ـًّ
+  rationale: FATHATAN+SHADDA on top of ARABIC TATWEEL (.isol)
+- check: no_orphaned_marks
+  input:
     text: ـِّ
   rationale: KASRA+SHADDA on top of ARABIC TATWEEL (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ـٍّ
+  rationale: KASRATAN+SHADDA on top of ARABIC TATWEEL (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ـُّ
+  rationale: DAMMA+SHADDA on top of ARABIC TATWEEL (.isol)
+- check: no_orphaned_marks
+  input:
+    text: ـٌّ
+  rationale: DAMMATAN+SHADDA on top of ARABIC TATWEEL (.isol)

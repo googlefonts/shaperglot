@@ -12,7 +12,11 @@ ZWJ = "\u200D"
 MANUALLY_DEFINED_MARKS = {
     'ar_Arab': [
         ["\u064E\u0651", 'FATHA+SHADDA'],
+        ["\u064B\u0651", 'FATHATAN+SHADDA'],
         ["\u0650\u0651", 'KASRA+SHADDA'],
+        ["\u064D\u0651", 'KASRATAN+SHADDA'],
+        ["\u064F\u0651", 'DAMMA+SHADDA'],
+        ["\u064C\u0651", 'DAMMATAN+SHADDA'],
     ]
 }
 
