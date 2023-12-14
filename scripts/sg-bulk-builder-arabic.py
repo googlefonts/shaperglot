@@ -7,32 +7,14 @@ from google.protobuf.json_format import MessageToDict
 
 gflangs = LoadLanguages()
 gfscripts = LoadScripts()
+
 ZWJ = "\u200D"
-MARKS = [
-    "\u064E",  # FATHA
-    "\u064E\u064E",  # 2xFATHA
-    "\u064B",  # FATHATAN
-    "\u064B\u0651",  # FATHATAN+SHADDA
-    "\u0651\u064B",  # SHADDA+FATHATAN
-    "\u064E\u064E\u0651",  # 2xFATHA+SHADDA
-    "\u0651\u064E\u064E",  # SHADDA+2xFATHA
-    "\u0650",  # KASRA
-    "\u0650\u0650",  # 2xKASRA
-    "\u064D",  # KASRATAN
-    "\u064D\u0651",  # KASRATAN+SHADDA
-    "\u0651\u064D",  # SHADDA+KASRATAN
-    "\u0650\u0650\u0651",  # 2xKASRA+SHADDA
-    "\u0651\u0650\u0650",  # SHADDA+2xKASRA
-    "\u064F",  # DAMMA
-    "\u064C",  # DAMMATAN
-    "\u0651",  # SHADDA
-    "\u0652",  # SUKUN
-    "\u0652\u0651",  # SUKUN+SHADDA
-    "\u0651\u0652",  # SHADDA+SUKUN
-    "\u0653",  # MADDAH ABOVE
-    "\u0654",  # HAMZA ABOVE
-    "\u0655",  # HAMZA BELOW
-]
+MANUALLY_DEFINED_MARKS = {
+    'ar_Arab': [
+        ["\u064E\u0651", 'FATHA+SHADDA'],
+        ["\u0650\u0651", 'KASRA+SHADDA'],
+    ]
+}
 
 with open('./data/ArabicShaping.txt', 'r') as f:
     arabic_shaping = [
@@ -65,100 +47,72 @@ def get_joining_type(char):
             return line.split(';')[2].strip()
 
 
+def mark_checks(pre_context, character, post_context, check_these_marks, position):
+    for marks, rationale in check_these_marks:
+        shaping_test = {
+            'check': 'no_orphaned_marks',
+            'input': {"text": pre_context + character + marks + post_context},
+            'rationale': f"{rationale} on top of {unicodedata.name(character)} (.{position})",
+        }
+        yield shaping_test
+
+
+def shaping_checks(pre_context, character, post_context, position):
+    shaping_test = {
+        'check': 'shaping_differs',
+        'inputs': [
+            {
+                'text': pre_context + character + post_context,
+                'features': {
+                    "init": False,
+                    "medi": False,
+                    "fina": False,
+                },
+            },
+            {'text': pre_context + character + post_context},
+        ],
+        'rationale': f".{position} version of {unicodedata.name(character)}",
+    }
+    yield shaping_test
+
+
 def main():
     for language in gflangs:
         tests = []
         if gflangs[language].script == "Arab" and gflangs[language].exemplar_chars.base:
+            # Assemble list of marks
+            check_these_marks = []
+            for character in gflangs[language].exemplar_chars.base:
+                if unicodedata.category(character) == "Mn":
+                    check_these_marks.append([character, unicodedata.name(character)])
+            if language in MANUALLY_DEFINED_MARKS:
+                check_these_marks.extend(MANUALLY_DEFINED_MARKS[language])
+
             for character in gflangs[language].exemplar_chars.base:
                 if unicodedata.category(character).startswith("L"):
                     # init/medi/fina
                     joining_type = get_joining_type(character)
                     if joining_type in ("R", "D"):
                         # .fina
-                        shaping_test = {
-                            'check': 'shaping_differs',
-                            'inputs': [
-                                {
-                                    'text': ZWJ + character,
-                                    'features': {
-                                        "init": False,
-                                        "medi": False,
-                                        "fina": False,
-                                    },
-                                },
-                                {'text': ZWJ + character},
-                            ],
-                            'rationale': f".fina version of {unicodedata.name(character)}",
-                        }
-                        tests.append(shaping_test)
-                        # marks
-                        for marks in MARKS:
-                            shaping_test = {
-                                'check': 'no_orphaned_marks',
-                                'input': {"text": ZWJ + character + marks},
-                                'rationale': f"{marks} on top of {unicodedata.name(character)} (.fina)",
-                            }
-                            tests.append(shaping_test)
+                        tests.extend(shaping_checks(ZWJ, character, '', 'fina'))
+                        tests.extend(
+                            mark_checks(ZWJ, character, '', check_these_marks, 'fina')
+                        )
                     if joining_type == "D":
                         # .medi
-                        shaping_test = {
-                            'check': 'shaping_differs',
-                            'inputs': [
-                                {
-                                    'text': ZWJ + character + ZWJ,
-                                    'features': {
-                                        "init": False,
-                                        "medi": False,
-                                        "fina": False,
-                                    },
-                                },
-                                {'text': ZWJ + character + ZWJ},
-                            ],
-                            'rationale': f".medi version of {unicodedata.name(character)}",
-                        }
-                        tests.append(shaping_test)
-                        # marks
-                        for marks in MARKS:
-                            shaping_test = {
-                                'check': 'no_orphaned_marks',
-                                'input': {"text": ZWJ + character + marks + ZWJ},
-                                'rationale': f"{marks} on top of {unicodedata.name(character)} (.medi)",
-                            }
-                            tests.append(shaping_test)
+                        tests.extend(shaping_checks(ZWJ, character, ZWJ, 'medi'))
+                        tests.extend(
+                            mark_checks(ZWJ, character, ZWJ, check_these_marks, 'medi')
+                        )
                         # .init
-                        shaping_test = {
-                            'check': 'shaping_differs',
-                            'inputs': [
-                                {
-                                    'text': character + ZWJ,
-                                    'features': {
-                                        "init": False,
-                                        "medi": False,
-                                        "fina": False,
-                                    },
-                                },
-                                {'text': character + ZWJ},
-                            ],
-                            'rationale': f".init version of {unicodedata.name(character)}",
-                        }
-                        tests.append(shaping_test)
-                        # marks
-                        for marks in MARKS:
-                            shaping_test = {
-                                'check': 'no_orphaned_marks',
-                                'input': {"text": character + marks + ZWJ},
-                                'rationale': f"{marks} on top of {unicodedata.name(character)} (.init)",
-                            }
-                            tests.append(shaping_test)
+                        tests.extend(shaping_checks('', character, ZWJ, 'init'))
+                        tests.extend(
+                            mark_checks('', character, ZWJ, check_these_marks, 'init')
+                        )
                     # .isol
-                    # marks
-                    for marks in MARKS:
-                        shaping_test = {
-                            'check': 'no_orphaned_marks',
-                            'input': {"text": character + marks},
-                            'rationale': f"{marks} on top of {unicodedata.name(character)} (.isol)",
-                        }
-                        tests.append(shaping_test)
+                    tests.extend(
+                        mark_checks('', character, '', check_these_marks, 'isol')
+                    )
 
         if tests:
             build_results(language, tests)
