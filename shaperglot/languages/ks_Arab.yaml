@@ -1,0 +1,937 @@
+#auto-generated using sg-bulk-builder-arabic.py
+- check: shaping_differs
+  inputs:
+  - text: ‍آ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍آ
+  rationale: .fina version of ARABIC LETTER ALEF WITH MADDA ABOVE
+- check: shaping_differs
+  inputs:
+  - text: ‍أ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍أ
+  rationale: .fina version of ARABIC LETTER ALEF WITH HAMZA ABOVE
+- check: shaping_differs
+  inputs:
+  - text: ‍ٲ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ٲ
+  rationale: .fina version of ARABIC LETTER ALEF WITH WAVY HAMZA ABOVE
+- check: shaping_differs
+  inputs:
+  - text: ‍ؤ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ؤ
+  rationale: .fina version of ARABIC LETTER WAW WITH HAMZA ABOVE
+- check: shaping_differs
+  inputs:
+  - text: ‍ا
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ا
+  rationale: .fina version of ARABIC LETTER ALEF
+- check: shaping_differs
+  inputs:
+  - text: ‍ب
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ب
+  rationale: .fina version of ARABIC LETTER BEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ب‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ب‍
+  rationale: .medi version of ARABIC LETTER BEH
+- check: shaping_differs
+  inputs:
+  - text: ب‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ب‍
+  rationale: .init version of ARABIC LETTER BEH
+- check: shaping_differs
+  inputs:
+  - text: ‍پ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍پ
+  rationale: .fina version of ARABIC LETTER PEH
+- check: shaping_differs
+  inputs:
+  - text: ‍پ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍پ‍
+  rationale: .medi version of ARABIC LETTER PEH
+- check: shaping_differs
+  inputs:
+  - text: پ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: پ‍
+  rationale: .init version of ARABIC LETTER PEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ت
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ت
+  rationale: .fina version of ARABIC LETTER TEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ت‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ت‍
+  rationale: .medi version of ARABIC LETTER TEH
+- check: shaping_differs
+  inputs:
+  - text: ت‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ت‍
+  rationale: .init version of ARABIC LETTER TEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ث
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ث
+  rationale: .fina version of ARABIC LETTER THEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ث‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ث‍
+  rationale: .medi version of ARABIC LETTER THEH
+- check: shaping_differs
+  inputs:
+  - text: ث‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ث‍
+  rationale: .init version of ARABIC LETTER THEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ٹ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ٹ
+  rationale: .fina version of ARABIC LETTER TTEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ٹ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ٹ‍
+  rationale: .medi version of ARABIC LETTER TTEH
+- check: shaping_differs
+  inputs:
+  - text: ٹ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ٹ‍
+  rationale: .init version of ARABIC LETTER TTEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ج
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ج
+  rationale: .fina version of ARABIC LETTER JEEM
+- check: shaping_differs
+  inputs:
+  - text: ‍ج‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ج‍
+  rationale: .medi version of ARABIC LETTER JEEM
+- check: shaping_differs
+  inputs:
+  - text: ج‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ج‍
+  rationale: .init version of ARABIC LETTER JEEM
+- check: shaping_differs
+  inputs:
+  - text: ‍چ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍چ
+  rationale: .fina version of ARABIC LETTER TCHEH
+- check: shaping_differs
+  inputs:
+  - text: ‍چ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍چ‍
+  rationale: .medi version of ARABIC LETTER TCHEH
+- check: shaping_differs
+  inputs:
+  - text: چ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: چ‍
+  rationale: .init version of ARABIC LETTER TCHEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ح
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ح
+  rationale: .fina version of ARABIC LETTER HAH
+- check: shaping_differs
+  inputs:
+  - text: ‍ح‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ح‍
+  rationale: .medi version of ARABIC LETTER HAH
+- check: shaping_differs
+  inputs:
+  - text: ح‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ح‍
+  rationale: .init version of ARABIC LETTER HAH
+- check: shaping_differs
+  inputs:
+  - text: ‍خ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍خ
+  rationale: .fina version of ARABIC LETTER KHAH
+- check: shaping_differs
+  inputs:
+  - text: ‍خ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍خ‍
+  rationale: .medi version of ARABIC LETTER KHAH
+- check: shaping_differs
+  inputs:
+  - text: خ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: خ‍
+  rationale: .init version of ARABIC LETTER KHAH
+- check: shaping_differs
+  inputs:
+  - text: ‍د
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍د
+  rationale: .fina version of ARABIC LETTER DAL
+- check: shaping_differs
+  inputs:
+  - text: ‍ذ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ذ
+  rationale: .fina version of ARABIC LETTER THAL
+- check: shaping_differs
+  inputs:
+  - text: ‍ڈ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ڈ
+  rationale: .fina version of ARABIC LETTER DDAL
+- check: shaping_differs
+  inputs:
+  - text: ‍ر
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ر
+  rationale: .fina version of ARABIC LETTER REH
+- check: shaping_differs
+  inputs:
+  - text: ‍ز
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ز
+  rationale: .fina version of ARABIC LETTER ZAIN
+- check: shaping_differs
+  inputs:
+  - text: ‍ڑ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ڑ
+  rationale: .fina version of ARABIC LETTER RREH
+- check: shaping_differs
+  inputs:
+  - text: ‍ژ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ژ
+  rationale: .fina version of ARABIC LETTER JEH
+- check: shaping_differs
+  inputs:
+  - text: ‍س
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍س
+  rationale: .fina version of ARABIC LETTER SEEN
+- check: shaping_differs
+  inputs:
+  - text: ‍س‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍س‍
+  rationale: .medi version of ARABIC LETTER SEEN
+- check: shaping_differs
+  inputs:
+  - text: س‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: س‍
+  rationale: .init version of ARABIC LETTER SEEN
+- check: shaping_differs
+  inputs:
+  - text: ‍ش
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ش
+  rationale: .fina version of ARABIC LETTER SHEEN
+- check: shaping_differs
+  inputs:
+  - text: ‍ش‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ش‍
+  rationale: .medi version of ARABIC LETTER SHEEN
+- check: shaping_differs
+  inputs:
+  - text: ش‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ش‍
+  rationale: .init version of ARABIC LETTER SHEEN
+- check: shaping_differs
+  inputs:
+  - text: ‍ص
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ص
+  rationale: .fina version of ARABIC LETTER SAD
+- check: shaping_differs
+  inputs:
+  - text: ‍ص‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ص‍
+  rationale: .medi version of ARABIC LETTER SAD
+- check: shaping_differs
+  inputs:
+  - text: ص‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ص‍
+  rationale: .init version of ARABIC LETTER SAD
+- check: shaping_differs
+  inputs:
+  - text: ‍ض
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ض
+  rationale: .fina version of ARABIC LETTER DAD
+- check: shaping_differs
+  inputs:
+  - text: ‍ض‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ض‍
+  rationale: .medi version of ARABIC LETTER DAD
+- check: shaping_differs
+  inputs:
+  - text: ض‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ض‍
+  rationale: .init version of ARABIC LETTER DAD
+- check: shaping_differs
+  inputs:
+  - text: ‍ط
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ط
+  rationale: .fina version of ARABIC LETTER TAH
+- check: shaping_differs
+  inputs:
+  - text: ‍ط‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ط‍
+  rationale: .medi version of ARABIC LETTER TAH
+- check: shaping_differs
+  inputs:
+  - text: ط‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ط‍
+  rationale: .init version of ARABIC LETTER TAH
+- check: shaping_differs
+  inputs:
+  - text: ‍ظ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ظ
+  rationale: .fina version of ARABIC LETTER ZAH
+- check: shaping_differs
+  inputs:
+  - text: ‍ظ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ظ‍
+  rationale: .medi version of ARABIC LETTER ZAH
+- check: shaping_differs
+  inputs:
+  - text: ظ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ظ‍
+  rationale: .init version of ARABIC LETTER ZAH
+- check: shaping_differs
+  inputs:
+  - text: ‍ع
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ع
+  rationale: .fina version of ARABIC LETTER AIN
+- check: shaping_differs
+  inputs:
+  - text: ‍ع‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ع‍
+  rationale: .medi version of ARABIC LETTER AIN
+- check: shaping_differs
+  inputs:
+  - text: ع‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ع‍
+  rationale: .init version of ARABIC LETTER AIN
+- check: shaping_differs
+  inputs:
+  - text: ‍غ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍غ
+  rationale: .fina version of ARABIC LETTER GHAIN
+- check: shaping_differs
+  inputs:
+  - text: ‍غ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍غ‍
+  rationale: .medi version of ARABIC LETTER GHAIN
+- check: shaping_differs
+  inputs:
+  - text: غ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: غ‍
+  rationale: .init version of ARABIC LETTER GHAIN
+- check: shaping_differs
+  inputs:
+  - text: ‍ف
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ف
+  rationale: .fina version of ARABIC LETTER FEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ف‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ف‍
+  rationale: .medi version of ARABIC LETTER FEH
+- check: shaping_differs
+  inputs:
+  - text: ف‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ف‍
+  rationale: .init version of ARABIC LETTER FEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ق
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ق
+  rationale: .fina version of ARABIC LETTER QAF
+- check: shaping_differs
+  inputs:
+  - text: ‍ق‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ق‍
+  rationale: .medi version of ARABIC LETTER QAF
+- check: shaping_differs
+  inputs:
+  - text: ق‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ق‍
+  rationale: .init version of ARABIC LETTER QAF
+- check: shaping_differs
+  inputs:
+  - text: ‍ک
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ک
+  rationale: .fina version of ARABIC LETTER KEHEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ک‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ک‍
+  rationale: .medi version of ARABIC LETTER KEHEH
+- check: shaping_differs
+  inputs:
+  - text: ک‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ک‍
+  rationale: .init version of ARABIC LETTER KEHEH
+- check: shaping_differs
+  inputs:
+  - text: ‍گ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍گ
+  rationale: .fina version of ARABIC LETTER GAF
+- check: shaping_differs
+  inputs:
+  - text: ‍گ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍گ‍
+  rationale: .medi version of ARABIC LETTER GAF
+- check: shaping_differs
+  inputs:
+  - text: گ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: گ‍
+  rationale: .init version of ARABIC LETTER GAF
+- check: shaping_differs
+  inputs:
+  - text: ‍ل
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ل
+  rationale: .fina version of ARABIC LETTER LAM
+- check: shaping_differs
+  inputs:
+  - text: ‍ل‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ل‍
+  rationale: .medi version of ARABIC LETTER LAM
+- check: shaping_differs
+  inputs:
+  - text: ل‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ل‍
+  rationale: .init version of ARABIC LETTER LAM
+- check: shaping_differs
+  inputs:
+  - text: ‍م
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍م
+  rationale: .fina version of ARABIC LETTER MEEM
+- check: shaping_differs
+  inputs:
+  - text: ‍م‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍م‍
+  rationale: .medi version of ARABIC LETTER MEEM
+- check: shaping_differs
+  inputs:
+  - text: م‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: م‍
+  rationale: .init version of ARABIC LETTER MEEM
+- check: shaping_differs
+  inputs:
+  - text: ‍ن
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ن
+  rationale: .fina version of ARABIC LETTER NOON
+- check: shaping_differs
+  inputs:
+  - text: ‍ن‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ن‍
+  rationale: .medi version of ARABIC LETTER NOON
+- check: shaping_differs
+  inputs:
+  - text: ن‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ن‍
+  rationale: .init version of ARABIC LETTER NOON
+- check: shaping_differs
+  inputs:
+  - text: ‍ں
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ں
+  rationale: .fina version of ARABIC LETTER NOON GHUNNA
+- check: shaping_differs
+  inputs:
+  - text: ‍ں‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ں‍
+  rationale: .medi version of ARABIC LETTER NOON GHUNNA
+- check: shaping_differs
+  inputs:
+  - text: ں‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ں‍
+  rationale: .init version of ARABIC LETTER NOON GHUNNA
+- check: shaping_differs
+  inputs:
+  - text: ‍ھ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ھ
+  rationale: .fina version of ARABIC LETTER HEH DOACHASHMEE
+- check: shaping_differs
+  inputs:
+  - text: ‍ھ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ھ‍
+  rationale: .medi version of ARABIC LETTER HEH DOACHASHMEE
+- check: shaping_differs
+  inputs:
+  - text: ھ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ھ‍
+  rationale: .init version of ARABIC LETTER HEH DOACHASHMEE
+- check: shaping_differs
+  inputs:
+  - text: ‍ہ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ہ
+  rationale: .fina version of ARABIC LETTER HEH GOAL
+- check: shaping_differs
+  inputs:
+  - text: ‍ہ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ہ‍
+  rationale: .medi version of ARABIC LETTER HEH GOAL
+- check: shaping_differs
+  inputs:
+  - text: ہ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ہ‍
+  rationale: .init version of ARABIC LETTER HEH GOAL
+- check: shaping_differs
+  inputs:
+  - text: ‍و
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍و
+  rationale: .fina version of ARABIC LETTER WAW
+- check: shaping_differs
+  inputs:
+  - text: ‍ۄ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ۄ
+  rationale: .fina version of ARABIC LETTER WAW WITH RING
+- check: shaping_differs
+  inputs:
+  - text: ‍ۆ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ۆ
+  rationale: .fina version of ARABIC LETTER OE
+- check: shaping_differs
+  inputs:
+  - text: ‍ی
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ی
+  rationale: .fina version of ARABIC LETTER FARSI YEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ی‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ی‍
+  rationale: .medi version of ARABIC LETTER FARSI YEH
+- check: shaping_differs
+  inputs:
+  - text: ی‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ی‍
+  rationale: .init version of ARABIC LETTER FARSI YEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ۍ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ۍ
+  rationale: .fina version of ARABIC LETTER YEH WITH TAIL
+- check: shaping_differs
+  inputs:
+  - text: ‍ؠ
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ؠ
+  rationale: .fina version of ARABIC LETTER KASHMIRI YEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ؠ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ؠ‍
+  rationale: .medi version of ARABIC LETTER KASHMIRI YEH
+- check: shaping_differs
+  inputs:
+  - text: ؠ‍
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ؠ‍
+  rationale: .init version of ARABIC LETTER KASHMIRI YEH
+- check: shaping_differs
+  inputs:
+  - text: ‍ے
+    features:
+      init: false
+      medi: false
+      fina: false
+  - text: ‍ے
+  rationale: .fina version of ARABIC LETTER YEH BARREE
