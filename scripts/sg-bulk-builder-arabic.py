@@ -85,7 +85,7 @@ def main():
         if gflangs[language].script == "Arab" and gflangs[language].exemplar_chars.base:
             # Assemble list of marks
             check_these_marks = []
-            for character in gflangs[language].exemplar_chars.base:
+            for character in gflangs[language].exemplar_chars.marks:
                 if unicodedata.category(character) == "Mn":
                     check_these_marks.append([character, unicodedata.name(character)])
             if language in MANUALLY_DEFINED_MARKS:
