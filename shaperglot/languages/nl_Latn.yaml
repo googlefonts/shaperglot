@@ -1,0 +1,54 @@
+- check: shaping_differs
+  inputs:
+  - text: ij
+    language: NLD
+  - text: íj
+    language: NLD
+  - text: íj́
+    language: NLD
+  rationale: 'Dutch uses ij with 3 different accent variations'
+- check: shaping_differs
+  inputs:
+  - text: IJ
+    language: NLD
+  - text: ÍJ
+    language: NLD
+  - text: ÍJ́
+    language: NLD
+  rationale: 'Dutch uses IJ with 3 different accent variations'
+- check: shaping_differs
+  inputs:
+  - text: ij
+    language: NLD
+    features:
+      smcp: true
+  - text: íj
+    language: NLD
+    features:
+      smcp: true
+  - text: íj́
+    language: NLD
+    features:
+      smcp: true
+  conditions:
+    features:
+    - smcp
+  rationale: 'Dutch uses ij with 3 different accent variations'
+- check: shaping_differs
+  inputs:
+  - text: IJ
+    language: NLD
+    features:
+      c2sc: true
+  - text: ÍJ
+    language: NLD
+    features:
+      c2sc: true
+  - text: ÍJ́
+    language: NLD
+    features:
+      c2sc: true
+  conditions:
+    features:
+    - c2sc
+  rationale: 'Dutch uses IJ with 3 different accent variations'
