@@ -1,6 +1,6 @@
+from itertools import permutations
 from strictyaml import Seq, Map, Int, Optional
 from num2words import num2words
-from itertools import permutations
 
 from .common import shaping_input_schema, ShaperglotCheck, check_schema
 
