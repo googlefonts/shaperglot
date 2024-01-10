@@ -36,8 +36,8 @@ class ShapingDiffersCheck(ShaperglotCheck):
         else:
             result = "the outputs differ."
         full_result = f"that, when {self.inputs[0].describe()}, "
-        for i in range(1, len(self.inputs)):
-            full_result += f"and then {self.inputs[i].describe()}, "
+        for input_index in range(1, len(self.inputs)):
+            full_result += f"and then {self.inputs[input_index].describe()}, "
         full_result += result
         if str(self.definition["rationale"]):
             full_result += f" This is because {self.definition['rationale']}."
