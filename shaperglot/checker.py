@@ -7,16 +7,6 @@ def flatten(lst):
     return [item for sublist in lst for item in sublist]
 
 
-def _get_cluster(buffers, index):
-    input_id = index[0]
-    cluster_id = index[1]
-    glyphs = buffers[input_id].glyph_infos
-    cluster = [x.codepoint for x in glyphs if x.cluster == cluster_id]
-    if len(index) == 3:
-        return [cluster[index[2]]]
-    return cluster
-
-
 class Checker:  # pylint: disable=too-few-public-methods
     def __init__(self, fontfile):
         self.vharfbuzz = Vharfbuzz(fontfile)
