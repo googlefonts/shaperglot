@@ -1,5 +1,10 @@
+# The main thing this module provides is the Languages class, which is a
+# superset of the LoadLanguages() object from gflanguages. When a language is
+# requested, we copy the gflanguages protobuf object into a plain Python
+# dictionary, and then add the shaperglot checks to it. Every language gets a
+# OrthographiesCheck and a NoOrphanedMarksInOrthographiesCheck, and then any
+# additional checks defined in the language definition file.
 from pathlib import Path
-import sys
 import yaml
 
 from gflanguages import LoadLanguages, LoadScripts
@@ -7,9 +12,8 @@ from strictyaml import YAMLValidationError
 from strictyaml import load as strictyaml_load
 from google.protobuf.json_format import MessageToDict
 
-from shaperglot.checks.no_orphaned_marks import NoOrphanedMarksInOrthographiesCheck
-
 from .checks import schemas, checks_map
+from .checks.no_orphaned_marks import NoOrphanedMarksInOrthographiesCheck
 from .checks.orthographies import OrthographiesCheck
 
 gflangs = LoadLanguages()
@@ -26,12 +30,10 @@ def load_shaperglot_definition(language, validate=False):
     if not definition_file.is_file():
         return []
     with open(definition_file, encoding="utf-8") as fh:
-        print("Loading ", language)
         if validate:
             data = strictyaml_load(fh.read())
         else:
             data = yaml.safe_load(fh.read())
-        print("Loaded ", language)
     check_objects = []
     for ix, check in enumerate(data):
         if validate:
