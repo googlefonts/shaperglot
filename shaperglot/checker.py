@@ -8,6 +8,10 @@ def flatten(lst):
 
 
 class Checker:  # pylint: disable=too-few-public-methods
+    """A class that creates a checking context for a font. We can then call
+    `.check` on this context to run all the checks for a given language, returning
+    a Reporter object with the results.
+    """
     def __init__(self, fontfile):
         self.vharfbuzz = Vharfbuzz(fontfile)
         self.ttfont = self.vharfbuzz.ttfont

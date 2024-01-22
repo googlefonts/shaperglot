@@ -9,6 +9,7 @@ from shaperglot.languages import Languages
 
 
 def describe(options):
+    """Describe the checks shaperglot will perform to determine support for a given language"""
     langs = Languages()
     if options.lang not in langs:
         maybe = langs.disambiguate(options.lang)
@@ -38,6 +39,7 @@ def describe(options):
 
 
 def check(options):
+    """Check a particular language or languages are supported"""
     checker = Checker(options.font)
     langs = Languages()
     for lang in options.lang:
@@ -63,6 +65,7 @@ def check(options):
 
 
 def report(options):
+    """Report which languages are supported by the given font"""
     checker = Checker(options.font)
     langs = Languages()
     messages = []
@@ -154,17 +157,13 @@ def main(args=None):
     )
     subparsers = parser.add_subparsers(help='sub-commands')
 
-    parser_describe = subparsers.add_parser(
-        'describe', help='describe what is needed for language support'
-    )
+    parser_describe = subparsers.add_parser('describe', help=describe.__doc__)
     parser_describe.add_argument(
         'lang', metavar='LANG', help='an ISO639-3 language code'
     )
     parser_describe.set_defaults(func=describe)
 
-    parser_check = subparsers.add_parser(
-        'check', help='check a particular language or languages are supported'
-    )
+    parser_check = subparsers.add_parser('check', help=check.__doc__)
     parser_check.add_argument('--verbose', '-v', action='count')
     parser_check.add_argument('font', metavar='FONT', help='the font file')
     parser_check.add_argument(
@@ -172,9 +171,7 @@ def main(args=None):
     )
     parser_check.set_defaults(func=check)
 
-    parser_report = subparsers.add_parser(
-        'report', help='report which languages are supported'
-    )
+    parser_report = subparsers.add_parser('report', help=report.__doc__)
     parser_report.add_argument('font', metavar='FONT', help='the font file')
     parser_report.add_argument('--verbose', '-v', action='count')
     parser_report.add_argument(
