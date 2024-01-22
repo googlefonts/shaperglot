@@ -35,7 +35,7 @@ class ShapeInput:
         self.text = str(check_yaml["text"])
         self.language = str(check_yaml.get("language", ""))
         if "features" in check_yaml:
-            self.features = check_yaml["features"].data
+            self.features = check_yaml["features"]
         else:
             self.features = {}
         self.check_yaml = check_yaml

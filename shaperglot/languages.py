@@ -1,8 +1,10 @@
 from pathlib import Path
 import sys
+import yaml
 
 from gflanguages import LoadLanguages, LoadScripts
-from strictyaml import YAMLValidationError, load
+from strictyaml import YAMLValidationError
+from strictyaml import load as strictyaml_load
 from google.protobuf.json_format import MessageToDict
 
 from shaperglot.checks.no_orphaned_marks import NoOrphanedMarksInOrthographiesCheck
@@ -24,7 +26,12 @@ def load_shaperglot_definition(language, validate=False):
     if not definition_file.is_file():
         return []
     with open(definition_file, encoding="utf-8") as fh:
-        data = load(fh.read())
+        print("Loading ", language)
+        if validate:
+            data = strictyaml_load(fh.read())
+        else:
+            data = yaml.safe_load(fh.read())
+        print("Loaded ", language)
     check_objects = []
     for ix, check in enumerate(data):
         if validate:
@@ -41,7 +48,8 @@ def load_shaperglot_definition(language, validate=False):
                     f"Language definition file for {language} invalid; "
                     f"parser error in check {ix}: {e}"
                 ) from e
-        # This turns a { "check": "foobar" } into a FoobarCheck({"check": "foobar"})
+            # This turns a { "check": "foobar" } into a FoobarCheck({"check": "foobar"})
+            check = check.data
         check_objects.append(checks_map[check["check"]](check))
     definition_cache[language] = check_objects
     return check_objects
@@ -78,14 +86,7 @@ class Languages:
             OrthographiesCheck(orig),
             NoOrphanedMarksInOrthographiesCheck(orig)
         ]
-        try:
-            checks = load_shaperglot_definition(item, validate=True)
-        except Exception as e:
-            print(
-                f"The shaperglot definition for {item} is not valid. Please report a bug."
-            )
-            print(e)
-            sys.exit(1)
+        checks = load_shaperglot_definition(item, validate=False)
         orig["shaperglot_checks"].extend(checks)
         self.loaded[item] = orig
         return orig
