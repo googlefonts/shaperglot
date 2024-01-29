@@ -50,8 +50,8 @@ def load_shaperglot_definition(language, validate=False):
                     f"Language definition file for {language} invalid; "
                     f"parser error in check {ix}: {e}"
                 ) from e
-            # This turns a { "check": "foobar" } into a FoobarCheck({"check": "foobar"})
             check = check.data
+        # This turns a { "check": "foobar" } into a FoobarCheck({"check": "foobar"})
         check_objects.append(checks_map[check["check"]](check))
     definition_cache[language] = check_objects
     return check_objects
