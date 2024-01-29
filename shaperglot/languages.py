@@ -15,6 +15,7 @@ from google.protobuf.json_format import MessageToDict
 from .checks import schemas, checks_map
 from .checks.no_orphaned_marks import NoOrphanedMarksInOrthographiesCheck
 from .checks.orthographies import OrthographiesCheck
+from .providers import PROVIDERS
 
 gflangs = LoadLanguages()
 gfscripts = LoadScripts()
@@ -88,6 +89,8 @@ class Languages:
             OrthographiesCheck(orig),
             NoOrphanedMarksInOrthographiesCheck(orig)
         ]
+        for provider in PROVIDERS:
+            provider.fill(orig)
         checks = load_shaperglot_definition(item, validate=False)
         orig["shaperglot_checks"].extend(checks)
         self.loaded[item] = orig
