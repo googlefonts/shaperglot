@@ -1,5 +1,6 @@
 from ufo2ft.util import closeGlyphsOverGSUB
 from vharfbuzz import Vharfbuzz
+from fontTools.ttLib import TTFont
 from shaperglot.reporter import Reporter
 
 
@@ -14,7 +15,7 @@ class Checker:  # pylint: disable=too-few-public-methods
     """
     def __init__(self, fontfile):
         self.vharfbuzz = Vharfbuzz(fontfile)
-        self.ttfont = self.vharfbuzz.ttfont
+        self.ttfont = TTFont(fontfile)
         self.glyphorder = self.ttfont.getGlyphOrder()
         self.cmap = self.ttfont["cmap"].getBestCmap()
         self.reversed_cmap = self.ttfont["cmap"].buildReversed()
