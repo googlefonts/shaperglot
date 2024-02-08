@@ -5,7 +5,9 @@
 # takes a language definition and adds any relevant checks to its
 # "shaperglot_checks" list.
 from .arabic import ArabicProvider
+from .african_latin import AfricanLatinProvider
 
 PROVIDERS = [
     ArabicProvider,
+    AfricanLatinProvider,
 ]
