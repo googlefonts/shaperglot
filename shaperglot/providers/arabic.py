@@ -15,8 +15,10 @@ MANUALLY_DEFINED_MARKS = {
     ]
 }
 
+
 def get_joining_type(char):
     return ucd_data(ord(char)).get("Joining_Type", "U")
+
 
 class ArabicProvider:
     @classmethod
@@ -36,16 +38,22 @@ class ArabicProvider:
             if unicodedata.category(character).startswith("L"):
                 joining_type = get_joining_type(character)
                 if joining_type in ("R", "D"):
-                    language["shaperglot_checks"].extend(cls.shaping_checks(ZWJ, character, '', 'fina'))
+                    language["shaperglot_checks"].extend(
+                        cls.shaping_checks(ZWJ, character, '', 'fina')
+                    )
                     language["shaperglot_checks"].extend(
                         cls.mark_checks(ZWJ, character, '', check_these_marks, 'fina')
                     )
                 if joining_type == "D":
-                    language["shaperglot_checks"].extend(cls.shaping_checks(ZWJ, character, ZWJ, 'medi'))
+                    language["shaperglot_checks"].extend(
+                        cls.shaping_checks(ZWJ, character, ZWJ, 'medi')
+                    )
                     language["shaperglot_checks"].extend(
                         cls.mark_checks(ZWJ, character, ZWJ, check_these_marks, 'medi')
                     )
-                    language["shaperglot_checks"].extend(cls.shaping_checks('', character, ZWJ, 'init'))
+                    language["shaperglot_checks"].extend(
+                        cls.shaping_checks('', character, ZWJ, 'init')
+                    )
                     language["shaperglot_checks"].extend(
                         cls.mark_checks('', character, ZWJ, check_these_marks, 'init')
                     )
@@ -54,26 +62,32 @@ class ArabicProvider:
                 )
 
     @classmethod
-    def mark_checks(cls, pre_context, character, post_context, check_these_marks, position):
+    def mark_checks(  # pylint: disable=too-many-arguments
+        cls, pre_context, character, post_context, check_these_marks, position
+    ):
         for marks, rationale in check_these_marks:
-            yield NoOrphanedMarksCheck({
-                'input': {"text": pre_context + character + marks + post_context},
-                'rationale': f"{rationale} on top of {unicodedata.name(character)} (.{position})",
-            })
+            yield NoOrphanedMarksCheck(
+                {
+                    'input': {"text": pre_context + character + marks + post_context},
+                    'rationale': f"{rationale} on top of {unicodedata.name(character)} (.{position})",
+                }
+            )
 
     @classmethod
     def shaping_checks(cls, pre_context, character, post_context, position):
-        yield ShapingDiffersCheck({
-            'inputs': [
-                {
-                    'text': pre_context + character + post_context,
-                    'features': {
-                        "init": False,
-                        "medi": False,
-                        "fina": False,
+        yield ShapingDiffersCheck(
+            {
+                'inputs': [
+                    {
+                        'text': pre_context + character + post_context,
+                        'features': {
+                            "init": False,
+                            "medi": False,
+                            "fina": False,
+                        },
                     },
-                },
-                {'text': pre_context + character + post_context},
-            ],
-            'rationale': f".{position} version of {unicodedata.name(character)}",
-        })
+                    {'text': pre_context + character + post_context},
+                ],
+                'rationale': f".{position} version of {unicodedata.name(character)}",
+            }
+        )

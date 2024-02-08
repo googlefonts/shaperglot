@@ -1,5 +1,3 @@
-from strictyaml import Seq, Map
-
 from .orthographies import OrthographiesCheck
 from .shaping_differs import ShapingDiffersCheck
 from .no_orphaned_marks import NoOrphanedMarksCheck
