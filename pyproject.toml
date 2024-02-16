@@ -38,6 +38,7 @@ strictyaml = "*"
 num2words = "^0.5"
 ufo2ft = "*"
 youseedee = "*"
+PyYAML = "*"
 protobuf = ">= 3.19.4"
 
 [tool.poetry.dev-dependencies]
