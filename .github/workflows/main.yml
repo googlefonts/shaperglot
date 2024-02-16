@@ -18,18 +18,19 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - uses: snok/install-poetry@v1
-
     - uses: actions/cache@v2
       with:
         path: .venv
         key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
 
     - name: Install dependencies
-      run: poetry install
+      run: pip3 install .
+
+    - name: Install dev dependencies
+      run: pip3 install pylint pytest
 
     - name: Check code
-      run: poetry run pylint --rcfile pyproject.toml shaperglot
+      run: pylint --rcfile pyproject.toml shaperglot
 
     - name: Test code
-      run: poetry run pytest
+      run: pytest
