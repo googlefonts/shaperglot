@@ -1,18 +1,16 @@
-[tool.poetry]
+[project]
 
 name = "shaperglot"
 version = "0.4.2"
 description = "Test font files for OpenType language support"
 
-license = "MIT"
+license = { file = "README.md" }
 
-authors = ["Simon Cozens <simon@simon-cozens.org>"]
+authors = [
+    { name = "Simon Cozens", email = "simon@simon-cozens.org" }
+]
 
-readme = "README.md"
-
-homepage = "https://pypi.org/project/shaperglot"
-documentation = "https://shaperglot.readthedocs.io"
-repository = "https://github.com/simoncozens/shaperglot"
+readme = { file = "README.md", content-type = "text/markdown" }
 
 keywords = [
 ]
@@ -27,27 +25,31 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
 ]
+dependencies= [
+"gflanguages >= 0.4.7",
+"termcolor >= 1.1.0",
+"vharfbuzz",
+"strictyaml",
+"num2words ~= 0.5",
+"ufo2ft",
+"youseedee",
+"PyYAML",
+"protobuf >= 3.19.4",
+]
 
-[tool.poetry.dependencies]
+[project.urls]
+homepage = "https://pypi.org/project/shaperglot"
+documentation = "https://shaperglot.readthedocs.io"
+repository = "https://github.com/simoncozens/shaperglot"
 
-python = ">= 3.7"
-gflanguages = ">= 0.4.7"
-termcolor = ">= 1.1.0"
-vharfbuzz = "^0"
-strictyaml = "*"
-num2words = "^0.5"
-ufo2ft = "*"
-youseedee = "*"
-PyYAML = "*"
-protobuf = ">= 3.19.4"
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry.dev-dependencies]
+[tool.setuptools.packages.find]
+where = ["Lib"]
 
-# Formatters
-pylint = "~2.6.0"
-pytest = "^5.3.2"
-
-[tool.poetry.scripts]
+[project.scripts]
 
 shaperglot = "shaperglot.cli:main"
 
@@ -55,11 +57,6 @@ shaperglot = "shaperglot.cli:main"
 
 target-version = ["py36", "py37", "py38"]
 skip-string-normalization = true
-
-[build-system]
-
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
 
 [tool.pylint."messages control"]
 good-names = [
