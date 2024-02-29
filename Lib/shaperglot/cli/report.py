@@ -17,7 +17,9 @@ def report(options):
     unsupported = []
 
     if options.csv:
-        print("Language,Name,Supported,Bases Missing,Marks Missing,Orphaned Marks,Other")
+        print(
+            "Language,Name,Supported,Bases Missing,Marks Missing,Orphaned Marks,Other"
+        )
 
     for lang in sorted(langs.keys()):
         if options.filter and not re.search(options.filter, lang):
@@ -57,7 +59,9 @@ def report(options):
             print("\nUnsupported languages")
             print("====================\n")
         for lang in unsupported:
-            print(f"Font does not fully support language '{lang}' ({langs[lang]['name']})")
+            print(
+                f"Font does not fully support language '{lang}' ({langs[lang]['name']})"
+            )
     # Collate a useful fixing guide
     if options.csv:
         return
@@ -123,10 +127,9 @@ def long_summary(messages, unsupported):
             )
         )
 
+
 def report_csv(langcode, lang, results: Iterable[Result]):
-    print(
-        f"{langcode},\"{lang['name']}\",{results.is_success},", end=""
-    )
+    print(f"{langcode},\"{lang['name']}\",{results.is_success},", end="")
     missing_bases = set()
     missing_marks = set()
     missing_anchors = set()

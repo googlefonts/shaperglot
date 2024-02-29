@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 
 from termcolor import colored
 
+
 class Result(Enum):
     PASS = colored("PASS", "green")
     WARN = colored("WARN", "yellow")
@@ -12,7 +13,7 @@ class Result(Enum):
 
 
 @dataclass(repr=False)
-class Message():
+class Message:
     result: Result
     check_name: str
     message: str

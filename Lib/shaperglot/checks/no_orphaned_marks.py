@@ -92,8 +92,4 @@ class NoOrphanedMarksInOrthographiesCheck(NoOrphanedMarksCheck):
     name = "no_orphaned_marks_in_orthographies"
 
     def __init__(self, lang):
-        super().__init__({
-            "input": {
-                "text":" ".join(OrthographiesCheck(lang).bases)
-            }
-        })
+        super().__init__({"input": {"text": " ".join(OrthographiesCheck(lang).bases)}})

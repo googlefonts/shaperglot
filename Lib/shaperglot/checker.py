@@ -13,6 +13,7 @@ class Checker:  # pylint: disable=too-few-public-methods
     `.check` on this context to run all the checks for a given language, returning
     a Reporter object with the results.
     """
+
     def __init__(self, fontfile):
         self.vharfbuzz = Vharfbuzz(fontfile)
         self.ttfont = TTFont(fontfile)
@@ -26,7 +27,7 @@ class Checker:  # pylint: disable=too-few-public-methods
 
     def _build_full_reversed_cmap(self):
         gsub = self.ttfont.get("GSUB")
-        self.full_reversed_cmap = {k: list(v)[0] for k,v in self.reversed_cmap.items()}
+        self.full_reversed_cmap = {k: list(v)[0] for k, v in self.reversed_cmap.items()}
         if not gsub:
             return
         if len(self.full_reversed_cmap) > 5_000:

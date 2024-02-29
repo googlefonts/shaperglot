@@ -24,6 +24,7 @@ definitions_directory = Path(__file__).parent / "languages"
 
 definition_cache = {}
 
+
 def load_shaperglot_definition(language, validate=False):
     if language in definition_cache:
         return definition_cache[language]
@@ -87,7 +88,7 @@ class Languages:
         )
         orig["shaperglot_checks"] = [
             OrthographiesCheck(orig),
-            NoOrphanedMarksInOrthographiesCheck(orig)
+            NoOrphanedMarksInOrthographiesCheck(orig),
         ]
         for provider in PROVIDERS:
             provider.fill(orig)

@@ -3,6 +3,7 @@ from textwrap import fill
 
 from shaperglot.languages import Languages
 
+
 def describe(options):
     """Describe the checks shaperglot will perform to determine support for a given language"""
     langs = Languages()
@@ -31,4 +32,3 @@ def describe(options):
                 width=os.get_terminal_size()[0] - 2,
             )
         )
-
