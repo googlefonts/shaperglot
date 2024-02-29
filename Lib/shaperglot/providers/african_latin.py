@@ -1,3 +1,4 @@
+# pylint: disable=C0302
 import unicodedata
 
 from shaperglot.checks.no_orphaned_marks import NoOrphanedMarksCheck
