@@ -49,6 +49,9 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 where = ["Lib"]
 
+[tool.setuptools_scm]
+git_describe_command = "git describe --match 'v*' --tags"
+
 [project.scripts]
 
 shaperglot = "shaperglot.cli:main"
