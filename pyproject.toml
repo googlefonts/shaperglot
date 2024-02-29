@@ -1,7 +1,7 @@
 [project]
+dynamic = ["version"]
 
 name = "shaperglot"
-version = "0.4.2"
 description = "Test font files for OpenType language support"
 
 license = { file = "README.md" }
