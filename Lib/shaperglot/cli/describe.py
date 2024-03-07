@@ -23,12 +23,16 @@ def describe(options):
     else:
         lang = langs[options.lang]
     print(f"To test for {lang['name']} support, shaperglot will:")
+    try:
+        width = os.get_terminal_size()[0]
+    except OSError:
+        width = 80
     for shaperglot_check in lang.get("shaperglot_checks", []):
         print(
             fill(
                 "ensure " + shaperglot_check.describe(),
                 initial_indent=" * ",
                 subsequent_indent="   ",
-                width=os.get_terminal_size()[0] - 2,
+                width=width - 2,
             )
         )
