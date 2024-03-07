@@ -1,0 +1,7 @@
+- check: shaping_differs
+  inputs:
+  - text: هٔ
+    language: fa
+  - text: هٔ
+    language: ar
+  rationale: in Farsi, "saria heh" should use a small yeh above, not hamza
