@@ -30,7 +30,7 @@ dependencies= [
 "termcolor >= 1.1.0",
 "vharfbuzz",
 "strictyaml",
-"num2words ~= 0.5",
+"num2words ~=0.5",
 "ufo2ft",
 "youseedee",
 "PyYAML",
