@@ -27,7 +27,7 @@ classifiers = [
 ]
 dependencies= [
 "gflanguages >=0.5.17",
-"termcolor >= 1.1.0",
+"termcolor >=2.4.0",
 "vharfbuzz",
 "strictyaml",
 "num2words ~=0.5",
