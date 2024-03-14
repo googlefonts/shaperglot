@@ -43,7 +43,7 @@ documentation = "https://shaperglot.readthedocs.io"
 repository = "https://github.com/simoncozens/shaperglot"
 
 [build-system]
-requires = ["setuptools>=45", "setuptools_scm[toml]>=8.0.4"]
+requires = ["setuptools>=69.2.0", "setuptools_scm[toml]>=8.0.4"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
