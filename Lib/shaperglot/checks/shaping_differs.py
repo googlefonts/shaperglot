@@ -37,6 +37,25 @@ class ShapingDiffersCheck(ShaperglotCheck):
         return full_result
 
     def execute(self, checker):
+        # If we've already reported any of these glyphs missing, the results
+        # won't mean anything
+        reported_missing = set()
+        for result in checker.results:
+            if (
+                result.result_code == "bases-missing"
+                or result.result_code == "marks-missing"
+            ):
+                reported_missing.update(result.context["glyphs"])
+        for text in self.inputs:
+            missing_glyphs = [f"'{g}'" for g in text.text if g in reported_missing]
+            if missing_glyphs:
+                checker.results.skip(
+                    check_name="shaping-differs",
+                    message="Differs check could not run because some characters (%s) were missing from the font."
+                    % ", ".join(missing_glyphs),
+                )
+                return
+
         buffers = [i.shape(checker) for i in self.inputs]
         if "differs" not in self.definition:
             # Any difference is OK
