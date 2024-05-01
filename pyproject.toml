@@ -26,7 +26,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
 ]
 dependencies= [
-"gflanguages >=0.5.17",
+"gflanguages >=0.6.0",
 "termcolor >=2.4.0",
 "vharfbuzz",
 "strictyaml",
