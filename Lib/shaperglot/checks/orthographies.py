@@ -1,4 +1,5 @@
 import re
+from typing import Optional
 
 from strictyaml import Map
 
@@ -33,10 +34,10 @@ class OrthographiesCheck(ShaperglotCheck):
         self.bases = set(bases) - self.marks
         self.aux = set(aux) - self.marks
 
-    def should_skip(self, checker) -> bool:
-        return False
+    def should_skip(self, _checker) -> Optional[str]:
+        return
 
-    def describe(self):
+    def describe(self) -> str:
         return "that the following glyphs are in the font: " + and_join(
             f"'{g}'" for g in self.all_glyphs
         )
@@ -56,6 +57,13 @@ class OrthographiesCheck(ShaperglotCheck):
                 result_code="bases-missing",
                 message=f"Some base glyphs were missing: {', '.join(missing)}",
                 context={"glyphs": missing},
+                fixes=[
+                    {
+                        "type": "add_codepoint",
+                        "thing": g,
+                    }
+                    for g in missing
+                ],
             )
         else:
             checker.results.okay(
@@ -74,6 +82,13 @@ class OrthographiesCheck(ShaperglotCheck):
                 result_code="marks-missing",
                 message=f"Some mark glyphs were missing: {missing_str}",
                 context={"glyphs": missing},
+                fixes=[
+                    {
+                        "type": "add_codepoint",
+                        "thing": g,
+                    }
+                    for g in missing
+                ],
             )
         else:
             checker.results.okay(
@@ -91,6 +106,13 @@ class OrthographiesCheck(ShaperglotCheck):
                 result_code="aux-missing",
                 message=f"Some auxiliary glyphs were missing: {', '.join(missing)}",
                 context={"glyphs": missing},
+                fixes=[
+                    {
+                        "type": "add_codepoint",
+                        "thing": g,
+                    }
+                    for g in missing
+                ],
             )
         else:
             checker.results.okay(

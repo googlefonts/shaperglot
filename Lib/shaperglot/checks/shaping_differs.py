@@ -41,18 +41,17 @@ class ShapingDiffersCheck(ShaperglotCheck):
         # won't mean anything
         reported_missing = set()
         for result in checker.results:
-            if (
-                result.result_code == "bases-missing"
-                or result.result_code == "marks-missing"
-            ):
+            if result.result_code in ["bases-missing", "marks-missing"]:
                 reported_missing.update(result.context["glyphs"])
         for text in self.inputs:
             missing_glyphs = [f"'{g}'" for g in text.text if g in reported_missing]
             if missing_glyphs:
                 checker.results.skip(
                     check_name="shaping-differs",
-                    message="Differs check could not run because some characters (%s) were missing from the font."
-                    % ", ".join(missing_glyphs),
+                    message=(
+                        "Differs check could not run because some characters"
+                        f" ({', '.join(missing_glyphs)}) were missing from the font."
+                    ),
                 )
                 return
 
@@ -77,6 +76,12 @@ class ShapingDiffersCheck(ShaperglotCheck):
                         "input1": self.inputs[0].check_yaml,
                         "input2": self.inputs[0].check_yaml,
                     },
+                    fixes=[
+                        {
+                            "type": "add_feature",
+                            "thing": "A rule so " + self.describe(),
+                        }
+                    ],
                 )
             return
         # We are looking for a specific difference
@@ -95,6 +100,12 @@ class ShapingDiffersCheck(ShaperglotCheck):
                         "input1": self.inputs[0].check_yaml,
                         "input2": self.inputs[0].check_yaml,
                     },
+                    fixes=[
+                        {
+                            "type": "add_feature",
+                            "thing": "A rule such " + self.describe(),
+                        }
+                    ],
                 )
                 return
             glyphs.append((buffer[glyph_ix][0].codepoint, buffer[glyph_ix][1]))
@@ -115,4 +126,10 @@ class ShapingDiffersCheck(ShaperglotCheck):
                     "input1": self.inputs[0].check_yaml,
                     "input2": self.inputs[0].check_yaml,
                 },
+                fixes=[
+                    {
+                        "type": "add_feature",
+                        "thing": "A rule such " + self.describe(),
+                    }
+                ],
             )

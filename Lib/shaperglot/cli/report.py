@@ -1,3 +1,4 @@
+from collections import defaultdict
 import os
 import re
 from textwrap import fill
@@ -13,8 +14,10 @@ def report(options) -> None:
     checker = Checker(options.font)
     langs = Languages()
     messages = []
+    nearly = []
     supported = []
     unsupported = []
+    fixes_needed = defaultdict(set)
 
     if options.csv:
         print(
@@ -36,17 +39,25 @@ def report(options) -> None:
         if results.is_success:
             supported.append(lang)
             msg = "supports"
+        elif results.is_nearly_success(options.nearly):
+            nearly.append(lang)
+            msg = "nearly supports"
         else:
             unsupported.append(lang)
             msg = "does not fully support"
+
+        for fixtype, things in results.unique_fixes().items():
+            fixes_needed[fixtype].update(things)
         if options.group:
             continue
         print(f"Font {msg} language '{lang}' ({langs[lang]['name']})")
 
-        messages.extend(results)
         if options.verbose and options.verbose > 1:
             for status, message in results:
                 print(f" * {status.value}: {message}")
+
+    if options.csv:
+        return
 
     if options.group:
         if supported:
@@ -54,6 +65,12 @@ def report(options) -> None:
             print("===================\n")
         for lang in supported:
             print(f"Font supports language '{lang}' ({langs[lang]['name']})")
+
+        if nearly:
+            print("\nNearly supported languages")
+            print("===================\n")
+        for lang in nearly:
+            print(f"Font nearly supports language '{lang}' ({langs[lang]['name']})")
 
         if unsupported:
             print("\nUnsupported languages")
@@ -63,22 +80,21 @@ def report(options) -> None:
                 f"Font does not fully support language '{lang}' ({langs[lang]['name']})"
             )
     # Collate a useful fixing guide
-    if options.csv:
-        return
-
-    short_summary(supported, unsupported)
+    short_summary(supported, nearly, unsupported)
     if options.verbose:
-        long_summary(messages, unsupported)
+        long_summary(fixes_needed, unsupported)
 
 
-def short_summary(supported, unsupported) -> None:
+def short_summary(supported, nearly, unsupported) -> None:
     print("\n== Summary ==\n")
-    print(f"* {len(supported)+len(unsupported)} languages checked")
+    print(f"* {len(supported)+len(nearly)+len(unsupported)} languages checked")
     if supported:
         print(f"* {len(supported)} languages supported")
+    if nearly:
+        print(f"* {len(supported)} languages nearly supported")
 
 
-def long_summary(messages, unsupported) -> None:
+def long_summary(fixes_needed, unsupported) -> None:
     if unsupported:
         print(
             fill(
@@ -88,44 +104,11 @@ def long_summary(messages, unsupported) -> None:
             )
         )
         print("\nTo add support:")
-    missing_bases = set()
-    missing_marks = set()
-    missing_anchors = set()
-    for msg in messages:
-        if msg.result_code == "bases-missing":
-            missing_bases |= set(msg.context["glyphs"])
-        if msg.result_code == "marks-missing":
-            missing_marks |= set(msg.context["glyphs"])
-        if msg.result_code == "orphaned-mark":
-            missing_anchors.add((msg.context["base"], msg.context["mark"]))
-    if missing_marks:
-        print(
-            fill(
-                " * Add mark glyphs: "
-                + ", ".join(["\u25cc" + x for x in sorted(missing_marks)]),
-                subsequent_indent="    ",
-                width=os.get_terminal_size()[0] - 2,
-            )
-        )
-    if missing_bases:
-        print(
-            fill(
-                " * Support characters: " + ", ".join(sorted(missing_bases)),
-                subsequent_indent="    ",
-                width=os.get_terminal_size()[0] - 2,
-            )
-        )
-    if missing_anchors:
-        print(
-            fill(
-                " * Add anchor attachments: "
-                + ", ".join(
-                    [base + '/' + mark for base, mark in sorted(missing_anchors)]
-                ),
-                subsequent_indent="    ",
-                width=os.get_terminal_size()[0] - 2,
-            )
-        )
+    for category, fixes in fixes_needed.items():
+        plural = "s" if len(fixes) > 1 else ""
+        print(f" * {category.replace("_", ' ').capitalize()}{plural}: ")
+        for fix in sorted(fixes):
+            print("    - " + fix)
 
 
 def report_csv(langcode, lang, results: Iterable[Result]) -> None:

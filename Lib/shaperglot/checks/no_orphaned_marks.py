@@ -47,13 +47,18 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
                 # good to hear specifically what glyphs we tried to test here.
                 if not checker.lang.get("exemplarChars"):
                     message += " when shaping " + self.input.describe()
-
-                checker.results.fail(
-                    check_name="no-orphaned-marks",
-                    result_code="notdef-produced",
-                    message=message,
-                    context={"text": self.input.check_yaml},
-                )
+                    checker.results.fail(
+                        check_name="no-orphaned-marks",
+                        result_code="notdef-produced",
+                        message=message,
+                        context={"text": self.input.check_yaml},
+                        fixes=[
+                            {
+                                "type": "add_codepoint",
+                                "thing": self.input.text[info.cluster],
+                            },
+                        ],
+                    )
                 break
             if _simple_mark_check(checker.codepoint_for(glyphname)):
                 # Was the previous glyph dotted circle?
@@ -65,6 +70,13 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
                         message="Shaper produced a dotted circle when shaping "
                         + self.input.describe(),
                         context={"text": self.input.check_yaml},
+                        fixes=[
+                            {
+                                "type": "add_feature",
+                                "thing": "to avoid a dotted circle shaping "
+                                + self.input.describe(),
+                            },
+                        ],
                     )
                 elif pos.x_offset == 0 and pos.y_offset == 0:  # Suspicious
                     passed = False
@@ -77,6 +89,12 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
                             "mark": glyphname,
                             "base": previous,
                         },
+                        fixes=[
+                            {
+                                "type": "add_anchor",
+                                "thing": f"{previous}/{glyphname}",
+                            },
+                        ],
                     )
             previous = glyphname
         if passed:
