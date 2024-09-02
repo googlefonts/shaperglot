@@ -2,13 +2,29 @@ from shaperglot.checker import Checker
 from shaperglot.languages import Languages
 
 
+def find_lang(lang, langs):
+    # Find the language in the languages list; could be by ID, by name, etc.
+    if lang in langs:
+        return lang
+    for lang_id in langs.keys():
+        lang_info = langs[lang_id]
+        if (
+            lang_info['name'].lower() == lang.lower()
+            or lang_id.lower() == lang.lower()
+            or lang_info["language"].lower() == lang.lower()
+            or lang_info.get("autonym", "").lower() == lang.lower()
+        ):
+            return lang_id
+
+
 def check(options):
     """Check a particular language or languages are supported"""
     checker = Checker(options.font)
     langs = Languages()
-    for lang in options.lang:
-        if lang not in langs:
-            print(f"Language '{options.lang}' not known")
+    for orig_lang in options.lang:
+        lang = find_lang(orig_lang, langs)
+        if not lang:
+            print(f"Language '{orig_lang}' not known")
             continue
 
         results = checker.check(langs[lang])
