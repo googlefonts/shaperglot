@@ -1,3 +1,4 @@
+import typing
 from strictyaml import Bool, Map, MapPattern, Optional, Seq, Str
 
 shaping_input_schema = Map(
@@ -75,10 +76,10 @@ class ShaperglotCheck:
         if "input" in check_yaml:
             self.input = ShapeInput(check_yaml["input"])
 
-    def should_skip(self, checker) -> bool | str:
+    def should_skip(self, checker) -> typing.Optional[str]:
         conditions = self.definition.get("conditions")
         if conditions is None:
-            return False
+            return None
         if "features" in conditions:
             font_features = set()
             for table in ["GSUB", "GPOS"]:
@@ -93,4 +94,4 @@ class ShaperglotCheck:
             required = set(str(f) for f in conditions["features"])
             if required - font_features:
                 return f"Missing features: {', '.join(required-font_features)}"
-        return False
+        return None

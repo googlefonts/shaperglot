@@ -9,16 +9,13 @@ def flatten(lst) -> list:
     return [item for sublist in lst for item in sublist]
 
 
-from shaperglot.reporter import Reporter
-
-
 class Checker:  # pylint: disable=too-few-public-methods
     """A class that creates a checking context for a font. We can then call
     `.check` on this context to run all the checks for a given language, returning
     a Reporter object with the results.
     """
 
-    def __init__(self, fontfile) -> None:
+    def __init__(self, fontfile: str) -> None:
         self.vharfbuzz = Vharfbuzz(fontfile)
         self.ttfont = TTFont(fontfile)
         self.glyphorder = self.ttfont.getGlyphOrder()
@@ -44,14 +41,14 @@ class Checker:  # pylint: disable=too-few-public-methods
             for new_glyph in glyphs:
                 self.full_reversed_cmap[new_glyph] = codepoint
 
-    def codepoint_for(self, glyphname):
+    def codepoint_for(self, glyphname: str) -> int:
         if glyphname in self.reversed_cmap:
             return list(self.reversed_cmap[glyphname])[0]
         if not self.full_reversed_cmap:
             self._build_full_reversed_cmap()
         return self.full_reversed_cmap.get(glyphname, 0)
 
-    def check(self, lang, fail_fast=False) -> Reporter | None:
+    def check(self, lang, fail_fast=False) -> Reporter:
         self.results = Reporter()
         self.lang = lang
         for check_object in self.lang.get("shaperglot_checks", []):

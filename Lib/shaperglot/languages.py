@@ -5,6 +5,7 @@
 # OrthographiesCheck and a NoOrphanedMarksInOrthographiesCheck, and then any
 # additional checks defined in the language definition file.
 from pathlib import Path
+from typing import List, Optional
 
 import yaml
 from gflanguages import LoadLanguages, LoadScripts
@@ -12,6 +13,7 @@ from google.protobuf.json_format import MessageToDict
 from strictyaml import YAMLValidationError
 from strictyaml import load as strictyaml_load
 
+from .checks.common import ShaperglotCheck
 from .checks import checks_map, schemas
 from .checks.no_orphaned_marks import NoOrphanedMarksInOrthographiesCheck
 from .checks.orthographies import OrthographiesCheck
@@ -25,7 +27,7 @@ definitions_directory = Path(__file__).parent / "languages"
 definition_cache = {}
 
 
-def load_shaperglot_definition(language, validate=False) -> list:
+def load_shaperglot_definition(language: dict, validate=False) -> List[ShaperglotCheck]:
     if language in definition_cache:
         return definition_cache[language]
     definition_file = definitions_directory / (language + ".yaml")
@@ -77,7 +79,7 @@ class Languages:
         ]
         return maybe_keys
 
-    def __getitem__(self, item) -> dict | None:
+    def __getitem__(self, item) -> Optional[dict]:
         if item in self.loaded:
             return self.loaded[item]
         if item not in gflangs:

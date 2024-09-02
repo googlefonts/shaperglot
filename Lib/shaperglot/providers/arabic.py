@@ -1,8 +1,10 @@
 import unicodedata
+from typing import Iterator, List
 
 from youseedee import ucd_data
 
 from shaperglot.checks import NoOrphanedMarksCheck, ShapingDiffersCheck
+from shaperglot.checks.common import ShaperglotCheck
 
 ZWJ = "\u200D"
 MANUALLY_DEFINED_MARKS = {
@@ -17,11 +19,8 @@ MANUALLY_DEFINED_MARKS = {
 }
 
 
-def get_joining_type(char):
+def get_joining_type(char: str) -> str:
     return ucd_data(ord(char)).get("Joining_Type", "U")
-
-
-from typing import Iterator
 
 
 class ArabicProvider:
@@ -67,18 +66,26 @@ class ArabicProvider:
 
     @classmethod
     def mark_checks(  # pylint: disable=too-many-arguments
-        cls, pre_context, character, post_context, check_these_marks, position
-    ) -> Iterator:
+        cls,
+        pre_context: str,
+        character: str,
+        post_context: str,
+        check_these_marks: List[str],
+        position: str,
+    ) -> Iterator[ShaperglotCheck]:
         for marks, rationale in check_these_marks:
+            cname = unicodedata.name(character)
             yield NoOrphanedMarksCheck(
                 {
                     'input': {"text": pre_context + character + marks + post_context},
-                    'rationale': f"{rationale} on top of {unicodedata.name(character)} (.{position})",
+                    'rationale': f"{rationale} on top of {cname} (.{position})",
                 }
             )
 
     @classmethod
-    def shaping_checks(cls, pre_context, character, post_context, position) -> Iterator:
+    def shaping_checks(
+        cls, pre_context: str, character: str, post_context: str, position: str
+    ) -> Iterator[ShaperglotCheck]:
         yield ShapingDiffersCheck(
             {
                 'inputs': [
