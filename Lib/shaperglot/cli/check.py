@@ -57,9 +57,9 @@ def check(options) -> None:
         show_how_to_fix(fixes_needed)
 
 
-def show_how_to_fix(fixes: Reporter):
+def show_how_to_fix(reporter: Reporter):
     print("\nTo add full support to nearly-supported languages:")
-    for category, fixes in fixes.items():
+    for category, fixes in reporter.items():
         plural = "s" if len(fixes) > 1 else ""
         print(f" * {category.replace("_", ' ').capitalize()}{plural}: ", end="")
         print("; ".join(sorted(fixes)))

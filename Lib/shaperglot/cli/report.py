@@ -13,7 +13,6 @@ def report(options) -> None:
     """Report which languages are supported by the given font"""
     checker = Checker(options.font)
     langs = Languages()
-    messages = []
     nearly = []
     supported = []
     unsupported = []

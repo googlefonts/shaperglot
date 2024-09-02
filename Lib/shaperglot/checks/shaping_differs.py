@@ -95,7 +95,10 @@ class ShapingDiffersCheck(ShaperglotCheck):
                 checker.results.fail(
                     check_name="shaping-differs",
                     result_code="too-few-glyphs",
-                    message=f"Test asked for glyph {glyph_ix} but shaper only returned {len(buffer)} glyphs",
+                    message=(
+                        f"Test asked for glyph {glyph_ix} but "
+                        f"shaper only returned {len(buffer)} glyphs"
+                    ),
                     context={
                         "input1": self.inputs[0].check_yaml,
                         "input2": self.inputs[0].check_yaml,

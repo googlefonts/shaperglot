@@ -2,7 +2,6 @@ from collections import defaultdict
 from collections.abc import Sequence
 from dataclasses import dataclass, field
 from enum import Enum
-import json
 from typing import Dict
 
 from termcolor import colored
@@ -94,4 +93,4 @@ class Reporter(Sequence):
     def count_fixes(self) -> int:
         """Return the number of fixes required to pass all checks"""
         fixes = self.unique_fixes()
-        return sum([len(stuff) for stuff in fixes.values()])
+        return sum(len(stuff) for stuff in fixes.values())
