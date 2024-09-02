@@ -4,7 +4,7 @@ from textwrap import fill
 from shaperglot.languages import Languages
 
 
-def describe(options):
+def describe(options) -> None:
     """Describe the checks shaperglot will perform to determine support for a given language"""
     langs = Languages()
     if options.lang not in langs:

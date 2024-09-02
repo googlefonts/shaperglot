@@ -5,11 +5,11 @@ from strictyaml import Map
 from .common import ShaperglotCheck, and_join
 
 
-def parse_bases(bases):
+def parse_bases(bases) -> list:
     return [x[0] or x[1] for x in re.findall(r"\{([^}]+)\}|(\S+)", bases)]
 
 
-def can_shape(text, checker):
+def can_shape(text, checker) -> bool:
     if text not in checker.cache["can_shape"]:
         buf = checker.vharfbuzz.shape(text)
         checker.cache["can_shape"][text] = all(
@@ -23,7 +23,7 @@ class OrthographiesCheck(ShaperglotCheck):
     schema = Map({})
 
     # pylint: disable=W0231
-    def __init__(self, lang):
+    def __init__(self, lang) -> None:
         exemplar_chars = lang.get("exemplarChars", {})
         marks = exemplar_chars.get("marks", "").replace("◌", "").split() or []
         bases = parse_bases(exemplar_chars.get("base", ""))
@@ -33,7 +33,7 @@ class OrthographiesCheck(ShaperglotCheck):
         self.bases = set(bases) - self.marks
         self.aux = set(aux) - self.marks
 
-    def should_skip(self, checker):
+    def should_skip(self, checker) -> bool:
         return False
 
     def describe(self):
@@ -41,7 +41,7 @@ class OrthographiesCheck(ShaperglotCheck):
             f"'{g}'" for g in self.all_glyphs
         )
 
-    def execute(self, checker):
+    def execute(self, checker) -> None:
         if not self.all_glyphs:
             checker.results.warn(
                 check_name="orthographies",

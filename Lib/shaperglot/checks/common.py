@@ -1,4 +1,4 @@
-from strictyaml import Str, Map, Optional, MapPattern, Bool, Seq
+from strictyaml import Bool, Map, MapPattern, Optional, Seq, Str
 
 shaping_input_schema = Map(
     {
@@ -11,7 +11,7 @@ shaping_input_schema = Map(
 conditions_schema = Map({Optional("features"): Seq(Str())})
 
 
-def check_schema(schema):
+def check_schema(schema) -> Map:
     base_schema = {
         "check": Str(),
         Optional("rationale"): Str(),
@@ -21,7 +21,7 @@ def check_schema(schema):
     return Map(schema)
 
 
-def and_join(lst):
+def and_join(lst) -> str:
     lst = list(lst)
     if len(lst) == 0:
         return "(nothing here)"
@@ -31,7 +31,7 @@ def and_join(lst):
 
 
 class ShapeInput:
-    def __init__(self, check_yaml):
+    def __init__(self, check_yaml) -> None:
         self.text = str(check_yaml["text"])
         self.language = str(check_yaml.get("language", ""))
         if "features" in check_yaml:
@@ -40,7 +40,7 @@ class ShapeInput:
             self.features = {}
         self.check_yaml = check_yaml
 
-    def describe(self):
+    def describe(self) -> str:
         result = f"shaping the text '{self.text}' "
         if self.language or self.features:
             result += "while "
@@ -68,14 +68,14 @@ class ShapeInput:
 
 # pylint: disable=R0903
 class ShaperglotCheck:
-    def __init__(self, check_yaml):
+    def __init__(self, check_yaml) -> None:
         self.definition = check_yaml
         if "inputs" in check_yaml:
             self.inputs = [ShapeInput(x) for x in check_yaml["inputs"]]
         if "input" in check_yaml:
             self.input = ShapeInput(check_yaml["input"])
 
-    def should_skip(self, checker):
+    def should_skip(self, checker) -> bool | str:
         conditions = self.definition.get("conditions")
         if conditions is None:
             return False

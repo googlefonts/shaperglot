@@ -17,7 +17,7 @@ def find_lang(lang, langs):
             return lang_id
 
 
-def check(options):
+def check(options) -> None:
     """Check a particular language or languages are supported"""
     checker = Checker(options.font)
     langs = Languages()

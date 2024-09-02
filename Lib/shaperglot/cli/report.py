@@ -8,7 +8,7 @@ from shaperglot.languages import Languages
 from shaperglot.reporter import Result
 
 
-def report(options):
+def report(options) -> None:
     """Report which languages are supported by the given font"""
     checker = Checker(options.font)
     langs = Languages()
@@ -71,14 +71,14 @@ def report(options):
         long_summary(messages, unsupported)
 
 
-def short_summary(supported, unsupported):
+def short_summary(supported, unsupported) -> None:
     print("\n== Summary ==\n")
     print(f"* {len(supported)+len(unsupported)} languages checked")
     if supported:
         print(f"* {len(supported)} languages supported")
 
 
-def long_summary(messages, unsupported):
+def long_summary(messages, unsupported) -> None:
     if unsupported:
         print(
             fill(
@@ -128,7 +128,7 @@ def long_summary(messages, unsupported):
         )
 
 
-def report_csv(langcode, lang, results: Iterable[Result]):
+def report_csv(langcode, lang, results: Iterable[Result]) -> None:
     print(f"{langcode},\"{lang['name']}\",{results.is_success},", end="")
     missing_bases = set()
     missing_marks = set()

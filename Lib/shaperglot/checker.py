@@ -1,11 +1,15 @@
+from fontTools.ttLib import TTFont
 from ufo2ft.util import closeGlyphsOverGSUB
 from vharfbuzz import Vharfbuzz
-from fontTools.ttLib import TTFont
+
 from shaperglot.reporter import Reporter
 
 
-def flatten(lst):
+def flatten(lst) -> list:
     return [item for sublist in lst for item in sublist]
+
+
+from shaperglot.reporter import Reporter
 
 
 class Checker:  # pylint: disable=too-few-public-methods
@@ -14,7 +18,7 @@ class Checker:  # pylint: disable=too-few-public-methods
     a Reporter object with the results.
     """
 
-    def __init__(self, fontfile):
+    def __init__(self, fontfile) -> None:
         self.vharfbuzz = Vharfbuzz(fontfile)
         self.ttfont = TTFont(fontfile)
         self.glyphorder = self.ttfont.getGlyphOrder()
@@ -25,7 +29,7 @@ class Checker:  # pylint: disable=too-few-public-methods
         self.lang = None
         self.cache = {"can_shape": {}}
 
-    def _build_full_reversed_cmap(self):
+    def _build_full_reversed_cmap(self) -> None:
         gsub = self.ttfont.get("GSUB")
         self.full_reversed_cmap = {k: list(v)[0] for k, v in self.reversed_cmap.items()}
         if not gsub:
@@ -47,7 +51,7 @@ class Checker:  # pylint: disable=too-few-public-methods
             self._build_full_reversed_cmap()
         return self.full_reversed_cmap.get(glyphname, 0)
 
-    def check(self, lang, fail_fast=False):
+    def check(self, lang, fail_fast=False) -> Reporter | None:
         self.results = Reporter()
         self.lang = lang
         for check_object in self.lang.get("shaperglot_checks", []):

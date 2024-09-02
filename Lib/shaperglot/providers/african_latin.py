@@ -2190,9 +2190,12 @@ unencoded_variants = {
 available_languages = {isoconv.get(tag, tag) + "_Latn": tag for tag in afr_tags}
 
 
+from typing import Iterator
+
+
 class AfricanLatinProvider:
     @classmethod
-    def fill(cls, language):
+    def fill(cls, language) -> None:
         if language["script"] != "Latn":
             return
         if language["id"] not in available_languages:
@@ -2211,7 +2214,7 @@ class AfricanLatinProvider:
         language["shaperglot_checks"].extend(cls.build_sd_smcp(bases, auxiliary))
 
     @classmethod
-    def build_no_orphaned_marks(cls, bases, auxiliary):
+    def build_no_orphaned_marks(cls, bases, auxiliary) -> Iterator:
         basemarks = []
         for base in bases:
             if len(base) > 1:
@@ -2240,7 +2243,7 @@ class AfricanLatinProvider:
         )
 
     @classmethod
-    def build_unencoded_variants(cls, language, bases, auxiliary):
+    def build_unencoded_variants(cls, language, bases, auxiliary) -> Iterator:
         if "Ŋ" in bases or 'Ŋ' in auxiliary:
             yield UnencodedVariantsCheck(
                 {"check": "unencoded_variants", "input": {"text": 'Ŋ'}}
@@ -2251,7 +2254,7 @@ class AfricanLatinProvider:
             )
 
     @classmethod
-    def build_sd_smcp(cls, bases, auxiliary):
+    def build_sd_smcp(cls, bases, auxiliary) -> Iterator:
         for letter in bases + auxiliary:
             if len(letter) == 1 and unicodedata.category(letter) == 'Ll':
                 yield ShapingDiffersCheck(

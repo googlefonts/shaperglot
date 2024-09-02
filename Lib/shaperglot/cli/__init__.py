@@ -2,11 +2,11 @@ import argparse
 import sys
 
 from shaperglot.cli.check import check
-from shaperglot.cli.report import report
 from shaperglot.cli.describe import describe
+from shaperglot.cli.report import report
 
 
-def main(args=None):
+def main(args=None) -> None:
     if args is None:
         args = sys.argv[1:]
     parser = argparse.ArgumentParser(

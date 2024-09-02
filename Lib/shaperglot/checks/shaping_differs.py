@@ -1,7 +1,7 @@
-from strictyaml import FixedSeq, Map, Int, Optional
 from num2words import num2words
+from strictyaml import FixedSeq, Int, Map, Optional
 
-from .common import shaping_input_schema, ShaperglotCheck, check_schema
+from .common import ShaperglotCheck, check_schema, shaping_input_schema
 
 cluster_schema = Map({Optional("cluster"): Int(), "glyph": Int()})
 
@@ -36,7 +36,7 @@ class ShapingDiffersCheck(ShaperglotCheck):
             full_result += f" This is because {self.definition['rationale']}."
         return full_result
 
-    def execute(self, checker):
+    def execute(self, checker) -> None:
         # If we've already reported any of these glyphs missing, the results
         # won't mean anything
         reported_missing = set()

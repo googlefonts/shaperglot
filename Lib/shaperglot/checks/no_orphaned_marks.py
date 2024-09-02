@@ -4,11 +4,11 @@ from youseedee import ucd_data
 
 from shaperglot.checks.orthographies import OrthographiesCheck
 
-from .common import shaping_input_schema, ShaperglotCheck, check_schema
+from .common import ShaperglotCheck, check_schema, shaping_input_schema
 
 
 @lru_cache(maxsize=None)
-def _simple_mark_check(codepoint):
+def _simple_mark_check(codepoint) -> bool:
     return ucd_data(codepoint).get("General_Category") == "Mn"
 
 
@@ -20,10 +20,10 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
         }
     )
 
-    def describe(self):
+    def describe(self) -> str:
         return f"that, when {self.input.describe()}, no marks are left unattached"
 
-    def execute(self, checker):
+    def execute(self, checker) -> None:
         if not self.input.text:
             return
         buffer = self.input.shape(checker)
@@ -91,5 +91,5 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
 class NoOrphanedMarksInOrthographiesCheck(NoOrphanedMarksCheck):
     name = "no_orphaned_marks_in_orthographies"
 
-    def __init__(self, lang):
+    def __init__(self, lang) -> None:
         super().__init__({"input": {"text": " ".join(OrthographiesCheck(lang).bases)}})

@@ -1,4 +1,4 @@
-from .common import shaping_input_schema, ShaperglotCheck, check_schema
+from .common import ShaperglotCheck, check_schema, shaping_input_schema
 
 
 class UnencodedVariantsCheck(ShaperglotCheck):
@@ -9,10 +9,10 @@ class UnencodedVariantsCheck(ShaperglotCheck):
         }
     )
 
-    def describe(self):
+    def describe(self) -> str:
         return f"that, when {self.input.describe()}, an unencoded variant glyph is substituted used the `locl` feature"
 
-    def execute(self, checker):
+    def execute(self, checker) -> None:
         if len(self.input.text) > 1:
             raise ValueError(
                 f"Please only pass one codepoint at a time to the unencoded variants check (not '{self.input.text}')"
