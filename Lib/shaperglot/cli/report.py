@@ -105,7 +105,7 @@ def long_summary(fixes_needed, unsupported) -> None:
         print("\nTo add support:")
     for category, fixes in fixes_needed.items():
         plural = "s" if len(fixes) > 1 else ""
-        print(f" * {category.replace("_", ' ').capitalize()}{plural}: ")
+        print(f" * {category.replace('_', ' ').capitalize()}{plural}: ")
         for fix in sorted(fixes):
             print("    - " + fix)
 
