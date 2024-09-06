@@ -80,6 +80,8 @@ class NoOrphanedMarksCheck(ShaperglotCheck):
                     )
                 elif pos.x_offset == 0 and pos.y_offset == 0:  # Suspicious
                     passed = False
+                    if previous is None:
+                        previous = "the base glyph when " + self.input.describe()
                     checker.results.fail(
                         check_name="no-orphaned-marks",
                         result_code="orphaned-mark",
