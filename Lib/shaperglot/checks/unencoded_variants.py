@@ -21,21 +21,13 @@ class UnencodedVariantsCheck(ShaperglotCheck):
                 "Please only pass one codepoint at a time to the unencoded "
                 f"variants check (not '{self.input.text}')"
             )
+
         self.input.features["locl"] = False
         buffer = self.input.shape(checker)
         if buffer.glyph_infos[0].codepoint == 0:
-            checker.results.fail(
-                check_name="unencoded-variants",
-                result_code="notdef-produced",
-                message="Shaper produced a .notdef",
-                context={"text": self.input.check_yaml},
-                fixes=[
-                    {
-                        "type": "add_codepoint",
-                        "thing": self.input.text[buffer.glyph_infos[0].cluster],
-                    },
-                ],
-            )
+            # We don't care about this. Our interpretation of this check is that if the
+            # glyph is present, then it must have an unencoded variant. But if it isn't,
+            # no big deal as the orthographies check will tell us if it's really mandatory.
             return
         glyphname = checker.glyphorder[buffer.glyph_infos[0].codepoint]
         # Are there variant versions of this glyph?
