@@ -99,7 +99,7 @@ class OrthographiesCheck(ShaperglotCheck):
         if not self.aux:
             return
 
-        missing = sorted([x for x in self.bases if not can_shape(x, checker)])
+        missing = sorted([x for x in self.aux if not can_shape(x, checker)])
         if missing:
             checker.results.warn(
                 check_name="orthographies",
