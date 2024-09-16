@@ -9,6 +9,12 @@ from shaperglot.languages import Languages
 from shaperglot.reporter import Result
 
 
+try:
+    import glyphsets
+except ImportError:
+    glyphsets = None
+
+
 def report(options) -> None:
     """Report which languages are supported by the given font"""
     checker = Checker(options.font)
@@ -18,6 +24,10 @@ def report(options) -> None:
     unsupported = []
     fixes_needed = defaultdict(set)
 
+    lang_filter = None
+    if options.glyphset:
+        lang_filter = glyphsets.languages_per_glyphset(options.glyphset)
+
     if options.csv:
         print(
             "Language,Name,Supported,Bases Missing,Marks Missing,Orphaned Marks,Other"
@@ -25,6 +35,8 @@ def report(options) -> None:
 
     for lang in sorted(langs.keys()):
         if options.filter and not re.search(options.filter, lang):
+            continue
+        if lang_filter and lang not in lang_filter:
             continue
         results = checker.check(langs[lang])
 

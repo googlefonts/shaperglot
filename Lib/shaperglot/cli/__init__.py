@@ -5,6 +5,11 @@ from shaperglot.cli.check import check
 from shaperglot.cli.describe import describe
 from shaperglot.cli.report import report
 
+try:
+    import glyphsets
+except ImportError:
+    glyphsets = None
+
 
 def main(args=None) -> None:
     if args is None:
@@ -30,7 +35,11 @@ def main(args=None) -> None:
     )
     parser_check.add_argument('font', metavar='FONT', help='the font file')
     parser_check.add_argument(
-        'lang', metavar='LANG', help='one or more ISO639-3 language codes', nargs="+"
+        'lang',
+        metavar='LANG',
+        help='one or more ISO639-3 language codes'
+        + (" or glyphsets" if glyphsets else ""),
+        nargs="+",
     )
     parser_check.set_defaults(func=check)
 
@@ -50,6 +59,12 @@ def main(args=None) -> None:
     parser_report.add_argument(
         '--filter', type=str, help="Regular expression to filter languages"
     )
+    if glyphsets:
+        parser_report.add_argument(
+            '--glyphset',
+            help="Glyph set to use for checking",
+            choices=glyphsets.defined_glyphsets(),
+        )
     parser_report.set_defaults(func=report)
 
     options = parser.parse_args(args)

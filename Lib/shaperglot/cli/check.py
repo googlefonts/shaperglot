@@ -5,6 +5,11 @@ from shaperglot.checker import Checker
 from shaperglot.languages import Languages
 from shaperglot.reporter import Reporter
 
+try:
+    import glyphsets
+except ImportError:
+    glyphsets = None
+
 
 def find_lang(lang: str, langs: Languages) -> Optional[str]:
     # Find the language in the languages list; could be by ID, by name, etc.
@@ -27,7 +32,14 @@ def check(options) -> None:
     checker = Checker(options.font)
     langs = Languages()
     fixes_needed = defaultdict(set)
-    for orig_lang in options.lang:
+    lang_arg = []
+    for lang in options.lang:
+        if glyphsets and lang in glyphsets.defined_glyphsets():
+            lang_arg.extend(glyphsets.languages_per_glyphset(lang))
+        else:
+            lang_arg.append(lang)
+
+    for orig_lang in lang_arg:
         lang = find_lang(orig_lang, langs)
         if not lang:
             print(f"Language '{orig_lang}' not known")
