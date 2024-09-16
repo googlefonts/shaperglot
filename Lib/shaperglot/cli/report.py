@@ -71,29 +71,31 @@ def report(options) -> None:
         return
 
     if options.group:
-        if supported:
-            print("Supported languages")
-            print("===================\n")
-        for lang in supported:
-            print(f"Font supports language '{lang}' ({langs[lang]['name']})")
-
-        if nearly:
-            print("\nNearly supported languages")
-            print("===================\n")
-        for lang in nearly:
-            print(f"Font nearly supports language '{lang}' ({langs[lang]['name']})")
-
-        if unsupported:
-            print("\nUnsupported languages")
-            print("====================\n")
-        for lang in unsupported:
-            print(
-                f"Font does not fully support language '{lang}' ({langs[lang]['name']})"
-            )
+        show_grouped(langs, nearly, supported, unsupported)
     # Collate a useful fixing guide
     short_summary(supported, nearly, unsupported)
     if options.verbose:
         long_summary(fixes_needed, unsupported)
+
+
+def show_grouped(langs, nearly, supported, unsupported):
+    if supported:
+        print("Supported languages")
+        print("===================\n")
+    for lang in supported:
+        print(f"Font supports language '{lang}' ({langs[lang]['name']})")
+
+    if nearly:
+        print("\nNearly supported languages")
+        print("===================\n")
+    for lang in nearly:
+        print(f"Font nearly supports language '{lang}' ({langs[lang]['name']})")
+
+    if unsupported:
+        print("\nUnsupported languages")
+        print("====================\n")
+    for lang in unsupported:
+        print(f"Font does not fully support language '{lang}' ({langs[lang]['name']})")
 
 
 def short_summary(supported, nearly, unsupported) -> None:
