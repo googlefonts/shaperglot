@@ -25,7 +25,7 @@ def report(options) -> None:
     fixes_needed = defaultdict(set)
 
     lang_filter = None
-    if options.glyphset:
+    if glyphsets and options.glyphset:
         lang_filter = glyphsets.languages_per_glyphset(options.glyphset)
 
     if options.csv:
