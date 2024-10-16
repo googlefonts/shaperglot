@@ -27,13 +27,12 @@ def whatuses(options) -> None:
     base_langs = []
     mark_langs = []
     aux_langs = []
-    for langid in langs.keys():
-        lang = langs[langid]
+    for lang in langs.values():
         exemplar_chars = lang.get("exemplarChars", {})
         marks = exemplar_chars.get("marks", "").replace("◌", "").split() or []
         bases = parse_bases(exemplar_chars.get("base", ""))
         aux = parse_bases(exemplar_chars.get("auxiliary", ""))
-        lang_key = f"{lang['name']} [{langid}]".replace(" ", "\u00A0")
+        lang_key = f"{lang['name']} [{lang['id']}]".replace(" ", "\u00A0")
         if char in bases:
             base_langs.append(lang_key)
         elif char in marks:

@@ -70,6 +70,10 @@ class Languages:
     def keys(self):
         return gflangs.keys()
 
+    def values(self):
+        for k in gflangs.keys():
+            yield self.__getitem__(k)
+
     def disambiguate(self, lang):
         maybe_keys = [k for k in gflangs if k.lower().startswith(lang.lower() + "_")]
         if maybe_keys:
