@@ -4,6 +4,7 @@ import sys
 from shaperglot.cli.check import check
 from shaperglot.cli.describe import describe
 from shaperglot.cli.report import report
+from shaperglot.cli.whatuses import whatuses
 
 try:
     import glyphsets
@@ -66,6 +67,10 @@ def main(args=None) -> None:
             choices=glyphsets.defined_glyphsets(),
         )
     parser_report.set_defaults(func=report)
+
+    parser_whatuses = subparsers.add_parser('whatuses', help=whatuses.__doc__)
+    parser_whatuses.add_argument('char', metavar='CHAR', help='Character or code point')
+    parser_whatuses.set_defaults(func=whatuses)
 
     options = parser.parse_args(args)
     if not hasattr(options, "func"):
