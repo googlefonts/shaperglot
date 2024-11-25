@@ -2,13 +2,15 @@ use super::CheckImplementation;
 use crate::{
     checker::Checker,
     reporter::{Fix, Problem},
+    shaping::ShapingInput,
 };
+use itertools::Itertools;
 use serde::{Deserialize, Serialize};
 use unicode_properties::{GeneralCategory, UnicodeGeneralCategory};
 
 #[derive(Serialize, Deserialize)]
 pub struct NoOrphanedMarks {
-    test_strings: Vec<String>,
+    test_strings: Vec<ShapingInput>,
     has_orthography: bool,
 }
 
@@ -27,10 +29,10 @@ impl CheckImplementation for NoOrphanedMarks {
         let mut problems = vec![];
 
         for string in self.test_strings.iter() {
-            let mut buffer = rustybuzz::UnicodeBuffer::new();
-            buffer.push_str(string);
             let mut previous = None;
-            let glyph_buffer = rustybuzz::shape(&checker.face, &[], buffer);
+            let glyph_buffer = string
+                .shape(checker)
+                .expect("Failed to shape string for NoOrphanedMarks");
             for (codepoint, position) in glyph_buffer
                 .glyph_infos()
                 .iter()
@@ -43,9 +45,9 @@ impl CheckImplementation for NoOrphanedMarks {
                     let mut fail = Problem::new(
                         &self.name(),
                         "notdef-produced",
-                        format!("Shaper produced a .notdef while shaping '{}'", string),
+                        format!("Shaper produced a .notdef while {}", string),
                     );
-                    if let Some(input_codepoint) = string.chars().nth(codepoint.cluster as usize) {
+                    if let Some(input_codepoint) = string.char_at(codepoint.cluster as usize) {
                         fail.fixes = vec![Fix {
                             fix_type: "add_codepoint".to_string(),
                             fix_thing: input_codepoint.to_string(),
@@ -61,10 +63,7 @@ impl CheckImplementation for NoOrphanedMarks {
                     if previous.is_some() && previous == dotted_circle {
                         let fail = Problem {
                             check_name: self.name(),
-                            message: format!(
-                                "Shaper produced a dotted circle when shaping {}",
-                                string
-                            ),
+                            message: format!("Shaper produced a dotted circle when {}", string),
                             code: "dotted-circle-produced".to_string(),
                             context: serde_json::json!({
                                 "text": previous,
@@ -72,17 +71,14 @@ impl CheckImplementation for NoOrphanedMarks {
                             }),
                             fixes: vec![Fix {
                                 fix_type: "add_feature".to_string(),
-                                fix_thing: format!(
-                                    "to avoid a dotted circle while shaping {}",
-                                    string
-                                ),
+                                fix_thing: format!("to avoid a dotted circle while {}", string),
                             }],
                         };
                         problems.push(fail);
                     } else if position.x_offset == 0 && position.y_offset == 0 {
                         // Suspicious
                         let previous_name = previous.map_or_else(
-                            || format!("The base glyph when shaping {}", string),
+                            || format!("The base glyph when {}", string),
                             |gid| {
                                 checker
                                     .glyph_names
@@ -99,10 +95,10 @@ impl CheckImplementation for NoOrphanedMarks {
                         let fail = Problem {
                             check_name: self.name(),
                             message: format!(
-                                "Shaper didn't attach {} to {}",
-                                this_name, previous_name
+                                "Shaper didn't attach {} to {} when {}",
+                                this_name, previous_name, string
                             ),
-                            code: "dotted-circle-produced".to_string(),
+                            code: "orphaned-mark".to_string(),
                             context: serde_json::json!({
                                 "text": string,
                                 "mark": this_name,
@@ -124,8 +120,8 @@ impl CheckImplementation for NoOrphanedMarks {
 
     fn describe(&self) -> String {
         format!(
-            "Checks that, when shaping the text '{}', no marks are left unattached",
-            self.test_strings.join(" ")
+            "Checks that, when {}, no marks are left unattached",
+            self.test_strings.iter().map(|x| x.describe()).join(" and ")
         )
     }
 }
@@ -137,7 +133,7 @@ fn simple_mark_check(c: u32) -> bool {
 }
 
 impl NoOrphanedMarks {
-    pub fn new(test_strings: Vec<String>, has_orthography: bool) -> Self {
+    pub fn new(test_strings: Vec<ShapingInput>, has_orthography: bool) -> Self {
         Self {
             test_strings,
             has_orthography,

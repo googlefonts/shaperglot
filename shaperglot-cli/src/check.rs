@@ -37,8 +37,13 @@ pub fn check_command(args: &CheckArgs, language_database: shaperglot::Languages)
                 println!("{}", serde_json::to_string(&results).unwrap());
                 continue;
             }
+            let score = if results.is_unknown() {
+                ""
+            } else {
+                &format!(": {:.0}%", results.score())
+            };
             let status = if results.is_unknown() {
-                "Cannot determine whether "
+                "Cannot determine whether font supports "
             } else if results.is_nearly_success(args.nearly) {
                 "Font nearly supports "
             } else if results.is_success() {
@@ -47,11 +52,11 @@ pub fn check_command(args: &CheckArgs, language_database: shaperglot::Languages)
                 "Font does not fully support "
             };
             eprintln!(
-                "{}language {} ({}): {:.0}%",
+                "{}language {} ({}){}",
                 status,
                 language.id(),
                 language.name(),
-                results.score()
+                score
             );
             show_result(&results, args.verbose);
             if args.fix {
@@ -77,16 +82,22 @@ fn show_result(results: &Reporter, verbose: u8) {
             continue;
         }
         eprintln!("   {}: {}", check.status, check.summary_result());
-        if verbose > 1 || (verbose == 1 && !check.problems.is_empty()) {
+        if verbose > 1 {
             eprintln!("  {}", check.check_description);
+        }
+        if verbose > 1 || (verbose == 1 && !check.problems.is_empty()) {
             for problem in check.problems.iter() {
                 eprintln!("  * {}", problem.message);
             }
         }
     }
+    println!();
 }
 
 fn show_fixes(fixes: &HashMap<String, HashSet<String>>) {
+    if fixes.is_empty() {
+        return;
+    }
     eprintln!("\nTo add full support:");
     for (category, fixes) in fixes {
         eprintln!(

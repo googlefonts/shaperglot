@@ -1,8 +1,10 @@
 use crate::{
     checks::{Check, CheckType, CodepointCoverage, NoOrphanedMarks, ScoringStrategy},
     language::Language,
+    shaping::ShapingInput,
     ResultCode,
 };
+use itertools::Itertools;
 use unicode_properties::{GeneralCategoryGroup, UnicodeGeneralCategory};
 
 mod african_latin;
@@ -48,13 +50,19 @@ fn mandatory_orthography(language: &Language) -> Check {
     let mut mandatory_orthography = Check {
         name: "Mandatory orthography codepoints".to_string(),
         description: format!(
-            "The font MUST support {} bases {}",
+            "The font MUST support the following {} bases{}: {}",
             language.name(),
             if !language.marks.is_empty() {
-                "and marks"
+                " and marks"
             } else {
                 ""
-            }
+            },
+            language
+                .bases
+                .iter()
+                .map(|x| format!("'{}'", x))
+                .chain(language.marks.iter().map(|x| format!("'{}'", x)))
+                .join(", ")
         ),
         severity: ResultCode::Fail,
         weight: 80,
@@ -73,11 +81,11 @@ fn mandatory_orthography(language: &Language) -> Check {
                 "mark".to_string(),
             )));
     }
-    let complex_bases: Vec<String> = language
+    let complex_bases: Vec<ShapingInput> = language
         .bases
         .iter()
         .filter(|s| has_complex_decomposed_base(s))
-        .map(|x| x.to_string())
+        .map(|x| ShapingInput::new_simple(x.to_string()))
         .collect();
     if !complex_bases.is_empty() {
         // If base exemplars contain marks, they MUST NOT be orphaned.
@@ -104,7 +112,14 @@ fn auxiliaries_check(language: &Language) -> Option<Check> {
 
     let mut auxiliaries_check = Check {
         name: "Auxiliary orthography codepoints".to_string(),
-        description: "The font SHOULD support auxiliary orthography".to_string(),
+        description: format!(
+            "The font SHOULD support the following auxiliary orthography codepoints: {}",
+            language
+                .auxiliaries
+                .iter()
+                .map(|x| format!("'{}'", x))
+                .join(", ")
+        ),
         weight: 20,
         scoring_strategy: ScoringStrategy::Continuous,
         implementations: vec![],
@@ -123,7 +138,10 @@ fn auxiliaries_check(language: &Language) -> Option<Check> {
     auxiliaries_check
         .implementations
         .push(CheckType::NoOrphanedMarks(NoOrphanedMarks::new(
-            complex_auxs.iter().map(|x| x.to_string()).collect(),
+            complex_auxs
+                .iter()
+                .map(|x| ShapingInput::new_simple(x.to_string()))
+                .collect(),
             true,
         )));
     Some(auxiliaries_check)
