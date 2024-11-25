@@ -146,17 +146,17 @@ class Shaperglot {
       result.append(`<h2>(${language.autonym})</h2>`);
     }
     if (language.population) {
-      result.append(`<p class="mb-0">Population: ${commify(language.population)}</p>`);
+      result.append(`<p class="mb-0"><b>Population</b>: ${commify(language.population)}</p>`);
     }
     if (language.region) {
       let regions_list = language.region
         .map((r) => this.regions[r].name)
         .join(", ");
-      result.append(`<p class="mb-0">Regions: ${regions_list}</p>`);
+      result.append(`<p class="mb-0"><b>Regions</b>: ${regions_list}</p>`);
     }
     if (language.sample_text) {
       result.append(
-        `<p class="mb-0">Sample text:<blockquote class="blockquote">${language.sample_text.specimen_32} ${language.sample_text.specimen_21}</blockquote></p>`
+        `<p class="mb-0"><b>Sample text</b>:<blockquote class="blockquote">${language.sample_text.specimen_32} ${language.sample_text.specimen_21}</blockquote></p>`
       );
     }
 
