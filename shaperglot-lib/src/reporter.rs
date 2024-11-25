@@ -9,6 +9,8 @@ use std::{
 
 use serde_json::Value;
 
+use crate::language::Language;
+
 #[derive(Debug, Default, Hash, Eq, PartialEq, Clone, Copy, Serialize, Deserialize)]
 pub enum ResultCode {
     #[default]
@@ -171,5 +173,29 @@ impl Reporter {
 
     pub fn is_nearly_success(&self, nearly: usize) -> bool {
         self.unique_fixes().values().map(|v| v.len()).sum::<usize>() <= nearly
+    }
+
+    pub fn to_summary_string(&self, nearly: usize, language: &Language) -> String {
+        let score = if self.is_unknown() {
+            ""
+        } else {
+            &format!(": {:.0}%", self.score())
+        };
+        let status = if self.is_unknown() {
+            "Cannot determine whether font supports "
+        } else if self.is_success() {
+            "Font supports "
+        } else if self.is_nearly_success(nearly) {
+            "Font nearly supports "
+        } else {
+            "Font does not fully support "
+        };
+        format!(
+            "{}language {} ({}){}",
+            status,
+            language.id(),
+            language.name(),
+            score
+        )
     }
 }

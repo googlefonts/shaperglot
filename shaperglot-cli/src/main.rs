@@ -1,7 +1,9 @@
 use check::{check_command, CheckArgs};
 use clap::{Parser, Subcommand};
+use report::{report_command, ReportArgs};
 
 mod check;
+mod report;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -15,6 +17,8 @@ struct Cli {
 enum Commands {
     /// Check language support
     Check(CheckArgs),
+    /// Report language support
+    Report(ReportArgs),
 }
 
 fn main() {
@@ -24,6 +28,9 @@ fn main() {
     match &cli.command {
         Commands::Check(args) => {
             check_command(args, language_database);
+        }
+        Commands::Report(args) => {
+            report_command(args, language_database);
         }
     }
 }
