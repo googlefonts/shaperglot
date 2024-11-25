@@ -1,0 +1,27 @@
+[package]
+name = "shaperglot"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+path = "src/lib.rs"
+
+[dev-dependencies]
+serde_json = "1.0"
+
+[features]
+
+[dependencies]
+google-fonts-languages = "*"
+skrifa = { workspace = true }
+itertools = {workspace = true}
+rustybuzz = "0.18.0"
+serde_json = "1.0"
+unicode-normalization = "*"
+colored = { version = "*", optional = true }
+unicode-properties = "0.1.3"
+indexmap = "2"
+log = "0.4"
+toml = "0.8.19"
+serde = "1"
+ambassador = "0.4.1"
