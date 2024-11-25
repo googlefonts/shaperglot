@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Shaperglot!</title>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+		crossorigin="anonymous"></script>
+	<style type="text/css">
+		@font-face {
+      font-family: "Test Font";
+      src: url();
+    }
+
+    .testfont {
+      font-variation-settings: "wght" 400, "wdth" 100;
+      font-family: "Test Font", "Adobe Notdef";
+    }
+    :root {
+      --node-pt-size: 60px;
+      }
+</style>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="modal" tabindex="-1" id="bigLoadingModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" id="spinnerModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Working...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" tabindex="-1" id="startModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="container h-100">
+              <div id="fontbefore" class="h-100 p-4 d-flex fontdrop">
+                <div class="align-self-center mx-auto">
+                  <h2>Drop font here to show language coverage</h2>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="">
+    <h2 id="filename" class="d-none">Test file</h2>
+
+    <div class=" row" id="results">
+      <div class="col-4">
+        <div class="accordion" id="scriptlist">
+          </div>
+
+      </div>
+      <div class="col-8">
+          <div class="tab-content" id="language-content">
+              <div class="tab-pane show active" role="tabpanel">
+              </div>
+          </div>
+      </div>
+  </div>
+
+</body>
+<script src="./bootstrap.js"></script>
+
+</html>
+
+</html>
