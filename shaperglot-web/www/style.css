@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+Arabic&family=Noto+Sans+Nandinagari&display=swap');
 
 body {
-  background-color: #dbd8f9 !important;
-  font-family: "Montserrat", sans-serif !important;
+  background-color: #b3dbf0 !important;
+  font-family: "Montserrat", "Noto Sans", "Noto Sans Arabic", "Noto Sans Nandinagari", "sans-serif" !important;
 }
 
 h4 {
@@ -12,224 +13,6 @@ h4 {
 @font-face {
   font-family: "Adobe NotDef";
   src: url(https://cdn.jsdelivr.net/gh/adobe-fonts/adobe-notdef/AND-Regular.ttf);
-}
-
-.box-title {
-  width: 100%;
-  font-size: 8pt;
-  font-weight: 700;
-  border-top: 1px solid black;
-  padding-top: 5px;
-  margin-bottom: 10pt;
-  display: block;
-}
-
-.box {
-  margin-bottom: 20pt;
-  width: 100%;
-  float: left;
-}
-
-.box-text {}
-
-#ui-nav {
-  position: fixed;
-  right: 20px;
-  z-index: 100;
-}
-
-#font-toggle {}
-
-.ui-nav-item {
-  display: block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  /* Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+/Edge */
-  user-select: none;
-  /* Standard */
-  text-align: center;
-  color: white;
-  background-color: black;
-  display: block;
-  font-size: 14pt;
-  padding: 5px;
-  margin: 2px;
-}
-
-/* Stuff needed for the table differ */
-body {
-  font-family: Helvetica;
-}
-
-.node {
-  font-family: courier;
-  cursor: pointer;
-  position: relative;
-  left: 30px;
-  padding: 5px;
-  display: block;
-  border: 1px dashed grey;
-  background-color: #e9e9ee;
-}
-
-.header {
-  font-weight: bold;
-}
-
-.attr-before {
-  color: green;
-  cursor: text;
-}
-
-.attr-after {
-  color: red;
-  cursor: text;
-}
-
-.leaf {
-  font-weight: bold;
-}
-
-.old .cell .new {
-  display: none;
-}
-
-.new .cell .old {
-  display: none;
-}
-
-.both .cell .old {
-  opacity: 0.75;
-  color: red;
-}
-
-.both .cell .new {
-  opacity: 0.75;
-  position: absolute;
-  top: 0;
-  color: green;
-}
-
-.spacer {
-  display: block;
-  float: left;
-  width: 100%;
-}
-
-#ot-panel {
-  max-height: 400px;
-  overflow-y: scroll;
-  background: white;
-  padding: 10px;
-  display: none;
-}
-
-.cell {
-  z-index: -100;
-  float: left;
-  display: block;
-  text-align: center;
-  padding: 5pt;
-  margin: 5pt;
-  width: 50pt;
-  font-size: var(--node-pt-size);
-  line-height: calc(var(--node-pt-size) * 1.5);
-}
-
-.cell-word {
-  z-index: -100;
-  float: left;
-  display: block;
-  text-align: center;
-  padding: 5pt;
-  margin: 5pt;
-  font-size: var(--node-pt-size);
-  line-height: calc(var(--node-pt-size) * 1.5);
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-}
-
-.cell-glyph {
-  z-index: -100;
-  float: left;
-  display: block;
-  text-align: center;
-  border-radius: 5pt;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  padding: 5pt;
-  margin: 5pt;
-  width: calc(var(--node-pt-size) * 2);
-  min-height: calc(var(--node-pt-size) * 2);
-  font-size: var(--node-pt-size);
-}
-
-.cell-glyph.font-before,
-.cell-word.font-before {
-  background: #eff6f2;
-}
-
-.cell-glyph.font-after,
-.cell-word.font-after {
-  background: #f7f4f4;
-}
-
-.cell-glyph:hover {
-  box-shadow: none;
-  background: #f0f0f5;
-}
-
-.cat-strings .cell {
-  clear: both;
-  position: static;
-  float: none;
-  text-align: left;
-}
-
-.codepoint {
-  text-align: center;
-  font-family: sans-serif;
-  font-size: 10pt;
-  line-height: 10pt;
-}
-
-.box-title {
-  clear: both;
-}
-
-.node.closed::before {
-  content: "+";
-  margin-right: 5pt;
-}
-
-.node.open::before {
-  content: "-";
-  margin-right: 5pt;
-}
-
-.tooltip pre {
-  background-color: #6f7882;
-  padding: 5px;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-
-.tooltip {
-  line-height: 1em;
-}
-
-.tooltip-inner {
-  max-width: 300px;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  clear: both;
 }
 
 #locationnav li {
@@ -290,7 +73,7 @@ h5 {
 
 .script-0 {
   background-color: #f0f0f0;
-  opacity: 0.75;
+  opacity: 0.5;
 }
 
 #language-content {
@@ -306,3 +89,15 @@ h5 {
   background-color: #f0f0f0;
   font-size: 0.75em;
 }
+blockquote { padding: 5px; }
+
+button.nav-link {
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #888;
+}
+
+dd { margin: 10px 25px 10px 25px; }

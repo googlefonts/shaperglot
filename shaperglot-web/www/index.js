@@ -110,8 +110,19 @@ class Shaperglot {
       let pilldiv = $("<div></div>");
       pilldiv.addClass("nav nav-pills");
       card.find(".card-body").append(pilldiv);
+      for (let language of languages) {
+        let problemSet = language[2];
+        let total_weight = problemSet
+          .map((r) => r.weight)
+          .reduce((a, b) => a + b);
+        let weighted_scores = problemSet.map((r) => r.score * r.weight);
+        let total_score = weighted_scores.reduce((a, b) => a + b);
+        problemSet.score = (total_score / total_weight) * 100.0;
+      }
 
-      for (let [language, result, problems] of languages) {
+      for (let [language, result, problems] of languages.sort(
+        (a, b) => a[2].score - b[2].score || a[0].name.localeCompare(b[0].name)
+      )) {
         var thispill = $(`
         <button
           class="nav-link status-${result}"
@@ -138,15 +149,16 @@ class Shaperglot {
     let result = $("#language-content div");
     result.empty();
     var problemSet = el.data("problemset");
-    console.log(problemSet);
     let language = el.data("languagedata");
     let langname = language.preferred_name || language.name;
-    result.append(`<h1>${langname}</h1>`);
+    result.append(`<h1>${langname} (${Math.round(problemSet.score)}%)</h1>`);
     if (language.autonym) {
       result.append(`<h2>(${language.autonym})</h2>`);
     }
     if (language.population) {
-      result.append(`<p class="mb-0"><b>Population</b>: ${commify(language.population)}</p>`);
+      result.append(
+        `<p class="mb-0"><b>Population</b>: ${commify(language.population)}</p>`
+      );
     }
     if (language.region) {
       let regions_list = language.region
@@ -176,7 +188,8 @@ class Shaperglot {
       );
     }
     let problem_html = $("<dl></dl>");
-    let fixdiv = $(`<div><b>For full support:</b>`);
+    let fixdiv = $(`<div><b>For full support:</b></div>`);
+    let fixes_needed = {};
     for (var check of problemSet) {
       let {
         check_name,
@@ -190,21 +203,39 @@ class Shaperglot {
       } = check;
       let mark = status == "Pass" ? "✅" : "❌";
       problem_html.append(
-        `<dt>${check_name} ${mark} (${Math.round(score * 100)}%)</dt>`
+        `<dt>${check_name} ${mark} (${Math.round(
+          score * weight
+        )}/${weight} points)</dt>`
       );
-      let dd = $(`<dd>${check_description}<ul></ul></dd>`);
+      let dd = $(`<dd>
+        <blockquote class="bg-light">${check_description}
+        </blockquote>
+        </dd>`);
       problem_html.append(dd);
+      if (problems.length > 0) {
+        dd.append(`<p><b>Problems:</b></p><ul></ul>`);
+      } else {
+        dd.append(`<ul><li>No problems found!</li></ul>`);
+      }
       for (var problem of problems) {
         let { check_name, message, fixes } = problem;
-        dd.find("ul").append(`<li>${check_name} check: ${message}</li>`);
+        dd.find("ul").append(`<li>${message}</li>`);
 
         for (var fix of fixes) {
           let { fix_type, fix_thing } = fix;
-          fixdiv.append(`<li>${fix_descriptions[fix_type]}: ${fix_thing}</li>`);
+          fixes_needed[fix_type] = fixes_needed[fix_type] || [];
+          fixes_needed[fix_type].push(fix_thing);
         }
       }
     }
+
+    for (var [fix_type, fix_things] of Object.entries(fixes_needed)) {
+      let fix_thing = fix_things.join(", ");
+      fixdiv.append(`<li>${fix_descriptions[fix_type]}: ${fix_thing}</li>`);
+    }
+
     if ($(fixdiv).children().length > 1) {
+      problem_html.append($("<hr>"));
       problem_html.append(fixdiv);
     }
 
