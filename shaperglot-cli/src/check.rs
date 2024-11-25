@@ -37,27 +37,7 @@ pub fn check_command(args: &CheckArgs, language_database: shaperglot::Languages)
                 println!("{}", serde_json::to_string(&results).unwrap());
                 continue;
             }
-            let score = if results.is_unknown() {
-                ""
-            } else {
-                &format!(": {:.0}%", results.score())
-            };
-            let status = if results.is_unknown() {
-                "Cannot determine whether font supports "
-            } else if results.is_nearly_success(args.nearly) {
-                "Font nearly supports "
-            } else if results.is_success() {
-                "Font supports "
-            } else {
-                "Font does not fully support "
-            };
-            eprintln!(
-                "{}language {} ({}){}",
-                status,
-                language.id(),
-                language.name(),
-                score
-            );
+            println!("{}", results.to_summary_string(args.nearly, language));
             show_result(&results, args.verbose);
             if args.fix {
                 for (category, fixes) in results.unique_fixes() {
@@ -68,7 +48,7 @@ pub fn check_command(args: &CheckArgs, language_database: shaperglot::Languages)
                 }
             }
         } else {
-            eprintln!("Language not found");
+            println!("Language not found");
         }
     }
     if args.fix {
@@ -81,13 +61,13 @@ fn show_result(results: &Reporter, verbose: u8) {
         if verbose == 0 && check.problems.is_empty() {
             continue;
         }
-        eprintln!("   {}: {}", check.status, check.summary_result());
+        println!("   {}: {}", check.status, check.summary_result());
         if verbose > 1 {
-            eprintln!("  {}", check.check_description);
+            println!("  {}", check.check_description);
         }
         if verbose > 1 || (verbose == 1 && !check.problems.is_empty()) {
             for problem in check.problems.iter() {
-                eprintln!("  * {}", problem.message);
+                println!("  * {}", problem.message);
             }
         }
     }
@@ -98,9 +78,9 @@ fn show_fixes(fixes: &HashMap<String, HashSet<String>>) {
     if fixes.is_empty() {
         return;
     }
-    eprintln!("\nTo add full support:");
+    println!("\nTo add full support:");
     for (category, fixes) in fixes {
-        eprintln!(
+        println!(
             "* {}:",
             match category.as_str() {
                 "add_anchor" => "Add anchors between the following glyphs",
@@ -109,6 +89,6 @@ fn show_fixes(fixes: &HashMap<String, HashSet<String>>) {
                 _ => category,
             }
         );
-        eprintln!("    {}", fixes.iter().join(", "));
+        println!("    {}", fixes.iter().join(", "));
     }
 }
