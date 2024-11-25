@@ -5,6 +5,10 @@ const fix_descriptions = {
   add_feature: "Add the following features to the font",
 };
 
+function commify(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 jQuery.fn.shake = function (interval, distance, times) {
   interval = typeof interval == "undefined" ? 100 : interval;
   distance = typeof distance == "undefined" ? 10 : distance;
@@ -142,7 +146,7 @@ class Shaperglot {
       result.append(`<h2>(${language.autonym})</h2>`);
     }
     if (language.population) {
-      result.append(`<p class="mb-0">Population: ${language.population}</p>`);
+      result.append(`<p class="mb-0">Population: ${commify(language.population)}</p>`);
     }
     if (language.region) {
       let regions_list = language.region
