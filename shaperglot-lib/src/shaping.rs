@@ -10,7 +10,7 @@ use crate::Checker;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ShapingInput {
-    text: String,
+    pub text: String,
     features: Vec<String>,
     language: Option<String>,
 }

@@ -30,6 +30,7 @@ impl CheckImplementation for NoOrphanedMarks {
 
         for string in self.test_strings.iter() {
             let mut previous = None;
+            let literally_a_dotted_circle = string.text.chars().any(|c| c == '\u{25CC}');
             let glyph_buffer = string
                 .shape(checker)
                 .expect("Failed to shape string for NoOrphanedMarks");
@@ -60,7 +61,8 @@ impl CheckImplementation for NoOrphanedMarks {
                     .map(simple_mark_check)
                     .unwrap_or(false)
                 {
-                    if previous.is_some() && previous == dotted_circle {
+                    if previous.is_some() && previous == dotted_circle && !literally_a_dotted_circle
+                    {
                         let fail = Problem {
                             check_name: self.name(),
                             message: format!("Shaper produced a dotted circle when {}", string),
@@ -78,7 +80,7 @@ impl CheckImplementation for NoOrphanedMarks {
                     } else if position.x_offset == 0 && position.y_offset == 0 {
                         // Suspicious
                         let previous_name = previous.map_or_else(
-                            || format!("The base glyph when {}", string),
+                            || "the base glyph".to_string(),
                             |gid| {
                                 checker
                                     .glyph_names

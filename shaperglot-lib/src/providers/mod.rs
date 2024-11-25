@@ -104,10 +104,17 @@ fn auxiliaries_check(language: &Language) -> Option<Check> {
     if language.auxiliaries.is_empty() {
         return None;
     }
-    let complex_auxs: Vec<&String> = language
+    let complex_auxs: Vec<String> = language
         .auxiliaries
         .iter()
         .filter(|s| has_complex_decomposed_base(s))
+        .map(|s| {
+            if s.chars().count() == 1 {
+                format!("◌{}", s)
+            } else {
+                s.to_string()
+            }
+        })
         .collect();
 
     let mut auxiliaries_check = Check {

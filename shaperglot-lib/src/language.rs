@@ -63,7 +63,13 @@ impl Languages {
                 .map(|e| e.marks().split_whitespace().collect())
                 .unwrap_or_else(Vec::new)
                 .iter()
-                .map(|x| x.to_string())
+                .map(|x| {
+                    if x.starts_with('\u{25cc}') {
+                        x.to_string()
+                    } else {
+                        format!("\u{25cc}{}", x)
+                    }
+                })
                 .collect();
 
             let mut lang = Language {
