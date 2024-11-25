@@ -1,10 +1,6 @@
 use clap::Args;
-use itertools::Itertools;
-use shaperglot::{Checker, Reporter};
-use std::{
-    collections::{HashMap, HashSet},
-    path::PathBuf,
-};
+use shaperglot::Checker;
+use std::path::PathBuf;
 
 #[derive(Args)]
 pub struct ReportArgs {
@@ -39,7 +35,7 @@ pub fn report_command(args: &ReportArgs, language_database: shaperglot::Language
                 continue;
             }
         }
-        let results = checker.check(language, false);
+        let results = checker.check(language);
         if results.is_unknown() {
             continue;
         }

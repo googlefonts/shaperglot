@@ -1,8 +1,5 @@
 use std::collections::HashMap;
 
-use indexmap::IndexMap;
-use serde_json::{json, Value};
-use skrifa::{setting::VariationSetting, FontRef, GlyphId};
 use wasm_bindgen::prelude::*;
 extern crate console_error_panic_hook;
 use google_fonts_languages::{RegionProto, ScriptProto, REGIONS, SCRIPTS};
@@ -44,7 +41,7 @@ pub fn check_font(font_data: &[u8]) -> Result<String, JsValue> {
     let languages = Languages::new();
     let mut results = vec![];
     for language in languages.iter() {
-        let result = checker.check(language, false);
+        let result = checker.check(language);
         if result.is_unknown() {
             continue;
         }

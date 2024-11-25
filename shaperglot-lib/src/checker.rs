@@ -1,6 +1,6 @@
 use std::{
     collections::BTreeMap,
-    sync::{Arc, Mutex},
+    // sync::{Arc, Mutex},
 };
 
 use crate::{font::glyph_names, language::Language, reporter::Reporter};
@@ -13,7 +13,7 @@ pub struct Checker<'a> {
     pub glyph_names: Vec<String>,
     pub cmap: BTreeMap<u32, GlyphId>,
     reversed_cmap: BTreeMap<GlyphId, u32>,
-    full_reversed_cmap: Arc<Mutex<Option<BTreeMap<GlyphId, u32>>>>,
+    // full_reversed_cmap: Arc<Mutex<Option<BTreeMap<GlyphId, u32>>>>,
 }
 
 impl<'a> Checker<'a> {
@@ -29,19 +29,20 @@ impl<'a> Checker<'a> {
             cmap,
             face,
             reversed_cmap,
-            full_reversed_cmap: Arc::new(Mutex::new(None)),
+            // full_reversed_cmap: Arc::new(Mutex::new(None)),
         })
     }
 
     pub fn codepoint_for(&self, gid: GlyphId) -> Option<u32> {
-        self.reversed_cmap.get(&gid).copied().or_else(||
-            // if !self.full_reversed_cmap.is_some() {
-            //     self.full_reversed_cmap = Some(self.font.charmap().mappings().collect());
-            // }
-            None)
+        // self.reversed_cmap.get(&gid).copied().or_else(||
+        // if !self.full_reversed_cmap.is_some() {
+        //     self.full_reversed_cmap = Some(self.font.charmap().mappings().collect());
+        // }
+        // None)
+        self.reversed_cmap.get(&gid).copied()
     }
 
-    pub fn check(&self, language: &Language, fail_fast: bool) -> Reporter {
+    pub fn check(&self, language: &Language) -> Reporter {
         let mut results = Reporter::default();
         for check_object in language.checks.iter() {
             // let toml = toml::to_string(&check_object).unwrap();

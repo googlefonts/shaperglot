@@ -32,7 +32,7 @@ pub fn check_command(args: &CheckArgs, language_database: shaperglot::Languages)
     let mut fixes_required = HashMap::new();
     for language in args.languages.iter() {
         if let Some(language) = language_database.get_language(language) {
-            let results = checker.check(language, false);
+            let results = checker.check(language);
             if args.json {
                 println!("{}", serde_json::to_string(&results).unwrap());
                 continue;

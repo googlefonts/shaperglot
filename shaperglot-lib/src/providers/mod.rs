@@ -8,7 +8,7 @@ use itertools::Itertools;
 use unicode_properties::{GeneralCategoryGroup, UnicodeGeneralCategory};
 
 mod african_latin;
-mod african_latin_constants;
+// mod african_latin_constants;
 
 pub trait Provider {
     fn checks_for(&self, language: &Language) -> Vec<Check>;
