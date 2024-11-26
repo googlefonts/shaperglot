@@ -204,8 +204,8 @@ class Shaperglot {
       let mark = status == "Pass" ? "✅" : "❌";
       problem_html.append(
         `<dt>${check_name} ${mark} (${Math.round(
-          score * weight
-        )}/${weight} points)</dt>`
+          score * weight * 100
+        ) / 100}/${weight} points)</dt>`
       );
       let dd = $(`<dd>
         <blockquote class="bg-light">${check_description}
