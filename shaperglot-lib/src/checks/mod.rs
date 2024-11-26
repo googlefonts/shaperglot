@@ -1,5 +1,6 @@
 mod codepoint_coverage;
 mod no_orphaned_marks;
+mod shaping_differs;
 
 use crate::{
     checker::Checker,
@@ -10,6 +11,7 @@ use ambassador::{delegatable_trait, Delegate};
 pub use codepoint_coverage::CodepointCoverage;
 pub use no_orphaned_marks::NoOrphanedMarks;
 use serde::{Deserialize, Serialize};
+pub use shaping_differs::ShapingDiffers;
 
 #[delegatable_trait]
 pub trait CheckImplementation {
@@ -31,6 +33,7 @@ pub enum ScoringStrategy {
 pub enum CheckType {
     CodepointCoverage(CodepointCoverage),
     NoOrphanedMarks(NoOrphanedMarks),
+    ShapingDiffers(ShapingDiffers),
 }
 
 #[derive(Serialize, Deserialize)]
@@ -48,13 +51,33 @@ impl Check {
         let mut problems = Vec::new();
         let mut total_checks = 0;
         for implementation in &self.implementations {
-            // if let Some(skip_reason) = implementation.should_skip(checker) {
-            //     messages.push(Problem::new_skip(&implementation.name(), skip_reason))
-            // } else {
-            let (local_problems, checks_run) = implementation.execute(checker);
-            problems.extend(local_problems);
-            total_checks += checks_run;
-            // }
+            if let Some(skip_reason) = implementation.should_skip(checker) {
+                // If there's only one implementation and we skipped, return a skip
+                // result. Otherwise, add a skip problem.
+                let skip_problem = Problem::new(
+                    &self.name,
+                    "skip",
+                    format!("Check skipped: {}", skip_reason),
+                );
+                if self.implementations.len() == 1 {
+                    return CheckResult {
+                        check_name: self.name.clone(),
+                        check_description: self.description.clone(),
+                        status: ResultCode::Skip,
+                        score: 0.5,
+                        weight: self.weight,
+                        problems: vec![skip_problem],
+                        total_checks: 1,
+                    };
+                } else {
+                    problems.push(skip_problem);
+                    total_checks += 1;
+                }
+            } else {
+                let (local_problems, checks_run) = implementation.execute(checker);
+                problems.extend(local_problems);
+                total_checks += checks_run;
+            }
         }
 
         let score = match self.scoring_strategy {

@@ -11,7 +11,7 @@ use crate::Checker;
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ShapingInput {
     pub text: String,
-    features: Vec<String>,
+    pub features: Vec<String>,
     language: Option<String>,
 }
 
@@ -20,6 +20,14 @@ impl ShapingInput {
         Self {
             text,
             features: Vec::new(),
+            language: None,
+        }
+    }
+
+    pub fn new_with_feature(text: String, feature: impl AsRef<str>) -> Self {
+        Self {
+            text,
+            features: vec![feature.as_ref().to_string()],
             language: None,
         }
     }

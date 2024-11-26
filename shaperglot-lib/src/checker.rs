@@ -1,9 +1,10 @@
-use std::{
-    collections::BTreeMap,
-    // sync::{Arc, Mutex},
-};
+use std::collections::{BTreeMap, HashSet};
 
-use crate::{font::glyph_names, language::Language, reporter::Reporter};
+use crate::{
+    font::{feature_tags, glyph_names},
+    language::Language,
+    reporter::Reporter,
+};
 use rustybuzz::Face;
 use skrifa::{raw::ReadError, FontRef, GlyphId, MetadataProvider};
 
@@ -11,6 +12,7 @@ pub struct Checker<'a> {
     pub font: FontRef<'a>,
     pub face: Face<'a>,
     pub glyph_names: Vec<String>,
+    pub features: HashSet<String>,
     pub cmap: BTreeMap<u32, GlyphId>,
     reversed_cmap: BTreeMap<GlyphId, u32>,
     // full_reversed_cmap: Arc<Mutex<Option<BTreeMap<GlyphId, u32>>>>,
@@ -23,11 +25,13 @@ impl<'a> Checker<'a> {
         let glyph_names = glyph_names(&font)?;
         let cmap: BTreeMap<u32, GlyphId> = font.charmap().mappings().collect();
         let reversed_cmap = cmap.iter().map(|(k, v)| (*v, *k)).collect();
+        let features = feature_tags(&font)?;
         Ok(Self {
             font,
             glyph_names,
             cmap,
             face,
+            features,
             reversed_cmap,
             // full_reversed_cmap: Arc::new(Mutex::new(None)),
         })

@@ -9,5 +9,6 @@ mod shaping;
 pub use crate::{
     checker::Checker,
     language::Languages,
+    providers::Provider,
     reporter::{Reporter, ResultCode},
 };

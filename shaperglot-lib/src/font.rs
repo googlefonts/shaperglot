@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use skrifa::{
     raw::{
         tables::post::{PString, DEFAULT_GLYPH_NAMES},
@@ -50,4 +52,27 @@ pub(crate) fn glyph_names(font: &FontRef) -> Result<Vec<String>, ReadError> {
         names.extend((names.len()..glyph_count).map(|gid| format!("gid{}", gid)));
     }
     Ok(names)
+}
+
+pub(crate) fn feature_tags(font: &FontRef) -> Result<HashSet<String>, ReadError> {
+    let mut tags = HashSet::new();
+    if let Some(gsub_featurelist) = font.gsub().ok().and_then(|gsub| gsub.feature_list().ok()) {
+        gsub_featurelist
+            .feature_records()
+            .iter()
+            .map(|feature| feature.feature_tag().to_string())
+            .for_each(|tag| {
+                tags.insert(tag);
+            });
+    }
+    if let Some(gpos_featurelist) = font.gpos().ok().and_then(|gpos| gpos.feature_list().ok()) {
+        gpos_featurelist
+            .feature_records()
+            .iter()
+            .map(|feature| feature.feature_tag().to_string())
+            .for_each(|tag| {
+                tags.insert(tag);
+            });
+    }
+    Ok(tags)
 }
