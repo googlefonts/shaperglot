@@ -18,6 +18,7 @@ pub enum ResultCode {
     Warn,
     Fail,
     Skip,
+    StopNow,
 }
 
 impl Display for ResultCode {
@@ -28,6 +29,7 @@ impl Display for ResultCode {
             ResultCode::Warn => "WARN".yellow(),
             ResultCode::Fail => "FAIL".red(),
             ResultCode::Skip => "SKIP".blue(),
+            ResultCode::StopNow => "STOP".red(),
         };
         #[cfg(not(feature = "colored"))]
         let to_string = match self {
@@ -35,6 +37,7 @@ impl Display for ResultCode {
             ResultCode::Warn => "WARN",
             ResultCode::Fail => "FAIL",
             ResultCode::Skip => "SKIP",
+            ResultCode::StopNow => "STOP",
         };
         write!(f, "{}", to_string)
     }
@@ -51,6 +54,7 @@ pub struct Problem {
     pub check_name: String,
     pub message: String,
     pub code: String,
+    pub terminal: bool,
     #[serde(skip_serializing_if = "Value::is_null")]
     pub context: Value,
     #[serde(skip_serializing_if = "Vec::is_empty")]
@@ -164,6 +168,25 @@ impl Reporter {
         total_score / f32::from(total_weight) * 100.0
     }
 
+    pub fn support_level(&self) -> SupportLevel {
+        if self.0.iter().any(|r| r.status == ResultCode::StopNow) {
+            return SupportLevel::None;
+        }
+        if self.is_unknown() {
+            return SupportLevel::Indeterminate;
+        }
+        if self.is_success() {
+            return SupportLevel::Complete;
+        }
+        if self.0.iter().any(|r| r.status == ResultCode::Fail) {
+            return SupportLevel::Unsupported;
+        }
+        if self.0.iter().any(|r| r.status == ResultCode::Warn) {
+            return SupportLevel::Incomplete;
+        }
+        SupportLevel::Supported
+    }
+
     pub fn is_success(&self) -> bool {
         self.0.iter().all(|r| r.problems.is_empty())
     }
@@ -171,31 +194,67 @@ impl Reporter {
         self.0.iter().map(|r| r.total_checks).sum::<usize>() == 0
     }
 
-    pub fn is_nearly_success(&self, nearly: usize) -> bool {
-        self.unique_fixes().values().map(|v| v.len()).sum::<usize>() <= nearly
+    pub fn fixes_required(&self) -> usize {
+        self.unique_fixes().values().map(|v| v.len()).sum::<usize>()
     }
 
-    pub fn to_summary_string(&self, nearly: usize, language: &Language) -> String {
-        let score = if self.is_unknown() {
-            ""
-        } else {
-            &format!(": {:.0}%", self.score())
-        };
-        let status = if self.is_unknown() {
-            "Cannot determine whether font supports "
-        } else if self.is_success() {
-            "Font supports "
-        } else if self.is_nearly_success(nearly) {
-            "Font nearly supports "
-        } else {
-            "Font does not fully support "
-        };
-        format!(
-            "{}language {} ({}){}",
-            status,
-            language.id(),
-            language.name(),
-            score
-        )
+    pub fn is_nearly_success(&self, nearly: usize) -> bool {
+        self.fixes_required() <= nearly
     }
+
+    pub fn to_summary_string(&self, language: &Language) -> String {
+        match self.support_level() {
+            SupportLevel::Complete => {
+                format!(
+                    "Font has complete support for {} ({}): 100%",
+                    language.id(),
+                    language.name()
+                )
+            }
+            SupportLevel::Supported => format!(
+                "Font fully supports {} ({}): {:.0}%",
+                language.id(),
+                language.name(),
+                self.score()
+            ),
+            SupportLevel::Incomplete => format!(
+                "Font partially supports {} ({}): {:.0}% ({} fixes required)",
+                language.id(),
+                language.name(),
+                self.score(),
+                self.fixes_required()
+            ),
+            SupportLevel::Unsupported => format!(
+                "Font does not support {} ({}): {:.0}% ({} fixes required)",
+                language.id(),
+                language.name(),
+                self.score(),
+                self.fixes_required()
+            ),
+            SupportLevel::None => {
+                format!(
+                    "Font does not attempt to support {} ({})",
+                    language.id(),
+                    language.name()
+                )
+            }
+            SupportLevel::Indeterminate => {
+                format!(
+                    "Cannot determine whether font supports {} ({})",
+                    language.id(),
+                    language.name()
+                )
+            }
+        }
+    }
+}
+
+#[derive(Debug, Serialize, PartialEq)]
+pub enum SupportLevel {
+    Complete,      // Nothing can be improved.
+    Supported,     // No FAILs or WARNS, but some optional SKIPs
+    Incomplete,    // No FAILs
+    Unsupported,   // There were FAILs
+    None,          // Didn't even try
+    Indeterminate, // No checks
 }

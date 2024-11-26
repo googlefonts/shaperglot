@@ -8,7 +8,7 @@ use itertools::Itertools;
 use serde::{Deserialize, Serialize};
 use unicode_properties::{GeneralCategory, UnicodeGeneralCategory};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct NoOrphanedMarks {
     test_strings: Vec<ShapingInput>,
     has_orthography: bool,
@@ -67,6 +67,7 @@ impl CheckImplementation for NoOrphanedMarks {
                             check_name: self.name(),
                             message: format!("Shaper produced a dotted circle when {}", string),
                             code: "dotted-circle-produced".to_string(),
+                            terminal: false,
                             context: serde_json::json!({
                                 "text": previous,
                                 "mark": codepoint.glyph_id,
@@ -96,6 +97,7 @@ impl CheckImplementation for NoOrphanedMarks {
                             .unwrap_or_else(|| format!("Glyph #{}", codepoint.glyph_id));
                         let fail = Problem {
                             check_name: self.name(),
+                            terminal: false,
                             message: format!(
                                 "Shaper didn't attach {} to {} when {}",
                                 this_name, previous_name, string

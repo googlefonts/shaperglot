@@ -19,6 +19,9 @@ pub struct PositionalProvider;
 
 impl Provider for PositionalProvider {
     fn checks_for(&self, language: &Language) -> Vec<Check> {
+        if language.script() != "Arab" {
+            return vec![];
+        }
         // let marks = language
         //     .marks
         //     .iter()

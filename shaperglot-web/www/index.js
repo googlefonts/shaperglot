@@ -4,6 +4,14 @@ const fix_descriptions = {
   add_codepoint: "Add the following codepoints to the font",
   add_feature: "Add the following features to the font",
 };
+const STATUS_INT = {
+  "Complete": 5,
+  "Supported": 4,
+  "Incomplete": 3,
+  "Unsupported": 2,
+  "None": 1,
+  "Indeterminate": 0,
+};
 
 function commify(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -76,7 +84,7 @@ class Shaperglot {
       issues_by_script[language.script] =
         issues_by_script[language.script] || [];
       issues_by_script[language.script].push([language, result, problems]);
-      if (result === "supported") {
+      if (result === "Supported" || result === "Complete" || result === "Incomplete") {
         count_supported_by_script[language.script] =
           (count_supported_by_script[language.script] || 0) + 1;
       }
@@ -121,7 +129,7 @@ class Shaperglot {
       }
 
       for (let [language, result, problems] of languages.sort(
-        (a, b) => a[2].score - b[2].score || a[0].name.localeCompare(b[0].name)
+        (a, b) => STATUS_INT[a[1]] - STATUS_INT[b[1]] || a[0].name.localeCompare(b[0].name)
       )) {
         var thispill = $(`
         <button
@@ -155,6 +163,9 @@ class Shaperglot {
     if (language.autonym) {
       result.append(`<h2>(${language.autonym})</h2>`);
     }
+    result.append(
+      `<p class="mb-0"><b>ISO369-3 Code</b>: <code>${language.id}</code></p>`
+    );
     if (language.population) {
       result.append(
         `<p class="mb-0"><b>Population</b>: ${commify(language.population)}</p>`
@@ -174,19 +185,34 @@ class Shaperglot {
 
     let status = el.data("result");
 
-    if (status == "supported") {
+    if (status == "Complete") {
       result.append(
-        `<div class="p-3 mb-2 bg-success text-white">${filename} fully supports ${langname}!</div>`
+        `<div class="p-3 mb-2 alert alert-success">${filename} completely supports ${langname}!</div>`
       );
-    } else if (status == "nearly-supported") {
+    } else if (status == "Supported") {
+        result.append(
+          `<div class="p-3 mb-2 alert alert-success">${filename} fully supports ${langname} (but could be improved)</div>`
+        );
+  
+    } else if (status == "Incomplete") {
       result.append(
-        `<div class="p-3 mb-2 bg-warning text-white">${filename} nearly supports ${langname}!</div>`
+        `<div class="p-3 mb-2 alert alert-warning">${filename} does not fully support ${langname}!</div>`
+      );
+    } else if (status == "Unsupported") {
+      result.append(
+        `<div class="p-3 mb-2 alert alert-danger">${filename} does not support ${langname}.</div>`
+      );
+    } else if (status == "None") {
+      result.append(
+        `<div class="p-3 mb-2 alert alert-dark">${filename} does not attempt to support ${langname}.</div>`
       );
     } else {
       result.append(
-        `<div class="p-3 mb-2 bg-danger text-white">${filename} does not fully support ${langname}.</div>`
+        `<div class="p-3 mb-2 alert alert-dark">Cannot determine whether ${filename} supports ${langname}.</div>`
       );
     }
+    // result.append(`<pre>${JSON.stringify(problemSet)}</pre>`);
+
     let problem_html = $("<dl></dl>");
     let fixdiv = $(`<div><b>For full support:</b></div>`);
     let fixes_needed = {};
@@ -202,6 +228,7 @@ class Shaperglot {
         fixes,
       } = check;
       let mark = status == "Pass" ? "✅" : "❌";
+
       problem_html.append(
         `<dt>${check_name} ${mark} (${Math.round(
           score * weight * 100
@@ -213,7 +240,7 @@ class Shaperglot {
         </dd>`);
       problem_html.append(dd);
       if (problems.length > 0) {
-        dd.append(`<p><b>Problems:</b></p><ul></ul>`);
+        dd.append(`<p><b>Problems:</b><ul></ul></p>`);
       } else {
         dd.append(`<ul><li>No problems found!</li></ul>`);
       }
@@ -221,7 +248,7 @@ class Shaperglot {
         let { check_name, message, fixes } = problem;
         dd.find("ul").append(`<li>${message}</li>`);
 
-        for (var fix of fixes) {
+        for (var fix of fixes || []) {
           let { fix_type, fix_thing } = fix;
           fixes_needed[fix_type] = fixes_needed[fix_type] || [];
           fixes_needed[fix_type].push(fix_thing);
@@ -240,7 +267,6 @@ class Shaperglot {
     }
 
     result.append(problem_html);
-    // result.append(`<pre>${JSON.stringify(problemSet)}</pre>`);
     // result.append(`<pre>${JSON.stringify(language)}</pre>`);
   }
 

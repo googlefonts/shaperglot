@@ -4,6 +4,7 @@ use crate::{
     font::{feature_tags, glyph_names},
     language::Language,
     reporter::Reporter,
+    ResultCode,
 };
 use rustybuzz::Face;
 use skrifa::{raw::ReadError, FontRef, GlyphId, MetadataProvider};
@@ -52,7 +53,11 @@ impl<'a> Checker<'a> {
             // let toml = toml::to_string(&check_object).unwrap();
             // println!("Running check:\n{}", toml);
             let checkresult = check_object.execute(self);
+            let status = checkresult.status;
             results.add(checkresult);
+            if status == ResultCode::StopNow {
+                break;
+            }
         }
         results
     }

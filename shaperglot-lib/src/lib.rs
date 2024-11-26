@@ -10,5 +10,5 @@ pub use crate::{
     checker::Checker,
     language::Languages,
     providers::Provider,
-    reporter::{Reporter, ResultCode},
+    reporter::{Reporter, ResultCode, SupportLevel},
 };

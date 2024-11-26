@@ -54,16 +54,24 @@ h4 {
   outline: 5px dashed #ffffffff;
 }
 
-.status-supported {
+.status-Complete {
   background-color: #ddffdd !important;
 }
 
-.status-nearly-supported {
-  background-color: #ffffdd !important;
+.status-Supported {
+  background-color: #a8f4a9 !important;
 }
 
-.status-unsupported {
+.status-Incomplete {
+  background-color: #f1ebae !important;
+}
+
+.status-Unsupported {
   background-color: #ffdddd !important;
+}
+
+.status-None {
+  background-color: #a8a8a8 !important;
 }
 
 .flex-scroll {

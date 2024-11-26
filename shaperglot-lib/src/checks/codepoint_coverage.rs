@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::json;
 use std::collections::HashSet;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct CodepointCoverage {
     strings: HashSet<String>,
     code: String,
@@ -50,6 +50,9 @@ impl CheckImplementation for CodepointCoverage {
                     missing_things.join(", ")
                 ),
             );
+            if missing_things.len() == self.strings.len() {
+                fail.terminal = true;
+            }
             fail.context = json!({"glyphs": missing_things});
             fail.fixes.extend(missing_things.iter().map(|x| Fix {
                 fix_type: "add_codepoint".to_string(),

@@ -47,13 +47,7 @@ pub fn check_font(font_data: &[u8]) -> Result<String, JsValue> {
         }
         results.push((
             serde_json::to_value(&language.proto).map_err(|e| e.to_string())?,
-            if result.is_success() {
-                "supported"
-            } else if result.is_nearly_success(5) {
-                "nearly-supported"
-            } else {
-                "unsupported"
-            },
+            serde_json::to_value(result.support_level()).map_err(|e| e.to_string())?,
             serde_json::to_value(&result).map_err(|e| e.to_string())?,
         ));
     }

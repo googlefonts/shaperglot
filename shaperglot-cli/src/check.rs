@@ -37,7 +37,7 @@ pub fn check_command(args: &CheckArgs, language_database: shaperglot::Languages)
                 println!("{}", serde_json::to_string(&results).unwrap());
                 continue;
             }
-            println!("{}", results.to_summary_string(args.nearly, language));
+            println!("{}", results.to_summary_string(language));
             show_result(&results, args.verbose);
             if args.fix {
                 for (category, fixes) in results.unique_fixes() {

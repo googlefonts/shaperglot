@@ -39,6 +39,6 @@ pub fn report_command(args: &ReportArgs, language_database: shaperglot::Language
         if results.is_unknown() {
             continue;
         }
-        println!("{}", results.to_summary_string(args.nearly, language));
+        println!("{}", results.to_summary_string(language));
     }
 }
