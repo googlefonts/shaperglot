@@ -71,7 +71,11 @@ impl CheckImplementation for ShapingDiffers {
             );
             fail.fixes.push(Fix {
                 fix_type: "add_feature".to_string(),
-                fix_thing: format!("A rule such that {}", self.describe()),
+                fix_thing: format!(
+                    "A rule such that {} and {} give different results",
+                    before.describe(),
+                    after.describe()
+                ),
             });
             problems.push(fail);
         }
