@@ -12,7 +12,7 @@ use crate::Checker;
 pub struct ShapingInput {
     pub text: String,
     pub features: Vec<String>,
-    language: Option<String>,
+    pub language: Option<String>,
 }
 
 impl ShapingInput {
