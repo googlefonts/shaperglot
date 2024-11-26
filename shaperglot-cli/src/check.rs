@@ -61,9 +61,18 @@ fn show_result(results: &Reporter, verbose: u8) {
         if verbose == 0 && check.problems.is_empty() {
             continue;
         }
-        println!("   {}: {}", check.status, check.summary_result());
+        print!("   {}: {}", check.status, check.summary_result());
         if verbose > 1 {
-            println!("  {}", check.check_description);
+            println!(
+                " (score {:.1}% with weight {})",
+                check.score * 100.0,
+                check.weight
+            );
+            if verbose > 2 {
+                println!("  {}", check.check_description);
+            }
+        } else {
+            println!();
         }
         if verbose > 1 || (verbose == 1 && !check.problems.is_empty()) {
             for problem in check.problems.iter() {
