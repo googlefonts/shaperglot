@@ -3,8 +3,6 @@ use crate::{checks::Check, language::Language};
 // mod african_latin;
 mod orthographies;
 mod small_caps;
-// mod african_latin_constants;
-// pub use african_latin::AfricanLatinProvider;
 use orthographies::OrthographiesProvider;
 use small_caps::SmallCapsProvider;
 
