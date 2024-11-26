@@ -90,7 +90,10 @@ impl Languages {
     }
 
     pub fn get_language(&self, id: &str) -> Option<&Language> {
-        self.0.iter().find(|l| l.id() == id)
+        self.0
+            .iter()
+            .find(|l| l.id() == id)
+            .or_else(|| self.0.iter().find(|l| l.name() == id))
     }
 }
 
