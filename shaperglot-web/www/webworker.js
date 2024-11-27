@@ -14,7 +14,7 @@ async function init() {
     const { font } = event.data;
     try {
       const results = JSON.parse(wasm.check_font(font));
-      self.postMessage({ results: results });
+      self.postMessage({ results: results, family_name: wasm.family_name(font) });
     } catch (error) {
       self.postMessage({ error: error.message });
     }

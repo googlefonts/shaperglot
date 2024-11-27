@@ -109,3 +109,5 @@ button.nav-link {
 }
 
 dd { margin: 10px 25px 10px 25px; }
+
+dt details blockquote { font-weight: 400; margin: 10px 25px 10px 25px; }

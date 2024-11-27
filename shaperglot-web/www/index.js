@@ -72,6 +72,9 @@ class Shaperglot {
       this.regions = message.regions;
     } else if ("results" in message) {
       $("#spinnerModal").hide();
+      if (message.family_name) {
+        $("#filename").text(message.family_name);
+      }
       this.renderResults(message.results);
     }
   }
@@ -230,19 +233,24 @@ class Shaperglot {
       let mark = status == "Pass" ? "✅" : "❌";
 
       problem_html.append(
-        `<dt>${check_name} ${mark} (${Math.round(
-          score * weight * 100
-        ) / 100}/${weight} points)</dt>`
+        `<dt>
+        <details>
+          <summary>${check_name} ${mark} (${Math.round(
+            score * weight * 100
+          ) / 100}/${weight} points)
+          </summary>
+          <blockquote class="bg-light">${check_description}
+          </blockquote>
+        </dt>`
       );
       let dd = $(`<dd>
-        <blockquote class="bg-light">${check_description}
-        </blockquote>
+       
         </dd>`);
       problem_html.append(dd);
       if (problems.length > 0) {
         dd.append(`<p><b>Problems:</b><ul></ul></p>`);
       } else {
-        dd.append(`<ul><li>No problems found!</li></ul>`);
+        problem_html.find("details").last().append(`<ul><li>No problems found!</li></ul>`);
       }
       for (var problem of problems) {
         let { check_name, message, fixes } = problem;

@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use skrifa::{raw::tables::name::NameId, FontRef, MetadataProvider};
 use wasm_bindgen::prelude::*;
 extern crate console_error_panic_hook;
 use google_fonts_languages::{RegionProto, ScriptProto, REGIONS, SCRIPTS};
@@ -33,6 +34,16 @@ pub fn regions() -> Result<String, JsValue> {
         .map(|(id, proto)| (id.to_string(), *proto.clone()))
         .collect();
     serde_json::to_string(&region_hash).map_err(|e| e.to_string().into())
+}
+
+#[wasm_bindgen]
+pub fn family_name(font_data: &[u8]) -> Result<String, JsValue> {
+    let font = FontRef::new(font_data).map_err(|e| e.to_string())?;
+    Ok(font
+        .localized_strings(NameId::FAMILY_NAME)
+        .english_or_first()
+        .map(|s| s.chars().collect())
+        .unwrap_or_default())
 }
 
 #[wasm_bindgen]
