@@ -7,7 +7,7 @@ default-members = ["shaperglot-lib", "shaperglot-cli"]
 
 [workspace.dependencies]
 read-fonts = "0"
-skrifa = "0"
+skrifa = "0.26.0"
 itertools = "0.13.0"
 google-fonts-languages = "*"
 toml = "0.8.19"
