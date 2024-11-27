@@ -16,7 +16,7 @@ google-fonts-languages = "*"
 skrifa = { workspace = true }
 itertools = {workspace = true}
 rustybuzz = "0.18.0"
-serde_json = "1.0"
+serde_json = { workspace = true }
 unicode-normalization = "*"
 colored = { version = "*", optional = true }
 unicode-properties = "0.1.3"
