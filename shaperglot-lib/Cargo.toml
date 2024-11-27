@@ -12,7 +12,7 @@ path = "src/lib.rs"
 google-fonts-languages = "*"
 skrifa = { workspace = true }
 itertools = {workspace = true}
-rustybuzz = "0.18.0"
+rustybuzz = "0.20.1"
 serde_json = { workspace = true }
 unicode-normalization = "*"
 colored = { version = "*", optional = true }
