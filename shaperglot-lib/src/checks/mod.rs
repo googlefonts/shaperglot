@@ -21,13 +21,13 @@ pub trait CheckImplementation {
     fn execute(&self, checker: &Checker) -> (Vec<Problem>, usize);
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub enum ScoringStrategy {
     Continuous,
     AllOrNothing,
 }
 
-#[derive(Delegate, Serialize, Deserialize, Debug)]
+#[derive(Delegate, Serialize, Deserialize, Debug, Clone)]
 #[delegate(CheckImplementation)]
 #[serde(tag = "type")]
 pub enum CheckType {
@@ -36,7 +36,7 @@ pub enum CheckType {
     ShapingDiffers(ShapingDiffers),
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Check {
     pub name: String,
     pub severity: ResultCode,

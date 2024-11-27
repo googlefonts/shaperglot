@@ -1,0 +1,14 @@
+[[tr_Latn]]
+name = "Small caps i should be dotted"
+severity = "Warn"
+description = "When the letter 'i' is in small caps, it should be dotted"
+scoring_strategy = "Continuous"
+weight = 10
+
+[[tr_Latn.implementations]]
+type = "ShapingDiffers"
+features_optional = true
+pairs = [[
+    { text = "i", features = ["smcp"] },
+    { text = "i", features = ["smcp"], language = "tr" },
+]]

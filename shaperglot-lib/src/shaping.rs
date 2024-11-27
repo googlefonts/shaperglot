@@ -8,10 +8,12 @@ use serde::{Deserialize, Serialize};
 
 use crate::Checker;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ShapingInput {
     pub text: String,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
     pub features: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub language: Option<String>,
 }
 

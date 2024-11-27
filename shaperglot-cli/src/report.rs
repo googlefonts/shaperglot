@@ -27,7 +27,12 @@ pub struct ReportArgs {
 }
 
 pub fn report_command(args: &ReportArgs, language_database: shaperglot::Languages) {
-    let font_binary = std::fs::read(args.font.as_path()).expect("Failed to read font file");
+    let font_binary = std::fs::read(args.font.as_path())
+        .map_err(|e| {
+            eprintln!("Failed to read font file {}: {}", args.font.display(), e);
+            std::process::exit(1);
+        })
+        .unwrap();
     let checker = Checker::new(&font_binary).expect("Failed to load font");
     for language in language_database.iter() {
         if let Some(filter) = &args.filter {

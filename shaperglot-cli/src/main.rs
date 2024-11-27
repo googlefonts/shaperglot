@@ -1,8 +1,10 @@
 use check::{check_command, CheckArgs};
 use clap::{Parser, Subcommand};
+use describe::{describe_command, DescribeArgs};
 use report::{report_command, ReportArgs};
 
 mod check;
+mod describe;
 mod report;
 
 #[derive(Parser)]
@@ -19,6 +21,8 @@ enum Commands {
     Check(CheckArgs),
     /// Report language support
     Report(ReportArgs),
+    /// Describe what is needed to support a language
+    Describe(DescribeArgs),
 }
 
 fn main() {
@@ -31,6 +35,9 @@ fn main() {
         }
         Commands::Report(args) => {
             report_command(args, language_database);
+        }
+        Commands::Describe(args) => {
+            describe_command(args, language_database);
         }
     }
 }

@@ -3,9 +3,12 @@ use crate::{checks::Check, language::Language};
 mod orthographies;
 mod positional;
 mod small_caps;
+mod toml;
+
 use orthographies::OrthographiesProvider;
 use positional::PositionalProvider;
 use small_caps::SmallCapsProvider;
+use toml::TomlProvider;
 
 pub trait Provider {
     fn checks_for(&self, language: &Language) -> Vec<Check>;
@@ -20,9 +23,7 @@ impl Provider for BaseCheckProvider {
         checks.extend(OrthographiesProvider.checks_for(language));
         checks.extend(SmallCapsProvider.checks_for(language));
         checks.extend(PositionalProvider.checks_for(language));
-
-        // And any manually coded checks
-
+        checks.extend(TomlProvider.checks_for(language));
         checks
     }
 }

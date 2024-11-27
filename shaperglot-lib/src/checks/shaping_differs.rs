@@ -10,7 +10,7 @@ use itertools::Itertools;
 use rustybuzz::SerializeFlags;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ShapingDiffers {
     pairs: Vec<(ShapingInput, ShapingInput)>,
     features_optional: bool,
