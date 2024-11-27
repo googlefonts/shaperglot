@@ -8,6 +8,7 @@ use crate::{
     Provider, ResultCode,
 };
 
+/// Zero Width Joiner
 const ZWJ: &str = "\u{200D}";
 
 // const MARKS_FOR_LANG: [(&str, &str); 1] = [(
@@ -15,6 +16,11 @@ const ZWJ: &str = "\u{200D}";
 //         "\u{064E}\u{0651} \u{064B}\u{0651} \u{0650}\u{0651} \u{064D}\u{0651} \u{064F}\u{0651} \u{064C}\u{0651}",
 // )];
 
+/// A provider that checks for positional forms in Arabic
+///
+/// A font which supports Arabic should not only cover the Arabic codepoints,
+/// but contain OpenType shaping rules for the `init`, `medi`, and `fina` features.
+/// This provider checks that Arabic letters form positional forms when the `init`, `medi`, and `fina` features are enabled.
 pub struct PositionalProvider;
 
 impl Provider for PositionalProvider {
@@ -68,6 +74,7 @@ impl Provider for PositionalProvider {
     }
 }
 
+/// Create a pair of ShapingInputs for a positional form check
 fn positional_check(
     pre: &str,
     character: &str,

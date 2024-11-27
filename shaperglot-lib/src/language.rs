@@ -1,49 +1,49 @@
-use google_fonts_languages::{LanguageProto, LANGUAGES, SCRIPTS};
+use google_fonts_languages::{LanguageProto, LANGUAGES};
 use unicode_normalization::UnicodeNormalization;
 
 use crate::{
     checks::Check,
     providers::{BaseCheckProvider, Provider},
 };
+
+/// A language definition, including checks and exemplar characters
 pub struct Language {
+    /// The underlying language definition from the google-fonts-languages database
     pub proto: Box<LanguageProto>,
+    /// The checks that apply to this language
     pub checks: Vec<Check>,
+    /// Mandatory base characters for the language
     pub bases: Vec<String>,
+    /// Optional auxiliary characters for the language
     pub auxiliaries: Vec<String>,
+    /// Mandatory mark characters for the language
     pub marks: Vec<String>,
 }
 
 impl Language {
+    /// The language's ISO 639-3 code
     pub fn id(&self) -> &str {
         self.proto.id()
     }
 
+    /// The language's name
     pub fn name(&self) -> &str {
         self.proto.name()
     }
 
-    pub fn full_name(&self) -> String {
-        format!(
-            "{} in the {} script",
-            self.proto.name(),
-            SCRIPTS
-                .get(self.proto.script())
-                .map(|s| s.name())
-                .unwrap_or("Unknown")
-        )
-    }
-
+    /// The language's ISO15924 script code
     pub fn script(&self) -> &str {
         self.proto.script()
     }
-    pub fn language(&self) -> &str {
-        self.proto.language()
-    }
 }
 
+/// The language database
 pub struct Languages(Vec<Language>);
 
 impl Languages {
+    /// Instantiate a new language database
+    ///
+    /// This loads the database and fills it with checks.
     pub fn new() -> Self {
         let mut languages = Vec::new();
         for (_id, proto) in LANGUAGES.iter() {
@@ -85,10 +85,12 @@ impl Languages {
         Languages(languages)
     }
 
+    /// Get an iterator over the languages
     pub fn iter(&self) -> std::slice::Iter<Language> {
         self.0.iter()
     }
 
+    /// Get a single language by ID or name
     pub fn get_language(&self, id: &str) -> Option<&Language> {
         self.0
             .iter()
@@ -103,6 +105,7 @@ impl Default for Languages {
     }
 }
 
+/// Split up an exemplars string into individual characters
 fn parse_chars(chars: &str) -> Vec<String> {
     chars
         .split_whitespace()

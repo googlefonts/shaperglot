@@ -9,15 +9,20 @@ use serde::{Deserialize, Serialize};
 use crate::Checker;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+/// A struct representing the input to the shaping process.
 pub struct ShapingInput {
+    /// The text to shape.
     pub text: String,
+    /// The OpenType features to apply.
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub features: Vec<String>,
+    /// The language to shape the text in.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub language: Option<String>,
 }
 
 impl ShapingInput {
+    /// Create a new `ShapingInput` with the given text, no features and language supplied
     pub fn new_simple(text: String) -> Self {
         Self {
             text,
@@ -26,6 +31,7 @@ impl ShapingInput {
         }
     }
 
+    /// Create a new `ShapingInput` with the given text and a single OpenType feature
     pub fn new_with_feature(text: String, feature: impl AsRef<str>) -> Self {
         Self {
             text,
@@ -33,6 +39,8 @@ impl ShapingInput {
             language: None,
         }
     }
+
+    /// Shape the text using the given checker context
     pub fn shape(&self, checker: &Checker) -> Result<GlyphBuffer, String> {
         let mut buffer = rustybuzz::UnicodeBuffer::new();
         buffer.push_str(&self.text);
@@ -47,6 +55,7 @@ impl ShapingInput {
         Ok(glyph_buffer)
     }
 
+    /// Describe the shaping input
     pub fn describe(&self) -> String {
         let mut description = format!("shaping the text '{}'", self.text);
         if let Some(language) = &self.language {
@@ -59,6 +68,7 @@ impl ShapingInput {
         description
     }
 
+    /// Get the character at the given position in the text
     pub fn char_at(&self, pos: usize) -> Option<char> {
         self.text.chars().nth(pos)
     }

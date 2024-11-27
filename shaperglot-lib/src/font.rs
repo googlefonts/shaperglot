@@ -9,6 +9,7 @@ use skrifa::{
     FontRef,
 };
 
+/// Get a list of glyph names for a font
 pub(crate) fn glyph_names(font: &FontRef) -> Result<Vec<String>, ReadError> {
     #[allow(clippy::unwrap_used)] // Heck, Skrifa does the same
     let glyph_count = font.maxp().unwrap().num_glyphs().into();
@@ -54,6 +55,7 @@ pub(crate) fn glyph_names(font: &FontRef) -> Result<Vec<String>, ReadError> {
     Ok(names)
 }
 
+/// Get a list of feature tags present in a font
 pub(crate) fn feature_tags(font: &FontRef) -> Result<HashSet<String>, ReadError> {
     let mut tags = HashSet::new();
     if let Some(gsub_featurelist) = font.gsub().ok().and_then(|gsub| gsub.feature_list().ok()) {

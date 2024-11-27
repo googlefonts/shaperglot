@@ -7,11 +7,16 @@ use crate::{
 use itertools::Itertools;
 use unicode_properties::{GeneralCategoryGroup, UnicodeGeneralCategory};
 
+/// Check if a base character (in NFC) contains a mark
 fn has_complex_decomposed_base(base: &str) -> bool {
     base.chars()
         .any(|c| c.general_category_group() == GeneralCategoryGroup::Mark)
 }
 
+/// Check that the font covers the basic codepoints for the language's orthography
+///
+/// This check is mandatory for all languages. Base and mark codepoints are required,
+/// and auxiliary codepoints are optional.
 pub struct OrthographiesProvider;
 
 impl Provider for OrthographiesProvider {
@@ -29,7 +34,7 @@ impl Provider for OrthographiesProvider {
     }
 }
 
-// Orthography check. We MUST have all bases and marks.
+/// Orthography check. We MUST have all bases and marks.
 fn mandatory_orthography(language: &Language) -> Check {
     let mut mandatory_orthography = Check {
         name: "Mandatory orthography codepoints".to_string(),
@@ -83,7 +88,7 @@ fn mandatory_orthography(language: &Language) -> Check {
     mandatory_orthography
 }
 
-// We SHOULD have auxiliaries
+/// We SHOULD have auxiliaries
 fn auxiliaries_check(language: &Language) -> Option<Check> {
     if language.auxiliaries.is_empty() {
         return None;

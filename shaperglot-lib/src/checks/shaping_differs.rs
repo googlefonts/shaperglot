@@ -11,8 +11,14 @@ use rustybuzz::SerializeFlags;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+/// A check implementation which ensures that two shaping inputs produce different outputs
 pub struct ShapingDiffers {
+    /// The pairs of strings to shape and compare
     pairs: Vec<(ShapingInput, ShapingInput)>,
+    /// Whether the features are optional
+    ///
+    /// If this is true, the check will only run if the font contains the requested feature;
+    /// otherwise it will be skiped. If it is false, the check will always run.
     features_optional: bool,
 }
 
@@ -94,6 +100,7 @@ impl CheckImplementation for ShapingDiffers {
 }
 
 impl ShapingDiffers {
+    /// Create a new `ShapingDiffers` check implementation
     pub fn new(pairs: Vec<(ShapingInput, ShapingInput)>, features_optional: bool) -> Self {
         Self {
             pairs,

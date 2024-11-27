@@ -9,17 +9,25 @@ use crate::{
 use rustybuzz::Face;
 use skrifa::{raw::ReadError, FontRef, GlyphId, MetadataProvider};
 
+/// The context for running font language support checks
 pub struct Checker<'a> {
+    /// The font to check, as a [read_fonts::FontRef]
     pub font: FontRef<'a>,
+    /// The face to use for shaping
     pub face: Face<'a>,
+    /// The glyph names in the font
     pub glyph_names: Vec<String>,
+    /// The OpenType features present in the font
     pub features: HashSet<String>,
+    /// The character map of the font
     pub cmap: BTreeMap<u32, GlyphId>,
+    /// The reversed character map of the font
     reversed_cmap: BTreeMap<GlyphId, u32>,
     // full_reversed_cmap: Arc<Mutex<Option<BTreeMap<GlyphId, u32>>>>,
 }
 
 impl<'a> Checker<'a> {
+    /// Create a new font checker
     pub fn new(font_binary: &'a [u8]) -> Result<Self, ReadError> {
         let face = Face::from_slice(font_binary, 0).expect("Couldn't load font");
         let font = FontRef::new(font_binary)?;
@@ -38,6 +46,7 @@ impl<'a> Checker<'a> {
         })
     }
 
+    /// Get the codepoint for a given glyph ID
     pub fn codepoint_for(&self, gid: GlyphId) -> Option<u32> {
         // self.reversed_cmap.get(&gid).copied().or_else(||
         // if !self.full_reversed_cmap.is_some() {
@@ -47,6 +56,7 @@ impl<'a> Checker<'a> {
         self.reversed_cmap.get(&gid).copied()
     }
 
+    /// Check a font for language support
     pub fn check(&self, language: &Language) -> Reporter {
         let mut results = Reporter::default();
         for check_object in language.checks.iter() {

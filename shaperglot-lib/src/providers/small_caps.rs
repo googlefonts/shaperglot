@@ -6,6 +6,10 @@ use crate::{
 };
 use unicode_properties::{GeneralCategory, UnicodeGeneralCategory};
 
+/// A provider that checks for small caps support in Latin-based languages
+///
+/// This provider checks that Latin letters form small caps when the `smcp` feature is enabled.
+/// If the `smcp` feature is not present in the font, the check will be skipped.
 pub struct SmallCapsProvider;
 
 impl Provider for SmallCapsProvider {

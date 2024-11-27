@@ -10,8 +10,11 @@ use serde_json::json;
 use std::collections::HashSet;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+/// A check implementation which ensures codepoints are present in a font
 pub struct CodepointCoverage {
+    /// The codepoints to check for
     strings: HashSet<String>,
+    /// The unique code to return on failure (e.g. "marks-missing")
     code: String,
 }
 
@@ -72,6 +75,7 @@ impl CheckImplementation for CodepointCoverage {
 }
 
 impl CodepointCoverage {
+    /// Create a new `CodepointCoverage` check implementation
     pub fn new(test_strings: Vec<String>, code: String) -> Self {
         Self {
             strings: test_strings.into_iter().collect(),

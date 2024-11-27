@@ -9,8 +9,14 @@ use serde::{Deserialize, Serialize};
 use unicode_properties::{GeneralCategory, UnicodeGeneralCategory};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+/// A check implementation which ensures marks are anchors to their respective base characters
 pub struct NoOrphanedMarks {
+    /// The strings to shape and check
     test_strings: Vec<ShapingInput>,
+    /// Whether the language has orthography data
+    ///
+    /// If this is true, we will not report notdefs, as the orthography check will
+    /// catch them.
     has_orthography: bool,
 }
 
@@ -130,6 +136,7 @@ impl CheckImplementation for NoOrphanedMarks {
     }
 }
 
+/// Check if a codepoint is a nonspacing mark
 fn simple_mark_check(c: u32) -> bool {
     char::from_u32(c)
         .map(|c| matches!(c.general_category(), GeneralCategory::NonspacingMark))
@@ -137,6 +144,7 @@ fn simple_mark_check(c: u32) -> bool {
 }
 
 impl NoOrphanedMarks {
+    /// Create a new `NoOrphanedMarks` check implementation
     pub fn new(test_strings: Vec<ShapingInput>, has_orthography: bool) -> Self {
         Self {
             test_strings,
