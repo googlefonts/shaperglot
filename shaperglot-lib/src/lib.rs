@@ -8,6 +8,21 @@
 //! dictate particular implementations of language support, in terms of
 //! what glyphs or rules are present in the font or how glyphs should be named,
 //! but tests a font for its behaviour.
+//!
+//! # Example
+//!
+//! ```
+//! use shaperglot::{Checker, Languages, Provider};
+//!
+//! fn test_font(font_binary: &[u8]) {
+//!   let font = Checker::new(font_binary).expect("Failed to load font");
+//!   let languages = Languages::new();
+//!   for language in languages.iter() {
+//!      let results = font.check(language);
+//!      println!("{}", results.to_summary_string(language));
+//!   }
+//! }
+//! ```
 
 /// The checker object, representing the context of a check
 mod checker;

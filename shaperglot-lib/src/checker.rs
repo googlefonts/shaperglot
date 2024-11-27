@@ -11,7 +11,7 @@ use skrifa::{raw::ReadError, FontRef, GlyphId, MetadataProvider};
 
 /// The context for running font language support checks
 pub struct Checker<'a> {
-    /// The font to check, as a [read_fonts::FontRef]
+    /// The font to check, as a [skrifa::FontRef]
     pub font: FontRef<'a>,
     /// The face to use for shaping
     pub face: Face<'a>,
