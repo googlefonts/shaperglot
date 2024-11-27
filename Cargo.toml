@@ -11,4 +11,4 @@ skrifa = "0.26.0"
 itertools = "0.13.0"
 google-fonts-languages = "*"
 toml = "0.8.19"
-serde_json = { version = "1.0.96", features = ["preserve_order"] }
+serde_json = { version = "1.0.133", features = ["preserve_order"] }
