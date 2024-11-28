@@ -29,6 +29,7 @@ mod checker;
 /// Low-level checks and their implementations
 mod checks;
 /// Utility functions to extract information from a font
+#[cfg(feature = "skrifa")]
 mod font;
 /// Structures and routines relating to the language database
 mod language;
@@ -45,3 +46,6 @@ pub use crate::{
     providers::Provider,
     reporter::{Reporter, ResultCode, SupportLevel},
 };
+
+/// A glyph ID.
+pub type GlyphId = u32;
