@@ -59,6 +59,7 @@ fn mandatory_orthography(language: &Language) -> Check {
         implementations: vec![CheckType::CodepointCoverage(CodepointCoverage::new(
             language.bases.clone(),
             "base".to_string(),
+            true,
         ))],
     };
     let marks: Vec<String> = language.marks.iter().map(|s| s.replace("◌", "")).collect();
@@ -68,6 +69,7 @@ fn mandatory_orthography(language: &Language) -> Check {
             .push(CheckType::CodepointCoverage(CodepointCoverage::new(
                 marks,
                 "mark".to_string(),
+                false,
             )));
     }
     let complex_bases: Vec<ShapingInput> = language
@@ -128,6 +130,7 @@ fn auxiliaries_check(language: &Language) -> Option<Check> {
             .push(CheckType::CodepointCoverage(CodepointCoverage::new(
                 vec![codepoint.clone()],
                 "auxiliary".to_string(),
+                false,
             )));
     }
     // If auxiliary exemplars contain marks, they SHOULD NOT be orphaned.

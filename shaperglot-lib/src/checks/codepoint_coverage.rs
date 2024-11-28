@@ -16,6 +16,8 @@ pub struct CodepointCoverage {
     strings: HashSet<String>,
     /// The unique code to return on failure (e.g. "marks-missing")
     code: String,
+    /// Whether to mark the problem as terminal if no codepoints are found
+    terminal_if_empty: bool,
 }
 
 fn can_shape(text: &str, face: &Face) -> bool {
@@ -53,7 +55,7 @@ impl CheckImplementation for CodepointCoverage {
                     missing_things.join(", ")
                 ),
             );
-            if missing_things.len() == self.strings.len() {
+            if missing_things.len() == self.strings.len() && self.terminal_if_empty {
                 fail.terminal = true;
             }
             fail.context = json!({"glyphs": missing_things});
@@ -76,10 +78,11 @@ impl CheckImplementation for CodepointCoverage {
 
 impl CodepointCoverage {
     /// Create a new `CodepointCoverage` check implementation
-    pub fn new(test_strings: Vec<String>, code: String) -> Self {
+    pub fn new(test_strings: Vec<String>, code: String, terminal_if_empty: bool) -> Self {
         Self {
             strings: test_strings.into_iter().collect(),
             code,
+            terminal_if_empty,
         }
     }
 }
