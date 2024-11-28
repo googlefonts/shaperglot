@@ -55,15 +55,15 @@ h4 {
 }
 
 .status-Complete {
-  background-color: #ddffdd !important;
+  background-color: #30f15a !important;
 }
 
 .status-Supported {
-  background-color: #a8f4a9 !important;
+  background-color: #5eee7d !important;
 }
 
 .status-Incomplete {
-  background-color: #f1ebae !important;
+  background-color: #b7fb73 !important;
 }
 
 .status-Unsupported {

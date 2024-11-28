@@ -53,6 +53,8 @@ class Shaperglot {
     }
     window.thing = files[0];
     $("#filename").text(files[0].name);
+    let style = document.styleSheets[0].cssRules[0].style;
+    style.setProperty("src", "url(" + URL.createObjectURL(files[0]) + ")");
     var reader = new FileReader();
     let that = this;
     reader.onload = function (e) {
@@ -64,7 +66,7 @@ class Shaperglot {
   }
 
   progress_callback(message) {
-    console.log("Got message", message);
+    // console.log("Got message", message);
     if ("ready" in message) {
       $("#bigLoadingModal").hide();
       $("#startModal").show();
@@ -180,26 +182,31 @@ class Shaperglot {
         .join(", ");
       result.append(`<p class="mb-0"><b>Regions</b>: ${regions_list}</p>`);
     }
+    let status = el.data("result");
+
     if (language.sample_text) {
-      result.append(
-        `<p class="mb-0"><b>Sample text</b>:<blockquote class="blockquote">${language.sample_text.specimen_32} ${language.sample_text.specimen_21}</blockquote></p>`
-      );
+      let extra_class = "";
+      if (status == "Complete" || status == "Supported" || status == "Incomplete") {
+        extra_class = "testfont";
+      }
+      result.append($(
+        `<p class="mb-0"><b>Sample text</b>:<blockquote class="blockquote ${extra_class}">${language.sample_text.specimen_32} ${language.sample_text.specimen_21}</blockquote></p>`
+      ));
     }
 
-    let status = el.data("result");
 
     if (status == "Complete") {
       result.append(
-        `<div class="p-3 mb-2 alert alert-success">${filename} completely supports ${langname}!</div>`
+        `<div class="p-3 mb-2 alert alert-success">${filename} comprehensively supports ${langname}!</div>`
       );
     } else if (status == "Supported") {
         result.append(
-          `<div class="p-3 mb-2 alert alert-success">${filename} fully supports ${langname} (but could be improved)</div>`
+          `<div class="p-3 mb-2 alert alert-success">${filename} supports ${langname} well (but further support is possible).</div>`
         );
   
     } else if (status == "Incomplete") {
       result.append(
-        `<div class="p-3 mb-2 alert alert-warning">${filename} does not fully support ${langname}!</div>`
+        `<div class="p-3 mb-2 alert alert-success">${filename} supports ${langname}.</div>`
       );
     } else if (status == "Unsupported") {
       result.append(
