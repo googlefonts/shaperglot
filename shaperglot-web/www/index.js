@@ -54,7 +54,12 @@ class Shaperglot {
     window.thing = files[0];
     $("#filename").text(files[0].name);
     let style = document.styleSheets[0].cssRules[0].style;
-    style.setProperty("src", "url(" + URL.createObjectURL(files[0]) + ")");
+    try {
+      style.setProperty("src", "url(" + URL.createObjectURL(files[0]) + ")");
+    } catch (e) {
+      console.error(e + `: https://bugzilla.mozilla.org/show_bug.cgi?id=1466489 is RESOLVED FIXED -
+      and yet here we are.`);
+    }
     var reader = new FileReader();
     let that = this;
     reader.onload = function (e) {
