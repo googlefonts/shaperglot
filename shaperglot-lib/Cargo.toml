@@ -7,10 +7,11 @@ edition = "2021"
 path = "src/lib.rs"
 
 [features]
+default = ["skrifa"]
 
 [dependencies]
 google-fonts-languages = "*"
-skrifa = { workspace = true }
+skrifa = { workspace = true, optional = true }
 itertools = {workspace = true}
 rustybuzz = "0.20.1"
 serde_json = { workspace = true }

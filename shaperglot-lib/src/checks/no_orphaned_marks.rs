@@ -31,7 +31,7 @@ impl CheckImplementation for NoOrphanedMarks {
 
     fn execute(&self, checker: &Checker) -> (Vec<Problem>, usize) {
         let tests_run = self.test_strings.len();
-        let dotted_circle = checker.cmap.get(&0x25CC).map(|g| g.to_u32());
+        let dotted_circle = checker.cmap.get(&0x25CC).cloned();
         let mut problems = vec![];
 
         for string in self.test_strings.iter() {
