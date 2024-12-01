@@ -19,7 +19,7 @@ unicode-normalization = "*"
 colored = { version = "*", optional = true }
 unicode-properties = "0.1.3"
 unicode-joining-type = "1.0.0"
-indexmap = "2"
+indexmap = "2.7.0"
 log = "0.4"
 toml = { workspace = true }
 serde = "1.0.215"
