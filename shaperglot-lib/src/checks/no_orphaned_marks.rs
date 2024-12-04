@@ -63,7 +63,7 @@ impl CheckImplementation for NoOrphanedMarks {
                     problems.push(fail);
                 }
                 if checker
-                    .codepoint_for(codepoint.glyph_id.into())
+                    .codepoint_for(codepoint.glyph_id)
                     .map(simple_mark_check)
                     .unwrap_or(false)
                 {
