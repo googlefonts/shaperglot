@@ -8,6 +8,7 @@ weight = 10
 [[tr_Latn.implementations]]
 type = "ShapingDiffers"
 features_optional = true
+ignore_notdefs = false
 pairs = [[
     { text = "i", features = ["smcp"] },
     { text = "i", features = ["smcp"], language = "tr" },

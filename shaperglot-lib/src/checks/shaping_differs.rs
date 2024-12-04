@@ -20,6 +20,8 @@ pub struct ShapingDiffers {
     /// If this is true, the check will only run if the font contains the requested feature;
     /// otherwise it will be skiped. If it is false, the check will always run.
     features_optional: bool,
+    /// Whether to ignore any notdefs generated while shaping
+    ignore_notdefs: bool,
 }
 
 impl CheckImplementation for ShapingDiffers {
@@ -66,6 +68,14 @@ impl CheckImplementation for ShapingDiffers {
             if serialized_before != serialized_after {
                 continue;
             }
+            if self.ignore_notdefs
+                && glyph_buffer_before
+                    .glyph_infos()
+                    .iter()
+                    .any(|glyph| glyph.glyph_id == 0)
+            {
+                continue;
+            }
             let mut fail = Problem::new(
                 &self.name(),
                 "shaping-same",
@@ -101,10 +111,15 @@ impl CheckImplementation for ShapingDiffers {
 
 impl ShapingDiffers {
     /// Create a new `ShapingDiffers` check implementation
-    pub fn new(pairs: Vec<(ShapingInput, ShapingInput)>, features_optional: bool) -> Self {
+    pub fn new(
+        pairs: Vec<(ShapingInput, ShapingInput)>,
+        features_optional: bool,
+        ignore_notdefs: bool,
+    ) -> Self {
         Self {
             pairs,
             features_optional,
+            ignore_notdefs,
         }
     }
 }

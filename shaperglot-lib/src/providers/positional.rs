@@ -58,9 +58,9 @@ impl Provider for PositionalProvider {
             }
         }
         let implementations = vec![
-            CheckType::ShapingDiffers(ShapingDiffers::new(init_pairs, false)),
-            CheckType::ShapingDiffers(ShapingDiffers::new(medi_pairs, false)),
-            CheckType::ShapingDiffers(ShapingDiffers::new(fina_pairs, false)),
+            CheckType::ShapingDiffers(ShapingDiffers::new(init_pairs, false, false)),
+            CheckType::ShapingDiffers(ShapingDiffers::new(medi_pairs, false, false)),
+            CheckType::ShapingDiffers(ShapingDiffers::new(fina_pairs, false, false)),
         ];
         vec![Check {
             name: "Positional forms for Arabic letters".to_string(),

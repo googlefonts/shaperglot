@@ -37,6 +37,7 @@ impl Provider for SmallCapsProvider {
                 })
                 .collect(),
             true,
+            true,
         ))];
         vec![Check {
             name: "Small caps for Latin letters".to_string(),
