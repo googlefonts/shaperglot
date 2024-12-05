@@ -13,6 +13,6 @@ shaperglot = { path = "../shaperglot-lib", features=["colored"] }
 skrifa = { workspace = true }
 read-fonts = { workspace = true }
 itertools = { workspace = true }
-clap = { version = "4.5.21", features = ["derive"] }
+clap = { version = "4.5.23", features = ["derive"] }
 serde_json = { workspace = true }
 toml = {workspace = true }
