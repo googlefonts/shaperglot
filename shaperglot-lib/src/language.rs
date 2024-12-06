@@ -7,6 +7,7 @@ use crate::{
 };
 
 /// A language definition, including checks and exemplar characters
+#[derive(Clone, Debug)]
 pub struct Language {
     /// The underlying language definition from the google-fonts-languages database
     pub proto: Box<LanguageProto>,
@@ -89,7 +90,6 @@ impl Languages {
     pub fn iter(&self) -> std::slice::Iter<Language> {
         self.0.iter()
     }
-
     /// Get a single language by ID or name
     pub fn get_language(&self, id: &str) -> Option<&Language> {
         self.0
@@ -99,6 +99,14 @@ impl Languages {
     }
 }
 
+impl IntoIterator for Languages {
+    type Item = Language;
+    type IntoIter = std::vec::IntoIter<Language>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.into_iter()
+    }
+}
 impl Default for Languages {
     fn default() -> Self {
         Self::new()

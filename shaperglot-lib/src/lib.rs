@@ -42,7 +42,7 @@ mod shaping;
 
 pub use crate::{
     checker::Checker,
-    language::Languages,
+    language::{Language, Languages},
     providers::Provider,
     reporter::{Reporter, ResultCode, SupportLevel},
 };
