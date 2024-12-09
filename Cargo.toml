@@ -1,7 +1,7 @@
 [workspace]
 resolver = "2"
 
-members = ["shaperglot-lib", "shaperglot-cli", "shaperglot-web" ]
+members = ["shaperglot-lib", "shaperglot-cli", "shaperglot-web", "shaperglot-py" ]
 
 default-members = ["shaperglot-lib", "shaperglot-cli"]
 

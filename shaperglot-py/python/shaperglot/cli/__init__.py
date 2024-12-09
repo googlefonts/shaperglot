@@ -21,6 +21,7 @@ def main(args=None) -> None:
     subparsers = parser.add_subparsers(help='sub-commands')
 
     parser_describe = subparsers.add_parser('describe', help=describe.__doc__)
+    parser_describe.add_argument('--verbose', '-v', action='count')
     parser_describe.add_argument(
         'lang', metavar='LANG', help='an ISO639-3 language code'
     )

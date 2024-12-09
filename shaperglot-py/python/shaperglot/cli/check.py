@@ -1,9 +1,7 @@
 from collections import defaultdict
 from typing import Optional
 
-from shaperglot.checker import Checker
-from shaperglot.languages import Languages
-from shaperglot.reporter import Reporter
+from shaperglot import Checker, Languages, Reporter
 
 try:
     import glyphsets
@@ -45,25 +43,28 @@ def check(options) -> None:
             print(f"Language '{orig_lang}' not known")
             continue
 
-        results = checker.check(langs[lang])
+        reporter = checker.check(langs[lang])
 
-        if results.is_unknown:
+        if reporter.is_unknown:
             print(f"Cannot determine whether font supports language '{lang}'")
-        elif results.is_nearly_success(options.nearly):
-            print(f"Font nearly supports language '{lang}'")
-            for fixtype, things in results.unique_fixes().items():
+        elif reporter.is_nearly_success(options.nearly):
+            print(f"Font nearly supports language '{lang}' {reporter.score:.1f}%")
+            for fixtype, things in reporter.unique_fixes().items():
                 fixes_needed[fixtype].update(things)
-        elif results.is_success:
+        elif reporter.is_success:
             print(f"Font supports language '{lang}'")
         else:
-            print(f"Font does not fully support language '{lang}'")
+            print(
+                f"Font does not fully support language '{lang}' {reporter.score:.1f}%"
+            )
 
         if options.verbose and options.verbose > 1:
-            for message in results:
-                print(f" * {message}")
-        elif options.verbose or not results.is_success:
-            for message in results.fails:
-                print(f" * {message}")
+            for result in reporter:
+                print(f" * {result.message} {result.status_code}")
+        elif options.verbose or not reporter.is_success:
+            for result in reporter:
+                if not result.is_success:
+                    print(f" * {result}")
 
     if fixes_needed:
         show_how_to_fix(fixes_needed)

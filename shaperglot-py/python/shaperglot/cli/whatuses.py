@@ -1,8 +1,7 @@
 import sys
 from textwrap import wrap
 
-from shaperglot.languages import Languages
-from shaperglot.checks.orthographies import parse_bases
+from shaperglot import Languages
 
 
 def whatuses(options) -> None:
@@ -28,10 +27,9 @@ def whatuses(options) -> None:
     mark_langs = []
     aux_langs = []
     for lang in langs.values():
-        exemplar_chars = lang.get("exemplarChars", {})
-        marks = exemplar_chars.get("marks", "").replace("◌", "").split() or []
-        bases = parse_bases(exemplar_chars.get("base", ""))
-        aux = parse_bases(exemplar_chars.get("auxiliary", ""))
+        bases = lang.bases
+        marks = lang.marks
+        aux = lang.auxiliaries
         lang_key = f"{lang['name']} [{lang['id']}]".replace(" ", "\u00A0")
         if char in bases:
             base_langs.append(lang_key)

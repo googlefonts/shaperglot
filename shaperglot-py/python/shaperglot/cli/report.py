@@ -4,9 +4,10 @@ import re
 from textwrap import fill
 from typing import Iterable
 
-from shaperglot.checker import Checker
-from shaperglot.languages import Languages
-from shaperglot.reporter import Result
+from shaperglot import Checker
+from shaperglot import Languages
+
+# from shaperglot import Result
 
 
 try:
@@ -61,11 +62,13 @@ def report(options) -> None:
             fixes_needed[fixtype].update(things)
         if options.group:
             continue
-        print(f"Font {msg} language '{lang}' ({langs[lang]['name']})")
+        print(
+            f"Font {msg} language '{lang}' ({langs[lang]['name']}) ({results.score:.1f}%)"
+        )
 
         if options.verbose and options.verbose > 1:
-            for status, message in results:
-                print(f" * {status.value}: {message}")
+            for subresult in results:
+                print(f" * {subresult.status_code}: {subresult.message}")
 
     if options.csv:
         return
@@ -104,7 +107,7 @@ def short_summary(supported, nearly, unsupported) -> None:
     if supported:
         print(f"* {len(supported)} languages supported")
     if nearly:
-        print(f"* {len(supported)} languages nearly supported")
+        print(f"* {len(nearly)} languages nearly supported")
 
 
 def long_summary(fixes_needed, unsupported) -> None:
@@ -124,21 +127,24 @@ def long_summary(fixes_needed, unsupported) -> None:
             print("    - " + fix)
 
 
-def report_csv(langcode, lang, results: Iterable[Result]) -> None:
+def report_csv(langcode, lang, results) -> None:
     print(f"{langcode},\"{lang['name']}\",{results.is_success},", end="")
     missing_bases = set()
     missing_marks = set()
     missing_anchors = set()
     other_errors = set()
-    for msg in results:
-        if msg.result_code == "bases-missing":
-            missing_bases |= set(msg.context["glyphs"])
-        elif msg.result_code == "marks-missing":
-            missing_marks |= set(msg.context["glyphs"])
-        elif msg.result_code == "orphaned-mark":
-            missing_anchors.add(msg.context["base"] + "/" + msg.context["mark"])
-        else:
-            other_errors.add(msg.result_code)
+    for result in results:
+        for problem in result.problems:
+            if problem.code == "bases-missing":
+                missing_bases |= set(problem.context["glyphs"])
+            elif problem.code == "marks-missing":
+                missing_marks |= set(problem.context["glyphs"])
+            elif problem.code == "orphaned-mark":
+                missing_anchors.add(
+                    problem.context["base"] + "/" + problem.context["mark"]
+                )
+            else:
+                other_errors.add(problem.code)
     print(" ".join(sorted(missing_bases)), end=",")
     print(" ".join(sorted(missing_marks)), end=",")
     print(" ".join(sorted(missing_anchors)), end=",")
