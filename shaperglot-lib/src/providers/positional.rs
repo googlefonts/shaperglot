@@ -2,7 +2,10 @@ use unicode_joining_type::{get_joining_type, JoiningType};
 use unicode_properties::{GeneralCategoryGroup, UnicodeGeneralCategory};
 
 use crate::{
-    checks::{Check, CheckType, ScoringStrategy, ShapingDiffers},
+    checks::{
+        shaping_differs::{FeaturesOptional, IgnoreNotdefs},
+        Check, CheckType, ScoringStrategy, ShapingDiffers,
+    },
     language::Language,
     shaping::ShapingInput,
     Provider, ResultCode,
@@ -58,9 +61,21 @@ impl Provider for PositionalProvider {
             }
         }
         let implementations = vec![
-            CheckType::ShapingDiffers(ShapingDiffers::new(init_pairs, false, false)),
-            CheckType::ShapingDiffers(ShapingDiffers::new(medi_pairs, false, false)),
-            CheckType::ShapingDiffers(ShapingDiffers::new(fina_pairs, false, false)),
+            CheckType::ShapingDiffers(ShapingDiffers::new(
+                init_pairs,
+                FeaturesOptional(false),
+                IgnoreNotdefs(true),
+            )),
+            CheckType::ShapingDiffers(ShapingDiffers::new(
+                medi_pairs,
+                FeaturesOptional(false),
+                IgnoreNotdefs(true),
+            )),
+            CheckType::ShapingDiffers(ShapingDiffers::new(
+                fina_pairs,
+                FeaturesOptional(false),
+                IgnoreNotdefs(true),
+            )),
         ];
         vec![Check {
             name: "Positional forms for Arabic letters".to_string(),

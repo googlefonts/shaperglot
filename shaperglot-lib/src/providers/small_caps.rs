@@ -1,5 +1,8 @@
 use crate::{
-    checks::{Check, CheckType, ScoringStrategy, ShapingDiffers},
+    checks::{
+        shaping_differs::{FeaturesOptional, IgnoreNotdefs},
+        Check, CheckType, ScoringStrategy, ShapingDiffers,
+    },
     language::Language,
     shaping::ShapingInput,
     Provider, ResultCode,
@@ -36,8 +39,8 @@ impl Provider for SmallCapsProvider {
                     )
                 })
                 .collect(),
-            true,
-            true,
+            FeaturesOptional(true),
+            IgnoreNotdefs(true),
         ))];
         vec![Check {
             name: "Small caps for Latin letters".to_string(),

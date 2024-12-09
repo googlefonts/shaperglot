@@ -1,9 +1,9 @@
 /// A check implementation which ensures codepoints are present in a font
 mod codepoint_coverage;
 /// A check implementation which ensures marks are anchors to their respective base characters
-mod no_orphaned_marks;
+pub(crate) mod no_orphaned_marks;
 /// A check implementation which ensures that two shaping inputs produce different outputs
-mod shaping_differs;
+pub(crate) mod shaping_differs;
 
 use crate::{
     checker::Checker,

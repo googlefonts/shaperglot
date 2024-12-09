@@ -10,6 +10,14 @@ use itertools::Itertools;
 use rustybuzz::SerializeFlags;
 use serde::{Deserialize, Serialize};
 
+#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
+/// Whether the features are optional
+pub struct FeaturesOptional(pub bool);
+
+#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
+/// Whether to ignore any notdefs generated while shaping
+pub struct IgnoreNotdefs(pub bool);
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 /// A check implementation which ensures that two shaping inputs produce different outputs
 pub struct ShapingDiffers {
@@ -19,9 +27,9 @@ pub struct ShapingDiffers {
     ///
     /// If this is true, the check will only run if the font contains the requested feature;
     /// otherwise it will be skiped. If it is false, the check will always run.
-    features_optional: bool,
+    features_optional: FeaturesOptional,
     /// Whether to ignore any notdefs generated while shaping
-    ignore_notdefs: bool,
+    ignore_notdefs: IgnoreNotdefs,
 }
 
 impl CheckImplementation for ShapingDiffers {
@@ -30,7 +38,7 @@ impl CheckImplementation for ShapingDiffers {
     }
 
     fn should_skip(&self, checker: &Checker) -> Option<String> {
-        if !self.features_optional {
+        if !self.features_optional.0 {
             return None;
         }
         let needed_features: HashSet<String> = self
@@ -68,7 +76,7 @@ impl CheckImplementation for ShapingDiffers {
             if serialized_before != serialized_after {
                 continue;
             }
-            if self.ignore_notdefs
+            if self.ignore_notdefs.0
                 && glyph_buffer_before
                     .glyph_infos()
                     .iter()
@@ -113,8 +121,8 @@ impl ShapingDiffers {
     /// Create a new `ShapingDiffers` check implementation
     pub fn new(
         pairs: Vec<(ShapingInput, ShapingInput)>,
-        features_optional: bool,
-        ignore_notdefs: bool,
+        features_optional: FeaturesOptional,
+        ignore_notdefs: IgnoreNotdefs,
     ) -> Self {
         Self {
             pairs,
