@@ -11,4 +11,4 @@ crate-type = ["cdylib"]
 [dependencies]
 shaperglot = { path = "../shaperglot-lib" }
 pyo3 = "0.22"
-pythonize = "0.22.0"
+pythonize = "0.23.0"
