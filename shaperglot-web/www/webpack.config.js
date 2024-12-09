@@ -16,8 +16,8 @@ module.exports = {
   mode: "development",
   plugins: [
     new CopyWebpackPlugin([
-        'index.html',
-        '*.css',
+        { "patterns": 'index.html' },
+        { "patterns": '*.css' },
        ]
     )
   ],
