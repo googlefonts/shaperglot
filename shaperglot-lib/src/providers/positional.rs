@@ -80,7 +80,7 @@ impl Provider for PositionalProvider {
         vec![Check {
             name: "Positional forms for Arabic letters".to_string(),
             severity: ResultCode::Fail,
-            description: "Arabic letters should form positional forms when the init, medi, and fina features are enabled"
+            description: "Arabic letters MUST form positional forms when the init, medi, and fina features are enabled"
                 .to_string(),
             scoring_strategy: ScoringStrategy::Continuous,
             weight: 20,
