@@ -27,7 +27,7 @@
 /// The checker object, representing the context of a check
 mod checker;
 /// Low-level checks and their implementations
-mod checks;
+pub mod checks;
 /// Utility functions to extract information from a font
 #[cfg(feature = "skrifa")]
 mod font;
@@ -42,9 +42,10 @@ mod shaping;
 
 pub use crate::{
     checker::Checker,
+    checks::Check,
     language::{Language, Languages},
     providers::Provider,
-    reporter::{Reporter, ResultCode, SupportLevel},
+    reporter::{CheckResult, Problem, Reporter, ResultCode, SupportLevel},
 };
 
 /// A glyph ID.

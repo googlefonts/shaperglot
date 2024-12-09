@@ -49,7 +49,7 @@ impl Display for ResultCode {
     }
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Serialize, Deserialize, Clone)]
 /// Suggestions for how to fix the problem
 pub struct Fix {
     /// The broad category of fix
@@ -58,7 +58,7 @@ pub struct Fix {
     pub fix_thing: String,
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Serialize, Deserialize, Clone)]
 /// A problem found during a sub-test of a check
 pub struct Problem {
     /// The name of the check that found the problem
@@ -109,7 +109,7 @@ impl Display for Problem {
 }
 impl Eq for Problem {}
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Serialize, Deserialize, Clone)]
 /// The result of an individual check
 pub struct CheckResult {
     /// The name of the check
