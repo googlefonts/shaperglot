@@ -2,6 +2,11 @@
 
 [![PyPI Version](https://img.shields.io/pypi/v/shaperglot.svg)](https://pypi.org/project/shaperglot)
 [![PyPI License](https://img.shields.io/pypi/l/shaperglot.svg)](https://pypi.org/project/shaperglot)
+[![Read The Docs](https://readthedocs.org/projects/shaperglot/badge/)](https://https://shaperglot.readthedocs.io/en/latest/)
+
+
+
+Documentation: https://shaperglot.readthedocs.io/en/latest/
 
 Shaperglot is a library and a utility for testing a font's language support.
 You give it a font, and it tells you what languages are supported and to what
