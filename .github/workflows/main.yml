@@ -47,7 +47,7 @@ jobs:
                 yum install -y protobuf-compiler
                 ;;
             esac
-          args: --release --out dist --find-interpreter
+          args: --release --out ../dist --find-interpreter
           sccache: "true"
           manylinux: auto
       - name: Upload wheels
@@ -74,7 +74,7 @@ jobs:
         with:
           working-directory: shaperglot-py
           target: ${{ matrix.target }}
-          args: --release --out dist --find-interpreter
+          args: --release --out ../dist --find-interpreter
           sccache: "true"
       - name: Upload wheels
         uses: actions/upload-artifact@v3
@@ -101,7 +101,7 @@ jobs:
         with:
           working-directory: shaperglot-py
           target: ${{ matrix.target }}
-          args: --release --out dist --find-interpreter
+          args: --release --out ../dist --find-interpreter
           sccache: "true"
       - name: Upload wheels
         uses: actions/upload-artifact@v3
@@ -118,7 +118,7 @@ jobs:
         with:
           working-directory: shaperglot-py
           command: sdist
-          args: --out dist
+          args: --out ../dist
       - name: Upload sdist
         uses: actions/upload-artifact@v3
         with:
