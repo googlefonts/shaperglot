@@ -9,9 +9,8 @@ build:
   tools:
     python: "latest"
     rust: "latest"
-  jobs:
-    post_system_dependencies:
-      - sudo apt-get install protobuf-compiler
+  apt_packages:
+    - protobuf-compiler
 
 python:
   install:
