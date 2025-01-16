@@ -1,6 +1,6 @@
 #![deny(clippy::unwrap_used, clippy::expect_used)]
 use check::Check;
-use checkresult::CheckResult;
+use checkresult::{CheckResult, Problem};
 use language::{Language, Languages};
 use pyo3::prelude::*;
 use reporter::Reporter;
@@ -19,5 +19,6 @@ fn shaperglot(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Language>()?;
     m.add_class::<Languages>()?;
     m.add_class::<CheckResult>()?;
-    m.add_class::<Reporter>()
+    m.add_class::<Reporter>()?;
+    m.add_class::<Problem>()
 }

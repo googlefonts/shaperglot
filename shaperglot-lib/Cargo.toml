@@ -1,7 +1,12 @@
 [package]
 name = "shaperglot"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
+license = "Apache-2.0"
+authors = ["The Shaperglot Authors"]
+description = "Test font files for OpenType language support"
+homepage = "https://github.com/googlefonts/shaperglot"
+repository = "https://github.com/googlefonts/shaperglot"
 
 [lib]
 path = "src/lib.rs"
@@ -10,13 +15,13 @@ path = "src/lib.rs"
 default = ["skrifa"]
 
 [dependencies]
-google-fonts-languages = "*"
+google-fonts-languages = { workspace = true }
 skrifa = { workspace = true, optional = true }
-itertools = {workspace = true}
+itertools = { workspace = true }
 rustybuzz = "0.20.1"
 serde_json = { workspace = true }
-unicode-normalization = "*"
-colored = { version = "*", optional = true }
+unicode-normalization = "0.1.24"
+colored = { version = "3.0.0", optional = true }
 unicode-properties = "0.1.3"
 unicode-joining-type = "1.0.0"
 indexmap = "2"
