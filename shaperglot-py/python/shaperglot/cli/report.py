@@ -1,13 +1,9 @@
-from collections import defaultdict
 import os
 import re
+from collections import defaultdict
 from textwrap import fill
-from typing import Iterable
 
-from shaperglot import Checker
-from shaperglot import Languages
-
-# from shaperglot import Result
+from shaperglot import Checker, Languages
 
 
 try:
