@@ -4,9 +4,7 @@
 [![PyPI License](https://img.shields.io/pypi/l/shaperglot.svg)](https://pypi.org/project/shaperglot)
 [![Read The Docs](https://readthedocs.org/projects/shaperglot/badge/)](https://https://shaperglot.readthedocs.io/en/latest/)
 
-
-
-Documentation: https://shaperglot.readthedocs.io/en/latest/
+Try [Shaperglot on the web](https://googlefonts.github.io/shaperglot)!
 
 Shaperglot is a library and a utility for testing a font's language support.
 You give it a font, and it tells you what languages are supported and to what
@@ -61,7 +59,7 @@ when we shape some Arabic glyphs, the output with `init` turned on is different
 to the output with `init` turned off. We don't care what's different; we only
 care that something has happened. _(Yes, this still makes it possible to trick shaperglot into reporting support for a language which is not correctly implemented, but at that point, it's probably less effort to actually implement it...)_
 
-Shaperglot includes (or will include) the following kinds of test:
+Shaperglot includes the following kinds of test:
 
 - Certain codepoints were mapped to base or mark glyphs.
 - A named feature was present.
@@ -71,35 +69,46 @@ Shaperglot includes (or will include) the following kinds of test:
 - Languagesystems were defined in the font.
 - ...
 
-Using this library of tests, we then create language support definitions which
-exercise the font's capabilities to obtain a fuller picture of its support for
-a particular language. These language support definitions, expressed as YAML
-files, are the core of Shaperglot; to extend and improve Shaperglot, we need as
-many language support definition files as possible - so if you know a language
-well and can express what it means to "support" that language properly, please
-contribute a definition!
-
 ## Using Shaperglot
 
-To report whether or not a given language is supported, pass a font and one or
-more ISO639-3 language codes.
+Shaperglot consists of multiple components:
+
+### Shaperglot Web interface
+
+The easiest way to use Shaperglot as an end-user or font developer is through the
+[web interface](https://googlefonts.github.io/shaperglot). This allows you to drag
+and drop a font to analyze its language coverage. This is entirely client-side,
+and all fonts remain on your computer. Nothing is uploaded.
+
+### Shaperglot command line tools
+
+The next most user-friendly way to use Shaperglot is at the command line. You can
+install the latest version with:
+
+    cargo install --git https://github.com/googlefonts/shaperglot
+
+This will provide you with a new tool called `shaperglot`. It has four subcommands:
+
+- `shaperglot check <font> <language> <language>...` checks whether a font supports the given language IDs.
+- `shaperglot report <font>` reports all languages supported by the font.
+- `shaperglot describe <language>` explains what needs to be done for a font to supportt a given language ID.
 
 ```
-$ shaperglot -v -v MyFont.ttf urd
-Font does not fully support language 'urd'
- * PASS: All base glyphs were present in the font
- * FAIL: Some mark glyphs were missing: ْ
- * PASS: Required feature 'mark' was present
- * PASS: Mark glyph ◌َ  (FATHA) took part in a mark positioning rule
- * PASS: Mark glyph ◌ُ  (DAMMA) took part in a mark positioning rule
- * PASS: Mark glyph ◌ِ  (KASRA) took part in a mark positioning rule
- * PASS: Mark glyph ◌ٰ  (LONG_A) took part in a mark positioning rule
- * PASS: Required feature 'init' was present
- * PASS: Glyph ع (AINu1) took part in a init rule
- * PASS: Required feature 'medi' was present
- * PASS: Glyph ع (AINu1) took part in a medi rule
- * PASS: Required feature 'fina' was present
- * PASS: Glyph ع (AINu1) took part in a fina rule
- * PASS: Repeated beh forms should produce different shapes
- * PASS: Initial and final forms should differ
+$ shaperglot describe Nuer
+The font MUST support the following Nuer bases and marks: 'a', 'A', 'ä', 'Ä', 'a̱', 'A̱', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'ë', 'Ë', 'e̱', 'E̱', 'ɛ', 'Ɛ', 'ɛ̈', 'Ɛ̈', 'ɛ̱', 'Ɛ̱', 'ɛ̱̈', 'Ɛ̱̈', 'f', 'F', 'g', 'G', 'ɣ', 'Ɣ', 'h', 'H', 'i', 'I', 'ï', 'Ï', 'i̱', 'I̱', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'ŋ', 'Ŋ', 'o', 'O', 'ö', 'Ö', 'o̱', 'O̱', 'ɔ', 'Ɔ', 'ɔ̈', 'Ɔ̈', 'ɔ̱', 'Ɔ̱', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z', '◌̈', '◌̱'
+The font SHOULD support the following auxiliary orthography codepoints: 'ʈ', 'Ʈ'
+Latin letters should form small caps when the smcp feature is enabled
 ```
+
+### Shaperglot Rust library
+
+See the documentation on https://docs.rs/shaperglot/latest
+
+### Shaperglot Python library
+
+The Python library wraps the Rust library using PyO3. This new PyO3 implementation
+_broadly_ follows the same API as the original 0.x Python implementation, but all
+imports are at the top level (`from shaperglot import Checker`, etc.) The PyO3
+version is available as a pre-release from Pypi.
+
+Python Library Documentation: https://shaperglot.readthedocs.io/en/latest/
