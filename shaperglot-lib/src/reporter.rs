@@ -222,7 +222,7 @@ impl Reporter {
 
     /// Whether the font supports the language
     pub fn is_success(&self) -> bool {
-        self.0.iter().all(|r| r.problems.is_empty())
+        !self.is_unknown() && self.0.iter().all(|r| r.problems.is_empty())
     }
 
     /// Whether the support level is unknown
