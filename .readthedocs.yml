@@ -1,0 +1,18 @@
+version: 2
+
+sphinx:
+  configuration: ./shaperglot-py/docs/conf.py
+  builder: html
+
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "latest"
+    rust: "latest"
+
+python:
+  install:
+    - method: pip
+      path: ./shaperglot-py
+      extra_requirements:
+        - docs
