@@ -11,7 +11,7 @@ build:
     rust: "latest"
   jobs:
     post_system_dependencies:
-      - apt-get install protobuf-compiler
+      - sudo apt-get install protobuf-compiler
 
 python:
   install:
