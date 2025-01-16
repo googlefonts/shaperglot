@@ -46,6 +46,7 @@ jobs:
                 yum update -y
                 yum install -y protobuf-compiler
                 ;;
+            esac
           args: --release --out dist --find-interpreter
           sccache: "true"
           manylinux: auto
