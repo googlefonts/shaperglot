@@ -61,11 +61,12 @@ jobs:
     strategy:
       matrix:
         target: [x64, x86]
+        python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: ${{ matrix.python }}
           architecture: ${{ matrix.target }}
       - name: Install Protoc
         uses: arduino/setup-protoc@v3
@@ -79,7 +80,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-windows-${{ matrix.target }}
+          name: wheels-windows-${{ matrix.target }}-${{ matrix.python }}
           path: dist
 
   macos:
@@ -87,6 +88,7 @@ jobs:
     strategy:
       matrix:
         target: [x86_64, aarch64]
+        python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
       - name: Install Protoc
@@ -95,7 +97,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: ${{ matrix.python }}
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
@@ -106,7 +108,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-macos-${{ matrix.target }}
+          name: wheels-macos-${{ matrix.target }}-${{ matrix.python }}
           path: dist
 
   sdist:
