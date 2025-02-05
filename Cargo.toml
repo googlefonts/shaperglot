@@ -6,7 +6,7 @@ members = ["shaperglot-lib", "shaperglot-cli", "shaperglot-web", "shaperglot-py"
 default-members = ["shaperglot-lib", "shaperglot-cli"]
 
 [workspace.dependencies]
-read-fonts = "0.25.1"
+read-fonts = "0.26.0"
 skrifa = "0.26.1"
 itertools = "0.13.0"
 google-fonts-languages = "0.7.2"
