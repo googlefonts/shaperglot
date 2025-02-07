@@ -26,8 +26,8 @@ jobs:
         target: [x86_64, x86, aarch64, armv7, s390x, ppc64le]
     steps:
       - uses: actions/checkout@v4
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v3
+      #- name: Install Protoc
+      #  uses: arduino/setup-protoc@v3
       - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -68,8 +68,8 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
           architecture: ${{ matrix.target }}
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v3
+      #- name: Install Protoc
+      #  uses: arduino/setup-protoc@v3
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
@@ -91,10 +91,10 @@ jobs:
         python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v3
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        #- name: Install Protoc
+        #  uses: arduino/setup-protoc@v3
+      #  with:
+      #    repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}

@@ -1,7 +1,7 @@
 name: Build GH Pages
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -10,8 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
-      - name: Install protoc
-        run: sudo apt-get install protobuf-compiler
+      # - name: Install protoc
+      #   run: sudo apt-get install protobuf-compiler
       - name: Install wasm-pack
         run: cargo install wasm-pack
       - name: Build
@@ -28,8 +28,8 @@ jobs:
   deploy:
     needs: build
     permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
