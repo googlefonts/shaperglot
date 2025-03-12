@@ -151,41 +151,77 @@ jobs:
   #         name: wheels-pyodide
   #         path: dist
 
-  wasm-emscripten:
+  # wasm-emscripten:
+  #   strategy:
+  #     matrix:
+  #       # https://pyodide.org/en/stable/project/changelog.html
+  #       version:
+  #         - python: '3.12'
+  #           emscripten: 3.1.58  # pyodide 0.27.* 0.26.*
+  #         # - python: '3.11'
+  #         #   emscripten: 3.1.46  # pyodide 0.25.*
+  #         # - python: '3.11'
+  #         #   emscripten: 3.1.45  # pyodide 0.24.*
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: mymindstorm/setup-emsdk@v14
+  #       with:
+  #         version: ${{ matrix.version.emscripten }}
+  #     - uses: PyO3/maturin-action@v1
+  #       with:
+  #         working-directory: shaperglot-py
+  #         # maturin-version: ${{ env.MATURIN_VERSION }}
+  #         target: wasm32-unknown-emscripten
+  #         rust-toolchain: nightly
+  #         args: --release --out ../dist --strip -i python${{ matrix.version.python }}
+  #     - name: Upload Pyodide wheel
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: wheels-pyodide
+  #         path: dist
+
+  build-wasm32-emscripten-pyodide:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         # https://pyodide.org/en/stable/project/changelog.html
         version:
           - python: '3.12'
             emscripten: 3.1.58  # pyodide 0.27.* 0.26.*
-          # - python: '3.11'
-          #   emscripten: 3.1.46  # pyodide 0.25.*
-          # - python: '3.11'
-          #   emscripten: 3.1.45  # pyodide 0.24.*
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: mymindstorm/setup-emsdk@v14
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
         with:
-          version: ${{ matrix.version.emscripten }}
-      - name: Verify wasm-opt version
-        run: wasm-opt --version
-      - name: Update wasm-opt version
-        run: cargo install wasm-opt
-      - name: Verify wasm-opt version
-        run: wasm-opt --version
-      - uses: PyO3/maturin-action@v1
-        with:
-          working-directory: shaperglot-py
-          # maturin-version: ${{ env.MATURIN_VERSION }}
+          toolchain: nightly
           target: wasm32-unknown-emscripten
-          rust-toolchain: nightly
-          args: --release --out ../dist --strip -i python${{ matrix.version.python }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install Emscripten
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          # This needs to match the exact expected version pyodide expects...seems a bit brittle TBH, maybe I'm missing something.
+          # Discover by updating pyodide in package.json and re-running 'npm run test'; it'll spit out the error of 
+          # the expected vs actual versions.
+          version: ${{ matrix.version.emscripten }}
+
+      - name: Build
+        run: |
+          pip install maturin
+          cd shaperglot-py
+          maturin build --release -i python${{ matrix.python }} --features wasm32-compat --target wasm32-unknown-emscripten -o ../dist
+
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
         with:
           name: wheels-pyodide
           path: dist
+
 
   # sdist:
   #   runs-on: ubuntu-latest
