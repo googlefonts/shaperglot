@@ -18,6 +18,9 @@ on:
 permissions:
   contents: read
 
+env:
+  MATURIN_VERSION: 1.7.4
+
 jobs:
   # linux:
   #   runs-on: ubuntu-latest
@@ -111,37 +114,67 @@ jobs:
   #         name: wheels-macos-${{ matrix.target }}-${{ matrix.python }}
   #         path: dist
 
-  pyodide:
+  # pyodide:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-python@v5
+  #       with:
+  #         python-version: "3.10"
+  #     - name: Install Rust
+  #       run: |
+  #         rustup update nightly
+  #         rustup target add wasm32-unknown-emscripten --toolchain nightly
+  #     - name: Install emscripten
+  #       run: |
+  #         git clone https://github.com/emscripten-core/emsdk.git
+  #         cd emsdk
+  #         ./emsdk install latest # or 2.0.5
+  #         ./emsdk activate latest # or 2.0.5
+  #         source ./emsdk_env.sh
+  #         which emcc
+  #         emcc --version
+  #     - name: Build Pyodide wheel
+  #       uses: PyO3/maturin-action@v1
+  #       env:
+  #         RUSTUP_TOOLCHAIN: nightly
+  #         CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
+  #       with:
+  #         working-directory: shaperglot-py
+  #         target: wasm32-unknown-emscripten
+  #         args: --release --out ../dist --find-interpreter
+  #         sccache: "true"
+  #         rust-toolchain: nightly
+  #     - name: Upload Pyodide wheel
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: wheels-pyodide
+  #         path: dist
+
+  wasm-emscripten:
+    strategy:
+      matrix:
+        # https://pyodide.org/en/stable/project/changelog.html
+        version:
+          - python: '3.12'
+            emscripten: 3.1.58  # pyodide 0.26.*
+          - python: '3.11'
+            emscripten: 3.1.46  # pyodide 0.25.*
+          - python: '3.11'
+            emscripten: 3.1.45  # pyodide 0.24.*
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: mymindstorm/setup-emsdk@v14
         with:
-          python-version: "3.10"
-      - name: Install Rust
-        run: |
-          rustup update nightly
-          rustup target add wasm32-unknown-emscripten --toolchain nightly
-      - name: Install emscripten
-        run: |
-          git clone https://github.com/emscripten-core/emsdk.git
-          cd emsdk
-          ./emsdk install latest # or 2.0.5
-          ./emsdk activate latest # or 2.0.5
-          source ./emsdk_env.sh
-          which emcc
-          emcc --version
-      - name: Build Pyodide wheel
-        uses: PyO3/maturin-action@v1
-        env:
-          RUSTUP_TOOLCHAIN: nightly
-          CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
+          version: ${{ matrix.version.emscripten }}
+      - uses: PyO3/maturin-action@v1
         with:
           working-directory: shaperglot-py
+          maturin-version: ${{ env.MATURIN_VERSION }}
           target: wasm32-unknown-emscripten
-          args: --release --out ../dist --find-interpreter
-          sccache: "true"
           rust-toolchain: nightly
+          args: --release --out ../dist --strip -i python${{ matrix.version.python }}
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
         with:
