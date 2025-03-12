@@ -235,6 +235,7 @@ jobs:
           pwd
           mkdir dist
           cd shaperglot-py
+          export PYO3_CROSS_PYTHON_VERSION=${{ matrix.version.python }}
           cargo build --target wasm32-unknown-emscripten --release
           ls -la
           maturin build -i python${{ matrix.version.python }} --strip --target wasm32-unknown-emscripten -o ../dist
