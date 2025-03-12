@@ -225,13 +225,22 @@ jobs:
         env:
           RUSTUP_TOOLCHAIN: nightly
           # CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
+
         run: |
           pip install maturin
+          sudo apt install binaryen
+          which wasm-opt
+          wasm-opt --version
           ls -la
           pwd
           mkdir dist
           cd shaperglot-py
           maturin build -i python${{ matrix.version.python }} --strip --release --target wasm32-unknown-emscripten -o ../dist
+
+      # - name: Build directly with cargo and wasm32 target
+      #   run: |
+      #     rustup target add wasm32-unknown-emscripten
+      #     cargo build --target wasm32-unknown-emscripten --release
 
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
