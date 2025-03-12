@@ -123,7 +123,7 @@ jobs:
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           source $HOME/.cargo/env
           rustup update
-          rustup target add wasm32-unknown-emscripten      - name: Install emscripten
+          rustup target add wasm32-unknown-emscripten
       - name: Install emscripten
         run: |
           git clone https://github.com/emscripten-core/emsdk.git
