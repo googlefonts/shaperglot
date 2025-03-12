@@ -175,6 +175,7 @@ jobs:
           target: wasm32-unknown-emscripten
           rust-toolchain: nightly
           args: --release --out ../dist --strip -i python${{ matrix.version.python }}
+          production: yes
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
         with:
