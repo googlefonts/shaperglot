@@ -126,9 +126,22 @@ jobs:
         run: |
           git clone https://github.com/emscripten-core/emsdk.git
           cd emsdk
-          ./emsdk install latest
-          ./emsdk activate latest
+          ./emsdk install latest # or 2.0.5
+          ./emsdk activate latest # or 2.0.5
           source ./emsdk_env.sh
+
+      # Set up Emscripten environment
+      - name: Set up Emscripten environment
+        run: |
+          echo "Setting up Emscripten environment..."
+          source ~/emsdk/emsdk_env.sh
+
+      # Ensure the environment is set up correctly for the linker
+      - name: Verify emcc
+        run: |
+          which emcc
+          emcc --version
+
       - name: Build Pyodide wheel
         uses: PyO3/maturin-action@v1
         env:
@@ -136,7 +149,7 @@ jobs:
         with:
           working-directory: shaperglot-py
           target: wasm32-unknown-emscripten
-          args: --release --out ../dist --find-interpreter --target wasm32-unknown-emscripten
+          args: --release --out ../dist --find-interpreter
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
         with:
