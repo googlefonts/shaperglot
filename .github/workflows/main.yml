@@ -225,7 +225,6 @@ jobs:
           CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
         run: |
           pip install maturin
-          cd shaperglot-py
           maturin build -i python${{ matrix.version.python }} --target wasm32-unknown-emscripten -o ../dist
 
       - name: Upload Pyodide wheel
