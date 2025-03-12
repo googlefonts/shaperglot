@@ -111,6 +111,29 @@ jobs:
           name: wheels-macos-${{ matrix.target }}-${{ matrix.python }}
           path: dist
 
+  pyodide:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install emscripten
+        run: |
+          git clone https://github.com/emscripten-core/emsdk.git
+          cd emsdk
+          ./emsdk install latest
+          ./emsdk activate latest
+          source ./emsdk_env.sh
+      - name: Build Pyodide wheel
+        uses: PyO3/maturin-action@v1
+        with:
+          working-directory: shaperglot-py
+          target: wasm32-unknown-emscripten
+          args: --release --out ../dist --find-interpreter
+      - name: Upload Pyodide wheel
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-pyodide
+          path: dist
+
   sdist:
     runs-on: ubuntu-latest
     steps:
@@ -128,7 +151,7 @@ jobs:
           path: dist
 
   consolidate:
-    needs: [linux, windows, macos, sdist]
+    needs: [linux, windows, macos, pyodide, sdist]
     name: Consolidate wheels
     runs-on: ubuntu-latest
     steps:
