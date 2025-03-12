@@ -18,170 +18,100 @@ on:
 permissions:
   contents: read
 
-env:
-  MATURIN_VERSION: 1.7.4
-
 jobs:
-  # linux:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       target: [x86_64, x86, aarch64, armv7, s390x, ppc64le]
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     #- name: Install Protoc
-  #     #  uses: arduino/setup-protoc@v3
-  #     - uses: actions/setup-python@v5
-  #       with:
-  #         python-version: "3.10"
-  #     - name: Build wheels
-  #       uses: PyO3/maturin-action@v1
-  #       with:
-  #         working-directory: shaperglot-py
-  #         target: ${{ matrix.target }}
-  #         before-script-linux: |
-  #           case "${{ matrix.target }}" in
-  #             "aarch64" | "armv7" | "s390x" | "ppc64le")
-  #               sudo apt-get update
-  #               sudo apt-get install -y protobuf-compiler
-  #               ;;
-  #             "x86" | "x86_64")
-  #               yum update -y
-  #               yum install -y protobuf-compiler
-  #               ;;
-  #           esac
-  #         args: --release --out ../dist --find-interpreter
-  #         sccache: "true"
-  #         manylinux: auto
-  #     - name: Upload wheels
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: wheels-linux-${{ matrix.target }}
-  #         path: dist
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [x86_64, x86, aarch64, armv7, s390x, ppc64le]
+    steps:
+      - uses: actions/checkout@v4
+      #- name: Install Protoc
+      #  uses: arduino/setup-protoc@v3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Build wheels
+        uses: PyO3/maturin-action@v1
+        with:
+          working-directory: shaperglot-py
+          target: ${{ matrix.target }}
+          before-script-linux: |
+            case "${{ matrix.target }}" in
+              "aarch64" | "armv7" | "s390x" | "ppc64le")
+                sudo apt-get update
+                sudo apt-get install -y protobuf-compiler
+                ;;
+              "x86" | "x86_64")
+                yum update -y
+                yum install -y protobuf-compiler
+                ;;
+            esac
+          args: --release --out ../dist --find-interpreter
+          sccache: "true"
+          manylinux: auto
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-linux-${{ matrix.target }}
+          path: dist
 
-  # windows:
-  #   runs-on: windows-latest
-  #   strategy:
-  #     matrix:
-  #       target: [x64, x86]
-  #       python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-python@v5
-  #       with:
-  #         python-version: ${{ matrix.python }}
-  #         architecture: ${{ matrix.target }}
-  #     #- name: Install Protoc
-  #     #  uses: arduino/setup-protoc@v3
-  #     - name: Build wheels
-  #       uses: PyO3/maturin-action@v1
-  #       with:
-  #         working-directory: shaperglot-py
-  #         target: ${{ matrix.target }}
-  #         args: --release --out ../dist --find-interpreter
-  #         sccache: "true"
-  #     - name: Upload wheels
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: wheels-windows-${{ matrix.target }}-${{ matrix.python }}
-  #         path: dist
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        target: [x64, x86]
+        python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          architecture: ${{ matrix.target }}
+      #- name: Install Protoc
+      #  uses: arduino/setup-protoc@v3
+      - name: Build wheels
+        uses: PyO3/maturin-action@v1
+        with:
+          working-directory: shaperglot-py
+          target: ${{ matrix.target }}
+          args: --release --out ../dist --find-interpreter
+          sccache: "true"
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-windows-${{ matrix.target }}-${{ matrix.python }}
+          path: dist
 
-  # macos:
-  #   runs-on: macos-latest
-  #   strategy:
-  #     matrix:
-  #       target: [x86_64, aarch64]
-  #       python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       #- name: Install Protoc
-  #       #  uses: arduino/setup-protoc@v3
-  #     #  with:
-  #     #    repo-token: ${{ secrets.GITHUB_TOKEN }}
-  #     - uses: actions/setup-python@v5
-  #       with:
-  #         python-version: ${{ matrix.python }}
-  #     - name: Build wheels
-  #       uses: PyO3/maturin-action@v1
-  #       with:
-  #         working-directory: shaperglot-py
-  #         target: ${{ matrix.target }}
-  #         args: --release --out ../dist --find-interpreter
-  #         sccache: "true"
-  #     - name: Upload wheels
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: wheels-macos-${{ matrix.target }}-${{ matrix.python }}
-  #         path: dist
+  macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        target: [x86_64, aarch64]
+        python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        #- name: Install Protoc
+        #  uses: arduino/setup-protoc@v3
+      #  with:
+      #    repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Build wheels
+        uses: PyO3/maturin-action@v1
+        with:
+          working-directory: shaperglot-py
+          target: ${{ matrix.target }}
+          args: --release --out ../dist --find-interpreter
+          sccache: "true"
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-macos-${{ matrix.target }}-${{ matrix.python }}
+          path: dist
 
-  # pyodide:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-python@v5
-  #       with:
-  #         python-version: "3.10"
-  #     - name: Install Rust
-  #       run: |
-  #         rustup update nightly
-  #         rustup target add wasm32-unknown-emscripten --toolchain nightly
-  #     - name: Install emscripten
-  #       run: |
-  #         git clone https://github.com/emscripten-core/emsdk.git
-  #         cd emsdk
-  #         ./emsdk install latest # or 2.0.5
-  #         ./emsdk activate latest # or 2.0.5
-  #         source ./emsdk_env.sh
-  #         which emcc
-  #         emcc --version
-  #     - name: Build Pyodide wheel
-  #       uses: PyO3/maturin-action@v1
-  #       env:
-  #         RUSTUP_TOOLCHAIN: nightly
-  #         CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
-  #       with:
-  #         working-directory: shaperglot-py
-  #         target: wasm32-unknown-emscripten
-  #         args: --release --out ../dist --find-interpreter
-  #         sccache: "true"
-  #         rust-toolchain: nightly
-  #     - name: Upload Pyodide wheel
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: wheels-pyodide
-  #         path: dist
-
-  # wasm-emscripten:
-  #   strategy:
-  #     matrix:
-  #       # https://pyodide.org/en/stable/project/changelog.html
-  #       version:
-  #         - python: '3.12'
-  #           emscripten: 3.1.58  # pyodide 0.27.* 0.26.*
-  #         # - python: '3.11'
-  #         #   emscripten: 3.1.46  # pyodide 0.25.*
-  #         # - python: '3.11'
-  #         #   emscripten: 3.1.45  # pyodide 0.24.*
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: mymindstorm/setup-emsdk@v14
-  #       with:
-  #         version: ${{ matrix.version.emscripten }}
-  #     - uses: PyO3/maturin-action@v1
-  #       with:
-  #         working-directory: shaperglot-py
-  #         # maturin-version: ${{ env.MATURIN_VERSION }}
-  #         target: wasm32-unknown-emscripten
-  #         rust-toolchain: nightly
-  #         args: --release --out ../dist --strip -i python${{ matrix.version.python }}
-  #     - name: Upload Pyodide wheel
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: wheels-pyodide
-  #         path: dist
-
-  build-wasm32-emscripten-pyodide:
+  pyodide:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -189,19 +119,20 @@ jobs:
         version:
           - python: '3.12'
             emscripten: 3.1.58  # pyodide 0.27.* 0.26.*
+          - python: '3.11'
+            emscripten: 3.1.46  # pyodide 0.25.*
+          - python: '3.11'
+            emscripten: 3.1.45  # pyodide 0.24.*
     steps:
       - uses: actions/checkout@v4
-
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: nightly
           target: wasm32-unknown-emscripten
-
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.version.python }}
-
       - name: Install emscripten
         run: |
           git clone https://github.com/emscripten-core/emsdk.git
@@ -213,9 +144,9 @@ jobs:
           emcc --version
       - name: Add emcc to PATH
         run: echo "/home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten" >> $GITHUB_PATH
-
       # Install modern version of binaryen (contains wasm-opt) to allow for a flag that cargo uses but can't be influenced directly.
       # The wasm-opt version that ships with emsdk is too old.
+      # Since I can't influence the PATH of the emsdk (I tried), I have to replace the version that ships with emsdk.
       - name: Install specific version of binaryen
         run: |
           BINARYEN_VERSION=122
@@ -226,72 +157,59 @@ jobs:
           wasm-opt --version
           rm /home/runner/work/shaperglot/shaperglot/emsdk/upstream/bin/wasm-opt
           ln -s /usr/local/bin/wasm-opt /home/runner/work/shaperglot/shaperglot/emsdk/upstream/bin/wasm-opt
-
       - name: Build
         env:
           RUSTUP_TOOLCHAIN: nightly
-          # PATH: /usr/local/bin:$PATH  # Ensure the specific wasm-opt is in the PATH before emsdk
-          # CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
-
         run: |
           pip install maturin
-          ls -la
-          pwd
           mkdir dist
           cd shaperglot-py
           maturin build -i python${{ matrix.version.python }} --strip --release --target wasm32-unknown-emscripten -o ../dist
-
-      # - name: Build directly with cargo and wasm32 target
-      #   run: |
-      #     rustup target add wasm32-unknown-emscripten
-      #     cargo build --target wasm32-unknown-emscripten --release
-
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
         with:
           name: wheels-pyodide
           path: dist
 
+  sdist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build sdist
+        uses: PyO3/maturin-action@v1
+        with:
+          working-directory: shaperglot-py
+          command: sdist
+          args: --out ../dist
+      - name: Upload sdist
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-sdist
+          path: dist
 
-  # sdist:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Build sdist
-  #       uses: PyO3/maturin-action@v1
-  #       with:
-  #         working-directory: shaperglot-py
-  #         command: sdist
-  #         args: --out ../dist
-  #     - name: Upload sdist
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: wheels-sdist
-  #         path: dist
+  consolidate:
+    needs: [linux, windows, macos, pyodide, sdist]
+    name: Consolidate wheels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/upload-artifact/merge@v4
+        with:
+          pattern: wheels-*
+          name: wheels
 
-  # consolidate:
-  #   needs: [pyodide]
-  #   name: Consolidate wheels
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/upload-artifact/merge@v4
-  #       with:
-  #         pattern: wheels-*
-  #         name: wheels
-
-  # release:
-  #   name: Release
-  #   runs-on: ubuntu-latest
-  #   if: "startsWith(github.ref, 'refs/tags/')"
-  #   needs: consolidate
-  #   steps:
-  #     - uses: actions/download-artifact@v4
-  #       with:
-  #         name: wheels
-  #     - name: Publish to PyPI
-  #       uses: PyO3/maturin-action@v1
-  #       env:
-  #         MATURIN_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
-  #       with:
-  #         command: upload
-  #         args: --non-interactive --skip-existing *
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    if: "startsWith(github.ref, 'refs/tags/')"
+    needs: consolidate
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: wheels
+      - name: Publish to PyPI
+        uses: PyO3/maturin-action@v1
+        env:
+          MATURIN_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        with:
+          command: upload
+          args: --non-interactive --skip-existing *
