@@ -219,6 +219,9 @@ jobs:
           source ./emsdk_env.sh
 
       - name: Build
+        env:
+          # RUSTUP_TOOLCHAIN: nightly
+          CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
         run: |
           pip install maturin
           cd shaperglot-py
