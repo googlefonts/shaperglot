@@ -217,10 +217,11 @@ jobs:
           ./emsdk install ${{ matrix.version.emscripten }}
           ./emsdk activate ${{ matrix.version.emscripten }}
           source ./emsdk_env.sh
-
+          which emcc
+          emcc --version
       - name: Build
         env:
-          # RUSTUP_TOOLCHAIN: nightly
+          RUSTUP_TOOLCHAIN: nightly
           CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
         run: |
           pip install maturin
