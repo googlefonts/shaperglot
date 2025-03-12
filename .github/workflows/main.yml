@@ -226,7 +226,6 @@ jobs:
         run: |
           pip install maturin
           ls -la
-          cd shaperglot-py
           maturin build -i python${{ matrix.version.python }} --target wasm32-unknown-emscripten -o ../dist
 
       - name: Upload Pyodide wheel
