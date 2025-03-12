@@ -219,16 +219,19 @@ jobs:
           source ./emsdk_env.sh
           which emcc
           emcc --version
+      - name: Add emcc to PATH
+        run: echo "/home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten" >> $GITHUB_PATH
       - name: Build
         env:
           RUSTUP_TOOLCHAIN: nightly
-          CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
+          # CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
         run: |
           pip install maturin
           ls -la
+          pwd
           mkdir dist
           cd shaperglot-py
-          maturin build -vv -i python${{ matrix.version.python }} --target wasm32-unknown-emscripten -o ../dist
+          maturin build -i python${{ matrix.version.python }} --target wasm32-unknown-emscripten -o ../dist
 
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
