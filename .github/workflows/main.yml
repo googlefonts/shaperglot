@@ -214,7 +214,7 @@ jobs:
       - name: Add emcc to PATH
         run: echo "/home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten" >> $GITHUB_PATH
 
-      - name: Install specific version of binaryen
+      - name: Install specific version of binaryen (contains wasm-opt)
         run: |
           BINARYEN_VERSION=122
           wget https://github.com/WebAssembly/binaryen/releases/download/version_$BINARYEN_VERSION/binaryen-version_$BINARYEN_VERSION-x86_64-linux.tar.gz
@@ -226,6 +226,7 @@ jobs:
       - name: Build
         env:
           RUSTUP_TOOLCHAIN: nightly
+          PATH: /usr/local/bin:$PATH  # Ensure the specific wasm-opt is in the PATH before emsdk
           # CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
 
         run: |
