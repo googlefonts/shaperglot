@@ -144,8 +144,8 @@ jobs:
           emcc --version
       - name: Add emcc to PATH
         run: echo "/home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten" >> $GITHUB_PATH
-      # Install modern version of binaryen (contains wasm-opt) to allow for a flag that cargo uses but can't be influenced directly.
-      # The wasm-opt version that ships with emsdk is too old.
+      # Install modern version of binaryen (contains wasm-opt) to allow for a flag that cargo uses but can't be influenced.
+      # Because the wasm-opt version that ships with emsdk is too old.
       # Since I can't influence the PATH of the emsdk (I tried), I have to replace the version that ships with emsdk.
       - name: Install specific version of binaryen
         run: |
