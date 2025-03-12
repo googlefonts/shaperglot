@@ -129,10 +129,6 @@ jobs:
           ./emsdk install latest # or 2.0.5
           ./emsdk activate latest # or 2.0.5
           source ./emsdk_env.sh
-
-      # Ensure the environment is set up correctly for the linker
-      - name: Verify emcc
-        run: |
           which emcc
           emcc --version
 
