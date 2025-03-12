@@ -168,7 +168,7 @@ jobs:
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-pyodide
+          name: wheels-pyodide-${{ matrix.version.python }}-${{ matrix.version.emscripten }}
           path: dist
 
   sdist:
