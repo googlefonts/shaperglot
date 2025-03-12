@@ -132,6 +132,11 @@ jobs:
           which emcc
           emcc --version
 
+      # Set the Rust linker to the emcc located at the path you found
+      - name: Set Rust linker to specific emcc
+        run: |
+          echo "CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER=/home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc" >> $GITHUB_ENV
+
       - name: Build Pyodide wheel
         uses: PyO3/maturin-action@v1
         env:
