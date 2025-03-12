@@ -214,7 +214,7 @@ jobs:
         run: |
           pip install maturin
           cd shaperglot-py
-          maturin build --release -i python${{ matrix.python }} --features wasm32-compat --target wasm32-unknown-emscripten -o ../dist
+          maturin build --release -i python${{ matrix.python }} --target wasm32-unknown-emscripten -o ../dist
 
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
