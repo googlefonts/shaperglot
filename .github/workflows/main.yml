@@ -229,11 +229,11 @@ jobs:
           # CARGO_TARGET_WASM32_UNKNOWN_EMSCRIPTEN_LINKER: /home/runner/work/shaperglot/shaperglot/emsdk/upstream/emscripten/emcc
 
         run: |
+          pip install maturin
           ls -la
           pwd
           mkdir dist
           cd shaperglot-py
-          export PYO3_CROSS_PYTHON_VERSION=${{ matrix.version.python }}
           maturin build -i python${{ matrix.version.python }} --strip --release --target wasm32-unknown-emscripten -o ../dist
 
       # - name: Build directly with cargo and wasm32 target
