@@ -231,7 +231,7 @@ jobs:
           pwd
           mkdir dist
           cd shaperglot-py
-          maturin build -i python${{ matrix.version.python }} --strip --target wasm32-unknown-emscripten -o ../dist
+          maturin build -i python${{ matrix.version.python }} --strip --release --target wasm32-unknown-emscripten -o ../dist
 
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
