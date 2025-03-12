@@ -235,7 +235,8 @@ jobs:
           pwd
           mkdir dist
           cd shaperglot-py
-          maturin build -i python${{ matrix.version.python }} --strip --release --target wasm32-unknown-emscripten -o ../dist
+          maturin build -i python${{ matrix.version.python }} --strip --target wasm32-unknown-emscripten -o ../dist
+          wasm-opt --strip-target-features --post-emscripten --pass-arg=post-emscripten-side-module -O3 --low-memory-unused --pass-arg=directize-initial-contents-immutable /home/runner/work/shaperglot/shaperglot/target/wasm32-unknown-emscripten/release/deps/shaperglot.wasm -o /home/runner/work/shaperglot/shaperglot/target/wasm32-unknown-emscripten/release/deps/shaperglot.wasm --mvp-features --enable-bulk-memory --enable-call-indirect-overlong --enable-multivalue --enable-mutable-globals --enable-nontrapping-float-to-int --enable-reference-types --enable-sign-ext
 
       # - name: Build directly with cargo and wasm32 target
       #   run: |
