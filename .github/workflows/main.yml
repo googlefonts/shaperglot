@@ -19,97 +19,97 @@ permissions:
   contents: read
 
 jobs:
-  linux:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        target: [x86_64, x86, aarch64, armv7, s390x, ppc64le]
-    steps:
-      - uses: actions/checkout@v4
-      #- name: Install Protoc
-      #  uses: arduino/setup-protoc@v3
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-      - name: Build wheels
-        uses: PyO3/maturin-action@v1
-        with:
-          working-directory: shaperglot-py
-          target: ${{ matrix.target }}
-          before-script-linux: |
-            case "${{ matrix.target }}" in
-              "aarch64" | "armv7" | "s390x" | "ppc64le")
-                sudo apt-get update
-                sudo apt-get install -y protobuf-compiler
-                ;;
-              "x86" | "x86_64")
-                yum update -y
-                yum install -y protobuf-compiler
-                ;;
-            esac
-          args: --release --out ../dist --find-interpreter
-          sccache: "true"
-          manylinux: auto
-      - name: Upload wheels
-        uses: actions/upload-artifact@v4
-        with:
-          name: wheels-linux-${{ matrix.target }}
-          path: dist
+  # linux:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       target: [x86_64, x86, aarch64, armv7, s390x, ppc64le]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     #- name: Install Protoc
+  #     #  uses: arduino/setup-protoc@v3
+  #     - uses: actions/setup-python@v5
+  #       with:
+  #         python-version: "3.10"
+  #     - name: Build wheels
+  #       uses: PyO3/maturin-action@v1
+  #       with:
+  #         working-directory: shaperglot-py
+  #         target: ${{ matrix.target }}
+  #         before-script-linux: |
+  #           case "${{ matrix.target }}" in
+  #             "aarch64" | "armv7" | "s390x" | "ppc64le")
+  #               sudo apt-get update
+  #               sudo apt-get install -y protobuf-compiler
+  #               ;;
+  #             "x86" | "x86_64")
+  #               yum update -y
+  #               yum install -y protobuf-compiler
+  #               ;;
+  #           esac
+  #         args: --release --out ../dist --find-interpreter
+  #         sccache: "true"
+  #         manylinux: auto
+  #     - name: Upload wheels
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: wheels-linux-${{ matrix.target }}
+  #         path: dist
 
-  windows:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        target: [x64, x86]
-        python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python }}
-          architecture: ${{ matrix.target }}
-      #- name: Install Protoc
-      #  uses: arduino/setup-protoc@v3
-      - name: Build wheels
-        uses: PyO3/maturin-action@v1
-        with:
-          working-directory: shaperglot-py
-          target: ${{ matrix.target }}
-          args: --release --out ../dist --find-interpreter
-          sccache: "true"
-      - name: Upload wheels
-        uses: actions/upload-artifact@v4
-        with:
-          name: wheels-windows-${{ matrix.target }}-${{ matrix.python }}
-          path: dist
+  # windows:
+  #   runs-on: windows-latest
+  #   strategy:
+  #     matrix:
+  #       target: [x64, x86]
+  #       python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-python@v5
+  #       with:
+  #         python-version: ${{ matrix.python }}
+  #         architecture: ${{ matrix.target }}
+  #     #- name: Install Protoc
+  #     #  uses: arduino/setup-protoc@v3
+  #     - name: Build wheels
+  #       uses: PyO3/maturin-action@v1
+  #       with:
+  #         working-directory: shaperglot-py
+  #         target: ${{ matrix.target }}
+  #         args: --release --out ../dist --find-interpreter
+  #         sccache: "true"
+  #     - name: Upload wheels
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: wheels-windows-${{ matrix.target }}-${{ matrix.python }}
+  #         path: dist
 
-  macos:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        target: [x86_64, aarch64]
-        python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
-    steps:
-      - uses: actions/checkout@v4
-        #- name: Install Protoc
-        #  uses: arduino/setup-protoc@v3
-      #  with:
-      #    repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python }}
-      - name: Build wheels
-        uses: PyO3/maturin-action@v1
-        with:
-          working-directory: shaperglot-py
-          target: ${{ matrix.target }}
-          args: --release --out ../dist --find-interpreter
-          sccache: "true"
-      - name: Upload wheels
-        uses: actions/upload-artifact@v4
-        with:
-          name: wheels-macos-${{ matrix.target }}-${{ matrix.python }}
-          path: dist
+  # macos:
+  #   runs-on: macos-latest
+  #   strategy:
+  #     matrix:
+  #       target: [x86_64, aarch64]
+  #       python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       #- name: Install Protoc
+  #       #  uses: arduino/setup-protoc@v3
+  #     #  with:
+  #     #    repo-token: ${{ secrets.GITHUB_TOKEN }}
+  #     - uses: actions/setup-python@v5
+  #       with:
+  #         python-version: ${{ matrix.python }}
+  #     - name: Build wheels
+  #       uses: PyO3/maturin-action@v1
+  #       with:
+  #         working-directory: shaperglot-py
+  #         target: ${{ matrix.target }}
+  #         args: --release --out ../dist --find-interpreter
+  #         sccache: "true"
+  #     - name: Upload wheels
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: wheels-macos-${{ matrix.target }}-${{ matrix.python }}
+  #         path: dist
 
   pyodide:
     runs-on: ubuntu-latest
@@ -134,24 +134,24 @@ jobs:
           name: wheels-pyodide
           path: dist
 
-  sdist:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build sdist
-        uses: PyO3/maturin-action@v1
-        with:
-          working-directory: shaperglot-py
-          command: sdist
-          args: --out ../dist
-      - name: Upload sdist
-        uses: actions/upload-artifact@v4
-        with:
-          name: wheels-sdist
-          path: dist
+  # sdist:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Build sdist
+  #       uses: PyO3/maturin-action@v1
+  #       with:
+  #         working-directory: shaperglot-py
+  #         command: sdist
+  #         args: --out ../dist
+  #     - name: Upload sdist
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: wheels-sdist
+  #         path: dist
 
   consolidate:
-    needs: [linux, windows, macos, pyodide, sdist]
+    needs: [pyodide]
     name: Consolidate wheels
     runs-on: ubuntu-latest
     steps:
