@@ -120,6 +120,7 @@ jobs:
           python-version: "3.10"
       - name: Install emscripten
         run: |
+          rustup target add wasm32-unknown-emscripten
           git clone https://github.com/emscripten-core/emsdk.git
           cd emsdk
           ./emsdk install latest
