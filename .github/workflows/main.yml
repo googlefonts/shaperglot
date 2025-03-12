@@ -202,13 +202,21 @@ jobs:
         with:
           python-version: ${{ matrix.version.python }}
 
-      - name: Install Emscripten
-        uses: mymindstorm/setup-emsdk@v14
-        with:
-          # This needs to match the exact expected version pyodide expects...seems a bit brittle TBH, maybe I'm missing something.
-          # Discover by updating pyodide in package.json and re-running 'npm run test'; it'll spit out the error of 
-          # the expected vs actual versions.
-          version: ${{ matrix.version.emscripten }}
+      # - name: Install Emscripten
+      #   uses: mymindstorm/setup-emsdk@v14
+      #   with:
+      #     # This needs to match the exact expected version pyodide expects...seems a bit brittle TBH, maybe I'm missing something.
+      #     # Discover by updating pyodide in package.json and re-running 'npm run test'; it'll spit out the error of 
+      #     # the expected vs actual versions.
+      #     version: ${{ matrix.version.emscripten }}
+
+      - name: Install emscripten
+        run: |
+          git clone https://github.com/emscripten-core/emsdk.git
+          cd emsdk
+          ./emsdk install ${{ matrix.version.emscripten }}
+          ./emsdk activate ${{ matrix.version.emscripten }}
+          source ./emsdk_env.sh
 
       - name: Build
         run: |
