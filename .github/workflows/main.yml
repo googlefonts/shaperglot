@@ -216,7 +216,7 @@ jobs:
 
       # Install modern version of binaryen (contains wasm-opt) to allow for a flag that cargo uses but can't be influenced directly.
       # The wasm-opt version that ships with emsdk is too old.
-      - name: Install specific version of binaryen (contains wasm-opt)
+      - name: Install specific version of binaryen
         run: |
           BINARYEN_VERSION=122
           wget https://github.com/WebAssembly/binaryen/releases/download/version_$BINARYEN_VERSION/binaryen-version_$BINARYEN_VERSION-x86_64-linux.tar.gz
@@ -224,7 +224,8 @@ jobs:
           sudo cp -r binaryen-version_$BINARYEN_VERSION/* /usr/local/
           which wasm-opt
           wasm-opt --version
-          PATH=/usr/local/bin:$PATH
+          rm /home/runner/work/shaperglot/shaperglot/emsdk/upstream/bin/wasm-opt
+          ln -s /usr/local/bin/wasm-opt /home/runner/work/shaperglot/shaperglot/emsdk/upstream/bin/wasm-opt
 
       - name: Build
         env:
