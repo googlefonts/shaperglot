@@ -168,6 +168,12 @@ jobs:
       - uses: mymindstorm/setup-emsdk@v14
         with:
           version: ${{ matrix.version.emscripten }}
+      - name: Verify wasm-opt version
+        run: wasm-opt --version
+      - name: Update wasm-opt version
+        run: cargo install wasm-opt
+      - name: Verify wasm-opt version
+        run: wasm-opt --version
       - uses: PyO3/maturin-action@v1
         with:
           working-directory: shaperglot-py
