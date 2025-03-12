@@ -140,6 +140,8 @@ jobs:
           working-directory: shaperglot-py
           target: wasm32-unknown-emscripten
           args: --release --out ../dist --find-interpreter
+          sccache: "true"
+          rust-toolchain: nightly
       - name: Upload Pyodide wheel
         uses: actions/upload-artifact@v4
         with:
