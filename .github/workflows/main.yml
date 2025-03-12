@@ -124,6 +124,7 @@ jobs:
           source $HOME/.cargo/env
           rustup update
           rustup target add wasm32-unknown-emscripten      - name: Install emscripten
+      - name: Install emscripten
         run: |
           git clone https://github.com/emscripten-core/emsdk.git
           cd emsdk
