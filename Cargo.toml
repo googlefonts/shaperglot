@@ -10,5 +10,5 @@ read-fonts = "0.26.0"
 skrifa = "0.26.1"
 itertools = "0.13.0"
 google-fonts-languages = "0.7.3"
-toml = "0.8.19"
+toml = "0.8.20"
 serde_json = { version = "1.0.138", features = ["preserve_order"] }
