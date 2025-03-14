@@ -18,3 +18,6 @@ python-source = "python"
 
 [project.optional-dependencies]
 docs = ["sphinx", "sphinxcontrib-napoleon", "sphinx_rtd_theme", "myst_parser"]
+
+[project.scripts]
+shaperglot = "shaperglot.cli:main"
