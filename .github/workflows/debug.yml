@@ -1,0 +1,425 @@
+name: debug
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4.4.0
+        with:
+          python-version: '3.10'
+      - name: Install unicodedata2
+        run: |
+          python -m pip install unicodedata2
+      - name: install ttfautohint-py
+        run: |
+          python -m pip install ttfautohint-py
+      - name: install sre-yield
+        run: |
+          python -m pip install sre-yield
+      - name: install sortedcontainers
+        run: |
+          python -m pip install sortedcontainers
+      - name: install resvg-cli
+        run: |
+          python -m pip install resvg-cli
+      - name: install pyclipper
+        run: |
+          python -m pip install pyclipper
+      - name: install pngquant-cli
+        run: |
+          python -m pip install pngquant-cli
+      - name: install opentype-sanitizer
+        run: |
+          python -m pip install opentype-sanitizer
+      - name: install munkres
+        run: |
+          python -m pip install munkres
+      - name: install commandlines
+        run: |
+          python -m pip install commandlines
+      - name: install brotli
+        run: |
+          python -m pip install brotli
+      - name: install appdirs
+        run: |
+          python -m pip install appdirs
+      - name: install zopfli
+        run: |
+          python -m pip install zopfli
+      - name: install wrapt
+        run: |
+          python -m pip install wrapt
+      - name: install websocket-client
+        run: |
+          python -m pip install websocket-client
+      - name: install urllib3
+        run: |
+          python -m pip install urllib3
+      - name: install unidecode
+        run: |
+          python -m pip install unidecode
+      - name: install uharfbuzz
+        run: |
+          python -m pip install uharfbuzz
+      - name: install ufonormalizer
+        run: |
+          python -m pip install ufonormalizer
+      - name: install typing-extensions
+        run: |
+          python -m pip install typing-extensions
+      - name: install tomli
+        run: |
+          python -m pip install tomli
+      - name: install toml
+        run: |
+          python -m pip install toml
+      - name: install tabulate
+        run: |
+          python -m pip install tabulate
+      - name: install soupsieve
+        run: |
+          python -m pip install soupsieve
+      - name: install sniffio
+        run: |
+          python -m pip install sniffio
+      - name: install smmap
+        run: |
+          python -m pip install smmap
+      - name: install skia-pathops
+        run: |
+          python -m pip install skia-pathops
+      - name: install six
+        run: |
+          python -m pip install six
+      - name: install shaperglot
+        run: |
+          python -m pip install shaperglot
+      - name: install ruamel.yaml.clib
+        run: |
+          python -m pip install ruamel.yaml.clib
+      - name: install rstr
+        run: |
+          python -m pip install rstr
+      - name: install regex
+        run: |
+          python -m pip install regex
+      - name: install PyYAML
+        run: |
+          python -m pip install PyYAML
+      - name: install pysocks
+        run: |
+          python -m pip install pysocks
+      - name: install pyparsing
+        run: |
+          python -m pip install pyparsing
+      - name: install pyjwt
+        run: |
+          python -m pip install pyjwt
+      - name: install pygments
+        run: |
+          python -m pip install pygments
+      - name: install pycparser
+        run: |
+          python -m pip install pycparser
+      - name: install pycairo
+        run: |
+          python -m pip install pycairo
+      - name: install pybind11
+        run: |
+          python -m pip install pybind11
+      - name: install pyahocorasick
+        run: |
+          python -m pip install pyahocorasick
+      - name: install protobuf
+        run: |
+          python -m pip install protobuf
+      - name: install pluggy
+        run: |
+          python -m pip install pluggy
+      - name: install pip-api
+        run: |
+          python -m pip install pip-api
+      - name: install pillow
+        run: |
+          python -m pip install pillow
+      - name: install packaging
+        run: |
+          python -m pip install packaging
+      - name: install orjson
+        run: |
+          python -m pip install orjson
+      - name: install opentypespec
+        run: |
+          python -m pip install opentypespec
+      - name: install openstep-plist
+        run: |
+          python -m pip install openstep-plist
+      - name: install numpy
+        run: |
+          python -m pip install numpy
+      - name: install ninja
+        run: |
+          python -m pip install ninja
+      - name: install networkx
+        run: |
+          python -m pip install networkx
+      - name: install mdurl
+        run: |
+          python -m pip install mdurl
+      - name: install MarkupSafe
+        run: |
+          python -m pip install MarkupSafe
+      - name: install lxml
+        run: |
+          python -m pip install lxml
+      - name: install iniconfig
+        run: |
+          python -m pip install iniconfig
+      - name: install importlib-resources
+        run: |
+          python -m pip install importlib-resources
+      - name: install idna
+        run: |
+          python -m pip install idna
+      - name: install h11
+        run: |
+          python -m pip install h11
+      - name: install freetype-py
+        run: |
+          python -m pip install freetype-py
+      - name: install FontTools
+        run: |
+          python -m pip install FontTools
+      - name: install filelock
+        run: |
+          python -m pip install filelock
+      - name: install exceptiongroup
+        run: |
+          python -m pip install exceptiongroup
+      - name: install colorama
+        run: |
+          python -m pip install colorama
+      - name: install charset-normalizer
+        run: |
+          python -m pip install charset-normalizer
+      - name: install certifi
+        run: |
+          python -m pip install certifi
+      - name: install bump2version
+        run: |
+          python -m pip install bump2version
+      - name: install beziers
+        run: |
+          python -m pip install beziers
+      - name: install attrs
+        run: |
+          python -m pip install attrs
+      - name: install absl-py
+        run: |
+          python -m pip install absl-py
+      - name: install wsproto
+        run: |
+          python -m pip install wsproto
+      - name: install vharfbuzz
+        run: |
+          python -m pip install vharfbuzz
+      - name: install tqdm
+        run: |
+          python -m pip install tqdm
+      - name: install stringbrewer
+        run: |
+          python -m pip install stringbrewer
+      - name: install skia-python
+        run: |
+          python -m pip install skia-python
+      - name: install ruamel.yaml
+        run: |
+          python -m pip install ruamel.yaml
+      - name: install requests
+        run: |
+          python -m pip install requests
+      - name: install python-dateutil
+        run: |
+          python -m pip install python-dateutil
+      - name: install python-bidi
+        run: |
+          python -m pip install python-bidi
+      - name: install pytest
+        run: |
+          python -m pip install pytest
+      - name: install picosvg
+        run: |
+          python -m pip install picosvg
+      - name: install outcome
+        run: |
+          python -m pip install outcome
+      - name: install markdown-it-py
+        run: |
+          python -m pip install markdown-it-py
+      - name: install kurbopy
+        run: |
+          python -m pip install kurbopy
+      - name: install jinja2
+        run: |
+          python -m pip install jinja2
+      - name: install gitdb
+        run: |
+          python -m pip install gitdb
+      - name: install gfsubsets
+        run: |
+          python -m pip install gfsubsets
+      - name: install gflanguages
+        run: |
+          python -m pip install gflanguages
+      - name: install fs
+        run: |
+          python -m pip install fs
+      - name: install fontPens
+        run: |
+          python -m pip install fontPens
+      - name: install fontMath
+        run: |
+          python -m pip install fontMath
+      - name: install Deprecated
+        run: |
+          python -m pip install Deprecated
+      - name: install dehinter
+        run: |
+          python -m pip install dehinter
+      - name: install compreffor
+        run: |
+          python -m pip install compreffor
+      - name: install cffsubr
+        run: |
+          python -m pip install cffsubr
+      - name: install cffi
+        run: |
+          python -m pip install cffi
+      - name: install cattrs
+        run: |
+          python -m pip install cattrs
+      - name: install booleanOperations
+        run: |
+          python -m pip install booleanOperations
+      - name: install blackrenderer
+        run: |
+          python -m pip install blackrenderer
+      - name: install beautifulsoup4
+        run: |
+          python -m pip install beautifulsoup4
+      - name: install axisregistry
+        run: |
+          python -m pip install axisregistry
+      - name: install youseedee
+        run: |
+          python -m pip install youseedee
+      - name: install trio
+        run: |
+          python -m pip install trio
+      - name: install strictyaml
+        run: |
+          python -m pip install strictyaml
+      - name: install rich
+        run: |
+          python -m pip install rich
+      - name: install pynacl
+        run: |
+          python -m pip install pynacl
+      - name: install pygit2
+        run: |
+          python -m pip install pygit2
+      - name: install gitpython
+        run: |
+          python -m pip install gitpython
+      - name: install fontFeatures
+        run: |
+          python -m pip install fontFeatures
+      - name: install cryptography
+        run: |
+          python -m pip install cryptography
+      - name: install cmarkgfm
+        run: |
+          python -m pip install cmarkgfm
+      - name: install ufolint
+        run: |
+          python -m pip install ufolint
+      - name: install ufoLib2
+        run: |
+          python -m pip install ufoLib2
+      - name: install ufo2ft
+        run: |
+          python -m pip install ufo2ft
+      - name: install trio-websocket
+        run: |
+          python -m pip install trio-websocket
+      - name: install statmake
+        run: |
+          python -m pip install statmake
+      - name: install font-v
+        run: |
+          python -m pip install font-v
+      - name: install defcon
+        run: |
+          python -m pip install defcon
+      - name: install vttlib
+        run: |
+          python -m pip install vttlib
+      - name: install ufomerge
+        run: |
+          python -m pip install ufomerge
+      - name: install selenium
+        run: |
+          python -m pip install selenium
+      - name: install PyGithub
+        run: |
+          python -m pip install PyGithub
+      - name: install mutatorMath
+        run: |
+          python -m pip install mutatorMath
+      - name: install glyphsLib
+        run: |
+          python -m pip install glyphsLib
+      - name: install fontbakery
+        run: |
+          python -m pip install fontbakery
+      - name: install nanoemoji
+        run: |
+          python -m pip install nanoemoji
+      - name: install glyphsets
+        run: |
+          python -m pip install glyphsets
+      - name: install fontParts
+        run: |
+          python -m pip install fontParts
+      - name: install fontmake
+        run: |
+          python -m pip install fontmake
+      - name: install bumpfontversion
+        run: |
+          python -m pip install bumpfontversion
+      - name: install babelfont
+        run: |
+          python -m pip install babelfont
+      - name: install ufoProcessor
+        run: |
+          python -m pip install ufoProcessor
+      - name: install diffenator2
+        run: |
+          python -m pip install diffenator2
+      - name: install collidoscope
+        run: |
+          python -m pip install collidoscope
+      - name: install afdko
+        run: |
+          python -m pip install afdko
+      - name: install gftools
+        run: |
+          python -m pip install gftools
