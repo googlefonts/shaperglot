@@ -27,5 +27,5 @@ unicode-joining-type = "1.0.0"
 indexmap = "2"
 log = "0.4"
 toml = { workspace = true }
-serde = "1.0.215"
+serde = "1.0.219"
 ambassador = "0.4.1"
