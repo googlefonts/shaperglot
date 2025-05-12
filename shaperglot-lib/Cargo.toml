@@ -12,11 +12,11 @@ repository = "https://github.com/googlefonts/shaperglot"
 path = "src/lib.rs"
 
 [features]
-default = ["skrifa"]
+default = ["fontations"]
 
 [dependencies]
 google-fonts-languages = { workspace = true }
-skrifa = { workspace = true, optional = true }
+fontations = { workspace = true, optional = true }
 itertools = { workspace = true }
 rustybuzz = "0.20.1"
 serde_json = { workspace = true }

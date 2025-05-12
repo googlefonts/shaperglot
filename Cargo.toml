@@ -1,13 +1,17 @@
 [workspace]
 resolver = "2"
 
-members = ["shaperglot-lib", "shaperglot-cli", "shaperglot-web", "shaperglot-py" ]
+members = [
+    "shaperglot-lib",
+    "shaperglot-cli",
+    "shaperglot-web",
+    "shaperglot-py",
+]
 
 default-members = ["shaperglot-lib", "shaperglot-cli"]
 
 [workspace.dependencies]
-read-fonts = "0.26.0"
-skrifa = "0.26.1"
+fontations = "0.1.0"
 itertools = "0.13.0"
 google-fonts-languages = "0.7.3"
 toml = "0.8.19"

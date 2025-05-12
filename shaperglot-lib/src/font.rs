@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use skrifa::{
+use fontations::skrifa::{
     raw::{
         tables::post::{PString, DEFAULT_GLYPH_NAMES},
         types::Version16Dot16,

@@ -19,9 +19,9 @@ pub struct Checker<'a> {
 
 impl<'a> Checker<'a> {
     /// Create an instance given the binary data of a font.
-    #[cfg(feature = "skrifa")]
-    pub fn new(data: &'a [u8]) -> Result<Self, skrifa::raw::ReadError> {
-        use skrifa::{FontRef, MetadataProvider};
+    #[cfg(feature = "fontations")]
+    pub fn new(data: &'a [u8]) -> Result<Self, fontations::skrifa::raw::ReadError> {
+        use fontations::skrifa::{FontRef, MetadataProvider};
 
         let font = FontRef::new(data)?;
         Ok(Self::from_parts(
