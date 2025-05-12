@@ -12,7 +12,7 @@ default-members = ["shaperglot-lib", "shaperglot-cli"]
 
 [workspace.dependencies]
 fontations = "0.1.0"
-itertools = "0.13.0"
+itertools = "0.14.0"
 google-fonts-languages = "0.7.3"
 toml = "0.8.19"
 serde_json = { version = "1.0.138", features = ["preserve_order"] }
