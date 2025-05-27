@@ -284,9 +284,9 @@ checksum = "a8d1add55171497b4705a648c6b583acafb01d58050a51727785f0b2c8e0a2b2"
 
 [[package]]
 name = "google-fonts-languages"
-version = "0.7.3"
+version = "0.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "46660dfb52a0e3d47ae4ab9024a7e1b25ebd1fe695fc9afdfa8c73e94b7cf764"
+checksum = "043b75050ad428f76636bbc88f1006e843bb0d6fd38586803861f41bf08da898"
 dependencies = [
  "bytes",
  "glob",
