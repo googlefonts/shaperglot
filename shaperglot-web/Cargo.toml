@@ -4,9 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-wasm-bindgen = { version = "0.2.95" }
+wasm-bindgen = { version = "0.2.100" }
 console_error_panic_hook = { version = "0.1.7" }
-js-sys = { version = "0.3.72" }
+js-sys = { version = "0.3.77" }
 shaperglot = { path = "../shaperglot-lib" }
 fontations = { workspace = true }
 serde_json = { workspace = true }
