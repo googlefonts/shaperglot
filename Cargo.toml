@@ -13,6 +13,6 @@ default-members = ["shaperglot-lib", "shaperglot-cli"]
 [workspace.dependencies]
 fontations = "0.1.0"
 itertools = "0.14.0"
-google-fonts-languages = "0.7.4"
+google-fonts-languages = "0.7.5"
 toml = "0.8.22"
 serde_json = { version = "1.0.140", features = ["preserve_order"] }
