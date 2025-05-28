@@ -5,22 +5,22 @@ use std::path::PathBuf;
 #[derive(Args)]
 pub struct ReportArgs {
     /// Number of fixes left to be considered nearly supported
-    #[arg(long, default_value_t = 5)]
+    #[arg(long, default_value_t = 5, hide = true)]
     nearly: usize,
     /// Verbosity
-    #[arg(short, long, action = clap::ArgAction::Count)]
+    #[arg(short, long, action = clap::ArgAction::Count, hide = true)]
     verbose: u8,
     /// Output check results as JSON
-    #[arg(long)]
+    #[arg(long, hide = true)]
     json: bool,
     /// Output check results as CSV
-    #[arg(long)]
+    #[arg(long, hide = true)]
     csv: bool,
     /// Regular expression to filter languages
     #[arg(long)]
     filter: Option<String>,
     /// Output a fix summary
-    #[arg(long)]
+    #[arg(long, hide = true)]
     fix: bool,
     /// Font file to check
     font: PathBuf,

@@ -9,7 +9,7 @@ use std::{
 #[derive(Args)]
 pub struct CheckArgs {
     /// Number of fixes left to be considered nearly supported
-    #[arg(long, default_value_t = 5, conflicts_with = "fix")]
+    #[arg(long, default_value_t = 5, conflicts_with = "fix", hide = true)]
     nearly: usize,
     /// Verbosity
     #[arg(short, long, action = clap::ArgAction::Count, conflicts_with = "json")]
