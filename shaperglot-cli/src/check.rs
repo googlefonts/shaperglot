@@ -53,7 +53,7 @@ pub fn check_command(args: &CheckArgs, language_database: shaperglot::Languages)
                 }
             }
         } else {
-            println!("Language not found");
+            println!("Language not found ({})", language);
         }
     }
     if args.fix {
