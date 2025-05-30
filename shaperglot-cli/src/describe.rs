@@ -21,6 +21,6 @@ pub fn describe_command(args: &DescribeArgs, language_database: shaperglot::Lang
             }
         }
     } else {
-        println!("Language not found");
+        println!("Language not found ({})", &args.language);
     }
 }
