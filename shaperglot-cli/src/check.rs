@@ -9,16 +9,16 @@ use std::{
 #[derive(Args)]
 pub struct CheckArgs {
     /// Number of fixes left to be considered nearly supported
-    #[arg(long, default_value_t = 5)]
+    #[arg(long, default_value_t = 5, hide = true)]
     nearly: usize,
     /// Verbosity
-    #[arg(short, long, action = clap::ArgAction::Count)]
+    #[arg(short, long, action = clap::ArgAction::Count, conflicts_with = "json")]
     verbose: u8,
     /// Output check results as JSON
     #[arg(long)]
     json: bool,
     /// Output a fix summary
-    #[arg(long)]
+    #[arg(long, conflicts_with = "json")]
     fix: bool,
     /// Font file to check
     font: PathBuf,
