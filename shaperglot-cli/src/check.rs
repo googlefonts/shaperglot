@@ -35,9 +35,11 @@ pub fn check_command(args: &CheckArgs, language_database: shaperglot::Languages)
         .unwrap();
     let checker = Checker::new(&font_binary).expect("Failed to load font");
     let mut fixes_required = HashMap::new();
+    let mut has_failed = false;
     for language in args.languages.iter() {
         if let Some(language) = language_database.get_language(language) {
             let results = checker.check(language);
+            has_failed = !results.is_nearly_success(args.nearly);
             if args.json {
                 println!("{}", serde_json::to_string(&results).unwrap());
                 continue;
@@ -53,11 +55,15 @@ pub fn check_command(args: &CheckArgs, language_database: shaperglot::Languages)
                 }
             }
         } else {
+            has_failed = true;
             println!("Language not found ({})", language);
         }
     }
     if args.fix {
         show_fixes(&fixes_required);
+    }
+    if has_failed {
+        std::process::exit(1);
     }
 }
 
