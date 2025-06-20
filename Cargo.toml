@@ -11,7 +11,7 @@ members = [
 default-members = ["shaperglot-lib", "shaperglot-cli"]
 
 [workspace.dependencies]
-fontations = "0.1.0"
+fontations = "0.2.0"
 itertools = "0.14.0"
 google-fonts-languages = "0.7.5"
 toml = "0.8.22"
