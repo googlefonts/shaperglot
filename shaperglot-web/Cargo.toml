@@ -10,7 +10,7 @@ js-sys = { version = "0.3.77" }
 shaperglot = { path = "../shaperglot-lib" }
 fontations = { workspace = true }
 serde_json = { workspace = true }
-indexmap = { version = "1.9.3", features = ["serde-1"] }
+indexmap = { version = "2.10.0", features = ["serde-1"] }
 google-fonts-languages = { workspace = true }
 
 [lib]
