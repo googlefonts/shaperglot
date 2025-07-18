@@ -16,3 +16,6 @@ google-fonts-languages = { workspace = true }
 [lib]
 crate-type = ["cdylib", "rlib"]
 path = "src/lib.rs"
+
+[lints]
+workspace = true

@@ -29,3 +29,6 @@ log = "0.4.27"
 toml = { workspace = true }
 serde = "1.0.219"
 ambassador = "0.4.1"
+
+[lints]
+workspace = true
