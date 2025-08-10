@@ -14,7 +14,7 @@ default-members = ["shaperglot-lib", "shaperglot-cli"]
 fontations = "0.3.0"
 itertools = "0.14.0"
 google-fonts-languages = "0.7.6"
-toml = "0.9.2"
+toml = "0.9.5"
 serde_json = { version = "1.0.142", features = ["preserve_order"] }
 
 [workspace.lints.clippy]
