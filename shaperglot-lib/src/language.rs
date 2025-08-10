@@ -87,7 +87,7 @@ impl Languages {
     }
 
     /// Get an iterator over the languages
-    pub fn iter(&self) -> std::slice::Iter<Language> {
+    pub fn iter(&self) -> std::slice::Iter<'_, Language> {
         self.0.iter()
     }
     /// Get a single language by ID or name
