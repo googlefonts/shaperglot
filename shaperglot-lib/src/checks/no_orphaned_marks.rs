@@ -48,19 +48,22 @@ impl CheckImplementation for NoOrphanedMarks {
                 // We got a notdef. The orthographies check would tell us about missing
                 // glyphs, so if we are running one (we have exemplars) we ignore it; if not,
                 // we report it.
-                if codepoint.glyph_id == 0 && !self.has_orthography {
-                    let mut fail = Problem::new(
-                        &self.name(),
-                        "notdef-produced",
-                        format!("Shaper produced a .notdef while {}", string),
-                    );
-                    if let Some(input_codepoint) = string.char_at(codepoint.cluster as usize) {
-                        fail.fixes = vec![Fix {
-                            fix_type: "add_codepoint".to_string(),
-                            fix_thing: input_codepoint.to_string(),
-                        }];
+                if codepoint.glyph_id == 0 {
+                    if !self.has_orthography {
+                        let mut fail = Problem::new(
+                            &self.name(),
+                            "notdef-produced",
+                            format!("Shaper produced a .notdef while {}", string),
+                        );
+                        if let Some(input_codepoint) = string.char_at(codepoint.cluster as usize) {
+                            fail.fixes = vec![Fix {
+                                fix_type: "add_codepoint".to_string(),
+                                fix_thing: input_codepoint.to_string(),
+                            }];
+                        }
+                        problems.push(fail);
                     }
-                    problems.push(fail);
+                    continue;
                 }
                 if checker
                     .codepoint_for(codepoint.glyph_id)
