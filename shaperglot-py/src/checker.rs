@@ -12,7 +12,7 @@ use std::sync::Arc;
 pub(crate) struct Checker(Vec<u8>);
 
 impl Checker {
-    pub(crate) fn _checker(&self) -> Result<Arc<RustChecker>, PyErr> {
+    pub(crate) fn _checker(&self) -> Result<Arc<RustChecker<'_>>, PyErr> {
         Ok(Arc::new(RustChecker::new(&self.0).map_err(|e| {
             PyErr::new::<PyValueError, _>(e.to_string())
         })?))
