@@ -840,7 +840,7 @@ dependencies = [
 
 [[package]]
 name = "shaperglot"
-version = "1.0.3"
+version = "1.1.0"
 dependencies = [
  "ambassador",
  "colored",
@@ -860,7 +860,7 @@ dependencies = [
 
 [[package]]
 name = "shaperglot-cli"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = [
  "clap",
  "fontations",
@@ -872,7 +872,7 @@ dependencies = [
 
 [[package]]
 name = "shaperglot-py"
-version = "1.0.3"
+version = "1.1.0"
 dependencies = [
  "pyo3",
  "pythonize",
