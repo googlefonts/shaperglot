@@ -1,6 +1,11 @@
 use clap::Args;
 use shaperglot::Checker;
-use std::path::PathBuf;
+use std::{
+    collections::{HashMap, HashSet},
+    path::PathBuf,
+};
+
+use crate::show_fixes;
 
 #[derive(Args)]
 pub struct ReportArgs {
@@ -34,6 +39,8 @@ pub fn report_command(args: &ReportArgs, language_database: shaperglot::Language
         })
         .unwrap();
     let checker = Checker::new(&font_binary).expect("Failed to load font");
+    let mut fixes_required = HashMap::new();
+    let mut has_failed = false;
     for language in language_database.iter() {
         if let Some(filter) = &args.filter {
             if !language.id().contains(filter) {
@@ -44,6 +51,31 @@ pub fn report_command(args: &ReportArgs, language_database: shaperglot::Language
         if results.is_unknown() {
             continue;
         }
-        println!("{}", results.to_summary_string(language));
+        has_failed |= !results.is_nearly_success(args.nearly);
+        if results.fixes_required() > 0 && results.fixes_required() <= args.nearly {
+            println!(
+                "Font nearly supports {} ({}): {:.0}% ({} fixes required)",
+                language.id(),
+                language.name(),
+                results.score(),
+                results.fixes_required()
+            );
+        } else {
+            println!("{}", results.to_summary_string(language));
+        }
+        if args.fix {
+            for (category, fixes) in results.unique_fixes() {
+                fixes_required
+                    .entry(category)
+                    .or_insert_with(HashSet::new)
+                    .extend(fixes);
+            }
+        }
+    }
+    if args.fix {
+        show_fixes(&fixes_required);
+    }
+    if has_failed {
+        std::process::exit(1);
     }
 }

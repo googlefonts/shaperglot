@@ -1,10 +1,11 @@
 use clap::Args;
-use itertools::Itertools;
 use shaperglot::{Checker, Reporter};
 use std::{
     collections::{HashMap, HashSet},
     path::PathBuf,
 };
+
+use crate::show_fixes;
 
 #[derive(Args)]
 pub struct CheckArgs {
@@ -39,7 +40,7 @@ pub fn check_command(args: &CheckArgs, language_database: shaperglot::Languages)
     for language in args.languages.iter() {
         if let Some(language) = language_database.get_language(language) {
             let results = checker.check(language);
-            has_failed = !results.is_nearly_success(args.nearly);
+            has_failed |= !results.is_nearly_success(args.nearly);
             if args.json {
                 println!("{}", serde_json::to_string(&results).unwrap());
                 continue;
@@ -92,23 +93,4 @@ fn show_result(results: &Reporter, verbose: u8) {
         }
     }
     println!();
-}
-
-fn show_fixes(fixes: &HashMap<String, HashSet<String>>) {
-    if fixes.is_empty() {
-        return;
-    }
-    println!("\nTo add full support:");
-    for (category, fixes) in fixes {
-        println!(
-            "* {}:",
-            match category.as_str() {
-                "add_anchor" => "Add anchors between the following glyphs",
-                "add_codepoint" => "Add the following codepoints to the font",
-                "add_feature" => "Add the following features to the font",
-                _ => category,
-            }
-        );
-        println!("    {}", fixes.iter().join(", "));
-    }
 }
