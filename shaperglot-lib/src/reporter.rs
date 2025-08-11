@@ -143,6 +143,9 @@ impl CheckResult {
         if self.problems.is_empty() {
             return format!("{}: no problems found", self.check_name);
         }
+        if self.status == ResultCode::Skip {
+            return format!("{} check skipped", self.check_name);
+        }
         format!("{} check failed", self.check_name)
     }
 }
