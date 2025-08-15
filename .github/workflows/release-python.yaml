@@ -25,7 +25,7 @@ jobs:
       matrix:
         target: [x86_64, x86, aarch64, armv7, s390x, ppc64le]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       #- name: Install Protoc
       #  uses: arduino/setup-protoc@v3
       - uses: actions/setup-python@v5
@@ -63,7 +63,7 @@ jobs:
         target: [x64, x86]
         python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
@@ -90,7 +90,7 @@ jobs:
         target: [x86_64, aarch64]
         python: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         #- name: Install Protoc
         #  uses: arduino/setup-protoc@v3
       #  with:
@@ -124,7 +124,7 @@ jobs:
           - python: '3.11'
             emscripten: 3.1.45  # pyodide 0.24.*
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -174,7 +174,7 @@ jobs:
   sdist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Build sdist
         uses: PyO3/maturin-action@v1
         with:
