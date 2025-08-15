@@ -3,7 +3,7 @@ use std::{
     str::FromStr,
 };
 
-use rustybuzz::GlyphBuffer;
+use harfrust::GlyphBuffer;
 use serde::{Deserialize, Serialize};
 
 use crate::Checker;
@@ -42,16 +42,18 @@ impl ShapingInput {
 
     /// Shape the text using the given checker context
     pub fn shape(&self, checker: &Checker) -> Result<GlyphBuffer, String> {
-        let mut buffer = rustybuzz::UnicodeBuffer::new();
+        let mut buffer = harfrust::UnicodeBuffer::new();
         buffer.push_str(&self.text);
+        buffer.guess_segment_properties();
         if let Some(language) = &self.language {
-            buffer.set_language(rustybuzz::Language::from_str(language)?);
+            buffer.set_language(harfrust::Language::from_str(language)?);
         }
         let mut features = Vec::new();
         for f in &self.features {
-            features.push(rustybuzz::Feature::from_str(f)?);
+            features.push(harfrust::Feature::from_str(f)?);
         }
-        let glyph_buffer = rustybuzz::shape(&checker.face, &features, buffer);
+        let shaper = checker.shaper();
+        let glyph_buffer = shaper.shape(buffer, &features);
         Ok(glyph_buffer)
     }
 
