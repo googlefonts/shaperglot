@@ -34,7 +34,7 @@
     "@webassemblyjs/ast": "^1.14.1",
     "@webassemblyjs/wasm-edit": "^1.14.1",
     "@webassemblyjs/wasm-parser": "^1.14.1",
-    "copy-webpack-plugin": "^12.0.2",
+    "copy-webpack-plugin": "^13.0.1",
     "webpack": "^5.100.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.2"
