@@ -6,8 +6,8 @@ use crate::{
     reporter::{Fix, Problem},
     shaping::ShapingInput,
 };
+use harfrust::SerializeFlags;
 use itertools::Itertools;
-use rustybuzz::SerializeFlags;
 use serde::{Deserialize, Serialize};
 
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
@@ -70,9 +70,9 @@ impl CheckImplementation for ShapingDiffers {
                 .shape(checker)
                 .expect("Failed to shape after string for ShapingDiffers");
             let serialized_before =
-                glyph_buffer_before.serialize(&checker.face, SerializeFlags::default());
+                glyph_buffer_before.serialize(&checker.shaper(), SerializeFlags::default());
             let serialized_after =
-                glyph_buffer_after.serialize(&checker.face, SerializeFlags::default());
+                glyph_buffer_after.serialize(&checker.shaper(), SerializeFlags::default());
             if serialized_before != serialized_after {
                 continue;
             }

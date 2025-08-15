@@ -1,12 +1,14 @@
 use std::collections::{BTreeMap, HashSet};
 
 use crate::{language::Language, reporter::Reporter, GlyphId, ResultCode};
-use rustybuzz::Face;
+use harfrust::{Shaper, ShaperData};
 
 /// The context for running font language support checks
 pub struct Checker<'a> {
-    /// The face to use for shaping
-    pub face: Face<'a>,
+    /// The font reference
+    pub fontref: harfrust::FontRef<'a>,
+    /// The shaper data
+    pub shaper_data: ShaperData,
     /// The glyph names in the font
     pub glyph_names: Vec<String>,
     /// The OpenType features present in the font
@@ -21,14 +23,18 @@ impl<'a> Checker<'a> {
     /// Create an instance given the binary data of a font.
     #[cfg(feature = "fontations")]
     pub fn new(data: &'a [u8]) -> Result<Self, fontations::skrifa::raw::ReadError> {
-        use fontations::skrifa::{FontRef, MetadataProvider};
+        use fontations::skrifa::MetadataProvider;
+        let font_for_charmap = fontations::skrifa::FontRef::from_index(data, 0)?; // XXX allow selection of face indices
+        let font_for_shaping = harfrust::FontRef::from_index(data, 0)?;
+        // XXX allow variations
+        // let instance = ShaperInstance::from_variations(&font, &args.variations);
 
-        let font = FontRef::new(data)?;
         Ok(Self::from_parts(
-            Face::from_slice(data, 0).expect("could not parse the font"),
-            crate::font::glyph_names(&font)?,
-            crate::font::feature_tags(&font)?,
-            font.charmap()
+            font_for_shaping,
+            crate::font::glyph_names(&font_for_charmap)?,
+            crate::font::feature_tags(&font_for_charmap)?,
+            font_for_charmap
+                .charmap()
                 .mappings()
                 .map(|(character, glyph)| (character, glyph.to_u32()))
                 .collect(),
@@ -37,19 +43,27 @@ impl<'a> Checker<'a> {
 
     /// Create an instance given the parts of a font.
     pub fn from_parts(
-        face: Face<'a>,
+        fontref: harfrust::FontRef<'a>,
         glyph_names: Vec<String>,
         features: HashSet<String>,
         cmap: BTreeMap<u32, GlyphId>,
     ) -> Self {
         let reversed_cmap = cmap.iter().map(|(k, v)| (*v, *k)).collect();
+        let shaper_data = harfrust::ShaperData::new(&fontref);
+
         Self {
-            face,
+            fontref,
             glyph_names,
             features,
             cmap,
             reversed_cmap,
+            shaper_data,
         }
+    }
+
+    /// Get the shaper for the font.
+    pub fn shaper(&'a self) -> Shaper<'a> {
+        self.shaper_data.shaper(&self.fontref).build()
     }
 
     /// Get the codepoint for a given glyph ID.

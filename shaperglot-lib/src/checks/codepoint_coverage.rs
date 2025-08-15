@@ -4,7 +4,6 @@ use crate::{
     reporter::{Fix, Problem},
 };
 use itertools::Itertools;
-use rustybuzz::Face;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use std::collections::HashSet;
@@ -20,10 +19,11 @@ pub struct CodepointCoverage {
     terminal_if_empty: bool,
 }
 
-fn can_shape(text: &str, face: &Face) -> bool {
-    let mut buffer = rustybuzz::UnicodeBuffer::new();
+fn can_shape(text: &str, shaper: &harfrust::Shaper) -> bool {
+    let mut buffer = harfrust::UnicodeBuffer::new();
     buffer.push_str(text);
-    let glyph_buffer = rustybuzz::shape(face, &[], buffer);
+    buffer.guess_segment_properties();
+    let glyph_buffer = shaper.shape(buffer, &[]);
     glyph_buffer.glyph_infos().iter().all(|x| x.glyph_id != 0)
 }
 
@@ -41,7 +41,7 @@ impl CheckImplementation for CodepointCoverage {
         let missing_things: Vec<_> = self
             .strings
             .iter()
-            .filter(|x| !can_shape(x, &checker.face))
+            .filter(|x| !can_shape(x, &checker.shaper()))
             .cloned()
             .collect();
         let mut problems = vec![];
