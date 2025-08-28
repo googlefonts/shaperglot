@@ -22,7 +22,7 @@ pub struct Checker<'a> {
 impl<'a> Checker<'a> {
     /// Create an instance given the binary data of a font.
     #[cfg(feature = "fontations")]
-    pub fn new(data: &'a [u8]) -> Result<Self, fontations::skrifa::raw::ReadError> {
+    pub fn new(data: &'a [u8]) -> Result<Self, Box<dyn std::error::Error>> {
         use fontations::skrifa::MetadataProvider;
         let font_for_charmap = fontations::skrifa::FontRef::from_index(data, 0)?; // XXX allow selection of face indices
         let font_for_shaping = harfrust::FontRef::from_index(data, 0)?;
