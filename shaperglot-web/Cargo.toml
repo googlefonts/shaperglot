@@ -8,7 +8,7 @@ wasm-bindgen = { version = "0.2.100" }
 console_error_panic_hook = { version = "0.1.7" }
 js-sys = { version = "0.3.77" }
 shaperglot = { path = "../shaperglot-lib" }
-fontations = { workspace = true }
+skrifa = { workspace = true }
 serde_json = { workspace = true }
 indexmap = { version = "2.10.0", features = ["serde"] }
 google-fonts-languages = { workspace = true }

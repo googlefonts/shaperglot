@@ -29,7 +29,7 @@ mod checker;
 /// Low-level checks and their implementations
 pub mod checks;
 /// Utility functions to extract information from a font
-#[cfg(feature = "fontations")]
+#[cfg(feature = "skrifa")]
 mod font;
 /// Structures and routines relating to the language database
 mod language;

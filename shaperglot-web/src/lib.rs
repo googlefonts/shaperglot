@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use fontations::skrifa::{raw::tables::name::NameId, FontRef, MetadataProvider};
+use skrifa::{raw::tables::name::NameId, FontRef, MetadataProvider};
 use wasm_bindgen::prelude::*;
 extern crate console_error_panic_hook;
 use google_fonts_languages::{RegionProto, ScriptProto, REGIONS, SCRIPTS};

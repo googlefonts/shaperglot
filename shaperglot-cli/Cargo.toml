@@ -10,7 +10,7 @@ name = "shaperglot"
 
 [dependencies]
 shaperglot = { path = "../shaperglot-lib", features = ["colored"] }
-fontations = { workspace = true }
+skrifa = { workspace = true }
 itertools = { workspace = true }
 clap = { version = "4.5.43", features = ["derive"] }
 serde_json = { workspace = true }

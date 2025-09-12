@@ -80,12 +80,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b0674a1ddeecb70197781e945de4b3b8ffb61fa939a5597bcf48503737663100"
 
 [[package]]
-name = "arrayvec"
-version = "0.7.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7c02d123df017efcdfbd739ef81735b36c5ba83ec3c59c80a9d7ecc718f92e50"
-
-[[package]]
 name = "autocfg"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -232,15 +226,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "euclid"
-version = "0.22.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ad9cdb4b747e485a12abb0e6566612956c7a1bafa3bdb8d682c5b6d403589e48"
-dependencies = [
- "num-traits",
-]
-
-[[package]]
 name = "fastrand"
 version = "2.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -259,18 +244,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "02a596f5713680923a2080d86de50fe472fb290693cf0f701187a1c8b36996b7"
 dependencies = [
  "bytemuck",
-]
-
-[[package]]
-name = "fontations"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6ce83f5942797f03c95b06864da889bc5a6acf543cd5bbf108ea114d898fc824"
-dependencies = [
- "font-types",
- "read-fonts 0.31.3",
- "skrifa",
- "write-fonts",
 ]
 
 [[package]]
@@ -316,14 +289,14 @@ dependencies = [
 
 [[package]]
 name = "harfrust"
-version = "0.1.2"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ca4253de099ee464aea026833ee8f3968c08bfe0065bfb4f47c6ac590d533590"
+checksum = "406a98b615ed380f2195fa8fb2ed3083e64b2a6329d710e06f95a42466f0f0c4"
 dependencies = [
  "bitflags",
  "bytemuck",
  "core_maths",
- "read-fonts 0.33.1",
+ "read-fonts",
  "smallvec",
 ]
 
@@ -415,17 +388,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "kurbo"
-version = "0.11.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c62026ae44756f8a599ba21140f350303d4f08dcdcc71b5ad9c9bb8128c13c62"
-dependencies = [
- "arrayvec",
- "euclid",
- "smallvec",
-]
-
-[[package]]
 name = "libc"
 version = "0.2.175"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -475,15 +437,6 @@ name = "multimap"
 version = "0.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1d87ecb2933e8aeadb3e3a02b828fed80a7528047e68b4f424523a0981a3a084"
-
-[[package]]
-name = "num-traits"
-version = "0.2.19"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
-dependencies = [
- "autocfg",
-]
 
 [[package]]
 name = "once_cell"
@@ -773,19 +726,9 @@ checksum = "69cdb34c158ceb288df11e18b4bd39de994f6657d83847bdffdbd7f346754b0f"
 
 [[package]]
 name = "read-fonts"
-version = "0.31.3"
+version = "0.34.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b8250b8f09ed4b9ba9271e06f10e7b1f03e8f8e3619e2368a991ecb25efa204"
-dependencies = [
- "bytemuck",
- "font-types",
-]
-
-[[package]]
-name = "read-fonts"
-version = "0.33.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "50ea612a55c08586a1d15134be8a776186c440c312ebda3b9e8efbfe4255b7f4"
+checksum = "8941f8e9d5f8ad3aebea330d01ac68c0167600eb31a86ecd86e97be4d13b51f5"
 dependencies = [
  "bytemuck",
  "core_maths",
@@ -907,7 +850,6 @@ version = "1.1.0"
 dependencies = [
  "ambassador",
  "colored",
- "fontations",
  "google-fonts-languages",
  "harfrust",
  "indexmap",
@@ -915,6 +857,7 @@ dependencies = [
  "log",
  "serde",
  "serde_json",
+ "skrifa",
  "toml",
  "unicode-joining-type",
  "unicode-normalization",
@@ -926,10 +869,10 @@ name = "shaperglot-cli"
 version = "1.1.0"
 dependencies = [
  "clap",
- "fontations",
  "itertools 0.14.0",
  "serde_json",
  "shaperglot",
+ "skrifa",
  "toml",
 ]
 
@@ -947,23 +890,23 @@ name = "shaperglot-web"
 version = "0.1.0"
 dependencies = [
  "console_error_panic_hook",
- "fontations",
  "google-fonts-languages",
  "indexmap",
  "js-sys",
  "serde_json",
  "shaperglot",
+ "skrifa",
  "wasm-bindgen",
 ]
 
 [[package]]
 name = "skrifa"
-version = "0.33.2"
+version = "0.36.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "78cc1f79e5624f166718224ef883095bea315801aca75b62c64f3937755a586d"
+checksum = "37004372610e83ee2a4c69c7d896b41f33da6a3dc1a4fe07dd9b2629a549b1dc"
 dependencies = [
  "bytemuck",
- "read-fonts 0.31.3",
+ "read-fonts",
 ]
 
 [[package]]
@@ -1375,16 +1318,3 @@ name = "wit-bindgen"
 version = "0.45.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "052283831dbae3d879dc7f51f3d92703a316ca49f91540417d38591826127814"
-
-[[package]]
-name = "write-fonts"
-version = "0.39.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cac89848aeba9b7e1877f1e89e3f9c95adb8771f640e1ef23c605aa734748c2b"
-dependencies = [
- "font-types",
- "indexmap",
- "kurbo",
- "log",
- "read-fonts 0.31.3",
-]
