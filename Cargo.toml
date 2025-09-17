@@ -11,10 +11,10 @@ members = [
 default-members = ["shaperglot-lib", "shaperglot-cli"]
 
 [workspace.dependencies]
-skrifa = "0.36.0"
-harfrust = "0.2.0"
+skrifa = "0.37.0"
+harfrust = "0.3.1"
 itertools = "0.14.0"
-google-fonts-languages = "0.7.6"
+google-fonts-languages = "0.7.7"
 toml = "0.9.5"
 serde_json = { version = "1.0.142", features = ["preserve_order"] }
 
