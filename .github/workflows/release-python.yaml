@@ -206,6 +206,9 @@ jobs:
       - uses: actions/download-artifact@v5
         with:
           name: wheels
+      - name: Repack Windows wheels, avoids zip errors
+        run: |
+            for i in *win*whl; do wheel unpack $i; wheel pack shaperglot-1.1.1; rm -rf shaperglot-1.1.1; done
       - name: Publish to PyPI
         uses: PyO3/maturin-action@v1
         env:
