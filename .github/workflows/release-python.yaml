@@ -206,9 +206,15 @@ jobs:
       - uses: actions/download-artifact@v5
         with:
           name: wheels
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.version.python }}
       - name: Repack Windows wheels, avoids zip errors
         run: |
-            for i in *win*whl; do wheel unpack $i; wheel pack shaperglot-1.1.1; rm -rf shaperglot-1.1.1; done
+            pip install wheel
+            rm *emscripten*.whl || true 
+            VERSION=${GITHUB_REF/refs\/tags\/v/}
+            for i in *win*whl; do wheel unpack $i; wheel pack shaperglot-$VERSION; rm -rf shaperglot-$VERSION; done
       - name: Publish to PyPI
         uses: PyO3/maturin-action@v1
         env:
