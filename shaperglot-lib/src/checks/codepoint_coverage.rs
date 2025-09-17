@@ -19,14 +19,6 @@ pub struct CodepointCoverage {
     terminal_if_empty: bool,
 }
 
-fn can_shape(text: &str, shaper: &harfrust::Shaper) -> bool {
-    let mut buffer = harfrust::UnicodeBuffer::new();
-    buffer.push_str(text);
-    buffer.guess_segment_properties();
-    let glyph_buffer = shaper.shape(buffer, &[]);
-    glyph_buffer.glyph_infos().iter().all(|x| x.glyph_id != 0)
-}
-
 impl CheckImplementation for CodepointCoverage {
     fn name(&self) -> String {
         "CodepointCoverage".to_string()
@@ -41,7 +33,7 @@ impl CheckImplementation for CodepointCoverage {
         let missing_things: Vec<_> = self
             .strings
             .iter()
-            .filter(|x| !can_shape(x, &checker.shaper()))
+            .filter(|x| !checker.can_shape(x))
             .cloned()
             .collect();
         let mut problems = vec![];

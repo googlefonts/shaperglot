@@ -66,6 +66,19 @@ impl<'a> Checker<'a> {
         self.shaper_data.shaper(&self.fontref).build()
     }
 
+    /// Check if the font can shape a given string.
+    pub fn can_shape(&self, text: &str) -> bool {
+        // Check we have all codepoints in the cmap first, it's quicker
+        if text.chars().any(|c| !self.cmap.contains_key(&(c as u32))) {
+            return false;
+        }
+        let mut buffer = harfrust::UnicodeBuffer::new();
+        buffer.push_str(text);
+        buffer.guess_segment_properties();
+        let glyph_buffer = self.shaper().shape(buffer, &[]);
+        glyph_buffer.glyph_infos().iter().all(|x| x.glyph_id != 0)
+    }
+
     /// Get the codepoint for a given glyph ID.
     pub fn codepoint_for(&self, gid: GlyphId) -> Option<u32> {
         self.reversed_cmap.get(&gid).copied()
