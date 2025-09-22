@@ -67,6 +67,7 @@ jobs:
     name: Create release if needed
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - if: contains(github.ref, 'refs/tags/v')
         name: Check for release
         id: create_release
