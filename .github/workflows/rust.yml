@@ -145,7 +145,7 @@ jobs:
         name: Add artefact to release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload shaperglot-${{ env.VERSION }} ${{ env.ASSET }}
+        run: gh release upload v${{ env.VERSION }} ${{ env.ASSET }}
 
   publish-crate:
     needs: deploy-binaries
