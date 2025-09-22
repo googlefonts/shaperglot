@@ -142,6 +142,13 @@ jobs:
           name: ${{ env.ASSET }}
           path: ${{ env.ASSET }}
       - if: contains(github.ref, 'refs/tags/v')
+        name: Check for release
+        id: create_release
+        run: |
+          if ! gh release view ${{ github.ref_name }}; then
+          git show -s --format=%B ${{ github.ref_name }} | tail -n +4 | gh release create ${{ github.ref_name }} -t ${{ github.ref_name }} -F -
+          fi
+      - if: contains(github.ref, 'refs/tags/v')
         name: Add artefact to release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
