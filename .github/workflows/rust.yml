@@ -146,3 +146,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release upload shaperglot-${{ env.VERSION }} ${{ env.ASSET }}
+
+  publish-crate:
+    needs: deploy-binaries
+    runs-on: ubuntu-latest
+    if: contains(github.ref, 'refs/tags/shaperglot-v')
+
+    steps:
+        - uses: actions/checkout@v3
+        - uses: actions-rs/toolchain@v1
+          with:
+            toolchain: stable
+            override: true
+        - uses: katyo/publish-crates@v2
+          with:
+              registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+              args: -p shaperglot
+              ignore-unpublished-changes: true
