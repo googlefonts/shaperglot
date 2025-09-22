@@ -178,8 +178,7 @@ jobs:
           with:
             toolchain: stable
             override: true
-        - uses: katyo/publish-crates@v2
-          with:
-              registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
-              args: ${{ env.CARGO_PUBLISH_ARGS }}
-              ignore-unpublished-changes: true
+        - run:
+            cargo publish ${{ env.CARGO_PUBLISH_ARGS }} --no-verify
+          env:
+              CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
