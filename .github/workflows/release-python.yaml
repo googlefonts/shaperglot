@@ -211,7 +211,7 @@ jobs:
           python-version: ${{ matrix.version.python }}
       - name: Repack Windows wheels, avoids zip errors
         run: |
-            pip install wheel
+            pip install -U wheel
             rm *emscripten*.whl || true 
             VERSION=${GITHUB_REF/refs\/tags\/v/}
             for i in *win*whl; do wheel unpack $i; wheel pack shaperglot-$VERSION; rm -rf shaperglot-$VERSION; done

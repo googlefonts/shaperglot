@@ -115,7 +115,7 @@ jobs:
         run: |
           if [ -n "$GITHUB_REF" ]; then
               if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
-                  echo "VERSION=${GITHUB_REF/refs\/tags\/shaperglot-/}" >> $GITHUB_ENV
+                  echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
               else
                   echo "VERSION=dev" >> $GITHUB_ENV
               fi
