@@ -114,7 +114,7 @@ jobs:
         shell: bash
         run: |
           if [ -n "$GITHUB_REF" ]; then
-              if [[ "$GITHUB_REF" == refs/tags/shaperglot-v* ]]; then
+              if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
                   echo "VERSION=${GITHUB_REF/refs\/tags\/shaperglot-/}" >> $GITHUB_ENV
               else
                   echo "VERSION=dev" >> $GITHUB_ENV
@@ -141,7 +141,7 @@ jobs:
         with:
           name: ${{ env.ASSET }}
           path: ${{ env.ASSET }}
-      - if: contains(github.ref, 'refs/tags/shaperglot-v')
+      - if: contains(github.ref, 'refs/tags/v')
         name: Add artefact to release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -150,7 +150,7 @@ jobs:
   publish-crate:
     needs: deploy-binaries
     runs-on: ubuntu-latest
-    if: contains(github.ref, 'refs/tags/shaperglot-v')
+    if: contains(github.ref, 'refs/tags/v')
 
     steps:
         - uses: actions/checkout@v3
