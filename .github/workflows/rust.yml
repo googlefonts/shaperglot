@@ -11,6 +11,8 @@ permissions:
 env:
   CARGO_TERM_COLOR: always
   GH_TOKEN: ${{ github.token }}
+  PROJECT_NAME: shaperglot
+  CARGO_PUBLISH_ARGS: "-p shaperglot"
 
 jobs:
   build:
@@ -61,11 +63,24 @@ jobs:
       - name: Lint for warnings
         run: cargo clippy --all-targets --all-features -- -D warnings
 
+  check-for-release:
+    name: Create release if needed
+    runs-on: ubuntu-latest
+    steps:
+      - if: contains(github.ref, 'refs/tags/v')
+        name: Check for release
+        id: create_release
+        run: |
+          if ! gh release view ${{ github.ref_name }}; then
+          git show -s --format=%B ${{ github.ref_name }} | tail -n +4 | gh release create ${{ github.ref_name }} -t ${{ github.ref_name }} -F -
+          fi
+
   deploy-binaries:
     name: Build and upload binaries
     permissions:
       contents: write
       id-token: write
+    needs: [build, check-for-release]
     runs-on: ${{ matrix.os.os }}
     # Only build on main or tag
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
@@ -126,15 +141,15 @@ jobs:
       - name: Build archive
         shell: bash
         run: |
-          # dirname="shaperglot-${{ env.VERSION }}-${{ matrix.os.target }}-py${{ matrix.python }}"
-          dirname="shaperglot-${{ env.VERSION }}-${{ matrix.os.target }}"
+          # dirname="${{env.PROJECT_NAME}}-${{ env.VERSION }}-${{ matrix.os.target }}-py${{ matrix.python }}"
+          dirname="${{env.PROJECT_NAME}}-${{ env.VERSION }}-${{ matrix.os.target }}"
           mkdir "$dirname"
           if [ "${{ matrix.os.os }}" = "windows-latest" ]; then
               mv "target/${{ matrix.os.target }}/release/"*.exe "$dirname"
               7z a "$dirname.zip" "$dirname"
               echo "ASSET=$dirname.zip" >> $GITHUB_ENV
           else
-              mv "target/${{ matrix.os.target }}/release/shaperglot" "$dirname"
+              mv "target/${{ matrix.os.target }}/release/${{env.PROJECT_NAME}}" "$dirname"
               tar -czf "$dirname.tar.gz" "$dirname"
               echo "ASSET=$dirname.tar.gz" >> $GITHUB_ENV
           fi
@@ -142,13 +157,6 @@ jobs:
         with:
           name: ${{ env.ASSET }}
           path: ${{ env.ASSET }}
-      - if: contains(github.ref, 'refs/tags/v')
-        name: Check for release
-        id: create_release
-        run: |
-          if ! gh release view ${{ github.ref_name }}; then
-          git show -s --format=%B ${{ github.ref_name }} | tail -n +4 | gh release create ${{ github.ref_name }} -t ${{ github.ref_name }} -F -
-          fi
       - if: contains(github.ref, 'refs/tags/v')
         name: Add artefact to release
         env:
@@ -169,5 +177,5 @@ jobs:
         - uses: katyo/publish-crates@v2
           with:
               registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
-              args: -p shaperglot
+              args: ${{ env.CARGO_PUBLISH_ARGS }}
               ignore-unpublished-changes: true
