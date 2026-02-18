@@ -81,8 +81,8 @@ jobs:
         name: Check for release
         id: create_release
         run: |
-          if ! gh release view ${{ github.ref_name }}; then
-          git show -s --format=%B ${{ github.ref_name }} | tail -n +4 | gh release create ${{ github.ref_name }} -t ${{ github.ref_name }} -F -
+          if ! gh release view ${GITHUB_REF_NAME}; then
+          git show -s --format=%B ${GITHUB_REF_NAME} | tail -n +4 | gh release create ${GITHUB_REF_NAME} -t ${GITHUB_REF_NAME} -F -
           fi
 
   deploy-binaries:
@@ -151,8 +151,8 @@ jobs:
       - name: Build archive
         shell: bash
         run: |
-          # dirname="${{env.PROJECT_NAME}}-${{ env.VERSION }}-${{ matrix.os.target }}-py${{ matrix.python }}"
-          dirname="${{env.PROJECT_NAME}}-${{ env.VERSION }}-${{ matrix.os.target }}"
+          # dirname="${{env.PROJECT_NAME}}-${VERSION}-${{ matrix.os.target }}-py${{ matrix.python }}"
+          dirname="${{env.PROJECT_NAME}}-${VERSION}-${{ matrix.os.target }}"
           mkdir "$dirname"
           if [ "${{ matrix.os.os }}" = "windows-latest" ]; then
               mv "target/${{ matrix.os.target }}/release/"*.exe "$dirname"
