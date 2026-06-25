@@ -16,7 +16,7 @@ harfrust = "0.6"
 itertools = "0.14.0"
 google-fonts-languages = "0.7.9"
 toml = "0.9.5"
-serde_json = { version = "1.0.142", features = ["preserve_order"] }
+serde_json = { version = "1.0.143", features = ["preserve_order"] }
 
 [workspace.lints.clippy]
 uninlined_format_args = "allow"
