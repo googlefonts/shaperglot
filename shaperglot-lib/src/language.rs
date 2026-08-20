@@ -47,7 +47,7 @@ impl Languages {
     /// This loads the database and fills it with checks.
     pub fn new() -> Self {
         let mut languages = Vec::new();
-        for (_id, proto) in LANGUAGES.iter() {
+        for proto in LANGUAGES.values() {
             let bases = proto
                 .exemplar_chars
                 .as_ref()
