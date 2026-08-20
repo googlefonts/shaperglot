@@ -3,7 +3,7 @@ use std::{
     str::FromStr,
 };
 
-use harfrust::GlyphBuffer;
+use harfrust::{GlyphBuffer, ShapeOptions};
 use serde::{Deserialize, Serialize};
 
 use crate::Checker;
@@ -53,7 +53,8 @@ impl ShapingInput {
             features.push(harfrust::Feature::from_str(f)?);
         }
         let shaper = checker.shaper();
-        let glyph_buffer = shaper.shape(buffer, &features);
+        let options = ShapeOptions::default().features(&features);
+        let glyph_buffer = shaper.shape(buffer, options);
         Ok(glyph_buffer)
     }
 

@@ -1,7 +1,7 @@
 use std::collections::{BTreeMap, HashSet};
 
 use crate::{language::Language, reporter::Reporter, GlyphId, ResultCode};
-use harfrust::{Shaper, ShaperData};
+use harfrust::{ShapeOptions, Shaper, ShaperData};
 
 /// The context for running font language support checks
 pub struct Checker<'a> {
@@ -75,7 +75,7 @@ impl<'a> Checker<'a> {
         let mut buffer = harfrust::UnicodeBuffer::new();
         buffer.push_str(text);
         buffer.guess_segment_properties();
-        let glyph_buffer = self.shaper().shape(buffer, &[]);
+        let glyph_buffer = self.shaper().shape(buffer, ShapeOptions::default());
         glyph_buffer.glyph_infos().iter().all(|x| x.glyph_id != 0)
     }
 
