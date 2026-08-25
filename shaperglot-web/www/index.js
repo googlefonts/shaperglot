@@ -246,7 +246,7 @@ class Shaperglot {
   }
 
   renderProblemSet(el) {
-    let filename = $("#filename").text();
+    let filename = $("#filename").html();
     let result = $("#language-content div");
     result.empty();
     var problemSet = el.data("problemset");
