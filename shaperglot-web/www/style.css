@@ -53,6 +53,16 @@ label[for="fontfile"] {
   cursor: pointer;
 }
 
+#searchfilter {
+  background-color: #b3dbf0;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+#statusfilter .btn {
+  margin: 2px;
+}
+
 .dragging {
   background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
   outline: 5px dashed #ffffffff;
@@ -78,9 +88,61 @@ label[for="fontfile"] {
   background-color: #a8a8a8 !important;
 }
 
-.flex-scroll {
-  height: 100vh;
+#results {
+  min-height: 0;
+}
+
+#coverage-panel,
+#details-panel {
+  min-height: 0;
+}
+
+#coverage-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#details-panel {
   overflow-y: auto;
+}
+
+#scriptlist {
+  flex-grow: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+#mobiletabs {
+  z-index: 1030;
+}
+
+#mobiletabs .btn-group {
+  border-top: 1px solid #c0c0c0;
+}
+
+#mobiletabs .btn {
+  border-radius: 0;
+}
+
+@media (max-width: 767.98px) {
+  #app {
+    margin: 0.75rem !important;
+    padding-bottom: 60px;
+  }
+
+  #coverage-panel,
+  #details-panel {
+    display: none;
+  }
+
+  #coverage-panel.active {
+    display: flex;
+  }
+
+  #details-panel.active {
+    display: block;
+  }
 }
 
 .script-0 {

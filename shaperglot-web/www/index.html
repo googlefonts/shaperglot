@@ -75,20 +75,39 @@
   </div>
 
   <div class="">
-    <div class="m-5 d-flex flex-column vh-100 mh-100 ">
+    <div class="m-5 d-flex flex-column vh-100 mh-100 " id="app">
       <h1>Shaperglot</h1>
       <p>A tool for evaluating language coverage, based on the
         <a href="https://github.com/googlefonts/lang">Google Fonts Language Database</a>
       </p>
       <h2 id="filename" class="d-none">Test file</h2>
 
-      <div class=" row  flex-shrink-1" id="results">
-        <div class="col-4 overflow-auto flex-scroll">
-          <div class="accordion" id="scriptlist">
+      <div class=" row  flex-grow-1" id="results">
+        <div class="col-12 col-md-4 active" id="coverage-panel">
+          <div class="p-2" id="searchfilter">
+            <input type="search" id="searchbox" class="form-control mb-2"
+              placeholder="Search languages (name, ISO code, autonym, region)"
+              aria-label="Search languages" />
+            <div class="d-flex flex-wrap" id="statusfilter" role="group"
+              aria-label="Filter by support status">
+              <button type="button" class="btn btn-sm btn-outline-secondary active"
+                data-status="">All</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary"
+                data-status="Complete">Complete</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary"
+                data-status="Supported">Supported</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary"
+                data-status="Incomplete">Incomplete</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary"
+                data-status="Unsupported">Unsupported</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary"
+                data-status="None">None</button>
+            </div>
           </div>
-
+          <div class="accordion flex-grow-1 overflow-auto" id="scriptlist">
+          </div>
         </div>
-        <div class="col-8  flex-shrink-1">
+        <div class="col-12 col-md-8 overflow-auto" id="details-panel">
           <div class="tab-content" id="language-content">
             <div class="tab-pane show active m-2" role="tabpanel">
             </div>
@@ -96,6 +115,13 @@
         </div>
       </div>
     </div>
+
+  <nav class="d-md-none fixed-bottom bg-white" id="mobiletabs" aria-label="Mobile navigation">
+    <div class="btn-group btn-group-lg d-flex" role="group">
+      <button type="button" class="btn btn-primary" data-panel="coverage">Coverage</button>
+      <button type="button" class="btn btn-secondary" data-panel="details">Details</button>
+    </div>
+  </nav>
 
 </body>
 <script src="./bootstrap.js"></script>
