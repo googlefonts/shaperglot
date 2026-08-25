@@ -17,6 +17,23 @@ function commify(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+const MOBILE_MQ = window.matchMedia("(max-width: 767.98px)");
+
+function isMobile() {
+  return MOBILE_MQ.matches;
+}
+
+function showMobilePanel(name) {
+  $("#coverage-panel").toggleClass("active", name === "coverage");
+  $("#details-panel").toggleClass("active", name === "details");
+  $("#mobiletabs button").each(function () {
+    let isActive = $(this).data("panel") === name;
+    $(this)
+      .toggleClass("btn-primary", isActive)
+      .toggleClass("btn-secondary", !isActive);
+  });
+}
+
 jQuery.fn.shake = function (interval, distance, times) {
   interval = typeof interval == "undefined" ? 100 : interval;
   distance = typeof distance == "undefined" ? 10 : distance;
@@ -44,6 +61,10 @@ class Shaperglot {
     this.font = null;
     this.scripts = null;
     this.regions = null;
+    this.searchQuery = "";
+    this.statusFilter = "";
+    this.expandedScripts = new Set();
+    this.selectedLanguageId = null;
   }
 
   dropFile(files, element) {
@@ -90,7 +111,6 @@ class Shaperglot {
   }
 
   renderResults(results) {
-    let ix = 0;
     let issues_by_script = {};
     let count_supported_by_script = {};
     for (let [language, result, problems] of results) {
@@ -106,18 +126,56 @@ class Shaperglot {
           (count_supported_by_script[language.script] || 0) + 1;
       }
     }
+    this.issues_by_script = issues_by_script;
+    this.count_supported_by_script = count_supported_by_script;
+    this.renderScriptList();
+  }
 
-    for (let [script, languages] of Object.entries(issues_by_script).sort(
+  matchesFilter(language, result) {
+    if (this.statusFilter && result !== this.statusFilter) {
+      return false;
+    }
+    let q = (this.searchQuery || "").trim().toLowerCase();
+    if (!q) {
+      return true;
+    }
+    let haystack = [language.name, language.autonym, language.id]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    if (language.region) {
+      haystack +=
+        " " +
+        language.region
+          .map((r) => (this.regions[r] ? this.regions[r].name : r))
+          .join(" ");
+    }
+    return haystack.indexOf(q) !== -1;
+  }
+
+  renderScriptList() {
+    $("#scriptlist").empty();
+    if (!this.issues_by_script) {
+      return;
+    }
+    let ix = 0;
+    for (let [script, languages] of Object.entries(this.issues_by_script).sort(
       ([script_a, _languages_a], [script_b, _languages_b]) =>
-        (count_supported_by_script[script_b] || 0) -
-        (count_supported_by_script[script_a] || 0),
+        (this.count_supported_by_script[script_b] || 0) -
+        (this.count_supported_by_script[script_a] || 0),
     )) {
-      let supported = count_supported_by_script[script] || 0;
+      let filtered = languages.filter(([language, result]) =>
+        this.matchesFilter(language, result),
+      );
+      if (filtered.length === 0) {
+        continue;
+      }
+      let supported = this.count_supported_by_script[script] || 0;
       let card = $(`
-      <div class="card script-${supported}">
+      <div class="card script-${supported}" data-script="${script}">
 <div class="card-header" id="script${ix}" class="p-0">
   <h5 class="mb-0 text-center">
-    <a class="collapsed p-0" type="button" data-toggle="collapse" data-target="#collapse${ix}" aria-expanded="true" aria-controls="collapse${ix}">
+    <a class="collapsed p-0" type="button" data-toggle="collapse" data-target="#collapse${ix}" aria-expanded="false" aria-controls="collapse${ix}">
       ${this.scripts[script].name}<br>
       <small>(${supported} supported languages)</small>
     </a>
@@ -145,7 +203,7 @@ class Shaperglot {
         problemSet.score = (total_score / total_weight) * 100.0;
       }
 
-      for (let [language, result, problems] of languages.sort(
+      for (let [language, result, problems] of filtered.sort(
         (a, b) =>
           STATUS_INT[a[1]] - STATUS_INT[b[1]] ||
           a[0].name.localeCompare(b[0].name),
@@ -160,14 +218,30 @@ class Shaperglot {
         thispill.data("languagedata", language);
         thispill.data("problemset", problems);
         thispill.data("result", result);
+        if (this.selectedLanguageId === language.id) {
+          thispill.addClass("active");
+        }
         pilldiv.append(thispill);
         thispill.on("click", (el) => {
+          this.selectedLanguageId = language.id;
           this.renderProblemSet($(el.target));
           $(el.target).siblings().removeClass("active");
           $(el.target).addClass("active");
+          if (isMobile()) {
+            showMobilePanel("details");
+          }
         });
       }
+      if (this.expandedScripts.has(script)) {
+        card.find(".collapse").addClass("show");
+        card.find("a").removeClass("collapsed");
+      }
       $("#scriptlist").append(card);
+    }
+    if ($("#scriptlist").children().length === 0) {
+      $("#scriptlist").append(
+        `<div class="alert alert-info m-2">No languages match your search or filter.</div>`,
+      );
     }
   }
 
@@ -349,6 +423,48 @@ $(function () {
       window.shaperglot.dropFile(this.files, "#fontbefore");
       // Reset so choosing the same file again re-triggers the change event
       this.value = "";
+    }
+  });
+
+  $("#searchbox").on("input", function () {
+    window.shaperglot.searchQuery = this.value;
+    window.shaperglot.renderScriptList();
+  });
+
+  $("#statusfilter button").on("click", function () {
+    window.shaperglot.statusFilter = $(this).data("status") || "";
+    $("#statusfilter button").removeClass("active");
+    $(this).addClass("active");
+    window.shaperglot.renderScriptList();
+  });
+
+  $("#scriptlist").on("show.bs.collapse", ".collapse", function () {
+    window.shaperglot.expandedScripts.add(
+      $(this).closest(".card").data("script"),
+    );
+  });
+  $("#scriptlist").on("hidden.bs.collapse", ".collapse", function () {
+    window.shaperglot.expandedScripts.delete(
+      $(this).closest(".card").data("script"),
+    );
+  });
+
+  $("#mobiletabs button").on("click", function () {
+    let panel = $(this).data("panel");
+    if (
+      panel === "details" &&
+      $("#language-content div").children().length === 0
+    ) {
+      $("#language-content div").append(
+        `<div class="m-3">Select a language from the Coverage tab to see details.</div>`,
+      );
+    }
+    showMobilePanel(panel);
+  });
+
+  MOBILE_MQ.addEventListener("change", function (e) {
+    if (!e.matches) {
+      showMobilePanel("coverage");
     }
   });
 });
