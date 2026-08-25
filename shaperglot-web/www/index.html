@@ -58,8 +58,14 @@
         <div class="modal-body">
           <div class="container h-100">
             <div id="fontbefore" class="h-100 p-4 d-flex fontdrop">
-              <div class="align-self-center mx-auto">
+              <div class="align-self-center mx-auto text-center">
                 <h2>Drop font here to show language coverage</h2>
+                <p class="mb-3 mt-3">or</p>
+                <label for="fontfile" class="btn btn-primary btn-lg">
+                  Browse for a font file
+                </label>
+                <input type="file" id="fontfile" class="sr-only"
+                  accept=".ttf,.otf,font/ttf,font/otf,application/x-font-ttf,application/x-font-opentype" />
               </div>
             </div>
           </div>
