@@ -5,12 +5,12 @@ const fix_descriptions = {
   add_feature: "Add the following features to the font",
 };
 const STATUS_INT = {
-  "Complete": 5,
-  "Supported": 4,
-  "Incomplete": 3,
-  "Unsupported": 2,
-  "None": 1,
-  "Indeterminate": 0,
+  Complete: 5,
+  Supported: 4,
+  Incomplete: 3,
+  Unsupported: 2,
+  None: 1,
+  Indeterminate: 0,
 };
 
 function commify(x) {
@@ -28,14 +28,14 @@ jQuery.fn.shake = function (interval, distance, times) {
       {
         left: iter % 2 == 0 ? distance : distance * -1,
       },
-      interval
+      interval,
     );
   }
   return jTarget.animate(
     {
       left: 0,
     },
-    interval
+    interval,
   );
 };
 
@@ -57,8 +57,11 @@ class Shaperglot {
     try {
       style.setProperty("src", "url(" + URL.createObjectURL(files[0]) + ")");
     } catch (e) {
-      console.error(e + `: https://bugzilla.mozilla.org/show_bug.cgi?id=1466489 is RESOLVED FIXED -
-      and yet here we are.`);
+      console.error(
+        e +
+          `: https://bugzilla.mozilla.org/show_bug.cgi?id=1466489 is RESOLVED FIXED -
+      and yet here we are.`,
+      );
     }
     var reader = new FileReader();
     let that = this;
@@ -94,7 +97,11 @@ class Shaperglot {
       issues_by_script[language.script] =
         issues_by_script[language.script] || [];
       issues_by_script[language.script].push([language, result, problems]);
-      if (result === "Supported" || result === "Complete" || result === "Incomplete") {
+      if (
+        result === "Supported" ||
+        result === "Complete" ||
+        result === "Incomplete"
+      ) {
         count_supported_by_script[language.script] =
           (count_supported_by_script[language.script] || 0) + 1;
       }
@@ -103,7 +110,7 @@ class Shaperglot {
     for (let [script, languages] of Object.entries(issues_by_script).sort(
       ([script_a, _languages_a], [script_b, _languages_b]) =>
         (count_supported_by_script[script_b] || 0) -
-        (count_supported_by_script[script_a] || 0)
+        (count_supported_by_script[script_a] || 0),
     )) {
       let supported = count_supported_by_script[script] || 0;
       let card = $(`
@@ -139,7 +146,9 @@ class Shaperglot {
       }
 
       for (let [language, result, problems] of languages.sort(
-        (a, b) => STATUS_INT[a[1]] - STATUS_INT[b[1]] || a[0].name.localeCompare(b[0].name)
+        (a, b) =>
+          STATUS_INT[a[1]] - STATUS_INT[b[1]] ||
+          a[0].name.localeCompare(b[0].name),
       )) {
         var thispill = $(`
         <button
@@ -174,11 +183,11 @@ class Shaperglot {
       result.append(`<h2>(${language.autonym})</h2>`);
     }
     result.append(
-      `<p class="mb-0"><b>ISO369-3 Code</b>: <code>${language.id}</code></p>`
+      `<p class="mb-0"><b>ISO369-3 Code</b>: <code>${language.id}</code></p>`,
     );
     if (language.population) {
       result.append(
-        `<p class="mb-0"><b>Population</b>: ${commify(language.population)}</p>`
+        `<p class="mb-0"><b>Population</b>: ${commify(language.population)}</p>`,
       );
     }
     if (language.region) {
@@ -191,39 +200,43 @@ class Shaperglot {
 
     if (language.sample_text) {
       let extra_class = "";
-      if (status == "Complete" || status == "Supported" || status == "Incomplete") {
+      if (
+        status == "Complete" ||
+        status == "Supported" ||
+        status == "Incomplete"
+      ) {
         extra_class = "testfont";
       }
-      result.append($(
-        `<p class="mb-0"><b>Sample text</b>:<blockquote class="blockquote ${extra_class}">${language.sample_text.specimen_32} ${language.sample_text.specimen_21}</blockquote></p>`
-      ));
+      result.append(
+        $(
+          `<p class="mb-0"><b>Sample text</b>:<blockquote class="blockquote ${extra_class}">${language.sample_text.specimen_32} ${language.sample_text.specimen_21}</blockquote></p>`,
+        ),
+      );
     }
-
 
     if (status == "Complete") {
       result.append(
-        `<div class="p-3 mb-2 alert alert-success">${filename} comprehensively supports ${langname}!</div>`
+        `<div class="p-3 mb-2 alert alert-success">${filename} comprehensively supports ${langname}!</div>`,
       );
     } else if (status == "Supported") {
-        result.append(
-          `<div class="p-3 mb-2 alert alert-success">${filename} supports ${langname} well (but further support is possible).</div>`
-        );
-  
+      result.append(
+        `<div class="p-3 mb-2 alert alert-success">${filename} supports ${langname} well (but further support is possible).</div>`,
+      );
     } else if (status == "Incomplete") {
       result.append(
-        `<div class="p-3 mb-2 alert alert-success">${filename} supports ${langname}.</div>`
+        `<div class="p-3 mb-2 alert alert-success">${filename} supports ${langname}.</div>`,
       );
     } else if (status == "Unsupported") {
       result.append(
-        `<div class="p-3 mb-2 alert alert-danger">${filename} does not support ${langname}.</div>`
+        `<div class="p-3 mb-2 alert alert-danger">${filename} does not support ${langname}.</div>`,
       );
     } else if (status == "None") {
       result.append(
-        `<div class="p-3 mb-2 alert alert-dark">${filename} does not attempt to support ${langname}.</div>`
+        `<div class="p-3 mb-2 alert alert-dark">${filename} does not attempt to support ${langname}.</div>`,
       );
     } else {
       result.append(
-        `<div class="p-3 mb-2 alert alert-dark">Cannot determine whether ${filename} supports ${langname}.</div>`
+        `<div class="p-3 mb-2 alert alert-dark">Cannot determine whether ${filename} supports ${langname}.</div>`,
       );
     }
     // result.append(`<pre>${JSON.stringify(problemSet)}</pre>`);
@@ -247,13 +260,13 @@ class Shaperglot {
       problem_html.append(
         `<dt>
         <details>
-          <summary>${check_name} ${mark} (${Math.round(
-            score * weight * 100
-          ) / 100}/${weight} points)
+          <summary>${check_name} ${mark} (${
+            Math.round(score * weight * 100) / 100
+          }/${weight} points)
           </summary>
           <blockquote class="bg-light">${check_description}
           </blockquote>
-        </dt>`
+        </dt>`,
       );
       let dd = $(`<dd>
        
@@ -262,7 +275,10 @@ class Shaperglot {
       if (problems.length > 0) {
         dd.append(`<p><b>Problems:</b><ul></ul></p>`);
       } else {
-        problem_html.find("details").last().append(`<ul><li>No problems found!</li></ul>`);
+        problem_html
+          .find("details")
+          .last()
+          .append(`<ul><li>No problems found!</li></ul>`);
       }
       for (var problem of problems) {
         let { check_name, message, fixes } = problem;
@@ -324,6 +340,15 @@ $(function () {
       e.preventDefault();
       e.stopPropagation();
       window.shaperglot.dropFile(e.originalEvent.dataTransfer.files, this);
+    }
+  });
+
+  $("#fontfile").on("change", function (e) {
+    if (this.files.length) {
+      // Same pathway as the drag-and-drop handler
+      window.shaperglot.dropFile(this.files, "#fontbefore");
+      // Reset so choosing the same file again re-triggers the change event
+      this.value = "";
     }
   });
 });

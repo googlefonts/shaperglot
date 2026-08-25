@@ -49,6 +49,10 @@ h4 {
   background-color: #ffdddddd;
 }
 
+label[for="fontfile"] {
+  cursor: pointer;
+}
+
 .dragging {
   background-image: linear-gradient(rgb(0 0 0/5%) 0 0);
   outline: 5px dashed #ffffffff;
