@@ -11,8 +11,8 @@ members = [
 default-members = ["shaperglot-lib", "shaperglot-cli"]
 
 [workspace.dependencies]
-skrifa = "0.42.0"
-harfrust = "0.13"
+skrifa = "0.46.0"
+harfrust = "0.13.3"
 itertools = "0.15.0"
 google-fonts-languages = "0.7.10"
 toml = { version = "1.1.4", default-features = false, features = ["parse", "serde"] }
