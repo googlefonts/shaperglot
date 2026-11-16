@@ -1,7 +1,7 @@
 use crate::{checks::Check, language::Language};
 
 /// Kannada conjuncts checks provider
-mod conjuncts;
+mod kannada_conjuncts;
 /// Orthographic checks provider
 mod orthographies;
 /// Arabic positional forms checks provider
@@ -11,7 +11,7 @@ mod small_caps;
 /// Manually-coded checks provider
 mod toml;
 
-use conjuncts::ConjunctsProvider;
+use kannada_conjuncts::KannadaConjunctsProvider;
 use orthographies::OrthographiesProvider;
 use positional::PositionalProvider;
 use small_caps::SmallCapsProvider;
@@ -34,7 +34,7 @@ impl Provider for BaseCheckProvider {
         checks.extend(OrthographiesProvider.checks_for(language));
         checks.extend(SmallCapsProvider.checks_for(language));
         checks.extend(PositionalProvider.checks_for(language));
-        checks.extend(ConjunctsProvider.checks_for(language));
+        checks.extend(KannadaConjunctsProvider.checks_for(language));
         checks.extend(TomlProvider.checks_for(language));
         checks
     }

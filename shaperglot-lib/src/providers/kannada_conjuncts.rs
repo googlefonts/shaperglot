@@ -28,9 +28,9 @@ const CONJUNCT_FEATURES: [&str; 7] = [
 /// script tag the shaper uses. This provider checks that consonant + virama +
 /// consonant shapes differently when the conjunct features are turned off, and
 /// that ra + virama + consonant forms the reph (arkavattu).
-pub struct ConjunctsProvider;
+pub struct KannadaConjunctsProvider;
 
-impl Provider for ConjunctsProvider {
+impl Provider for KannadaConjunctsProvider {
     fn checks_for(&self, language: &Language) -> Vec<Check> {
         if language.script() != "Knda" {
             return vec![];
