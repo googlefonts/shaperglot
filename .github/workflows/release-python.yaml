@@ -202,23 +202,58 @@ jobs:
     runs-on: ubuntu-latest
     if: "startsWith(github.ref, 'refs/tags/')"
     needs: consolidate
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/download-artifact@v5
         with:
           name: wheels
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.version.python }}
+          python-version: "3.12"
       - name: Repack Windows wheels, avoids zip errors
         run: |
-            pip install -U wheel
-            rm *emscripten*.whl || true 
+            pip install -U wheel twine
+            rm *emscripten*.whl || true
             VERSION=${GITHUB_REF/refs\/tags\/v/}
             for i in *win*whl; do wheel unpack $i; wheel pack shaperglot-$VERSION; rm -rf shaperglot-$VERSION; done
-      - name: Publish to PyPI
-        uses: PyO3/maturin-action@v1
-        env:
-          MATURIN_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
         with:
-          command: upload
-          args: --non-interactive --skip-existing *
+          workload_identity_provider: 'projects/305452601764/locations/global/workloadIdentityPools/builders/providers/github'
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3
+      - name: Clean up prior staged artifacts in OSS Exit Gate repository
+        run: |
+          set -euo pipefail
+          EXISTING_PKGS="$(gcloud artifacts packages list \
+            --project=oss-exit-gate-prod \
+            --location=us \
+            --repository=shaperglot--pypi \
+            --format='value(name)' 2>/dev/null || true)"
+          for pkg in ${EXISTING_PKGS}; do
+            gcloud artifacts packages delete "${pkg}" \
+              --project=oss-exit-gate-prod \
+              --location=us \
+              --repository=shaperglot--pypi \
+              --quiet || true
+          done
+      - name: Publish to OSS Exit Gate
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          set -euo pipefail
+          set +x
+          export TWINE_USERNAME="oauth2accesstoken"
+          export TWINE_PASSWORD="$(gcloud auth print-access-token)"
+          twine upload \
+            --repository-url https://us-python.pkg.dev/oss-exit-gate-prod/shaperglot--pypi/ \
+            --non-interactive \
+            --skip-existing \
+            *.whl *.tar.gz
+          unset TWINE_PASSWORD
+          printf '{"publish_all": true}\n' > manifest.json
+          gcloud storage cp manifest.json \
+            "gs://oss-exit-gate-prod-projects-bucket/shaperglot/pypi/manifests/manifest-${RUN_ID}-${RUN_ATTEMPT}.json"
